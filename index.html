@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eamon McKiernan — IT Support &amp; Infrastructure</title>
+<meta name="description" content="Eamon McKiernan — IT Support Technician specialising in Microsoft 365, virtualisation, and self-hosted infrastructure.">
+
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:#001F4A;
+  color:#c8ccd4;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:#6ba1e0;text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+a:hover{color:#93bfee}
+ul{list-style:none}
+
+/* ── Layout ── */
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* ── Hero ── */
+.hero{
+  padding:80px 0 60px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.hero h1{
+  font-size:clamp(28px,5vw,42px);
+  font-weight:700;
+  color:#f0f2f5;
+  letter-spacing:-.5px;
+}
+.hero .role{
+  font-size:18px;
+  color:#6ba1e0;
+  margin-top:6px;
+  font-weight:500;
+}
+.hero .summary{
+  margin-top:20px;
+  max-width:640px;
+  font-size:15px;
+  color:#9da3af;
+  line-height:1.7;
+}
+.hero .links{
+  margin-top:24px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  font-size:14px;
+}
+.hero .links span{color:#6b7280}
+
+/* ── Section ── */
+section{padding:52px 0}
+section+section{border-top:1px solid rgba(255,255,255,.06)}
+.section-title{
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:#4e7ab5;
+  margin-bottom:28px;
+}
+
+/* ── Skills Grid ── */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.skill-group{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;
+  padding:20px;
+  transition:transform .25s ease, border-color .25s ease;
+}
+.skill-group:hover{
+  transform:scale(1.03);
+  border-color:rgba(107,161,224,.25);
+}
+.skill-group h3{
+  font-size:14px;
+  font-weight:600;
+  color:#e2e5ea;
+  margin-bottom:12px;
+}
+.skill-group ul{display:flex;flex-wrap:wrap;gap:6px}
+.skill-group li{
+  font-size:12px;
+  padding:4px 10px;
+  background:rgba(107,161,224,.08);
+  border:1px solid rgba(107,161,224,.15);
+  border-radius:4px;
+  color:#8db8e8;
+}
+
+/* ── Experience ── */
+.timeline-item{
+  padding:20px 0;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:20px;
+}
+.timeline-item+.timeline-item{border-top:1px solid rgba(255,255,255,.04)}
+.timeline-date{
+  font-size:13px;
+  color:#6b7280;
+  padding-top:2px;
+}
+.timeline-body h3{
+  font-size:16px;
+  font-weight:600;
+  color:#e2e5ea;
+}
+.timeline-body .company{
+  font-size:14px;
+  color:#6ba1e0;
+  margin-bottom:8px;
+}
+.timeline-body ul{margin-top:8px}
+.timeline-body li{
+  position:relative;
+  padding-left:16px;
+  font-size:14px;
+  color:#9da3af;
+  margin-bottom:4px;
+}
+.timeline-body li::before{
+  content:'';
+  position:absolute;
+  left:0;top:10px;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:#3d5a80;
+}
+
+/* ── Projects ── */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.project{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;
+  padding:20px;
+  cursor:pointer;
+  transition:transform .25s ease, border-color .25s ease;
+}
+.project:hover{
+  transform:scale(1.03);
+  border-color:rgba(107,161,224,.25);
+}
+.project h3{
+  font-size:15px;
+  font-weight:600;
+  color:#e2e5ea;
+  margin-bottom:4px;
+}
+.project .meta{
+  font-size:12px;
+  color:#4e7ab5;
+  margin-bottom:10px;
+}
+.project p{font-size:13px;color:#9da3af;line-height:1.65}
+
+/* ── Project Modal ── */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(4px);
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+.modal-backdrop.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.modal{
+  background:#0f1520;
+  border:1px solid rgba(107,161,224,.2);
+  border-radius:12px;
+  width:100%;
+  max-width:680px;
+  max-height:85vh;
+  overflow-y:auto;
+  padding:36px 40px;
+  position:relative;
+  will-change:transform,opacity;
+}
+.modal-close{
+  position:absolute;
+  top:16px;right:20px;
+  background:none;
+  border:none;
+  color:#6b7280;
+  font-size:22px;
+  cursor:pointer;
+  line-height:1;
+  padding:4px;
+  transition:color .15s;
+}
+.modal-close:hover{color:#c8ccd4}
+.modal h2{
+  font-size:22px;
+  font-weight:700;
+  color:#f0f2f5;
+  margin-bottom:6px;
+}
+.modal .modal-meta{
+  font-size:13px;
+  color:#4e7ab5;
+  margin-bottom:20px;
+  line-height:1.6;
+}
+.modal .modal-desc{
+  font-size:15px;
+  color:#9da3af;
+  line-height:1.7;
+  margin-bottom:24px;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.modal-section-title{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  color:#4e7ab5;
+  margin-bottom:12px;
+}
+.modal ul{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.modal li{
+  position:relative;
+  padding-left:16px;
+  font-size:14px;
+  color:#9da3af;
+  line-height:1.6;
+}
+.modal li::before{
+  content:'';
+  position:absolute;
+  left:0;top:9px;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:#3d5a80;
+}
+.modal .tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:20px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.modal .tag{
+  font-size:12px;
+  padding:4px 10px;
+  background:rgba(107,161,224,.08);
+  border:1px solid rgba(107,161,224,.15);
+  border-radius:4px;
+  color:#8db8e8;
+}
+
+/* ── Certifications ── */
+.cert-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.cert-item{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:8px;
+  padding:18px 22px;
+}
+.cert-badge{
+  flex-shrink:0;
+  width:44px;height:44px;
+  border-radius:8px;
+  background:rgba(107,161,224,.1);
+  border:1px solid rgba(107,161,224,.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+.cert-info{flex:1}
+.cert-info h3{
+  font-size:15px;
+  font-weight:600;
+  color:#e2e5ea;
+  margin-bottom:2px;
+}
+.cert-info .cert-meta{
+  font-size:12px;
+  color:#6b7280;
+}
+.cert-info .cert-meta span{
+  color:#4e7ab5;
+  font-weight:500;
+}
+.cert-year{
+  font-size:12px;
+  color:#6b7280;
+  flex-shrink:0;
+}
+
+/* ── Education ── */
+.edu-item{
+  padding:20px 0;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:20px;
+}
+.edu-item+.edu-item{border-top:1px solid rgba(255,255,255,.04)}
+.edu-item h3{
+  font-size:16px;
+  font-weight:600;
+  color:#e2e5ea;
+}
+.edu-item .sub{
+  font-size:13px;
+  color:#6b7280;
+  margin-bottom:8px;
+}
+.grades{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:8px;
+}
+.grade{
+  font-size:12px;
+  padding:4px 10px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:4px;
+  color:#9da3af;
+}
+.grade strong{color:#c8ccd4}
+
+/* ── Contact ── */
+.contact-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  font-size:14px;
+}
+.contact-row a,.contact-row span{color:#9da3af}
+.contact-row a:hover{color:#6ba1e0}
+
+/* ── Footer ── */
+footer{
+  padding:40px 0;
+  border-top:1px solid rgba(255,255,255,.06);
+  font-size:12px;
+  color:#3d4451;
+  text-align:center;
+}
+
+/* ── Scroll Animations ── */
+.fade-in{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.fade-in.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .hero{padding:48px 0 40px}
+  .timeline-item,.edu-item{
+    grid-template-columns:1fr;
+    gap:4px;
+  }
+  .timeline-date{padding-top:0;margin-bottom:4px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- ── Hero ── -->
+<header class="hero fade-in">
+  <h1>Eamon McKiernan</h1>
+  <div class="role">IT Support Engineer</div>
+  <p class="summary">
+    IT support technician with a foundation in Microsoft 365, virtualisation, and self-hosted infrastructure.
+    I run a multi-node homelab with Proxmox, TrueNAS, and OPNsense.
+    Outside of IT, I compete in powerlifting and have represented the Isle of Man internationally twice.
+  </p>
+  <div class="links">
+    <a href="mailto:enquiries@eamonmckiernan.uk">enquiries@eamonmckiernan.uk</a>
+    <span>·</span>
+    <span>Isle of Man</span>
+    <span>·</span>
+    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">LinkedIn</a>
+    <span>·</span>
+    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</header>
+
+<!-- ── Skills ── -->
+<section class="fade-in">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+
+    <div class="skill-group">
+      <h3>Microsoft 365 &amp; Azure</h3>
+      <ul>
+        <li>Exchange Online</li>
+        <li>Exchange On-Prem</li>
+        <li>Entra ID / Azure AD</li>
+        <li>Intune</li>
+        <li>Licensing</li>
+        <li>Conditional Access</li>
+        <li>Active Directory On-Prem</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>Virtualisation &amp; Containers</h3>
+      <ul>
+        <li>Proxmox</li>
+        <li>VM Deployment</li>
+        <li>LXC Containers</li>
+        <li>Docker</li>
+        <li>Resource Planning</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>Backup &amp; Monitoring</h3>
+      <ul>
+        <li>Veeam Backup &amp; Replication</li>
+        <li>CloudCover 365</li>
+        <li>TrueNAS Replication</li>
+        <li>Proxmox Backup</li>
+        <li>LibreNMS</li>
+        <li>Uptime Kuma</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>Networking</h3>
+      <ul>
+        <li>OPNsense</li>
+        <li>Firewall Rules</li>
+        <li>DNS / Pi-hole</li>
+        <li>VPN / Tailscale</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>Operating Systems</h3>
+      <ul>
+        <li>Windows 10 &amp; 11</li>
+        <li>Windows Server</li>
+        <li>Proxmox</li>
+        <li>TrueNAS</li>
+        <li>Ubuntu</li>
+        <li>Debian</li>
+        <li>Arch</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>Programming &amp; Scripting</h3>
+      <ul>
+        <li>PowerShell</li>
+        <li>C#</li>
+        <li>HTML &amp; JavaScript</li>
+        <li>Git</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>End-User Support</h3>
+      <ul>
+        <li>Phone &amp; Email</li>
+        <li>Datto</li>
+        <li>Zoho</li>
+        <li>AnyDesk</li>
+        <li>Quick Assist</li>
+        <li>SuperOps</li>
+        <li>Splashtop</li>
+        <li>Documentation</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>AI &amp; LLMs</h3>
+      <ul>
+        <li>llama.cpp</li>
+        <li>Hermes Agent</li>
+        <li>Ollama</li>
+        <li>Local AI</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Experience ── -->
+<section class="fade-in">
+  <h2 class="section-title">Experience</h2>
+
+  <div class="timeline-item">
+    <div class="timeline-date">Jan 2026 — Present</div>
+    <div class="timeline-body">
+      <h3>IT Support Engineer</h3>
+      <div class="company">Manx Technology Group</div>
+      <ul>
+        <li>Level 1 and Level 2 helpdesk support</li>
+        <li>On-call for out-of-hours incident response</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-date">Aug 2024 — Dec 2025</div>
+    <div class="timeline-body">
+      <h3>Junior Support Technician</h3>
+      <div class="company">SynergyIT</div>
+      <ul>
+        <li>Level 1 support — first point of contact for clients</li>
+        <li>Backup and replication management and monitoring</li>
+        <li>Management and delegation of tickets</li>
+        <li>Client user onboarding and offboarding</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── Certifications ── -->
+<section class="fade-in">
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-list">
+
+    <div class="cert-item">
+      <div class="cert-badge">
+        <svg width="26" height="26" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="10" height="10" fill="#f25022"/>
+          <rect x="12" y="1" width="10" height="10" fill="#7fba00"/>
+          <rect x="1" y="12" width="10" height="10" fill="#00a4ef"/>
+          <rect x="12" y="12" width="10" height="10" fill="#ffb900"/>
+        </svg>
+      </div>
+      <div class="cert-info">
+        <h3>Microsoft 365 Certified: Fundamentals</h3>
+        <div class="cert-meta">Microsoft &nbsp;·&nbsp; MS-900 &nbsp;·&nbsp; <span>ID: 1AF2E23DEFE59917</span></div>
+      </div>
+      <div class="cert-year">Nov 2024</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Projects ── -->
+<section class="fade-in">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project" data-modal="proxmox">
+      <h3>Proxmox Cluster</h3>
+      <div class="meta">Dell 3050 (i5-8500, 32 GB) · HP ProDesk (i5-7500, 16 GB) · HP EliteDesk (i5-6500, 16 GB)</div>
+      <p>Three-node HA cluster with Ceph storage running LXCs and VMs.</p>
+    </div>
+
+    <div class="project" data-modal="opnsense">
+      <h3>OPNsense Router</h3>
+      <div class="meta">HP 280 G2 SFF · Intel i350 NIC</div>
+      <p>Two subnets with a managed switch and WAP. Servers and admin devices isolated from consumer traffic.</p>
+    </div>
+
+    <div class="project" data-modal="media">
+      <h3>Media Server</h3>
+      <div class="meta">Xeon E5-2630 v4 · 16 GB RAM · GTX 1650 · TrueNAS</div>
+      <p>Self-hosted media stack with automated downloads and redundant storage.</p>
+    </div>
+
+    <div class="project" data-modal="ai">
+      <h3>Local AI</h3>
+      <div class="meta">Xeon E5-2650 v4 · 16 GB RAM · Dual RTX 3060 12 GB</div>
+      <div class="meta">Hermes Agent · llama.cpp · Open Source Models</div>
+      <p>Running open source LLMs locally via llama.cpp with Hermes agent integration and a custom Discord bot.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Education ── -->
+<section class="fade-in">
+  <h2 class="section-title">Education</h2>
+
+  <div class="edu-item">
+    <div class="timeline-date">2021 — 2024</div>
+    <div>
+      <h3>A-Levels</h3>
+      <div class="sub">Ramsey Grammar School</div>
+      <div class="grades">
+        <span class="grade"><strong>B</strong> IT</span>
+        <span class="grade"><strong>B</strong> Photography</span>
+        <span class="grade"><strong>D</strong> Computer Science</span>
+        <span class="grade"><strong>L3 Pass</strong> Sports Leaders</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="edu-item">
+    <div class="timeline-date">2018 — 2021</div>
+    <div>
+      <h3>GCSEs</h3>
+      <div class="sub">Ramsey Grammar School</div>
+      <div class="grades">
+        <span class="grade"><strong>A</strong> Maths</span>
+        <span class="grade"><strong>B</strong> English</span>
+        <span class="grade"><strong>BB</strong> Science (Double)</span>
+        <span class="grade"><strong>B</strong> ICT</span>
+        <span class="grade"><strong>C</strong> Computer Science</span>
+        <span class="grade"><strong>C</strong> Business Studies</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── Contact ── -->
+<section class="fade-in">
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-row">
+    <a href="mailto:enquiries@eamonmckiernan.uk">enquiries@eamonmckiernan.uk</a>
+    <span>Isle of Man</span>
+    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Eamon McKiernan
+</footer>
+
+</div>
+
+<!-- ── Project Modals ── -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal-content" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<template id="tpl-proxmox">
+  <h2>Proxmox Cluster</h2>
+  <div class="modal-meta">Dell 3050 (i5-8500, 32 GB) &nbsp;·&nbsp; HP ProDesk (i5-7500, 16 GB) &nbsp;·&nbsp; HP EliteDesk (i5-6500, 16 GB)</div>
+  <p class="modal-desc">Three-node high-availability cluster with Ceph distributed storage, running a mix of LXC containers and full VMs for homelab services.</p>
+  <div class="modal-section-title">Details</div>
+  <ul>
+    <li>Automatic VM and LXC failover between nodes via Proxmox HA</li>
+    <li>Ceph replicated storage pools distributed across all three nodes</li>
+    <li>Separate resource pools isolating different workload types</li>
+    <li>Proxmox Backup Server for scheduled snapshot backups</li>
+    <li>Monitored via LibreNMS and Uptime Kuma</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">Proxmox</span>
+    <span class="tag">Ceph</span>
+    <span class="tag">LXC</span>
+    <span class="tag">HA</span>
+    <span class="tag">Virtualisation</span>
+  </div>
+</template>
+
+<template id="tpl-opnsense">
+  <h2>OPNsense Router</h2>
+  <div class="modal-meta">HP 280 G2 SFF &nbsp;·&nbsp; Intel i350 Quad-Port NIC</div>
+  <p class="modal-desc">Custom router/firewall separating server infrastructure from consumer traffic, with a managed switch and wireless access point for full network control.</p>
+  <div class="modal-section-title">Details</div>
+  <ul>
+    <li>Dedicated server subnet isolated from consumer devices via firewall rules</li>
+    <li>Managed switch handling VLAN tagging and port segregation</li>
+    <li>Pi-hole for network-wide DNS filtering and ad blocking</li>
+    <li>Tailscale VPN for secure remote access to home network resources</li>
+    <li>OPNsense IDS/IPS for traffic inspection</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">OPNsense</span>
+    <span class="tag">Firewall</span>
+    <span class="tag">VLANs</span>
+    <span class="tag">Pi-hole</span>
+    <span class="tag">Tailscale</span>
+    <span class="tag">Networking</span>
+  </div>
+</template>
+
+<template id="tpl-media">
+  <h2>Media Server</h2>
+  <div class="modal-meta">Xeon E5-2630 v4 &nbsp;·&nbsp; 16 GB RAM &nbsp;·&nbsp; GTX 1650 &nbsp;·&nbsp; TrueNAS</div>
+  <p class="modal-desc">Self-hosted media stack with a fully automated download pipeline, hardware-accelerated transcoding, and ZFS-backed redundant storage.</p>
+  <div class="modal-section-title">Details</div>
+  <ul>
+    <li>Sonarr, Radarr, and Prowlarr for automated media acquisition</li>
+    <li>Jellyfin with GTX 1650 hardware-accelerated transcoding</li>
+    <li>TrueNAS with ZFS for redundant storage and data integrity</li>
+    <li>TrueNAS replication for off-site backup of the media library</li>
+    <li>Reverse proxied via Nginx Proxy Manager with HTTPS</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">Jellyfin</span>
+    <span class="tag">TrueNAS</span>
+    <span class="tag">ZFS</span>
+    <span class="tag">Sonarr</span>
+    <span class="tag">Radarr</span>
+    <span class="tag">Docker</span>
+  </div>
+</template>
+
+<template id="tpl-ai">
+  <h2>Local AI</h2>
+  <div class="modal-meta">Xeon E5-2650 v4 &nbsp;·&nbsp; 16 GB RAM &nbsp;·&nbsp; Dual RTX 3060 12 GB &nbsp;·&nbsp; Hermes Agent &nbsp;·&nbsp; llama.cpp</div>
+  <p class="modal-desc">Fully local LLM inference stack with 24 GB combined VRAM, running open-source models via llama.cpp with a Hermes agent layer and a custom Discord bot frontend.</p>
+  <div class="modal-section-title">Details</div>
+  <ul>
+    <li>24 GB combined VRAM enabling large model inference without quantisation trade-offs</li>
+    <li>llama.cpp for efficient GPU-accelerated inference across both GPUs</li>
+    <li>Hermes agent framework for tool use and agentic workflows</li>
+    <li>Custom Discord bot as a conversational frontend for the local models</li>
+    <li>Entirely self-hosted — no data sent to external APIs</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">llama.cpp</span>
+    <span class="tag">LLM</span>
+    <span class="tag">RTX 3060</span>
+    <span class="tag">Hermes</span>
+    <span class="tag">Discord Bot</span>
+    <span class="tag">Self-hosted AI</span>
+  </div>
+</template>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const backdrop = document.getElementById('modal-backdrop');
+  const modal    = document.getElementById('modal-content');
+  const modalBody = document.getElementById('modal-body');
+  const closeBtn  = document.getElementById('modal-close');
+
+  let activeAnim = null;
+  let tileTransform = null; // saved for close animation
+
+  function openModal(key, tile) {
+    const tpl = document.getElementById('tpl-' + key);
+    if (!tpl) return;
+
+    // Snapshot tile before any DOM changes
+    const tileRect = tile.getBoundingClientRect();
+
+    if (activeAnim) { activeAnim.cancel(); activeAnim = null; }
+    modal.style.transform = '';
+    modal.style.opacity = '';
+
+    modalBody.innerHTML = '';
+    modalBody.appendChild(tpl.content.cloneNode(true));
+
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Double rAF: first frame triggers layout, second frame guarantees it's committed
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const modalRect = modal.getBoundingClientRect();
+
+      // Vector from modal center → tile center
+      const tx = (tileRect.left + tileRect.width  / 2) - (modalRect.left + modalRect.width  / 2);
+      const ty = (tileRect.top  + tileRect.height / 2) - (modalRect.top  + modalRect.height / 2);
+
+      // Scale factors so the modal starts at the tile's exact dimensions
+      const sx = tileRect.width  / modalRect.width;
+      const sy = tileRect.height / modalRect.height;
+
+      tileTransform = { tx, ty, sx, sy };
+      modal.style.transformOrigin = '50% 50%';
+
+      activeAnim = modal.animate([
+        { transform: `translate(${tx}px, ${ty}px) scale(${sx}, ${sy})`, opacity: 0, borderRadius: '8px'  },
+        { transform: 'translate(0, 0) scale(1)',                         opacity: 1, borderRadius: '12px' }
+      ], {
+        duration: 500,
+        easing: 'cubic-bezier(0.34, 1.25, 0.64, 1)',
+        fill: 'forwards'
+      });
+
+      activeAnim.onfinish = () => { activeAnim = null; };
+      closeBtn.focus();
+    }));
+  }
+
+  function closeModal() {
+    if (!backdrop.classList.contains('open')) return;
+    if (activeAnim) { activeAnim.cancel(); activeAnim = null; }
+
+    const { tx, ty, sx, sy } = tileTransform || { tx: 0, ty: 0, sx: 0.5, sy: 0.5 };
+
+    activeAnim = modal.animate([
+      { transform: 'translate(0, 0) scale(1)',                         opacity: 1, borderRadius: '12px' },
+      { transform: `translate(${tx}px, ${ty}px) scale(${sx}, ${sy})`, opacity: 0, borderRadius: '8px'  }
+    ], {
+      duration: 320,
+      easing: 'cubic-bezier(0.4, 0, 0.8, 0.6)',
+      fill: 'forwards'
+    });
+
+    activeAnim.onfinish = () => {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      // Do NOT cancel here — cancelling fill:forwards would snap the modal
+      // back to visible, causing a flash. openModal cancels it when reopened.
+    };
+  }
+
+  document.querySelectorAll('.project[data-modal]').forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.modal, card));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+});
+</script>
+</body>
+</html>
