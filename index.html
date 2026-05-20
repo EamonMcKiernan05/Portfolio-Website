@@ -500,6 +500,8 @@ footer{
         <li>FastAPI</li>
         <li>PowerShell</li>
         <li>C#</li>
+        <li>Swift</li>
+        <li>SwiftUI</li>
         <li>HTML &amp; JavaScript</li>
         <li>SQL</li>
         <li>Git</li>
@@ -639,7 +641,7 @@ footer{
 
     <div class="project" data-modal="ffiom">
       <h3>Fantasy Football Isle of Man</h3>
-      <div class="meta">FastAPI · SQLite · Capacitor · Vanilla JS</div>
+      <div class="meta">FastAPI · SQLite · SwiftUI · Vanilla JS</div>
       <div class="meta">GitHub Actions · FullTime API · JWT Auth</div>
       <p>FPL-style fantasy football game for the Canada Life Premier League with web app and native iOS client.</p>
     </div>
@@ -782,8 +784,8 @@ footer{
 
 <template id="tpl-ffiom">
   <h2>Fantasy Football Isle of Man</h2>
-  <div class="modal-meta">FastAPI &nbsp;·&nbsp; SQLite &nbsp;·&nbsp; Capacitor 6.x &nbsp;·&nbsp; Vanilla JS &nbsp;·&nbsp; GitHub Actions CI/CD</div>
-  <p class="modal-desc">FPL-style fantasy football game built for the Canada Life Premier League (Isle of Man). Full-stack application with FastAPI backend, web SPA, and native iOS client — integrating live match data from the FullTime API.</p>
+  <div class="modal-meta">FastAPI &nbsp;·&nbsp; SQLite &nbsp;·&nbsp; SwiftUI &nbsp;·&nbsp; Vanilla JS &nbsp;·&nbsp; GitHub Actions CI/CD</div>
+  <p class="modal-desc">FPL-style fantasy football game built for the Canada Life Premier League (Isle of Man). Full-stack application with FastAPI backend, web SPA, and a native iOS client — integrating live match data from the FullTime API.</p>
   <div class="modal-section-title">Backend</div>
   <ul>
     <li>FastAPI REST API with JWT authentication and bcrypt password hashing</li>
@@ -795,25 +797,26 @@ footer{
   <div class="modal-section-title">Frontend &amp; iOS App</div>
   <ul>
     <li>Vanilla JS SPA with carousel-style page transitions and FPL-inspired design</li>
-    <li>iOS client built with Capacitor 6.x — full feature parity with web app</li>
-    <li>Pitch visualization for team management with captain/vice-captain indicators</li>
-    <li>Transfer staging + confirm flow, player search with position filters</li>
-    <li>Fixtures, results, leaderboard, and push notifications</li>
+    <li>Native iOS app built with SwiftUI (iOS 17+) — MVVM architecture with 18 views across 8 modules</li>
+    <li>Swift Concurrency (async/await) with URLSession actor and auto-refresh token rotation</li>
+    <li>Keychain Services for secure token persistence and session management</li>
+    <li>@Observable macro for reactive state management</li>
   </ul>
   <div class="modal-section-title">Data &amp; DevOps</div>
   <ul>
     <li>Live data pipeline syncing fixtures, results, and league tables from FullTime API</li>
     <li>Separate database management service (FFIOM-DB) with automated data ingestion</li>
-    <li>GitHub Actions CI/CD pipeline with macOS runner for iOS builds</li>
+    <li>GitHub Actions CI/CD pipeline</li>
     <li>Pytest test suite with production database isolation</li>
-    <li>App Store compliance: Info.plist hardening, ATS configuration for local IPs, armv7 architecture removal, iOS 18.0 deployment target</li>
+    <li>App Store compliance: Info.plist hardening, ATS configuration, PrivacyInfo manifest, Keychain access groups</li>
   </ul>
   <div class="tags">
     <span class="tag">FastAPI</span>
     <span class="tag">SQLite</span>
     <span class="tag">SQLAlchemy</span>
     <span class="tag">Alembic</span>
-    <span class="tag">Capacitor</span>
+    <span class="tag">SwiftUI</span>
+    <span class="tag">Swift</span>
     <span class="tag">iOS</span>
     <span class="tag">Xcode</span>
     <span class="tag">CI/CD</span>
