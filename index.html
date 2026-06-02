@@ -481,6 +481,18 @@ footer{
     </div>
 
     <div class="skill-group">
+      <h3>Security</h3>
+      <ul>
+        <li>UFW</li>
+        <li>SSH Hardening</li>
+        <li>Cloudflare WAF</li>
+        <li>Cloudflare Tunnels</li>
+        <li>Bot Fight Mode</li>
+        <li>Unattended Upgrades</li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
       <h3>Operating Systems</h3>
       <ul>
         <li>Windows 10 &amp; 11</li>
@@ -653,6 +665,12 @@ footer{
       <div class="meta">Xeon E5-2650 v4 · 16 GB RAM · Dual RTX 3060 12 GB</div>
       <div class="meta">Hermes Agent · llama.cpp · Open Source Models</div>
       <p>Running open source LLMs locally via llama.cpp with Hermes agent integration and a custom Discord bot.</p>
+    </div>
+
+    <div class="project" data-modal="security">
+      <h3>Server Security Hardening</h3>
+      <div class="meta">Debian LXC · Cloudflare Tunnels · UFW · SSH Hardening</div>
+      <p>Security hardening research and implementation for public-facing infrastructure behind Cloudflare Tunnels.</p>
     </div>
 
   </div>
@@ -862,6 +880,38 @@ footer{
     <span class="tag">Hermes</span>
     <span class="tag">Discord Bot</span>
     <span class="tag">Self-hosted AI</span>
+  </div>
+</template>
+
+<template id="tpl-security">
+  <h2>Server Security Hardening</h2>
+  <div class="modal-meta">Debian LXC &nbsp;·&nbsp; Cloudflare Tunnels &nbsp;·&nbsp; UFW &nbsp;·&nbsp; SSH Hardening &nbsp;·&nbsp; Cloudflare WAF</div>
+  <p class="modal-desc">Comprehensive security research and hardening of public-facing LXC containers behind Cloudflare Tunnels — from threat modelling through production deployment and verification.</p>
+  <div class="modal-section-title">Research &amp; Analysis</div>
+  <ul>
+    <li>Analysed Cloudflare Tunnel threat model — determined that IP whitelisting is ineffective for tunnels (traffic originates from localhost, not Cloudflare edge IPs)</li>
+    <li>Evaluated Fail2Ban limitations behind Cloudflare (all traffic appears from CF IPs or localhost, making traditional IP bans pointless)</li>
+    <li>Researched CrowdSec as a Fail2Ban alternative — identified that the Cloudflare Direct bouncer is deprecated and the Workers Bouncer is the recommended replacement</li>
+    <li>Audited Cloudflare free tier features: WAF Free Managed Ruleset, Rate Limiting (1 rule), Bot Fight Mode (free), Turnstile (20 widgets limit), Access (50 MAU cap)</li>
+    <li>Fact-checked all Cloudflare feature pricing and limits against official documentation — corrected OWASP Core Ruleset availability, CrowdSec bouncer status, and Access pricing</li>
+  </ul>
+  <div class="modal-section-title">Implementation (Phase 1)</div>
+  <ul>
+    <li>Configured UFW firewall with default deny-all policy, allowing only ports 22 (SSH), 80 (HTTP), and 443 (HTTPS)</li>
+    <li>Hardened SSH: key-based authentication only, root login disabled, maximum 3 authentication attempts, restricted to specific users</li>
+    <li>Installed and enabled unattended-upgrades for automatic security patching</li>
+    <li>Verified LXC container was already running as unprivileged (unprivileged: 1 in Proxmox config)</li>
+    <li>Verified website remained fully accessible through Cloudflare tunnel after all hardening changes applied</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">Security</span>
+    <span class="tag">UFW</span>
+    <span class="tag">SSH Hardening</span>
+    <span class="tag">Cloudflare</span>
+    <span class="tag">Tunnels</span>
+    <span class="tag">WAF</span>
+    <span class="tag">LXC</span>
+    <span class="tag">Debian</span>
   </div>
 </template>
 
