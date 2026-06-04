@@ -515,6 +515,8 @@ footer{
         <li>Swift</li>
         <li>SwiftUI</li>
         <li>HTML &amp; JavaScript</li>
+        <li>Canvas API</li>
+        <li>Web Audio API</li>
         <li>SQL</li>
         <li>Git</li>
         <li>Xcode</li>
@@ -671,6 +673,12 @@ footer{
       <h3>Server Security Hardening</h3>
       <div class="meta">Debian LXC · Cloudflare Tunnels · UFW · SSH Hardening</div>
       <p>Security hardening research and implementation for public-facing infrastructure behind Cloudflare Tunnels.</p>
+    </div>
+
+    <div class="project" data-modal="spaceshooter">
+      <h3>Octopus Invaders</h3>
+      <div class="meta">Vanilla JavaScript · Canvas API · Web Audio API</div>
+      <p>Vertical-scrolling space shooter with procedural audio, particle effects, and boss fights — zero dependencies.</p>
     </div>
 
   </div>
@@ -912,6 +920,48 @@ footer{
     <span class="tag">WAF</span>
     <span class="tag">LXC</span>
     <span class="tag">Debian</span>
+  </div>
+</template>
+
+<template id="tpl-spaceshooter">
+  <h2>Octopus Invaders</h2>
+  <div class="modal-meta">Vanilla JavaScript &nbsp;·&nbsp; Canvas API &nbsp;·&nbsp; Web Audio API</div>
+  <p class="modal-desc">Vertical-scrolling space shooter game built from scratch with zero external dependencies — using only vanilla JavaScript, the Canvas API, and procedural audio generation.</p>
+  <div class="modal-section-title">Game Engine</div>
+  <ul>
+    <li>Custom game loop with state machine architecture (menu, playing, paused, game over)</li>
+    <li>Collision detection system handling ship-enemy, projectile-enemy, and power-up interactions</li>
+    <li>Screen shake, hit flash, and floating damage number feedback system</li>
+    <li>Combo scoring multiplier for consecutive kills</li>
+  </ul>
+  <div class="modal-section-title">Rendering &amp; Audio</div>
+  <ul>
+    <li>Multi-layer particle system: explosions, trails, sparks, and ink splatter effects</li>
+    <li>4-layer parallax scrolling background (stars, nebula, planets, comets)</li>
+    <li>Procedural audio generation via Web Audio API — no external sound files required</li>
+    <li>Pixel-art style octopus enemies rendered entirely with Canvas 2D primitives</li>
+  </ul>
+  <div class="modal-section-title">Gameplay</div>
+  <ul>
+    <li>4 enemy types with distinct behaviors: sine-wave movement, ink blob shooting, split-on-death, and boss tentacle attacks</li>
+    <li>Boss fights every 5 levels with multi-phase attack patterns</li>
+    <li>4-tier ship upgrade system (every 3 levels): single cannon → dual → triple spread → homing missiles</li>
+    <li>Unleash mode power-up unlocked from boss kills</li>
+    <li>Mouse-driven controls with smooth lerp interpolation</li>
+  </ul>
+  <div class="modal-section-title">Architecture</div>
+  <ul>
+    <li>Modular multi-file structure: config, game state, player, enemies, particles, background, UI, audio</li>
+    <li>Tuning constants centralized in config.js for easy balance iteration</li>
+    <li>Zero build step — runs directly from static file server</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">JavaScript</span>
+    <span class="tag">Canvas API</span>
+    <span class="tag">Web Audio API</span>
+    <span class="tag">Game Development</span>
+    <span class="tag">Particle Systems</span>
+    <span class="tag">Procedural Audio</span>
   </div>
 </template>
 
