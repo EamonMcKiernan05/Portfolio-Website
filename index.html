@@ -681,6 +681,12 @@ footer{
       <p>Vertical-scrolling space shooter with procedural audio, particle effects, and boss fights — zero dependencies.</p>
     </div>
 
+    <div class="project" data-modal="backupmonitor">
+      <h3>Backup Monitor</h3>
+      <div class="meta">FastAPI · Python · REST API · HTML/CSS/JS</div>
+      <p>Real-time monitoring dashboard for homelab backups — Proxmox multi-node cluster and TrueNAS replication.</p>
+    </div>
+
   </div>
 </section>
 
@@ -962,6 +968,49 @@ footer{
     <span class="tag">Game Development</span>
     <span class="tag">Particle Systems</span>
     <span class="tag">Procedural Audio</span>
+  </div>
+</template>
+
+<template id="tpl-backupmonitor">
+  <h2>Backup Monitor</h2>
+  <div class="modal-meta">FastAPI &nbsp;·&nbsp; Python &nbsp;·&nbsp; REST API &nbsp;·&nbsp; HTML/CSS/JS &nbsp;·&nbsp; Proxmox API &nbsp;·&nbsp; TrueNAS API</div>
+  <p class="modal-desc">Real-time backup monitoring dashboard aggregating status from a three-node Proxmox cluster and TrueNAS replication tasks. Modular collector architecture with live auto-refreshing web UI.</p>
+  <div class="modal-section-title">Backend</div>
+  <ul>
+    <li>FastAPI REST API with endpoints: /api/dashboard, /api/summary, /api/health</li>
+    <li>Modular collector pattern — separate Proxmox and TrueNAS collectors with shared model layer</li>
+    <li>Multi-node Proxmox cluster monitoring (3 nodes) with per-VM/LXC backup status</li>
+    <li>TrueNAS replication task and periodic snapshot schedule monitoring</li>
+    <li>YAML configuration with environment variable substitution for credentials</li>
+    <li>uv package manager with lockfile for reproducible builds</li>
+  </ul>
+  <div class="modal-section-title">Frontend</div>
+  <ul>
+    <li>Dark-themed responsive web dashboard with color-coded status indicators</li>
+    <li>Auto-refreshing live view — no page reload required</li>
+    <li>Per-backup cards showing: last run time, duration, next scheduled run, data transferred, errors/warnings</li>
+    <li>Server connection status with error display (green/red dots)</li>
+    <li>Summary counts: total backups, success, failed, warning, running</li>
+  </ul>
+  <div class="modal-section-title">Infrastructure</div>
+  <ul>
+    <li>Monitors 3 Proxmox nodes (vzdump backup jobs, task logs, schedules)</li>
+    <li>Monitors 2 TrueNAS servers (replication tasks and snapshot schedules)</li>
+    <li>Deduplication logic across cluster nodes to avoid duplicate backup entries</li>
+    <li>Deployed on a Debian LXC container with configurable port</li>
+    <li>REST API designed for integration with external monitoring tools</li>
+  </ul>
+  <div class="tags">
+    <span class="tag">FastAPI</span>
+    <span class="tag">Python</span>
+    <span class="tag">REST API</span>
+    <span class="tag">Proxmox API</span>
+    <span class="tag">TrueNAS API</span>
+    <span class="tag">Monitoring</span>
+    <span class="tag">Dashboard</span>
+    <span class="tag">Backup</span>
+    <span class="tag">YAML</span>
+    <span class="tag">uv</span>
   </div>
 </template>
 
