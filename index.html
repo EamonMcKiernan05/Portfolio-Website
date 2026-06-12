@@ -687,7 +687,7 @@ footer{
 
     <div class="project" data-modal="ai" role="button" tabindex="0">
       <h3>Local AI</h3>
-      <div class="meta">Xeon E5-2650 v4 · 16 GB RAM · Dual RTX 3060 12 GB</div>
+      <div class="meta">Xeon E5-2650 v4 · 32 GB RAM · Triple RTX 3060 12 GB</div>
       <div class="meta">Hermes Agent · llama.cpp · Open Source Models</div>
       <p>Running open source LLMs locally via llama.cpp with Hermes agent integration and a custom Discord bot.</p>
     </div>
@@ -698,13 +698,7 @@ footer{
       <p>Security hardening research and implementation for public-facing infrastructure behind Cloudflare Tunnels.</p>
     </div>
 
-    <div class="project" data-modal="spaceshooter" role="button" tabindex="0">
-      <h3>Octopus Invaders</h3>
-      <div class="meta">Vanilla JavaScript · Canvas API · Web Audio API</div>
-      <p>Vertical-scrolling space shooter with procedural audio, particle effects, and boss fights — zero dependencies.</p>
-    </div>
-
-    <div class="project" data-modal="backupmonitor" role="button" tabindex="0">
+   <div class="project" data-modal="backupmonitor" role="button" tabindex="0">
       <h3>Backup Monitor</h3>
       <div class="meta">FastAPI · Python · REST API · HTML/CSS/JS</div>
       <p>Real-time monitoring dashboard for homelab backups — Proxmox multi-node cluster and TrueNAS replication.</p>
@@ -898,12 +892,12 @@ footer{
 
 <template id="tpl-ai">
   <h2>Local AI</h2>
-  <div class="modal-meta">Xeon E5-2650 v4 &nbsp;·&nbsp; 16 GB RAM &nbsp;·&nbsp; Dual RTX 3060 12 GB &nbsp;·&nbsp; Hermes Agent &nbsp;·&nbsp; llama.cpp</div>
-  <p class="modal-desc">Fully local LLM inference stack with 24 GB combined VRAM, running open-source models via llama.cpp with a Hermes agent layer and a custom Discord bot frontend.</p>
+  <div class="modal-meta">Xeon E5-2650 v4 · 32 GB RAM · Triple RTX 3060 12 GB · Hermes Agent · llama.cpp</div>
+   <p class="modal-desc">Fully local LLM inference stack with 36 GB combined VRAM, running open-source models via llama.cpp with a Hermes agent layer and a custom Discord bot frontend.</p>
   <div class="modal-section-title">Details</div>
   <ul>
-    <li>24 GB combined VRAM enabling large model inference without quantisation trade-offs</li>
-    <li>llama.cpp for efficient GPU-accelerated inference across both GPUs</li>
+    <li>36 GB combined VRAM enabling large model inference without quantisation trade-offs</li>
+    <li>llama.cpp for efficient GPU-accelerated inference across all three GPUs</li>
     <li>Speculative decoding tuned to 75% draft acceptance rate, doubling throughput to ~30 tokens/sec</li>
     <li>Hermes agent framework for tool use and agentic workflows</li>
     <li>Custom Discord bot as a conversational frontend for the local models</li>
@@ -949,48 +943,6 @@ footer{
     <span class="tag">WAF</span>
     <span class="tag">LXC</span>
     <span class="tag">Debian</span>
-  </div>
-</template>
-
-<template id="tpl-spaceshooter">
-  <h2>Octopus Invaders</h2>
-  <div class="modal-meta">Vanilla JavaScript &nbsp;·&nbsp; Canvas API &nbsp;·&nbsp; Web Audio API</div>
-  <p class="modal-desc">Vertical-scrolling space shooter game built from scratch with zero external dependencies — using only vanilla JavaScript, the Canvas API, and procedural audio generation.</p>
-  <div class="modal-section-title">Game Engine</div>
-  <ul>
-    <li>Custom game loop with state machine architecture (menu, playing, paused, game over)</li>
-    <li>Collision detection system handling ship-enemy, projectile-enemy, and power-up interactions</li>
-    <li>Screen shake, hit flash, and floating damage number feedback system</li>
-    <li>Combo scoring multiplier for consecutive kills</li>
-  </ul>
-  <div class="modal-section-title">Rendering &amp; Audio</div>
-  <ul>
-    <li>Multi-layer particle system: explosions, trails, sparks, and ink splatter effects</li>
-    <li>4-layer parallax scrolling background (stars, nebula, planets, comets)</li>
-    <li>Procedural audio generation via Web Audio API — no external sound files required</li>
-    <li>Pixel-art style octopus enemies rendered entirely with Canvas 2D primitives</li>
-  </ul>
-  <div class="modal-section-title">Gameplay</div>
-  <ul>
-    <li>4 enemy types with distinct behaviors: sine-wave movement, ink blob shooting, split-on-death, and boss tentacle attacks</li>
-    <li>Boss fights every 5 levels with multi-phase attack patterns</li>
-    <li>4-tier ship upgrade system (every 3 levels): single cannon → dual → triple spread → homing missiles</li>
-    <li>Unleash mode power-up unlocked from boss kills</li>
-    <li>Mouse-driven controls with smooth lerp interpolation</li>
-  </ul>
-  <div class="modal-section-title">Architecture</div>
-  <ul>
-    <li>Modular multi-file structure: config, game state, player, enemies, particles, background, UI, audio</li>
-    <li>Tuning constants centralized in config.js for easy balance iteration</li>
-    <li>Zero build step — runs directly from static file server</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">JavaScript</span>
-    <span class="tag">Canvas API</span>
-    <span class="tag">Web Audio API</span>
-    <span class="tag">Game Development</span>
-    <span class="tag">Particle Systems</span>
-    <span class="tag">Procedural Audio</span>
   </div>
 </template>
 
