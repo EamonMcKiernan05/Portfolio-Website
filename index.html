@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a1a'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Segoe UI,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236ba1e0'>E</text></svg>">
 <title>Eamon McKiernan — IT Support &amp; Infrastructure</title>
 <meta name="description" content="Eamon McKiernan — IT Support Technician specialising in Microsoft 365, virtualisation, and self-hosted infrastructure.">
 
@@ -280,6 +282,27 @@ section+section{border-top:1px solid rgba(255,255,255,.06)}
   border:1px solid rgba(107,161,224,.15);
   border-radius:4px;
   color:#8db8e8;
+}
+
+/* ── Impact Stats ── */
+.stat-card{
+  text-align:center;
+  padding:30px 20px;
+}
+.stat-card .stat-number{
+  font-size:42px;
+  font-weight:700;
+  color:#6ba1e0;
+  margin-bottom:8px;
+}
+.stat-card .stat-label{
+  font-size:14px;
+  color:#9da3af;
+}
+.stat-card .stat-sub{
+  font-size:12px;
+  color:#6b7280;
+  margin-top:4px;
 }
 
 /* ── Certifications ── */
@@ -586,24 +609,24 @@ footer{
 
 </section>
 
-<!-- ── Community Impact ── -->
+<!-- ── Impact ── -->
 <section class="fade-in">
-  <h2 class="section-title">Community Impact</h2>
+  <h2 class="section-title">Impact</h2>
   <div class="skills-grid">
-    <div class="skill-group" style="text-align:center;padding:30px 20px;">
-      <div style="font-size:42px;font-weight:700;color:#6ba1e0;margin-bottom:8px;">40+</div>
-      <div style="font-size:14px;color:#9da3af;">Tickets Per Week</div>
-      <div style="font-size:12px;color:#6b7280;margin-top:4px;">average</div>
+    <div class="skill-group stat-card">
+      <div class="stat-number">40+</div>
+      <div class="stat-label">Tickets Per Week</div>
+      <div class="stat-sub">average</div>
     </div>
-    <div class="skill-group" style="text-align:center;padding:30px 20px;">
-      <div style="font-size:42px;font-weight:700;color:#6ba1e0;margin-bottom:8px;">200+</div>
-      <div style="font-size:14px;color:#9da3af;">Tickets Per Month</div>
-      <div style="font-size:12px;color:#6b7280;margin-top:4px;">average</div>
+    <div class="skill-group stat-card">
+      <div class="stat-number">200+</div>
+      <div class="stat-label">Tickets Per Month</div>
+      <div class="stat-sub">average</div>
     </div>
-    <div class="skill-group" style="text-align:center;padding:30px 20px;">
-      <div style="font-size:42px;font-weight:700;color:#6ba1e0;margin-bottom:8px;">15+</div>
-      <div style="font-size:14px;color:#9da3af;">Platform Integrations</div>
-      <div style="font-size:12px;color:#6b7280;margin-top:4px;">supported</div>
+    <div class="skill-group stat-card">
+      <div class="stat-number">15+</div>
+      <div class="stat-label">Platform Integrations</div>
+      <div class="stat-sub">supported</div>
     </div>
   </div>
 </section>
@@ -637,51 +660,51 @@ footer{
   <h2 class="section-title">Projects</h2>
   <div class="projects-grid">
 
-    <div class="project" data-modal="proxmox">
+    <div class="project" data-modal="proxmox" role="button" tabindex="0">
       <h3>Proxmox Cluster</h3>
       <div class="meta">Dell 3050 (i5-8500, 32 GB) · HP ProDesk (i5-7500, 16 GB) · HP EliteDesk (i5-6500, 16 GB)</div>
       <p>Three-node HA cluster with Ceph storage running LXCs and VMs.</p>
     </div>
 
-    <div class="project" data-modal="opnsense">
+    <div class="project" data-modal="opnsense" role="button" tabindex="0">
       <h3>OPNsense Router</h3>
       <div class="meta">HP 280 G2 SFF · Intel i350 NIC</div>
       <p>Two subnets with a managed switch and WAP. Servers and admin devices isolated from consumer traffic.</p>
     </div>
 
-    <div class="project" data-modal="media">
+    <div class="project" data-modal="media" role="button" tabindex="0">
       <h3>Media Server</h3>
       <div class="meta">Xeon E5-2630 v4 · 16 GB RAM · GTX 1650 · TrueNAS</div>
       <p>Self-hosted media stack with automated downloads and redundant storage.</p>
     </div>
 
-    <div class="project" data-modal="ffiom">
+    <div class="project" data-modal="ffiom" role="button" tabindex="0">
       <h3>Fantasy Football Isle of Man</h3>
       <div class="meta">FastAPI · SQLite · SwiftUI · Vanilla JS</div>
       <div class="meta">GitHub Actions · FullTime API · JWT Auth</div>
       <p>FPL-style fantasy football game for the Canada Life Premier League with web app and native iOS client.</p>
     </div>
 
-    <div class="project" data-modal="ai">
+    <div class="project" data-modal="ai" role="button" tabindex="0">
       <h3>Local AI</h3>
       <div class="meta">Xeon E5-2650 v4 · 16 GB RAM · Dual RTX 3060 12 GB</div>
       <div class="meta">Hermes Agent · llama.cpp · Open Source Models</div>
       <p>Running open source LLMs locally via llama.cpp with Hermes agent integration and a custom Discord bot.</p>
     </div>
 
-    <div class="project" data-modal="security">
+    <div class="project" data-modal="security" role="button" tabindex="0">
       <h3>Server Security Hardening</h3>
       <div class="meta">Debian LXC · Cloudflare Tunnels · UFW · SSH Hardening</div>
       <p>Security hardening research and implementation for public-facing infrastructure behind Cloudflare Tunnels.</p>
     </div>
 
-    <div class="project" data-modal="spaceshooter">
+    <div class="project" data-modal="spaceshooter" role="button" tabindex="0">
       <h3>Octopus Invaders</h3>
       <div class="meta">Vanilla JavaScript · Canvas API · Web Audio API</div>
       <p>Vertical-scrolling space shooter with procedural audio, particle effects, and boss fights — zero dependencies.</p>
     </div>
 
-    <div class="project" data-modal="backupmonitor">
+    <div class="project" data-modal="backupmonitor" role="button" tabindex="0">
       <h3>Backup Monitor</h3>
       <div class="meta">FastAPI · Python · REST API · HTML/CSS/JS</div>
       <p>Real-time monitoring dashboard for homelab backups — Proxmox multi-node cluster and TrueNAS replication.</p>
@@ -1014,14 +1037,30 @@ footer{
   </div>
 </template>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Eamon McKiernan",
+  "jobTitle": "IT Support Engineer",
+  "url": "https://eamonmckiernan.uk",
+  "email": "mailto:enquiries@eamonmckiernan.uk",
+  "sameAs": [
+    "https://www.linkedin.com/in/eamon-mckiernan-24a563307/",
+    "https://github.com/EamonMcKiernan05"
+  ],
+  "alumniOf": {
+    "@type": "School",
+    "name": "Ramsey Grammar School"
+  }
+}
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
       }
     });
   }, { threshold: 0.1 });
@@ -1053,6 +1092,9 @@ document.addEventListener('DOMContentLoaded', () => {
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    // Collect focusable elements for trap
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+
     // Double rAF: first frame triggers layout, second frame guarantees it's committed
     requestAnimationFrame(() => requestAnimationFrame(() => {
       const modalRect = modal.getBoundingClientRect();
@@ -1079,6 +1121,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeAnim.onfinish = () => { activeAnim = null; };
       closeBtn.focus();
+
+      // Focus trap
+      function handleTab(e) {
+        if (e.target === closeBtn && e.shiftKey) { e.preventDefault(); focusable[focusable.length - 1]?.focus(); }
+        else if (e.target === focusable[focusable.length - 1] && !e.shiftKey) { e.preventDefault(); closeBtn.focus(); }
+      }
+      modal.addEventListener('keydown', handleTab);
     }));
   }
 
@@ -1107,6 +1156,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.project[data-modal]').forEach(card => {
     card.addEventListener('click', () => openModal(card.dataset.modal, card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card.dataset.modal, card); }
+    });
   });
 
   closeBtn.addEventListener('click', closeModal);
