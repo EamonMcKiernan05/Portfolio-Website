@@ -565,6 +565,8 @@ footer{
       <h3>AI &amp; LLMs</h3>
       <ul>
         <li>llama.cpp</li>
+        <li>vLLM</li>
+        <li>TurboQuant</li>
         <li>Hermes Agent</li>
         <li>Ollama</li>
         <li>Local AI</li>
@@ -899,12 +901,16 @@ footer{
     <li>36 GB combined VRAM enabling large model inference without quantisation trade-offs</li>
     <li>llama.cpp for efficient GPU-accelerated inference across all three GPUs</li>
     <li>Speculative decoding tuned to 75% draft acceptance rate, doubling throughput to ~30 tokens/sec</li>
+    <li>Custom TurboQuant fork (llama.cpp-turboquant) built from source and deployed as systemd service with q8_0 K/V cache and turbo4 quantisation</li>
+    <li>Multi-framework inference benchmarking — vLLM vs llama.cpp across --split-mode layer and --split-mode tensor configurations for optimal multi-GPU utilisation</li>
     <li>Hermes agent framework for tool use and agentic workflows</li>
     <li>Custom Discord bot as a conversational frontend for the local models</li>
     <li>Entirely self-hosted — no data sent to external APIs</li>
   </ul>
   <div class="tags">
     <span class="tag">llama.cpp</span>
+    <span class="tag">vLLM</span>
+    <span class="tag">TurboQuant</span>
     <span class="tag">Speculative Decoding</span>
     <span class="tag">LLM</span>
     <span class="tag">RTX 3060</span>
