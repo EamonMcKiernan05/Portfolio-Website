@@ -567,6 +567,8 @@ footer{
         <li>llama.cpp</li>
         <li>vLLM</li>
         <li>TurboQuant</li>
+        <li>ExLlamaV3</li>
+        <li>Flash Attention</li>
         <li>Hermes Agent</li>
         <li>Ollama</li>
         <li>Local AI</li>
@@ -902,7 +904,9 @@ footer{
     <li>llama.cpp for efficient GPU-accelerated inference across all three GPUs</li>
     <li>Speculative decoding tuned to 75% draft acceptance rate, doubling throughput to ~30 tokens/sec</li>
     <li>Custom TurboQuant fork (llama.cpp-turboquant) built from source and deployed as systemd service with q8_0 K/V cache and turbo4 quantisation</li>
-    <li>Multi-framework inference benchmarking — vLLM vs llama.cpp across --split-mode layer and --split-mode tensor configurations for optimal multi-GPU utilisation</li>
+    <li>Multi-framework inference benchmarking — vLLM vs llama.cpp vs ExLlamaV3 across different split-mode and quantisation configurations for optimal multi-GPU utilisation</li>
+    <li>ExLlamaV3 multi-GPU inference without NVLink — dual RTX 3060s with architecture-specific Flash Attention kernel compilation (FA3_ARCHS="86")</li>
+    <li>Qwen 3.6 27B inference via ExLlamaV3 at 6.00bpw quantisation — full model download, format conversion, and multi-GPU loading</li>
     <li>Hermes agent framework for tool use and agentic workflows</li>
     <li>Custom Discord bot as a conversational frontend for the local models</li>
     <li>Entirely self-hosted — no data sent to external APIs</li>
@@ -912,6 +916,8 @@ footer{
     <span class="tag">vLLM</span>
     <span class="tag">TurboQuant</span>
     <span class="tag">Speculative Decoding</span>
+    <span class="tag">ExLlamaV3</span>
+    <span class="tag">Flash Attention</span>
     <span class="tag">LLM</span>
     <span class="tag">RTX 3060</span>
     <span class="tag">Hermes</span>
