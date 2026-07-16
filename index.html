@@ -3,1150 +3,274 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1a1a1a">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a1a'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Segoe UI,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236ba1e0'>E</text></svg>">
-<title>Eamon McKiernan — IT Support &amp; Infrastructure</title>
-<meta name="description" content="Eamon McKiernan — IT Support Technician specialising in Microsoft 365, virtualisation, and self-hosted infrastructure.">
-
+<title>Eamon McKiernan – IT Support & Infrastructure (Impeccable)</title>
+<meta name="description" content="Eamon McKiernan – IT Support Engineer. A redesign guided by pbakaus/impeccable: disciplined fundamentals, real contrast, flawless spacing.">
 <style>
-/* ── Reset & Base ── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#f3efe7; --card:#fbf9f4; --card-2:#efe9dd;
+  --ink:#26231d; --muted:#5c574d; --faint:#8a8475;
+  --line:#ddd6c8; --line-strong:#c9c0ad;
+  --accent:#bd4b2a; --accent-soft:#e7d3c8;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+
+  --r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  background:#1a1a1a;
-  color:#c8ccd4;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:#6ba1e0;text-decoration:underline;text-underline-offset:3px;transition:color .2s}
-a:hover{color:#93bfee}
-ul{list-style:none}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft);transition:border-color .2s}
+a:hover{border-color:var(--accent)}
+.wrap{max-width:880px;margin:0 auto;padding:0 32px}
+:root{--ease-out:cubic-bezier(.22,.61,.36,1)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
 
-/* ── Layout ── */
-.wrap{max-width:960px;margin:0 auto;padding:0 24px}
-
-/* ── Hero ── */
+/* Hero — taste-skill feel (large two-colour italic) adapted to impeccable's light palette; fullscreen spacing (eamon-cv/master-cv) */
 .hero{
-  padding:80px 0 60px;
-  border-bottom:1px solid rgba(255,255,255,.06);
+  background:var(--paper); color:var(--ink);
+  min-height:calc(100vh + 12px); display:flex; flex-direction:column; justify-content:center;
+  padding:80px 0 92px; border-bottom:2px solid var(--ink); position:relative;
 }
-.hero h1{
-  font-size:clamp(28px,5vw,42px);
-  font-weight:700;
-  color:#f0f2f5;
-  letter-spacing:-.5px;
-}
-.hero .role{
-  font-size:18px;
-  color:#6ba1e0;
-  margin-top:6px;
-  font-weight:500;
-}
-.hero .summary{
-  margin-top:20px;
-  max-width:640px;
-  font-size:15px;
-  color:#9da3af;
-  line-height:1.7;
-}
-.hero .links{
-  margin-top:24px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  font-size:14px;
-}
-.hero .links span{color:#6b7280}
+.hero .mark{font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
+.hero h1{font-family:var(--serif);font-size:clamp(56px,12vw,128px);font-weight:600;line-height:.92;letter-spacing:-.02em;color:var(--ink)}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .role{margin-top:22px;font-size:clamp(18px,2.6vw,26px);font-weight:500;color:var(--muted)}
+.hero .summary{margin-top:28px;max-width:560px;font-size:16px;color:var(--muted)}
+.hero .status{margin-top:22px;font-size:14px;color:var(--faint)}
+.hero .status b{color:var(--ink);font-weight:600}
+.hero .hero-links{margin-top:30px;display:flex;flex-wrap:wrap;gap:26px;font-size:14px}
+.hero .hero-links a{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:500;text-decoration:none}
+.hero .hero-links a:hover{color:var(--ink)}
+.hero .hero-links svg{width:17px;height:17px;fill:currentColor;flex:none}
 
-/* ── Section ── */
-section{padding:52px 0}
-section+section{border-top:1px solid rgba(255,255,255,.06)}
-.section-title{
-  font-size:13px;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  color:#4e7ab5;
-  margin-bottom:28px;
-}
+/* Sections */
+section{padding:54px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:none}
+.sec-title{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);margin-bottom:30px}
+.sec-title::after{content:"";display:block;width:48px;height:3px;background:var(--accent);margin-top:12px}
 
-/* ── Skills Grid ── */
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:16px;
-}
-.skill-group{
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:8px;
-  padding:20px;
-  transition:transform .25s ease, border-color .25s ease;
-}
-.skill-group:hover{
-  transform:scale(1.03);
-  border-color:rgba(107,161,224,.25);
-}
-.skill-group h3{
-  font-size:14px;
-  font-weight:600;
-  color:#e2e5ea;
-  margin-bottom:12px;
-}
-.skill-group ul{display:flex;flex-wrap:wrap;gap:6px}
-.skill-group li{
-  font-size:12px;
-  padding:4px 10px;
-  background:rgba(107,161,224,.08);
-  border:1px solid rgba(107,161,224,.15);
-  border-radius:4px;
-  color:#8db8e8;
-}
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.skill{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.skill h3{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:12px}
+.skill ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.skill li{font-size:12px;padding:3px 9px;background:var(--card-2);border:1px solid var(--line);border-radius:5px;color:var(--muted)}
 
-/* ── Experience ── */
-.timeline-item{
-  padding:20px 0;
-  display:grid;
-  grid-template-columns:180px 1fr;
-  gap:20px;
-}
-.timeline-item+.timeline-item{border-top:1px solid rgba(255,255,255,.04)}
-.timeline-date{
-  font-size:13px;
-  color:#6b7280;
-  padding-top:2px;
-}
-.timeline-body h3{
-  font-size:16px;
-  font-weight:600;
-  color:#e2e5ea;
-}
-.timeline-body .company{
-  font-size:14px;
-  color:#6ba1e0;
-  margin-bottom:8px;
-}
-.timeline-body ul{margin-top:8px}
-.timeline-body li{
-  position:relative;
-  padding-left:16px;
-  font-size:14px;
-  color:#9da3af;
-  margin-bottom:4px;
-}
-.timeline-body li::before{
-  content:'';
-  position:absolute;
-  left:0;top:10px;
-  width:5px;height:5px;
-  border-radius:50%;
-  background:#3d5a80;
-}
+/* Experience */
+.exp{display:flex;flex-direction:column;gap:26px}
+.job{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.job+.job{margin-top:14px}
+.job h3{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink)}
+.job .co{font-size:14px;color:var(--accent);margin:2px 0 4px;font-weight:500}
+.job .when{font-family:var(--sans);font-size:12.5px;color:var(--faint);margin-bottom:10px}
+.job ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.job li{position:relative;padding-left:16px;font-size:15px;color:var(--muted)}
+.job li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
-/* ── Projects ── */
-.projects-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:16px;
-}
-.project{
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:8px;
-  padding:20px;
-  cursor:pointer;
-  transition:transform .25s ease, border-color .25s ease;
-}
-.project:hover{
-  transform:scale(1.03);
-  border-color:rgba(107,161,224,.25);
-}
-.project h3{
-  font-size:15px;
-  font-weight:600;
-  color:#e2e5ea;
-  margin-bottom:4px;
-}
-.project .meta{
-  font-size:12px;
-  color:#4e7ab5;
-  margin-bottom:10px;
-}
-.project p{font-size:13px;color:#9da3af;line-height:1.65}
+/* Stats — same light box treatment as .job / .skill */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 18px}
+.stat .n{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1;color:var(--ink)}
+.stat .l{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.stat .s{margin-top:2px;font-size:11px;color:var(--faint)}
 
-/* ── Project Modal ── */
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(4px);
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .25s ease;
-}
-.modal-backdrop.open{
-  opacity:1;
-  pointer-events:auto;
-}
-.modal{
-  background:#0f1520;
-  border:1px solid rgba(107,161,224,.2);
-  border-radius:12px;
-  width:100%;
-  max-width:680px;
-  max-height:85vh;
-  overflow-y:auto;
-  padding:36px 40px;
-  position:relative;
-  will-change:transform,opacity;
-}
-.modal-close{
-  position:absolute;
-  top:16px;right:20px;
-  background:none;
-  border:none;
-  color:#6b7280;
-  font-size:22px;
-  cursor:pointer;
-  line-height:1;
-  padding:4px;
-  transition:color .15s;
-}
-.modal-close:hover{color:#c8ccd4}
-.modal h2{
-  font-size:22px;
-  font-weight:700;
-  color:#f0f2f5;
-  margin-bottom:6px;
-}
-.modal .modal-meta{
-  font-size:13px;
-  color:#4e7ab5;
-  margin-bottom:20px;
-  line-height:1.6;
-}
-.modal .modal-desc{
-  font-size:15px;
-  color:#9da3af;
-  line-height:1.7;
-  margin-bottom:24px;
-  padding-bottom:24px;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.modal-section-title{
-  font-size:11px;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-  color:#4e7ab5;
-  margin-bottom:12px;
-}
-.modal ul{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.modal li{
-  position:relative;
-  padding-left:16px;
-  font-size:14px;
-  color:#9da3af;
-  line-height:1.6;
-}
-.modal li::before{
-  content:'';
-  position:absolute;
-  left:0;top:9px;
-  width:5px;height:5px;
-  border-radius:50%;
-  background:#3d5a80;
-}
-.modal .tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:20px;
-  padding-top:20px;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-.modal .tag{
-  font-size:12px;
-  padding:4px 10px;
-  background:rgba(107,161,224,.08);
-  border:1px solid rgba(107,161,224,.15);
-  border-radius:4px;
-  color:#8db8e8;
-}
+/* Cert */
+.cert{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 22px}
+.cert .badge{width:42px;height:42px;border-radius:8px;background:var(--card-2);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cert h3{font-size:15px;font-weight:600;color:var(--ink)}
+.cert .meta{font-size:12.5px;color:var(--faint)}
+.cert .meta b{color:var(--accent);font-weight:500}
+.cert .yr{margin-left:auto;font-family:var(--sans);font-size:12px;color:var(--faint)}
 
-/* ── Impact Stats ── */
-.stat-card{
-  text-align:center;
-  padding:30px 20px;
-}
-.stat-card .stat-number{
-  font-size:42px;
-  font-weight:700;
-  color:#6ba1e0;
-  margin-bottom:8px;
-}
-.stat-card .stat-label{
-  font-size:14px;
-  color:#9da3af;
-}
-.stat-card .stat-sub{
-  font-size:12px;
-  color:#6b7280;
-  margin-top:4px;
-}
+/* Projects (details) */
+.proj{display:flex;flex-direction:column;gap:12px}
+.proj-item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.proj-item summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:14px;padding:18px 22px;transition:background .2s}
+.proj-item summary::-webkit-details-marker{display:none}
+.proj-item summary:hover{background:var(--card-2)}
+.proj-item summary .ph{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--ink)}
+.proj-item summary .pm{font-family:var(--sans);font-size:11px;color:var(--accent);margin-left:auto;text-align:right}
+.proj-item summary::before{content:"+";font-family:var(--sans);font-size:18px;color:var(--accent);transition:transform .25s}
+.proj-item[open] summary::before{content:"\2212"}
+.proj-body{padding:0 22px 22px}
+.proj-body .pdesc{font-size:15px;color:var(--muted);margin-bottom:18px}
+.msec{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:18px 0 10px}
+.proj-body ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.proj-body li{position:relative;padding-left:16px;font-size:14px;color:var(--muted)}
+.proj-body li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.tags span{font-size:11px;padding:3px 9px;background:var(--card-2);border:1px solid var(--line);border-radius:5px;color:var(--muted)}
 
-/* ── Certifications ── */
-.cert-list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.cert-item{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:8px;
-  padding:18px 22px;
-}
-.cert-badge{
-  flex-shrink:0;
-  width:44px;height:44px;
-  border-radius:8px;
-  background:rgba(107,161,224,.1);
-  border:1px solid rgba(107,161,224,.2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
-}
-.cert-info{flex:1}
-.cert-info h3{
-  font-size:15px;
-  font-weight:600;
-  color:#e2e5ea;
-  margin-bottom:2px;
-}
-.cert-info .cert-meta{
-  font-size:12px;
-  color:#6b7280;
-}
-.cert-info .cert-meta span{
-  color:#4e7ab5;
-  font-weight:500;
-}
-.cert-year{
-  font-size:12px;
-  color:#6b7280;
-  flex-shrink:0;
-}
+/* Education */
+.edu{display:flex;flex-direction:column;gap:22px}
+.ed{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.ed+.ed{margin-top:14px}
+.ed h3{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink)}
+.ed .sub{font-size:13px;color:var(--faint);margin-bottom:10px}
+.ed .when{font-family:var(--sans);font-size:12.5px;color:var(--faint);margin-bottom:8px}
+.grades{display:flex;flex-wrap:wrap;gap:8px}
+.grade{font-size:12.5px;padding:4px 11px;background:var(--card);border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+.grade b{color:var(--ink)}
 
-/* ── Education ── */
-.edu-item{
-  padding:20px 0;
-  display:grid;
-  grid-template-columns:180px 1fr;
-  gap:20px;
-}
-.edu-item+.edu-item{border-top:1px solid rgba(255,255,255,.04)}
-.edu-item h3{
-  font-size:16px;
-  font-weight:600;
-  color:#e2e5ea;
-}
-.edu-item .sub{
-  font-size:13px;
-  color:#6b7280;
-  margin-bottom:8px;
-}
-.grades{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:8px;
-}
-.grade{
-  font-size:12px;
-  padding:4px 10px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:4px;
-  color:#9da3af;
-}
-.grade strong{color:#c8ccd4}
+/* Contact + footer */
+.contact{display:flex;flex-wrap:wrap;gap:22px;font-size:15px}
+.contact a,.contact span{color:var(--muted);border-bottom:1px solid var(--line)}
+.contact a:hover{border-color:var(--accent)}
+footer{padding:44px 0 60px;border-top:2px solid var(--ink);font-size:12.5px;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
-/* ── Contact ── */
-.contact-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:24px;
-  font-size:14px;
-}
-.contact-row a,.contact-row span{color:#9da3af}
-.contact-row a:hover{color:#6ba1e0}
-
-/* ── Footer ── */
-footer{
-  padding:40px 0;
-  border-top:1px solid rgba(255,255,255,.06);
-  font-size:12px;
-  color:#3d4451;
-  text-align:center;
-}
-
-/* ── Scroll Animations ── */
-.fade-in{
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity .6s ease, transform .6s ease;
-}
-.fade-in.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ── Responsive ── */
-@media(max-width:640px){
-  .hero{padding:48px 0 40px}
-  .timeline-item,.edu-item{
-    grid-template-columns:1fr;
-    gap:4px;
-  }
-  .timeline-date{padding-top:0;margin-bottom:4px}
-}
+@media(max-width:720px){.hero{border-bottom-width:1px;padding:64px 0}.job,.ed{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.proj-item summary{flex-wrap:wrap}.proj-item summary .pm{margin-left:0;width:100%;text-align:left}}
 </style>
 </head>
-
 <body>
-
 <div class="wrap">
 
-<!-- ── Hero ── -->
-<header class="hero fade-in">
-  <h1>Eamon McKiernan</h1>
-  <div class="role">IT Support Engineer</div>
-  <p class="summary">
-    IT support technician with a foundation in Microsoft 365, virtualisation, and self-hosted infrastructure.
-    I run a multi-node homelab with Proxmox, TrueNAS, and OPNsense.
-    Outside of IT, I compete in powerlifting and have represented the Isle of Man internationally twice.
-  </p>
-  <div class="links">
-    <a href="mailto:enquiries@eamonmckiernan.uk">enquiries@eamonmckiernan.uk</a>
-    <span>·</span>
-    <span>Isle of Man</span>
-    <span>·</span>
-    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">LinkedIn</a>
-    <span>·</span>
-    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">GitHub</a>
+<header class="hero">
+  <h1>Eamon <em>McKiernan</em></h1>
+  <div class="role">IT Support Engineer · Self-Hosted AI Infrastructure</div>
+  <p class="summary">IT Support Technician with a foundation in Microsoft 365, frontier and local AI deployment, and self-hosted infrastructure. I run a multi-node homelab with Proxmox, TrueNAS, and OPNsense. Outside of IT, I compete in powerlifting and have represented the Isle of Man internationally twice.</p>
+  <p class="status">Based in the <b>Isle of Man</b> &middot; open to remote and on-site work</p>
+  <div class="hero-links">
+    <a href="mailto:enquiries@eamonmckiernan.uk">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2V5zm2 1.7V18h16V6.7l-8 5.3-8-5.3zM18.8 6H5.2L12 10.8 18.8 6z"/></svg>
+      enquiries@eamonmckiernan.uk
+    </a>
+    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5.001A2.5 2.5 0 014.98 3.5zM3 9h4v12H3V9zm6 0h3.8v1.64h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9V9z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"/></svg>
+      GitHub
+    </a>
   </div>
 </header>
 
-<!-- ── Skills ── -->
-<section class="fade-in">
-  <h2 class="section-title">Skills</h2>
-  <div class="skills-grid">
-
-    <div class="skill-group">
-      <h3>Microsoft 365 &amp; Azure</h3>
-      <ul>
-        <li>Exchange Online</li>
-        <li>Exchange On-Prem</li>
-        <li>Entra ID / Azure AD</li>
-        <li>Intune</li>
-        <li>Licensing</li>
-        <li>Conditional Access</li>
-        <li>Active Directory On-Prem</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>Virtualisation &amp; Containers</h3>
-      <ul>
-        <li>Proxmox</li>
-        <li>VM Deployment</li>
-        <li>LXC Containers</li>
-        <li>Docker</li>
-        <li>Resource Planning</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>Backup &amp; Monitoring</h3>
-      <ul>
-        <li>Veeam Backup &amp; Replication</li>
-        <li>CloudCover 365</li>
-        <li>TrueNAS Replication</li>
-        <li>Proxmox Backup</li>
-        <li>LibreNMS</li>
-        <li>Uptime Kuma</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>Networking</h3>
-      <ul>
-        <li>OPNsense</li>
-        <li>Firewall Rules</li>
-        <li>DNS / Pi-hole</li>
-        <li>VPN / Tailscale</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>Security</h3>
-      <ul>
-        <li>UFW</li>
-        <li>SSH Hardening</li>
-        <li>Cloudflare WAF</li>
-        <li>Cloudflare Tunnels</li>
-        <li>Bot Fight Mode</li>
-        <li>Unattended Upgrades</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>Operating Systems</h3>
-      <ul>
-        <li>Windows 10 &amp; 11</li>
-        <li>Windows Server</li>
-        <li>Proxmox</li>
-        <li>TrueNAS</li>
-        <li>Ubuntu</li>
-        <li>Debian</li>
-        <li>Arch</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>Programming &amp; Scripting</h3>
-      <ul>
-        <li>Python</li>
-        <li>FastAPI</li>
-        <li>PowerShell</li>
-        <li>C#</li>
-        <li>Swift</li>
-        <li>SwiftUI</li>
-        <li>HTML &amp; JavaScript</li>
-        <li>Canvas API</li>
-        <li>Web Audio API</li>
-        <li>SQL</li>
-        <li>Git</li>
-        <li>Xcode</li>
-        <li>Capacitor</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>End-User Support</h3>
-      <ul>
-        <li>Phone &amp; Email</li>
-        <li>Datto</li>
-        <li>Zoho</li>
-        <li>AnyDesk</li>
-        <li>Quick Assist</li>
-        <li>SuperOps</li>
-        <li>Splashtop</li>
-        <li>Documentation</li>
-      </ul>
-    </div>
-
-    <div class="skill-group">
-      <h3>AI &amp; LLMs</h3>
-      <ul>
-        <li>llama.cpp</li>
-        <li>vLLM</li>
-        <li>TurboQuant</li>
-        <li>ExLlamaV3</li>
-        <li>Flash Attention</li>
-        <li>Hermes Agent</li>
-        <li>Ollama</li>
-        <li>Local AI</li>
-        <li>Speculative Decoding</li>
-        <li>MCP</li>
-        <li>RAG</li>
-        <li>Obsidian</li>
-      </ul>
-    </div>
-
+<section class="reveal">
+  <h2 class="sec-title">Skills</h2>
+  <div class="skills">
+    <div class="skill"><h3>Microsoft 365 &amp; Azure</h3><ul><li>Exchange</li><li>Entra ID / Azure AD</li><li>Intune</li><li>Licensing</li><li>Conditional Access</li><li>Active Directory On-Prem</li></ul></div>
+    <div class="skill"><h3>Virtualisation &amp; Containers</h3><ul><li>Proxmox</li><li>VM Deployment</li><li>LXC Containers</li><li>Docker</li><li>Resource Planning</li><li>High Availability</li></ul></div>
+    <div class="skill"><h3>Backup &amp; Monitoring</h3><ul><li>Veeam Backup</li><li>TrueNAS Replication</li><li>Proxmox Backup</li><li>Uptime Kuma</li><li>Rsync</li><li>Snapshot & Replication</li></ul></div>
+    <div class="skill"><h3>Networking</h3><ul><li>OPNsense</li><li>Firewall Rules</li><li>Subnetting</li><li>VLANs</li><li>VPN / Tailscale</li><li>Zero Trust</li></ul></div>
+    <div class="skill"><h3>Operating Systems</h3><ul><li>Windows 10 &amp; 11</li><li>Windows Server</li><li>Proxmox</li><li>TrueNAS</li><li>Ubuntu</li><li>Debian</li></ul></div>
+    <div class="skill"><h3>Programming &amp; Scripting</h3><ul><li>Python</li><li>FastAPI</li><li>PowerShell</li><li>C#</li><li>Swift</li><li>SwiftUI</li><li>HTML &amp; JavaScript</li><li>SQL</li><li>Git</li><li>Xcode</li></ul></div>
+    <div class="skill"><h3>End-User Support</h3><ul><li>Datto</li><li>Zoho</li><li>RustDesk</li><li>AnyDesk</li><li>Quick Assist</li><li>SuperOps</li><li>Splashtop</li><li>Documentation</li></ul></div>
+    <div class="skill"><h3>AI &amp; LLMs</h3><ul><li>llama.cpp</li><li>Hermes Agent</li><li>TurboQuant</li><li>Local AI</li><li>Flash Attention</li><li>Multi-Token Prediction</li><li>MCP</li><li>RAG</li><li>Obsidian</li></ul></div>
   </div>
 </section>
 
-<!-- ── Experience ── -->
-<section class="fade-in">
-  <h2 class="section-title">Experience</h2>
-
-  <div class="timeline-item">
-    <div class="timeline-date">Jan 2026 — Present</div>
-    <div class="timeline-body">
-      <h3>IT Support Engineer</h3>
-      <div class="company">Manx Technology Group</div>
-      <ul>
-        <li>Level 1 and Level 2 helpdesk support</li>
-        <li>On-call for out-of-hours incident response</li>
-        <li>Resolved 900+ tickets in 7 months (avg. ~30/week, ~130/month)</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="timeline-date">Aug 2024 — Dec 2025</div>
-    <div class="timeline-body">
-      <h3>Junior Support Technician</h3>
-      <div class="company">SynergyIT</div>
-      <ul>
-        <li>Level 1 support — first point of contact for clients</li>
-        <li>Backup and replication management and monitoring</li>
-        <li>Management and delegation of tickets</li>
-        <li>Client user onboarding and offboarding</li>
-      </ul>
-    </div>
-  </div>
-
-</section>
-
-<!-- ── Impact ── -->
-<section class="fade-in">
-  <h2 class="section-title">Impact</h2>
-  <div class="skills-grid">
-    <div class="skill-group stat-card">
-      <div class="stat-number">900+</div>
-      <div class="stat-label">Tickets Resolved</div>
-      <div class="stat-sub">in 7 months</div>
-    </div>
-    <div class="skill-group stat-card">
-      <div class="stat-number">~30</div>
-      <div class="stat-label">Tickets Per Week</div>
-      <div class="stat-sub">average</div>
-    </div>
-    <div class="skill-group stat-card">
-      <div class="stat-number">~130</div>
-      <div class="stat-label">Tickets Per Month</div>
-      <div class="stat-sub">average</div>
-    </div>
-    <div class="skill-group stat-card">
-      <div class="stat-number">15+</div>
-      <div class="stat-label">Platform Integrations</div>
-      <div class="stat-sub">supported</div>
-    </div>
+<section class="reveal">
+  <h2 class="sec-title">Experience</h2>
+  <div class="exp">
+    <div class="job"><h3>IT Support Engineer</h3><div class="co">Manx Technology Group</div><div class="when">Jan 2026 – Present</div><ul><li>Level 1 and Level 2 helpdesk support</li><li>On-call for out-of-hours incident response</li><li>Resolved 900+ tickets in 7 months (avg. ~30/week, ~130/month)</li></ul></div>
+    <div class="job"><h3>Junior Support Technician</h3><div class="co">SynergyIT</div><div class="when">Aug 2024 – Dec 2025</div><ul><li>Level 1 support – first point of contact for clients</li><li>Backup and replication management and monitoring</li><li>Management and delegation of tickets</li><li>Client user onboarding and offboarding</li></ul></div>
   </div>
 </section>
 
-<!-- ── Certifications ── -->
-<section class="fade-in">
-  <h2 class="section-title">Certifications</h2>
-  <div class="cert-list">
-
-    <div class="cert-item">
-      <div class="cert-badge">
-        <svg width="26" height="26" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="10" height="10" fill="#f25022"/>
-          <rect x="12" y="1" width="10" height="10" fill="#7fba00"/>
-          <rect x="1" y="12" width="10" height="10" fill="#00a4ef"/>
-          <rect x="12" y="12" width="10" height="10" fill="#ffb900"/>
-        </svg>
-      </div>
-      <div class="cert-info">
-        <h3>Microsoft 365 Certified: Fundamentals</h3>
-        <div class="cert-meta">Microsoft &nbsp;·&nbsp; MS-900 &nbsp;·&nbsp; <span>ID: 1AF2E23DEFE59917</span></div>
-      </div>
-      <div class="cert-year">Nov 2024</div>
-    </div>
-
+<section class="reveal">
+  <h2 class="sec-title">Impact</h2>
+  <div class="stats">
+    <div class="stat"><div class="n" data-count="900" data-suffix="+">0</div><div class="l">Tickets Resolved</div><div class="s">in 7 months</div></div>
+    <div class="stat"><div class="n" data-count="30" data-prefix="~">0</div><div class="l">Tickets Per Week</div><div class="s">average</div></div>
+    <div class="stat"><div class="n" data-count="130" data-prefix="~">0</div><div class="l">Tickets Per Month</div><div class="s">average</div></div>
+    <div class="stat"><div class="n" data-count="15" data-suffix="+">0</div><div class="l">Platform Integrations</div><div class="s">supported</div></div>
   </div>
 </section>
 
-<!-- ── Projects ── -->
-<section class="fade-in">
-  <h2 class="section-title">Projects</h2>
-  <div class="projects-grid">
+<section class="reveal">
+  <h2 class="sec-title">Certifications</h2>
+  <div class="cert"><div class="badge"><svg width="22" height="22" viewBox="0 0 23 23"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="12" y="1" width="9" height="9" fill="#7fba00"/><rect x="1" y="12" width="9" height="9" fill="#00a4ef"/><rect x="12" y="12" width="9" height="9" fill="#ffb900"/></svg></div><div><h3>Microsoft 365 Certified: Fundamentals</h3><div class="meta">Microsoft · MS-900 · <b>ID: 1AF2E23DEFE59917</b></div></div><div class="yr">Nov 2024</div></div>
+</section>
 
-    <div class="project" data-modal="proxmox" role="button" tabindex="0">
-      <h3>Proxmox Cluster</h3>
-      <div class="meta">Dell 3050 (i5-8500, 32 GB) · HP ProDesk (i5-7500, 16 GB) · HP EliteDesk (i5-6500, 16 GB)</div>
-      <p>Three-node HA cluster with Ceph storage running LXCs and VMs.</p>
-    </div>
-
-    <div class="project" data-modal="opnsense" role="button" tabindex="0">
-      <h3>OPNsense Router</h3>
-      <div class="meta">HP 280 G2 SFF · Intel i350 NIC</div>
-      <p>Two subnets with a managed switch and WAP. Servers and admin devices isolated from consumer traffic.</p>
-    </div>
-
-    <div class="project" data-modal="media" role="button" tabindex="0">
-      <h3>Media Server</h3>
-      <div class="meta">Xeon E5-2630 v4 · 16 GB RAM · GTX 1650 · TrueNAS</div>
-      <p>Self-hosted media stack with automated downloads and redundant storage.</p>
-    </div>
-
-    <div class="project" data-modal="ffiom" role="button" tabindex="0">
-      <h3>Fantasy Football Isle of Man</h3>
-      <div class="meta">FastAPI · SQLite · SwiftUI · Vanilla JS</div>
-      <div class="meta">GitHub Actions · FullTime API · JWT Auth</div>
-      <p>FPL-style fantasy football game for the Canada Life Premier League with web app and native iOS client.</p>
-    </div>
-
-    <div class="project" data-modal="ai" role="button" tabindex="0">
-      <h3>Local AI</h3>
-      <div class="meta">Xeon E5-2650 v4 · 32 GB RAM · Triple RTX 3060 12 GB</div>
-      <div class="meta">Hermes Agent · llama.cpp · Open Source Models</div>
-      <p>Running open source LLMs locally via llama.cpp with Hermes agent integration and a custom Discord bot.</p>
-    </div>
-
-    <div class="project" data-modal="security" role="button" tabindex="0">
-      <h3>Server Security Hardening</h3>
-      <div class="meta">Debian LXC · Cloudflare Tunnels · UFW · SSH Hardening</div>
-      <p>Security hardening research and implementation for public-facing infrastructure behind Cloudflare Tunnels.</p>
-    </div>
-
-   <div class="project" data-modal="backupmonitor" role="button" tabindex="0">
-      <h3>Backup Monitor</h3>
-      <div class="meta">FastAPI · Python · REST API · HTML/CSS/JS</div>
-      <p>Real-time monitoring dashboard for homelab backups — Proxmox multi-node cluster and TrueNAS replication.</p>
-    </div>
-
+<section class="reveal">
+  <h2 class="sec-title">Projects</h2>
+  <div class="proj">
+    <details class="proj-item" open><summary><span class="ph">Proxmox Cluster</span><span class="pm">Dell 3050 · HP ProDesk · HP EliteDesk</span></summary><div class="proj-body"><p class="pdesc">Three-node high-availability cluster with Ceph distributed storage, running a mix of LXC containers and full VMs for homelab services.</p><div class="msec">Details</div><ul><li>Automatic VM and LXC failover between nodes via Proxmox HA</li><li>Ceph replicated storage pools distributed across all three nodes</li><li>Separate resource pools isolating different workload types</li><li>Proxmox Backup Server for scheduled snapshot backups</li><li>Monitored via LibreNMS and Uptime Kuma</li></ul><div class="tags"><span>Proxmox</span><span>Ceph</span><span>LXC</span><span>HA</span><span>Virtualisation</span></div></div></details>
+    <details class="proj-item"><summary><span class="ph">OPNsense Router</span><span class="pm">HP 280 G2 SFF · Intel i350 NIC</span></summary><div class="proj-body"><p class="pdesc">Custom router/firewall separating server infrastructure from consumer traffic, with a managed switch and wireless access point for full network control.</p><div class="msec">Details</div><ul><li>Dedicated server subnet isolated from consumer devices via firewall rules</li><li>Managed switch handling VLAN tagging and port segregation</li><li>Pi-hole for network-wide DNS filtering and ad blocking</li><li>Tailscale VPN for secure remote access to home network resources</li><li>OPNsense IDS/IPS for traffic inspection</li></ul><div class="tags"><span>OPNsense</span><span>Firewall</span><span>VLANs</span><span>Pi-hole</span><span>Tailscale</span><span>Networking</span></div></div></details>
+    <details class="proj-item"><summary><span class="ph">Media Server</span><span class="pm">Xeon E5-2630 v4 · GTX 1650 · TrueNAS</span></summary><div class="proj-body"><p class="pdesc">Self-hosted media stack with a fully automated download pipeline, hardware-accelerated transcoding, and ZFS-backed redundant storage.</p><div class="msec">Details</div><ul><li>Sonarr, Radarr, and Prowlarr for automated media acquisition</li><li>Jellyfin with GTX 1650 hardware-accelerated transcoding</li><li>TrueNAS with ZFS for redundant storage and data integrity</li><li>TrueNAS replication for off-site backup of the media library</li><li>Reverse proxied via Nginx Proxy Manager with HTTPS</li></ul><div class="tags"><span>Jellyfin</span><span>TrueNAS</span><span>ZFS</span><span>Sonarr</span><span>Radarr</span><span>Docker</span></div></div></details>
+    <details class="proj-item"><summary><span class="ph">Fantasy Football Isle of Man</span><span class="pm">FastAPI · SQLite · SwiftUI · Vanilla JS</span></summary><div class="proj-body"><p class="pdesc">FPL-style fantasy football game built for the Canada Life Premier League (Isle of Man). Full-stack application with FastAPI backend, web SPA, and a native iOS client integrating live match data from the FullTime API.</p><div class="msec">Backend</div><ul><li>FastAPI REST API with JWT authentication and bcrypt password hashing</li><li>SQLite + SQLAlchemy with Alembic migrations for schema management</li><li>FPL-style scoring engine with captain/vice-captain, transfers, and chips</li><li>APScheduler for automated gameweek scoring and data sync jobs</li><li>Position-based player scoring with performance-adjusted pricing</li></ul><div class="msec">Frontend & iOS App</div><ul><li>Vanilla JS SPA with carousel-style page transitions and FPL-inspired design</li><li>Native iOS app built with SwiftUI (iOS 17+) – MVVM architecture with 18 views across 8 modules</li><li>Swift Concurrency (async/await) with URLSession actor and auto-refresh token rotation</li><li>Keychain Services for secure token persistence and session management</li><li>@Observable macro for reactive state management</li></ul><div class="msec">Data & DevOps</div><ul><li>Live data pipeline syncing fixtures, results, and league tables from FullTime API</li><li>Separate database management service (FFIOM-DB) with automated data ingestion</li><li>GitHub Actions CI/CD pipeline</li><li>Pytest test suite with production database isolation</li><li>App Store compliance: Info.plist hardening, ATS configuration, PrivacyInfo manifest, Keychain access groups</li></ul><div class="tags"><span>FastAPI</span><span>SQLite</span><span>SQLAlchemy</span><span>Alembic</span><span>SwiftUI</span><span>Swift</span><span>iOS</span><span>Xcode</span><span>CI/CD</span><span>JWT</span><span>REST API</span><span>Vanilla JS</span><span>Pytest</span><span>MCP</span><span>XcodeBuildMCP</span><span>Capacitor</span><span>iOS Build</span></div></div></details>
+    <details class="proj-item"><summary><span class="ph">Local AI</span><span class="pm">Xeon E5-2650 v4 · Triple RTX 3060 12 GB</span></summary><div class="proj-body"><p class="pdesc">Fully local LLM inference stack with 36 GB combined VRAM, running open-source models via llama.cpp with a Hermes agent layer and a custom Discord bot frontend.</p><div class="msec">Details</div><ul><li>36 GB combined VRAM enabling large model inference without quantisation trade-offs</li><li>llama.cpp for efficient GPU-accelerated inference across all three GPUs</li><li>Speculative decoding tuned to 85% draft acceptance rate, doubling throughput</li><li>Hermes agent framework for tool use and agentic workflows, automations, and homelab management/maintenance</li><li>Custom Discord bot as a conversational frontend for the local models</li><li>Multi-agent knowledge infrastructure – Obsidian vault as centralized RAG/shared memory across multiple Hermes agent profiles</li><li>Cross-platform computer-use automation via CUA Driver MCP servers on Windows and macOS</li><li>Entirely self-hosted – no data sent to external APIs</li></ul><div class="tags"><span>llama.cpp</span><span>vLLM</span><span>TurboQuant</span><span>Speculative Decoding</span><span>ExLlamaV3</span><span>Flash Attention</span><span>LLM</span><span>RTX 3060</span><span>Hermes</span><span>Discord Bot</span><span>Self-hosted AI</span><span>RAG</span><span>Multi-Agent</span><span>Computer-Use</span></div></div></details>
+    <details class="proj-item"><summary><span class="ph">Office Downgrade Script</span><span class="pm">PowerShell · Office Deployment Tool</span></summary><div class="proj-body"><p class="pdesc">Single PowerShell script for IT teams to upgrade or downgrade Microsoft Office across many machines at once, using the Office Deployment Tool for a clean uninstall-then-install deployment.</p><div class="msec">Details</div><ul><li>Automatically downloads and silently extracts the latest Office Deployment Tool (ODT)</li><li>Dynamically generates XML configuration for a clean uninstallation and targeted reinstall</li><li>Uninstalls existing Office versions before deploying the specified build</li><li>Selects target/latest Office version in the generated config</li><li>Runs as Administrator or System on Windows 11, executing uninstall then download then install sequentially</li><li>Runs completely silently, with zero end user input or interruption</li></ul><div class="tags"><span>PowerShell</span><span>Office Deployment Tool</span><span>Microsoft 365</span><span>Automation</span><span>Windows</span></div></div></details>
   </div>
 </section>
 
-<!-- ── Education ── -->
-<section class="fade-in">
-  <h2 class="section-title">Education</h2>
-
-  <div class="edu-item">
-    <div class="timeline-date">2021 — 2024</div>
-    <div>
-      <h3>A-Levels</h3>
-      <div class="sub">Ramsey Grammar School</div>
-      <div class="grades">
-        <span class="grade"><strong>B</strong> IT</span>
-        <span class="grade"><strong>B</strong> Photography</span>
-        <span class="grade"><strong>D</strong> Computer Science</span>
-        <span class="grade"><strong>L3 Pass</strong> Sports Leaders</span>
-      </div>
-    </div>
+<section class="reveal">
+  <h2 class="sec-title">Education</h2>
+  <div class="edu">
+    <div class="ed"><div class="when">2021 – 2024</div><h3>A-Levels</h3><div class="sub">Ramsey Grammar School</div><div class="grades"><span class="grade"><b>B</b> IT</span><span class="grade"><b>B</b> Photography</span><span class="grade"><b>D</b> Computer Science</span><span class="grade"><b>L3 Pass</b> Sports Leaders</span></div></div>
+    <div class="ed"><div class="when">2018 – 2021</div><h3>GCSEs</h3><div class="sub">Ramsey Grammar School</div><div class="grades"><span class="grade"><b>A</b> Maths</span><span class="grade"><b>B</b> English</span><span class="grade"><b>BB</b> Science (Double)</span><span class="grade"><b>B</b> ICT</span><span class="grade"><b>C</b> Computer Science</span><span class="grade"><b>C</b> Business Studies</span></div></div>
   </div>
-
-  <div class="edu-item">
-    <div class="timeline-date">2018 — 2021</div>
-    <div>
-      <h3>GCSEs</h3>
-      <div class="sub">Ramsey Grammar School</div>
-      <div class="grades">
-        <span class="grade"><strong>A</strong> Maths</span>
-        <span class="grade"><strong>B</strong> English</span>
-        <span class="grade"><strong>BB</strong> Science (Double)</span>
-        <span class="grade"><strong>B</strong> ICT</span>
-        <span class="grade"><strong>C</strong> Computer Science</span>
-        <span class="grade"><strong>C</strong> Business Studies</span>
-      </div>
-    </div>
-  </div>
-
 </section>
 
-<!-- ── Contact ── -->
-<section class="fade-in">
-  <h2 class="section-title">Contact</h2>
-  <div class="contact-row">
-    <a href="mailto:enquiries@eamonmckiernan.uk">enquiries@eamonmckiernan.uk</a>
+<section class="reveal">
+  <h2 class="sec-title">Contact</h2>
+  <div class="contact">
+    <a href="mailto:enquiries@eamonmckiernan.uk">
+      <svg viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px;fill:currentColor;flex:none;vertical-align:-3px"><path d="M2 5h20v14H2V5zm2 1.7V18h16V6.7l-8 5.3-8-5.3zM18.8 6H5.2L12 10.8 18.8 6z"/></svg>
+      enquiries@eamonmckiernan.uk
+    </a>
+    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px;fill:currentColor;flex:none;vertical-align:-3px"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5.001A2.5 2.5 0 014.98 3.5zM3 9h4v12H3V9zm6 0h3.8v1.64h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9V9z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px;fill:currentColor;flex:none;vertical-align:-3px"><path d="M12 .5a12 12 0 00-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"/></svg>
+      GitHub
+    </a>
     <span>Isle of Man</span>
-    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">GitHub</a>
   </div>
 </section>
 
 <footer>
-  &copy; 2026 Eamon McKiernan
+  <span>© 2026 Eamon McKiernan</span>
 </footer>
 
-</div>
-
-<!-- ── Project Modals ── -->
-<div class="modal-backdrop" id="modal-backdrop">
-  <div class="modal" id="modal-content" role="dialog" aria-modal="true">
-    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
-    <div id="modal-body"></div>
-  </div>
-</div>
-
-<template id="tpl-proxmox">
-  <h2>Proxmox Cluster</h2>
-  <div class="modal-meta">Dell 3050 (i5-8500, 32 GB) &nbsp;·&nbsp; HP ProDesk (i5-7500, 16 GB) &nbsp;·&nbsp; HP EliteDesk (i5-6500, 16 GB)</div>
-  <p class="modal-desc">Three-node high-availability cluster with Ceph distributed storage, running a mix of LXC containers and full VMs for homelab services.</p>
-  <div class="modal-section-title">Details</div>
-  <ul>
-    <li>Automatic VM and LXC failover between nodes via Proxmox HA</li>
-    <li>Ceph replicated storage pools distributed across all three nodes</li>
-    <li>Separate resource pools isolating different workload types</li>
-    <li>Proxmox Backup Server for scheduled snapshot backups</li>
-    <li>Monitored via LibreNMS and Uptime Kuma</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">Proxmox</span>
-    <span class="tag">Ceph</span>
-    <span class="tag">LXC</span>
-    <span class="tag">HA</span>
-    <span class="tag">Virtualisation</span>
-  </div>
-</template>
-
-<template id="tpl-opnsense">
-  <h2>OPNsense Router</h2>
-  <div class="modal-meta">HP 280 G2 SFF &nbsp;·&nbsp; Intel i350 Quad-Port NIC</div>
-  <p class="modal-desc">Custom router/firewall separating server infrastructure from consumer traffic, with a managed switch and wireless access point for full network control.</p>
-  <div class="modal-section-title">Details</div>
-  <ul>
-    <li>Dedicated server subnet isolated from consumer devices via firewall rules</li>
-    <li>Managed switch handling VLAN tagging and port segregation</li>
-    <li>Pi-hole for network-wide DNS filtering and ad blocking</li>
-    <li>Tailscale VPN for secure remote access to home network resources</li>
-    <li>OPNsense IDS/IPS for traffic inspection</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">OPNsense</span>
-    <span class="tag">Firewall</span>
-    <span class="tag">VLANs</span>
-    <span class="tag">Pi-hole</span>
-    <span class="tag">Tailscale</span>
-    <span class="tag">Networking</span>
-  </div>
-</template>
-
-<template id="tpl-media">
-  <h2>Media Server</h2>
-  <div class="modal-meta">Xeon E5-2630 v4 &nbsp;·&nbsp; 16 GB RAM &nbsp;·&nbsp; GTX 1650 &nbsp;·&nbsp; TrueNAS</div>
-  <p class="modal-desc">Self-hosted media stack with a fully automated download pipeline, hardware-accelerated transcoding, and ZFS-backed redundant storage.</p>
-  <div class="modal-section-title">Details</div>
-  <ul>
-    <li>Sonarr, Radarr, and Prowlarr for automated media acquisition</li>
-    <li>Jellyfin with GTX 1650 hardware-accelerated transcoding</li>
-    <li>TrueNAS with ZFS for redundant storage and data integrity</li>
-    <li>TrueNAS replication for off-site backup of the media library</li>
-    <li>Reverse proxied via Nginx Proxy Manager with HTTPS</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">Jellyfin</span>
-    <span class="tag">TrueNAS</span>
-    <span class="tag">ZFS</span>
-    <span class="tag">Sonarr</span>
-    <span class="tag">Radarr</span>
-    <span class="tag">Docker</span>
-  </div>
-</template>
-
-<template id="tpl-ffiom">
-  <h2>Fantasy Football Isle of Man</h2>
-  <div class="modal-meta">FastAPI &nbsp;·&nbsp; SQLite &nbsp;·&nbsp; SwiftUI &nbsp;·&nbsp; Vanilla JS &nbsp;·&nbsp; GitHub Actions CI/CD</div>
-  <p class="modal-desc">FPL-style fantasy football game built for the Canada Life Premier League (Isle of Man). Full-stack application with FastAPI backend, web SPA, and a native iOS client — integrating live match data from the FullTime API.</p>
-  <div class="modal-section-title">Backend</div>
-  <ul>
-    <li>FastAPI REST API with JWT authentication and bcrypt password hashing</li>
-    <li>SQLite + SQLAlchemy with Alembic migrations for schema management</li>
-    <li>FPL-style scoring engine with captain/vice-captain, transfers, and chips</li>
-    <li>APScheduler for automated gameweek scoring and data sync jobs</li>
-    <li>Position-based player scoring with performance-adjusted pricing</li>
-  </ul>
-  <div class="modal-section-title">Frontend &amp; iOS App</div>
-  <ul>
-    <li>Vanilla JS SPA with carousel-style page transitions and FPL-inspired design</li>
-    <li>Native iOS app built with SwiftUI (iOS 17+) — MVVM architecture with 18 views across 8 modules</li>
-    <li>Swift Concurrency (async/await) with URLSession actor and auto-refresh token rotation</li>
-    <li>Keychain Services for secure token persistence and session management</li>
-    <li>@Observable macro for reactive state management</li>
-  </ul>
-  <div class="modal-section-title">Data &amp; DevOps</div>
-  <ul>
-    <li>Live data pipeline syncing fixtures, results, and league tables from FullTime API</li>
-    <li>Separate database management service (FFIOM-DB) with automated data ingestion</li>
-    <li>GitHub Actions CI/CD pipeline</li>
-    <li>Pytest test suite with production database isolation</li>
-    <li>App Store compliance: Info.plist hardening, ATS configuration, PrivacyInfo manifest, Keychain access groups</li>
-  </ul>
-  <div class="modal-section-title">Remote iOS Build Infrastructure</div>
-  <ul>
-    <li>Xcode MCP Bridge — mcp-proxy stdio→HTTP bridge enabling remote iOS builds from a Linux server</li>
-    <li>XcodeBuildMCP integration for headless xcodebuild commands via MCP protocol</li>
-    <li>macOS development host (192.168.2.165) with SSH, tmux session management, and persistent build daemon</li>
-    <li>Capacitor 6.x build pipeline: npm install → cap sync → pod install → xcodebuild</li>
-    <li>Successfully built and tested on iPhone simulator — login screen renders with dark theme</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">FastAPI</span>
-    <span class="tag">SQLite</span>
-    <span class="tag">SQLAlchemy</span>
-    <span class="tag">Alembic</span>
-    <span class="tag">SwiftUI</span>
-    <span class="tag">Swift</span>
-    <span class="tag">iOS</span>
-    <span class="tag">Xcode</span>
-    <span class="tag">CI/CD</span>
-    <span class="tag">JWT</span>
-    <span class="tag">REST API</span>
-    <span class="tag">Vanilla JS</span>
-    <span class="tag">Pytest</span>
-    <span class="tag">MCP</span>
-    <span class="tag">XcodeBuildMCP</span>
-    <span class="tag">Capacitor</span>
-    <span class="tag">iOS Build</span>
-  </div>
-</template>
-
-<template id="tpl-ai">
-  <h2>Local AI</h2>
-  <div class="modal-meta">Xeon E5-2650 v4 · 32 GB RAM · Triple RTX 3060 12 GB · Hermes Agent · llama.cpp</div>
-   <p class="modal-desc">Fully local LLM inference stack with 36 GB combined VRAM, running open-source models via llama.cpp with a Hermes agent layer and a custom Discord bot frontend.</p>
-  <div class="modal-section-title">Details</div>
-  <ul>
-    <li>36 GB combined VRAM enabling large model inference without quantisation trade-offs</li>
-    <li>llama.cpp for efficient GPU-accelerated inference across all three GPUs</li>
-    <li>Speculative decoding tuned to 75% draft acceptance rate, doubling throughput to ~30 tokens/sec</li>
-    <li>Custom TurboQuant fork (llama.cpp-turboquant) built from source and deployed as systemd service with q8_0 K/V cache and turbo4 quantisation</li>
-    <li>Multi-framework inference benchmarking — vLLM vs llama.cpp vs ExLlamaV3 across different split-mode and quantisation configurations for optimal multi-GPU utilisation</li>
-    <li>ExLlamaV3 multi-GPU inference without NVLink — dual RTX 3060s with architecture-specific Flash Attention kernel compilation (FA3_ARCHS="86")</li>
-    <li>Qwen 3.6 27B inference via ExLlamaV3 at 6.00bpw quantisation — full model download, format conversion, and multi-GPU loading</li>
-    <li>Hermes agent framework for tool use and agentic workflows</li>
-    <li>Custom Discord bot as a conversational frontend for the local models</li>
-    <li>Multi-agent knowledge infrastructure — Obsidian vault as centralized RAG/shared memory across multiple Hermes agent profiles with automated learning logs and soul/memory file management</li>
-    <li>Cross-platform computer-use automation via CUA Driver MCP servers on Windows and macOS</li>
-    <li>Entirely self-hosted — no data sent to external APIs</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">llama.cpp</span>
-    <span class="tag">vLLM</span>
-    <span class="tag">TurboQuant</span>
-    <span class="tag">Speculative Decoding</span>
-    <span class="tag">ExLlamaV3</span>
-    <span class="tag">Flash Attention</span>
-    <span class="tag">LLM</span>
-    <span class="tag">RTX 3060</span>
-    <span class="tag">Hermes</span>
-    <span class="tag">Discord Bot</span>
-    <span class="tag">Self-hosted AI</span>
-    <span class="tag">RAG</span>
-    <span class="tag">Multi-Agent</span>
-    <span class="tag">Computer-Use</span>
-  </div>
-</template>
-
-<template id="tpl-security">
-  <h2>Server Security Hardening</h2>
-  <div class="modal-meta">Debian LXC &nbsp;·&nbsp; Cloudflare Tunnels &nbsp;·&nbsp; UFW &nbsp;·&nbsp; SSH Hardening &nbsp;·&nbsp; Cloudflare WAF</div>
-  <p class="modal-desc">Comprehensive security research and hardening of public-facing LXC containers behind Cloudflare Tunnels — from threat modelling through production deployment and verification.</p>
-  <div class="modal-section-title">Research &amp; Analysis</div>
-  <ul>
-    <li>Analysed Cloudflare Tunnel threat model — determined that IP whitelisting is ineffective for tunnels (traffic originates from localhost, not Cloudflare edge IPs)</li>
-    <li>Evaluated Fail2Ban limitations behind Cloudflare (all traffic appears from CF IPs or localhost, making traditional IP bans pointless)</li>
-    <li>Researched CrowdSec as a Fail2Ban alternative — identified that the Cloudflare Direct bouncer is deprecated and the Workers Bouncer is the recommended replacement</li>
-    <li>Audited Cloudflare free tier features: WAF Free Managed Ruleset, Rate Limiting (1 rule), Bot Fight Mode (free), Turnstile (20 widgets limit), Access (50 MAU cap)</li>
-    <li>Fact-checked all Cloudflare feature pricing and limits against official documentation — corrected OWASP Core Ruleset availability, CrowdSec bouncer status, and Access pricing</li>
-  </ul>
-  <div class="modal-section-title">Implementation (Phase 1)</div>
-  <ul>
-    <li>Configured UFW firewall with default deny-all policy, allowing only ports 22 (SSH), 80 (HTTP), and 443 (HTTPS)</li>
-    <li>Hardened SSH: key-based authentication only, root login disabled, maximum 3 authentication attempts, restricted to specific users</li>
-    <li>Installed and enabled unattended-upgrades for automatic security patching</li>
-    <li>Verified LXC container was already running as unprivileged (unprivileged: 1 in Proxmox config)</li>
-    <li>Verified website remained fully accessible through Cloudflare tunnel after all hardening changes applied</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">Security</span>
-    <span class="tag">UFW</span>
-    <span class="tag">SSH Hardening</span>
-    <span class="tag">Cloudflare</span>
-    <span class="tag">Tunnels</span>
-    <span class="tag">WAF</span>
-    <span class="tag">LXC</span>
-    <span class="tag">Debian</span>
-  </div>
-</template>
-
-<template id="tpl-backupmonitor">
-  <h2>Backup Monitor</h2>
-  <div class="modal-meta">FastAPI &nbsp;·&nbsp; Python &nbsp;·&nbsp; REST API &nbsp;·&nbsp; HTML/CSS/JS &nbsp;·&nbsp; Proxmox API &nbsp;·&nbsp; TrueNAS API</div>
-  <p class="modal-desc">Real-time backup monitoring dashboard aggregating status from a three-node Proxmox cluster and TrueNAS replication tasks. Modular collector architecture with live auto-refreshing web UI.</p>
-  <div class="modal-section-title">Backend</div>
-  <ul>
-    <li>FastAPI REST API with endpoints: /api/dashboard, /api/summary, /api/health</li>
-    <li>Modular collector pattern — separate Proxmox and TrueNAS collectors with shared model layer</li>
-    <li>Multi-node Proxmox cluster monitoring (3 nodes) with per-VM/LXC backup status</li>
-    <li>TrueNAS replication task and periodic snapshot schedule monitoring</li>
-    <li>YAML configuration with environment variable substitution for credentials</li>
-    <li>uv package manager with lockfile for reproducible builds</li>
-  </ul>
-  <div class="modal-section-title">Frontend</div>
-  <ul>
-    <li>Dark-themed responsive web dashboard with color-coded status indicators</li>
-    <li>Auto-refreshing live view — no page reload required</li>
-    <li>Per-backup cards showing: last run time, duration, next scheduled run, data transferred, errors/warnings</li>
-    <li>Server connection status with error display (green/red dots)</li>
-    <li>Summary counts: total backups, success, failed, warning, running</li>
-  </ul>
-  <div class="modal-section-title">Infrastructure</div>
-  <ul>
-    <li>Monitors 3 Proxmox nodes (vzdump backup jobs, task logs, schedules)</li>
-    <li>Monitors 2 TrueNAS servers (replication tasks and snapshot schedules)</li>
-    <li>Deduplication logic across cluster nodes to avoid duplicate backup entries</li>
-    <li>Deployed on a Debian LXC container with configurable port</li>
-    <li>REST API designed for integration with external monitoring tools</li>
-  </ul>
-  <div class="tags">
-    <span class="tag">FastAPI</span>
-    <span class="tag">Python</span>
-    <span class="tag">REST API</span>
-    <span class="tag">Proxmox API</span>
-    <span class="tag">TrueNAS API</span>
-    <span class="tag">Monitoring</span>
-    <span class="tag">Dashboard</span>
-    <span class="tag">Backup</span>
-    <span class="tag">YAML</span>
-    <span class="tag">uv</span>
-  </div>
-</template>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Eamon McKiernan",
-  "jobTitle": "IT Support Engineer",
-  "url": "https://eamonmckiernan.uk",
-  "email": "mailto:enquiries@eamonmckiernan.uk",
-  "sameAs": [
-    "https://www.linkedin.com/in/eamon-mckiernan-24a563307/",
-    "https://github.com/EamonMcKiernan05"
-  ],
-  "alumniOf": {
-    "@type": "School",
-    "name": "Ramsey Grammar School"
-  }
-}
-</script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
+document.addEventListener('DOMContentLoaded',()=>{
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  const backdrop = document.getElementById('modal-backdrop');
-  const modal    = document.getElementById('modal-content');
-  const modalBody = document.getElementById('modal-body');
-  const closeBtn  = document.getElementById('modal-close');
-
-  let activeAnim = null;
-  let tileTransform = null; // saved for close animation
-
-  function openModal(key, tile) {
-    const tpl = document.getElementById('tpl-' + key);
-    if (!tpl) return;
-
-    // Snapshot tile before any DOM changes
-    const tileRect = tile.getBoundingClientRect();
-
-    if (activeAnim) { activeAnim.cancel(); activeAnim = null; }
-    modal.style.transform = '';
-    modal.style.opacity = '';
-
-    modalBody.innerHTML = '';
-    modalBody.appendChild(tpl.content.cloneNode(true));
-
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-
-    // Collect focusable elements for trap
-    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-
-    // Double rAF: first frame triggers layout, second frame guarantees it's committed
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      const modalRect = modal.getBoundingClientRect();
-
-      // Vector from modal center → tile center
-      const tx = (tileRect.left + tileRect.width  / 2) - (modalRect.left + modalRect.width  / 2);
-      const ty = (tileRect.top  + tileRect.height / 2) - (modalRect.top  + modalRect.height / 2);
-
-      // Scale factors so the modal starts at the tile's exact dimensions
-      const sx = tileRect.width  / modalRect.width;
-      const sy = tileRect.height / modalRect.height;
-
-      tileTransform = { tx, ty, sx, sy };
-      modal.style.transformOrigin = '50% 50%';
-
-      activeAnim = modal.animate([
-        { transform: `translate(${tx}px, ${ty}px) scale(${sx}, ${sy})`, opacity: 0, borderRadius: '8px'  },
-        { transform: 'translate(0, 0) scale(1)',                         opacity: 1, borderRadius: '12px' }
-      ], {
-        duration: 500,
-        easing: 'cubic-bezier(0.34, 1.25, 0.64, 1)',
-        fill: 'forwards'
-      });
-
-      activeAnim.onfinish = () => { activeAnim = null; };
-      closeBtn.focus();
-
-      // Focus trap
-      function handleTab(e) {
-        if (e.target === closeBtn && e.shiftKey) { e.preventDefault(); focusable[focusable.length - 1]?.focus(); }
-        else if (e.target === focusable[focusable.length - 1] && !e.shiftKey) { e.preventDefault(); closeBtn.focus(); }
-      }
-      modal.addEventListener('keydown', handleTab);
-    }));
+  // Scroll reveal (emilkowalski .reveal fade-up) — each section reveals on its own scroll-in only.
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -125px 0px' });
+    reveals.forEach(function(el){ io.observe(el); });
   }
 
-  function closeModal() {
-    if (!backdrop.classList.contains('open')) return;
-    if (activeAnim) { activeAnim.cancel(); activeAnim = null; }
-
-    const { tx, ty, sx, sy } = tileTransform || { tx: 0, ty: 0, sx: 0.5, sy: 0.5 };
-
-    activeAnim = modal.animate([
-      { transform: 'translate(0, 0) scale(1)',                         opacity: 1, borderRadius: '12px' },
-      { transform: `translate(${tx}px, ${ty}px) scale(${sx}, ${sy})`, opacity: 0, borderRadius: '8px'  }
-    ], {
-      duration: 320,
-      easing: 'cubic-bezier(0.4, 0, 0.8, 0.6)',
-      fill: 'forwards'
-    });
-
-    activeAnim.onfinish = () => {
-      backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-      // Do NOT cancel here — cancelling fill:forwards would snap the modal
-      // back to visible, causing a flash. openModal cancels it when reopened.
-    };
+  // Count-up on Impact numbers (first scroll into view), ported from emilkowalski.
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  function animateCount(el){
+    var target = parseFloat(el.dataset.count);
+    var pre = el.dataset.prefix || '';
+    var suf = el.dataset.suffix || '';
+    if (isNaN(target)) { el.textContent = pre + suf; return; }
+    if (reduce) { el.textContent = pre + fmt(target) + suf; return; }
+    var dur = 1100, t0 = performance.now();
+    function tick(t){
+      var p = Math.min(1, (t - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + fmt(Math.round(eased * target)) + suf;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = pre + fmt(target) + suf;
+    }
+    requestAnimationFrame(tick);
   }
-
-  document.querySelectorAll('.project[data-modal]').forEach(card => {
-    card.addEventListener('click', () => openModal(card.dataset.modal, card));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card.dataset.modal, card); }
-    });
-  });
-
-  closeBtn.addEventListener('click', closeModal);
-
-  backdrop.addEventListener('click', (e) => {
-    if (e.target === backdrop) closeModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
-  });
+  var nums = Array.prototype.slice.call(document.querySelectorAll('.stat .n'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    nums.forEach(animateCount);
+  } else {
+    var cio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (!e.isIntersecting) return; animateCount(e.target); cio.unobserve(e.target); });
+    }, { threshold: 0.6 });
+    nums.forEach(function(n){ cio.observe(n); });
+  }
 });
 </script>
+
+</div>
 </body>
 </html>
