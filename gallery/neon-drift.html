@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Drift &middot; One-shot bench — Eamon McKiernan</title>
+<meta name="description" content="Neon Drift — the one-shot prompt and every build it produced. Run each version in the browser or open it full size.">
+<meta property="og:title" content="Neon Drift — one-shot bench">
+<meta property="og:description" content="The prompt that made Neon Drift, and every model's build — runnable.">
+<style>
+:root{
+  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --accent:#D8A73C;
+  --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
+  --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0 0}
+.back{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.back:hover{color:var(--ink)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,5.6vw,52px);line-height:1.04;letter-spacing:.005em;margin:28px 0 0}
+.lede{margin-top:12px;max-width:70ch;color:var(--dim)}
+
+.sec{margin-top:44px}
+.sec-title{font-family:var(--display);font-weight:600;font-size:22px}
+.sec-sub{margin-top:5px;font-size:12.5px;color:var(--dim)}
+
+.result{border:1px solid var(--line);margin-top:16px}
+.rtop{display:flex;align-items:stretch}
+.rthumb{flex:0 0 380px;display:block;border-right:1px solid var(--line);background:#0c0b08}
+.rthumb img{display:block;width:100%;height:100%;object-fit:cover}
+.rbody{flex:1;padding:18px 20px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rt{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.15}
+.rm{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.rd{font-size:13.5px;color:var(--dim);max-width:70ch}
+.ractions{margin-top:auto;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+
+.btn{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:none;border:1px solid var(--line);padding:8px 13px;cursor:pointer;transition:border-color .15s ease,color .15s ease;display:inline-block}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.gold{color:var(--accent);border-color:#4a3f28}
+.btn.gold:hover{border-color:var(--accent)}
+.btn.ghost{color:var(--dim)}
+.btn.on{color:var(--accent);border-color:var(--accent)}
+
+.runbox{border-top:1px solid var(--line);background:#0c0b08}
+.runbox iframe{display:block;width:100%;aspect-ratio:16/10;border:0}
+.runhint{padding:10px 18px;font-family:var(--mono);font-size:11px;color:var(--dim);border-top:1px solid var(--line)}
+
+.promptbox{border:1px solid var(--line);margin-top:16px;padding:18px 20px;max-height:420px;overflow:auto;white-space:pre-wrap;font-family:var(--mono);font-size:12px;line-height:1.66;color:var(--dim)}
+
+footer{margin-top:60px;border-top:1px solid var(--line);padding:18px 0 70px}
+.f1{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.f2{margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--quiet);max-width:100ch}
+.f2 a{color:var(--quiet);text-decoration:underline}
+.f2 a:hover{color:var(--dim)}
+
+@media (max-width:760px){
+  .rtop{flex-direction:column}
+  .rthumb{flex:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .rtop .rthumb img{aspect-ratio:16/10;height:auto}
+}
+
+@media (prefers-reduced-motion: reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <a class="back" href="../gallery.html">&#8592;&nbsp;demo gallery</a>
+  </div>
+
+  <h1>Neon Drift</h1>
+  <p class="lede">A playable synthwave racer — an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.</p>
+
+  <section class="sec">
+    <div class="sec-title">Results</div>
+    <div class="sec-sub">One build of this prompt.</div>
+      <article class="result">
+        <div class="rtop">
+          <a class="rthumb" href="../demos/neon-drift.html" target="_blank" rel="noopener" aria-label="Open Qwen3.8-Flash-Next — one-shot in a new tab">
+            <img src="../demos/thumbs/neon-drift.jpg" alt="Neon Drift — a synthwave highway with neon arches and a striped sun">
+          </a>
+          <div class="rbody">
+            <div class="rt">Qwen3.8-Flash-Next — one-shot</div>
+            <div class="rm">5 Oct 2026 &middot; one shot, no follow-ups &middot; 35 KB</div>
+            <div class="rd">The original bench run — one message, no follow-ups.</div>
+            <div class="ractions">
+              <button class="btn" type="button" data-run>run in this page</button>
+              <a class="btn gold" href="../demos/neon-drift.html" target="_blank" rel="noopener">open in new tab &#8599;</a>
+              <a class="btn ghost" href="https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S%20-%20Strata/Neon%20Drift" target="_blank" rel="noopener">source &#8599;</a>
+            </div>
+          </div>
+        </div>
+        <div class="runbox" hidden>
+          <iframe src="about:blank" data-src="../demos/neon-drift.html" title="Qwen3.8-Flash-Next — one-shot — live demo" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allowfullscreen></iframe>
+          <div class="runhint">Runs sandboxed in this page — click inside to interact. Any key starts · arrows or A/D steer · space boosts.</div>
+        </div>
+      </article>
+  </section>
+
+  <section class="sec">
+    <div class="sec-title">The prompt</div>
+    <div class="sec-sub">The brief, exactly as it was sent to the model.</div>
+    <pre class="promptbox">Build one complete, self-contained web demo: a playable synthwave racer — NEON DRIFT. You chase-cam a hovercraft down an endless, procedurally curving neon highway at dusk. It must be fun within five seconds, with real game feel.
+
+DELIVERABLE
+A single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — &quot;three&quot;: https://unpkg.com/three@0.160.0/build/three.module.js and &quot;three/addons/&quot;: https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules. No assets: every visual generated in code (canvas-generated textures fine), all sound synthesized with WebAudio — no audio files. No build step, no TypeScript, no npm. Zero console errors.
+
+TRACK &amp; WORLD
+1. Endless procedural track: segments that curve left/right and rise/fall, generated ahead of the player and recycled — it never ends. Seeded (mulberry32, seed 1337) so the course is the same every run.
+2. Road: dark asphalt with glowing edge lines and centre dashes; neon pylons or arches passing overhead at intervals; side barriers.
+3. Environment: giant striped sun on the horizon, grid ground plane, silhouetted mountain ranges, starfield, occasional neon palm. Violet/magenta fog.
+
+GAMEPLAY
+- Controls: left/right arrows or A/D to steer (speed-sensitive steering), Space or Shift to boost with a heat/cooldown meter, R to restart after a crash. Auto-accelerate; top speed increases the longer you survive.
+- Hazards: slow rival cars (glowing blocks with tail lights) to dodge; hitting one wrecks you. Near-misses (passing within a small margin) give bonus points with a brief slow-mo flash.
+- Scoring: distance plus near-miss bonuses; small &quot;+50 NEAR MISS&quot; popups. Crash: hovercraft bursts into particles, slight camera pull-back, &quot;WRECKED — press R&quot; overlay, best score kept for the session.
+
+GAME FEEL (this is a game-feel test — get it right)
+- Camera lags smoothly behind the craft; FOV widens during boost; subtle screen shake on crash and near-miss.
+- The craft banks into turns, hovers with a gentle bob; thruster exhaust particles scale with speed.
+- Boost adds speed lines in the starfield and a colour shift. Track curvature must telegraph — you can read the next curve before entering it.
+
+AUDIO (WebAudio, synthesized, no files)
+- Engine hum whose pitch follows speed; whoosh on near-miss; explosion noise on crash; a simple looping synthwave bass/arp underneath. Audio starts on first click (autoplay policy); M mutes.
+
+HUD
+Speed, score, best, boost meter. Title card &quot;NEON DRIFT&quot; with a &quot;Press any key to drive&quot; prompt; instructions live on the title card only.
+
+PERFORMANCE
+- 60fps at 1080p: instancing for pylons and particles, recycled objects (no unbounded arrays), pixel ratio capped at 2, resize handled.
+
+OUTPUT
+Return the complete file as one HTML code block. No explanations, no commentary.</pre>
+  </section>
+
+  <footer>
+    <div class="f1">&copy; 2026 Eamon McKiernan &mdash; <a href="../index.html" style="color:var(--dim);text-decoration:underline">back to the portfolio</a></div>
+    <div class="f2">Demos: single-file HTML, Three.js r160 via unpkg &mdash; open in a new tab or run in a sandboxed frame on this page. Sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+  </footer>
+
+</div>
+
+<script>
+document.querySelectorAll('[data-run]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var art = btn.closest('.result');
+    var box = art.querySelector('.runbox');
+    var fr = box.querySelector('iframe');
+    if (box.hidden) {
+      fr.src = fr.getAttribute('data-src');
+      box.hidden = false;
+      btn.textContent = 'stop';
+      btn.classList.add('on');
+    } else {
+      fr.src = 'about:blank';
+      box.hidden = true;
+      btn.textContent = 'run in this page';
+      btn.classList.remove('on');
+    }
+  });
+});
+</script>
+</body>
+</html>
