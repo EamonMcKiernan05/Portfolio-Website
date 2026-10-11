@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>One-shot demo gallery — Eamon McKiernan</title>
-<meta name="description" content="Browser demos written by AI models running locally — one prompt each, single-file Three.js clips you can run right here.">
+<meta name="description" content="Browser demos written by AI models running locally — one prompt each. Open a benchmark to read its prompt and run every build it produced.">
 <meta property="og:title" content="One-shot demo gallery — Eamon McKiernan">
-<meta property="og:description" content="Seven single-file browser demos written by AI models running locally — run them live in the page.">
+<meta property="og:description" content="Single-file browser demos written by AI models running locally — read the prompt, run every build.">
 <style>
 :root{
   --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --accent:#D8A73C;
@@ -43,33 +43,13 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);l
 .cd{font-size:13px;color:var(--dim);line-height:1.5}
 .go{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--accent)}
 
-.modal{position:fixed;inset:0;z-index:50;display:none;background:rgba(9,8,5,.87);overflow:auto;padding:34px 20px 60px}
-.modal.open{display:block}
-.mpanel{max-width:1100px;margin:0 auto;background:var(--bg);border:1px solid var(--line)}
-.mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:20px 22px 16px}
-.mttl{font-family:var(--display);font-weight:600;font-size:26px;line-height:1.1}
-.mmeta{font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-top:6px}
-.mdesc{margin-top:10px;font-size:13.5px;color:var(--dim);max-width:70ch}
-.mclose{flex:none;background:none;border:1px solid var(--line);color:var(--ink);font-family:var(--mono);font-size:12px;padding:7px 13px;cursor:pointer;transition:border-color .15s ease,color .15s ease}
-.mclose:hover{border-color:var(--accent);color:var(--accent)}
-.mframe{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0c0b08}
-.mframe iframe{display:block;width:100%;aspect-ratio:16/10;border:0}
-.mbar{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;padding:12px 22px}
-.mhint{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
-.mlinks{font-family:var(--mono);font-size:11.5px}
-.mlinks a{color:var(--accent)}
-.mlinks a:hover{text-decoration:underline}
-.mlinks span{color:var(--quiet);padding:0 8px}
-.mprompt{padding:4px 22px 26px}
-.mprompt h3{font-family:var(--display);font-weight:600;font-size:16px;margin:10px 0 10px}
-.mprompt pre{white-space:pre-wrap;font-family:var(--mono);font-size:12px;line-height:1.66;color:var(--dim);border:1px solid var(--line);padding:16px;max-height:320px;overflow:auto}
 footer{margin-top:60px;border-top:1px solid var(--line);padding:18px 0 70px}
 .f1{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
 .f2{margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--quiet);max-width:100ch}
 .f2 a{color:var(--quiet);text-decoration:underline}
 .f2 a:hover{color:var(--dim)}
 @media (max-width:640px){.top{flex-wrap:wrap;row-gap:6px}.head-meta{white-space:normal;text-align:left}}
-@media (prefers-reduced-motion: reduce){.card,.mclose{transition:none}}
+@media (prefers-reduced-motion: reduce){.card{transition:none}}
 </style>
 </head>
 <body>
@@ -81,237 +61,65 @@ footer{margin-top:60px;border-top:1px solid var(--line);padding:18px 0 70px}
   </div>
 
   <h1>One-shot demo gallery</h1>
-  <p class="lede">Browser demos written by AI models running on my own hardware &mdash; one prompt each, no cloud services, no build step. Click any card to run it live, or open it full size.</p>
+  <p class="lede">Browser demos written by AI models running on my own hardware &mdash; one prompt each, no cloud services, no build step. Open a benchmark to read the prompt it was built from and run every build it produced.</p>
 
   <section class="sec">
     <div class="sec-title">The bench</div>
-    <div class="sec-sub">One message per test &mdash; no follow-ups, no fixes. Every file was opened and checked in a browser before it earned a card.</div>
+    <div class="sec-sub">One message per test &mdash; no follow-ups, no fixes. Every file was opened and checked in a browser before it earned a place here.</div>
     <div class="grid">
-
-      <a class="card" href="demos/sky-temple.html" data-demo="sky-temple">
-        <img class="thumb" src="demos/thumbs/sky-temple.jpg" alt="Sky Temple demo — a floating voxel island with a pagoda in a pink dusk sky">
+      <a class="card" href="gallery/sky-temple.html">
+        <img class="thumb" src="demos/thumbs/sky-temple.jpg" alt="Sky Temple — a floating voxel island with a pagoda in a pink dusk sky">
         <div class="cbody">
           <div class="ct">Sky Temple</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; one-shot &middot; 4 Oct 2026</div>
-          <div class="cd">A floating Japanese island in cube art &mdash; a five-tier pagoda, torii gate, waterfall, drifting petals and a 60-second day/night cycle.</div>
-          <div class="go">run demo &#8594;</div>
+          <div class="cm">Qwen3.8-Flash-Next + 27B &middot; 3 builds &middot; Oct 2026</div>
+          <div class="cd">A floating Japanese island in cube art — a five-tier pagoda, torii gate, waterfall, drifting petals and a 60-second day/night cycle.</div>
+          <div class="go">prompt + 3 builds &#8594;</div>
         </div>
       </a>
-
-      <a class="card" href="demos/living-city.html" data-demo="living-city">
-        <img class="thumb" src="demos/thumbs/living-city.jpg" alt="Living City demo — a procedural city of towers and avenues">
+      <a class="card" href="gallery/living-city.html">
+        <img class="thumb" src="demos/thumbs/living-city.jpg" alt="Living City — a procedural city of towers and avenues">
         <div class="cbody">
           <div class="ct">Living City</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; one-shot &middot; 4 Oct 2026</div>
-          <div class="cd">A city that builds itself at load &mdash; rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</div>
-          <div class="go">run demo &#8594;</div>
+          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="cd">A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</div>
+          <div class="go">prompt + build &#8594;</div>
         </div>
       </a>
-
-      <a class="card" href="demos/neon-drift.html" data-demo="neon-drift">
-        <img class="thumb" src="demos/thumbs/neon-drift.jpg" alt="Neon Drift demo — a synthwave highway with neon arches and a striped sun">
+      <a class="card" href="gallery/neon-drift.html">
+        <img class="thumb" src="demos/thumbs/neon-drift.jpg" alt="Neon Drift — a synthwave highway with neon arches and a striped sun">
         <div class="cbody">
           <div class="ct">Neon Drift</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; one-shot &middot; 5 Oct 2026</div>
-          <div class="cd">A playable synthwave racer &mdash; an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.</div>
-          <div class="go">run demo &#8594;</div>
+          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="cd">A playable synthwave racer — an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.</div>
+          <div class="go">prompt + build &#8594;</div>
         </div>
       </a>
-
-      <a class="card" href="demos/pulse-engine.html" data-demo="pulse-engine">
-        <img class="thumb" src="demos/thumbs/pulse-engine.jpg" alt="Pulse Engine demo — glowing particle visuals over a drum machine">
+      <a class="card" href="gallery/pulse-engine.html">
+        <img class="thumb" src="demos/thumbs/pulse-engine.jpg" alt="Pulse Engine — glowing particle visuals over a drum machine">
         <div class="cbody">
           <div class="ct">Pulse Engine</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; one-shot &middot; 5 Oct 2026</div>
-          <div class="cd">A generative instrument &mdash; a drum machine and synth that compose on their own while a particle galaxy pulses on the beat.</div>
-          <div class="go">run demo &#8594;</div>
+          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="cd">A generative instrument — a drum machine and synth that compose on their own while a particle galaxy pulses on the beat.</div>
+          <div class="go">prompt + build &#8594;</div>
         </div>
       </a>
-
-      <a class="card" href="demos/cloth-lab.html" data-demo="cloth-lab">
-        <img class="thumb" src="demos/thumbs/cloth-lab.jpg" alt="Cloth Lab demo — a draped cloth hanging between two posts beside a sphere">
+      <a class="card" href="gallery/cloth-lab.html">
+        <img class="thumb" src="demos/thumbs/cloth-lab.jpg" alt="Cloth Lab — a draped cloth hanging between two posts beside a sphere">
         <div class="cbody">
           <div class="ct">Cloth Lab</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; one-shot &middot; 5 Oct 2026</div>
-          <div class="cd">A from-scratch cloth physics lab &mdash; drag it, tear it, switch on the wind, drop balls on it. The solver is hand-written; no physics library.</div>
-          <div class="go">run demo &#8594;</div>
+          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="cd">A from-scratch cloth physics lab — drag it, tear it, switch on the wind, drop balls on it. The solver is hand-written; no physics library.</div>
+          <div class="go">prompt + build &#8594;</div>
         </div>
       </a>
-
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="sec-title">Same brief, different builds</div>
-    <div class="sec-sub">The Sky Temple prompt again &mdash; once on another local model, once rebuilt by my agent harness.</div>
-    <div class="grid">
-
-      <a class="card" href="demos/sky-temple-27b.html" data-demo="sky-temple-27b">
-        <img class="thumb" src="demos/thumbs/sky-temple-27b.jpg" alt="Sky Temple on the 27B model — the floating island at dusk">
-        <div class="cbody">
-          <div class="ct">Sky Temple &mdash; 27B build</div>
-          <div class="cm">Qwen3.8-27B &middot; one-shot &middot; 6 Oct 2026</div>
-          <div class="cd">The same brief on a different local model &mdash; same prompt, different handwriting.</div>
-          <div class="go">run demo &#8594;</div>
-        </div>
-      </a>
-
-      <a class="card" href="demos/sky-temple-agent.html" data-demo="sky-temple-agent">
-        <img class="thumb" src="demos/thumbs/sky-temple-agent.jpg" alt="Sky Temple agent rebuild — the floating island and pagoda in evening light">
-        <div class="cbody">
-          <div class="ct">Sky Temple &mdash; agent rebuild</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; agent build &middot; 6 Oct 2026</div>
-          <div class="cd">The same brief, rebuilt from scratch by my agent harness driving the local model over the live server.</div>
-          <div class="go">run demo &#8594;</div>
-        </div>
-      </a>
-
     </div>
   </section>
 
   <footer>
     <div class="f1">&copy; 2026 Eamon McKiernan &mdash; <a href="index.html" style="color:var(--dim);text-decoration:underline">back to the portfolio</a></div>
-    <div class="f2">Demos: single-file HTML, Three.js r160 via unpkg, run sandboxed in this page. Prompts and sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+    <div class="f2">Demos: single-file HTML, Three.js r160 via unpkg. Prompts and sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
   </footer>
 
 </div>
-
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
-  <div class="mpanel">
-    <div class="mhead">
-      <div>
-        <div class="mttl" id="m-title"></div>
-        <div class="mmeta" id="m-meta"></div>
-        <div class="mdesc" id="m-desc"></div>
-      </div>
-      <button class="mclose" id="m-close" type="button">close (esc)</button>
-    </div>
-    <div class="mframe">
-      <iframe id="m-frame" src="about:blank" title="demo player" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allowfullscreen></iframe>
-    </div>
-    <div class="mbar">
-      <div class="mhint" id="m-hint"></div>
-      <div class="mlinks">
-        <a id="m-open" href="#" target="_blank" rel="noopener">open full size &#8599;</a>
-        <span id="m-sourcesep" hidden>&middot;</span>
-        <a id="m-source" href="#" target="_blank" rel="noopener" hidden>source &#8599;</a>
-      </div>
-    </div>
-    <div class="mprompt">
-      <h3>Full prompt</h3>
-      <pre id="m-prompt"></pre>
-    </div>
-  </div>
-</div>
-
-<script>
-var DEMOS = {
- "sky-temple": {
-  "title": "Sky Temple",
-  "meta": "Qwen3.8-Flash-Next · one-shot · 4 Oct 2026",
-  "desc": "A floating Japanese island in cube art — a five-tier pagoda, torii gate, waterfall, drifting petals and a 60-second day/night cycle.",
-  "hint": "Drag to orbit · scroll to zoom · the cinematic toggle is top-left.",
-  "src": "demos/sky-temple.html",
-  "repo": "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S%20-%20Strata/Floating%20Japanese%20Sky%20Temple%20(DSH)",
-  "prompt": "Build one complete, self-contained web demo: a floating Japanese island in the sky, voxel/cube art style, cinematic and alive. It must look like a crafted scene, not a tech demo.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — \"three\": https://unpkg.com/three@0.160.0/build/three.module.js and \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules, OrbitControls from three/addons. Nothing else external: no images, textures, models, fonts or audio files — every surface, shape and effect must be generated procedurally in code (canvas-generated textures are fine). No build step, no TypeScript, no npm, no frameworks. Opening the file in a browser must work with zero console errors.\n\nSCENE — all of the following must be present\n1. The island: an irregular floating landmass built from cubes — grass top layer, dirt and rock strata beneath, tapered underside so it reads as torn from the earth. The edge must be uneven, never a circle.\n2. A five-tier pagoda (cube-built): alternating wall bands, wide dark roofs with upturned corners (scaled boxes are fine), gold finial. It is the visual anchor — put it on the high point.\n3. A torii gate at the head of a stone path that climbs to the pagoda, stone lanterns along it with warm emissive glow, and a small cluster of cube houses with lantern-lit windows. A small reflecting pond with stone edging sits near the base.\n4. Vegetation: cube-style pines in clusters plus one large cherry tree with a pink cube canopy near the pagoda.\n5. A waterfall pouring off one edge of the island, with mist particles where it disappears into the clouds below.\n6. A sea of clouds below the island: several layered semi-transparent cloud slabs plus drifting cloud puffs, giving real depth far below.\n7. Cherry-blossom petals drifting across the scene (200+ instanced), and two or three small flocks of birds circling.\n8. Sky: vertical gradient, sun and moon, stars that appear at night, soft distance fog tinted to the time of day.\n\nANIMATION & LIGHTING\n- The island slowly bobs and tilts, as if drifting in air (subtle — a few degrees max).\n- Full day/night cycle on a ~60 second loop: dawn, noon, golden sunset, night. Sun/moon orbit the scene, light colour and fog follow, lanterns and windows glow at night, stars fade in.\n- Continuous motion everywhere: waterfall, mist, petals, clouds, pond shimmer, birds.\n- Soft shadows; warm rim light at sunset.\n\nCAMERA & CONTROLS\n- Damped OrbitControls with sensible limits (cannot go under the island or inside the pagoda).\n- A \"Cinematic\" toggle button: slowly orbits the island at a low dramatic angle with gentle drift; toggles back to free orbit.\n- A \"Pause time\" toggle for the day/night cycle.\n\nPERFORMANCE\n- Stable 60fps at 1080p on a mid-range laptop: use InstancedMesh for cubes, petals and clouds; keep draw calls low; cap pixel ratio at 2; handle resize.\n- All procedural placement uses a seeded PRNG (mulberry32, seed 1337) so the island is IDENTICAL on every load.\n\nUI\nMinimal corner overlay: title \"SKY TEMPLE\", one-line hint (\"Drag to orbit · Scroll to zoom\"), the two toggle buttons. Fade to low opacity after 10 seconds idle; restore on mouse move. No other UI. The scene must be screenshot-ready the moment it loads — no interaction needed for the hero shot.\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary before or after."
- },
- "living-city": {
-  "title": "Living City",
-  "meta": "Qwen3.8-Flash-Next · one-shot · 4 Oct 2026",
-  "desc": "A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.",
-  "hint": "Drag to orbit · the fly-through button changes the camera.",
-  "src": "demos/living-city.html",
-  "repo": "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S%20-%20Strata/City",
-  "prompt": "Build one complete, self-contained web demo: a living procedural city — generated fresh in code, full of traffic, lit through a day/night cycle. It must feel like a real place you could fly through, not a grid of grey boxes.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — \"three\": https://unpkg.com/three@0.160.0/build/three.module.js and \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules. Nothing else external: no images, textures, models or fonts — everything generated in code (canvas-generated textures are fine). No build step, no TypeScript, no npm, no frameworks. Zero console errors when opened.\n\nTHE CITY (all of the following)\n1. Procedural layout, one generator run at load: a central downtown of tall towers (up to ~40 floors), a mid-rise ring, low-rise outskirts; a park block with trees and a pond; at least two diagonal avenues cutting across the grid; a river along one edge with two or more bridges. Seeded (mulberry32, seed 1337) — the SAME city every load.\n2. Roads: asphalt with lane markings and sidewalks, streetlights along the avenues, traffic lights at major intersections that actually change state.\n3. Buildings: window bands, rooftop details (AC units, antennae, water towers), varied palettes, an occasional construction crane; billboards with animated procedural content (draw them with canvas-generated textures).\n4. Traffic: cars driving in lanes and stopping at red lights; at night, headlights and tail lights; buses with lit windows; a helicopter circling downtown with a blinking light. Vehicles recycled/instanced — a few hundred max.\n5. Day/night cycle (~90 seconds): sky gradient with sun and moon, buildings' windows light up progressively at dusk (vary both per building and per floor), streetlights and billboards come on, light fog, stars at night.\n\nCAMERA\n- Damped OrbitControls for free look, plus a \"Fly-through\" mode button: the camera follows a smooth closed Catmull-Rom spline at street/rooftop level through the city with subtle banking, then toggles back. Minimise clipping through buildings — raise the path above obstacles or nudge points; brief grazes only.\n\nHUD\nSmall dark translucent overlay: FPS, building count, vehicle count, a day/night pause button, a camera mode button. Small type, tidy.\n\nPERFORMANCE\n- Stable 60fps at 1080p on a mid-range laptop: InstancedMesh for buildings, windows, cars and streetlights; distance fog to shorten draw distance; pixel ratio capped at 2; resize handled.\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary."
- },
- "neon-drift": {
-  "title": "Neon Drift",
-  "meta": "Qwen3.8-Flash-Next · one-shot · 5 Oct 2026",
-  "desc": "A playable synthwave racer — an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.",
-  "hint": "Any key starts · arrows or A/D steer · space boosts.",
-  "src": "demos/neon-drift.html",
-  "repo": "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S%20-%20Strata/Neon%20Drift",
-  "prompt": "Build one complete, self-contained web demo: a playable synthwave racer — NEON DRIFT. You chase-cam a hovercraft down an endless, procedurally curving neon highway at dusk. It must be fun within five seconds, with real game feel.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — \"three\": https://unpkg.com/three@0.160.0/build/three.module.js and \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules. No assets: every visual generated in code (canvas-generated textures fine), all sound synthesized with WebAudio — no audio files. No build step, no TypeScript, no npm. Zero console errors.\n\nTRACK & WORLD\n1. Endless procedural track: segments that curve left/right and rise/fall, generated ahead of the player and recycled — it never ends. Seeded (mulberry32, seed 1337) so the course is the same every run.\n2. Road: dark asphalt with glowing edge lines and centre dashes; neon pylons or arches passing overhead at intervals; side barriers.\n3. Environment: giant striped sun on the horizon, grid ground plane, silhouetted mountain ranges, starfield, occasional neon palm. Violet/magenta fog.\n\nGAMEPLAY\n- Controls: left/right arrows or A/D to steer (speed-sensitive steering), Space or Shift to boost with a heat/cooldown meter, R to restart after a crash. Auto-accelerate; top speed increases the longer you survive.\n- Hazards: slow rival cars (glowing blocks with tail lights) to dodge; hitting one wrecks you. Near-misses (passing within a small margin) give bonus points with a brief slow-mo flash.\n- Scoring: distance plus near-miss bonuses; small \"+50 NEAR MISS\" popups. Crash: hovercraft bursts into particles, slight camera pull-back, \"WRECKED — press R\" overlay, best score kept for the session.\n\nGAME FEEL (this is a game-feel test — get it right)\n- Camera lags smoothly behind the craft; FOV widens during boost; subtle screen shake on crash and near-miss.\n- The craft banks into turns, hovers with a gentle bob; thruster exhaust particles scale with speed.\n- Boost adds speed lines in the starfield and a colour shift. Track curvature must telegraph — you can read the next curve before entering it.\n\nAUDIO (WebAudio, synthesized, no files)\n- Engine hum whose pitch follows speed; whoosh on near-miss; explosion noise on crash; a simple looping synthwave bass/arp underneath. Audio starts on first click (autoplay policy); M mutes.\n\nHUD\nSpeed, score, best, boost meter. Title card \"NEON DRIFT\" with a \"Press any key to drive\" prompt; instructions live on the title card only.\n\nPERFORMANCE\n- 60fps at 1080p: instancing for pylons and particles, recycled objects (no unbounded arrays), pixel ratio capped at 2, resize handled.\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary."
- },
- "pulse-engine": {
-  "title": "Pulse Engine",
-  "meta": "Qwen3.8-Flash-Next · one-shot · 5 Oct 2026",
-  "desc": "A generative instrument — a drum machine and synth that compose on their own while a particle galaxy pulses on the beat.",
-  "hint": "Click to start the audio — it composes on its own.",
-  "src": "demos/pulse-engine.html",
-  "repo": "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S%20-%20Strata/Pulse%20Engine",
-  "prompt": "Build one complete, self-contained web demo: PULSE ENGINE — a generative audiovisual instrument. It plays music by itself, you can steer it, and the visuals are driven by the sound. This is an audio-engineering and aesthetics test.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg (\"three\": https://unpkg.com/three@0.160.0/build/three.module.js, \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/) allowed for the visuals. No assets of any kind — all sound must be synthesized in WebAudio (no samples, no audio files); all imagery generated in code. No build step, no TypeScript, no npm. Zero console errors.\n\nAUDIO ENGINE\n1. A 16-step sequencer with four synthesized drum voices — kick, snare, hats, clap — each built from oscillators/noise with real envelopes. Pattern editable by clicking steps in the UI.\n2. A bassline and an arpeggio synth (subtractive: oscillator + filter + envelope) playing a seeded four-chord progression, key and mood of your choice (stay in key — it must sound musical).\n3. Generative mode, ON by default: a seeded composer (seed 1337) mutates patterns and melodies over time so it never exactly repeats, while staying musical — the kind of loop you'd leave running, not random beeps. A \"Randomise\" button reseeds it.\n4. Rock-solid timing: no audible jitter or drift — all note events scheduled against AudioContext.currentTime (lookahead scheduling, not per-step setTimeout).\n5. A master chain with soft limiting so it never clips, whatever the user clicks; master volume and mute.\n6. Transport: Play/Stop and a tempo slider 90–160 BPM.\n\nVISUALS (Three.js)\n- A full-viewport scene reacting live through an AnalyserNode: for example a slowly rotating particle galaxy that pulses on the kick, warps with the bass, sparkles on hats, with a radial spectrum ring for mids/highs and slow camera drift. It must look composed, not like a debug spectrum.\n- Cohesive synthwave palette (deep blue/purple/cyan/magenta), additive blending, glow via sprites or additive planes (no post-processing dependency needed).\n\nUI\n- A start overlay: \"CLICK TO START AUDIO\" (browsers block autoplay) — everything begins on the first click.\n- A slim bottom bar: Play/Stop, tempo, mute, Generative on/off, Randomise. Small keyboard hotkeys: 1–4 mute individual drums, G toggles generative; list the hotkeys in one small help line.\n\nQUALITY BAR\n- Audio first: clean, mixed and musical (kick audible, bass warm, hats crisp); no clicks or pops when patterns change (envelopes must handle note starts/stops).\n- The visuals must visibly lock to the beat — the kick pulse unmistakable.\n- 60fps at 1080p with audio running; pixel ratio capped at 2.\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary."
- },
- "cloth-lab": {
-  "title": "Cloth Lab",
-  "meta": "Qwen3.8-Flash-Next · one-shot · 5 Oct 2026",
-  "desc": "A from-scratch cloth physics lab — drag it, tear it, switch on the wind, drop balls on it. The solver is hand-written; no physics library.",
-  "hint": "Drag the cloth · T tear · W wind · B balls · F wireframe · R reset.",
-  "src": "demos/cloth-lab.html",
-  "repo": null,
-  "prompt": "Build one complete, self-contained web demo: a cloth and rigid-body physics lab, with the physics written from scratch. This is a simulation-quality test.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — \"three\": https://unpkg.com/three@0.160.0/build/three.module.js and \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules, OrbitControls from three/addons. No assets. No build step, no TypeScript, no npm. Zero console errors.\nNO physics libraries: cannon-es, ammo, rapier, physx, matter.js and the like are banned. Write the solver yourself (Verlet/XPBD or similar) — not a reworded copy of a published tutorial implementation.\n\nTHE SIMULATION\n1. A cloth sheet — a grid of at least 60 x 40 = 2400 particles — pinned at its two top corners, hanging like a curtain between two posts. Structural, shear and bend constraints. It must drape and fold naturally with zero jitter at rest.\n2. A solid sphere pedestal near the cloth that the cloth drapes over when pulled across it (cloth-vs-sphere collision).\n3. A floor at ground level (cloth-vs-floor collision); gravity 9.8.\n4. Interaction:\n   - Left-drag any cloth particle: grab it (spring to cursor) and fling the cloth — it must ripple believably.\n   - T key or right-click on the cloth: tear it — remove that particle's constraints so it splits and hangs open; for a few seconds after a tear, springs under high strain should keep breaking.\n   - W: toggle gusty wind (smooth time-varying noise, not a constant push).\n   - B: spawn 10 falling spheres (radius ~0.2m) that collide with the cloth — the cloth must catch them, drape around them and not explode.\n   - R: reset the scene.\n5. Fixed-timestep simulation with an accumulator (never step physics from raw frame delta), with enough solver iterations for stability. It must stay stable for minutes of abuse — flinging, tearing, dozens of balls.\n\nRENDERING\n- Cloth as a lit double-sided mesh with subtle sheen (back face must look right when it flips), glossy spheres, soft studio lighting and gentle shadows (real shadow maps or fake blob shadows — either, but the cloth must not look flat). F key toggles a wireframe view of the particle grid.\n\nHUD\nSmall overlay: title \"CLOTH LAB\", key hints (drag / T tear / W wind / B balls / F wire / R reset), particle count, sim steps per second.\n\nPERFORMANCE\n- 2400+ particles at a comfortable 60fps: typed arrays, no per-frame allocations, flat constraint loops.\n\nQUALITY BAR\n- The cloth must look like fabric: no oscillating spikes, no visible interpenetration through itself, graceful tearing (never a whole-sheet explosion).\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary."
- },
- "sky-temple-27b": {
-  "title": "Sky Temple — 27B build",
-  "meta": "Qwen3.8-27B · one-shot · 6 Oct 2026",
-  "desc": "The same brief on a different local model — same prompt, different handwriting.",
-  "hint": "Drag to orbit · scroll to zoom · the cinematic toggle is top-left.",
-  "src": "demos/sky-temple-27b.html",
-  "repo": "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/qwen3.8-27b-llama-cpp/Floating%20Japanese%20Sky%20Temple%20(DSH)",
-  "prompt": "Build one complete, self-contained web demo: a floating Japanese island in the sky, voxel/cube art style, cinematic and alive. It must look like a crafted scene, not a tech demo.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — \"three\": https://unpkg.com/three@0.160.0/build/three.module.js and \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules, OrbitControls from three/addons. Nothing else external: no images, textures, models, fonts or audio files — every surface, shape and effect must be generated procedurally in code (canvas-generated textures are fine). No build step, no TypeScript, no npm, no frameworks. Opening the file in a browser must work with zero console errors.\n\nSCENE — all of the following must be present\n1. The island: an irregular floating landmass built from cubes — grass top layer, dirt and rock strata beneath, tapered underside so it reads as torn from the earth. The edge must be uneven, never a circle.\n2. A five-tier pagoda (cube-built): alternating wall bands, wide dark roofs with upturned corners (scaled boxes are fine), gold finial. It is the visual anchor — put it on the high point.\n3. A torii gate at the head of a stone path that climbs to the pagoda, stone lanterns along it with warm emissive glow, and a small cluster of cube houses with lantern-lit windows. A small reflecting pond with stone edging sits near the base.\n4. Vegetation: cube-style pines in clusters plus one large cherry tree with a pink cube canopy near the pagoda.\n5. A waterfall pouring off one edge of the island, with mist particles where it disappears into the clouds below.\n6. A sea of clouds below the island: several layered semi-transparent cloud slabs plus drifting cloud puffs, giving real depth far below.\n7. Cherry-blossom petals drifting across the scene (200+ instanced), and two or three small flocks of birds circling.\n8. Sky: vertical gradient, sun and moon, stars that appear at night, soft distance fog tinted to the time of day.\n\nANIMATION & LIGHTING\n- The island slowly bobs and tilts, as if drifting in air (subtle — a few degrees max).\n- Full day/night cycle on a ~60 second loop: dawn, noon, golden sunset, night. Sun/moon orbit the scene, light colour and fog follow, lanterns and windows glow at night, stars fade in.\n- Continuous motion everywhere: waterfall, mist, petals, clouds, pond shimmer, birds.\n- Soft shadows; warm rim light at sunset.\n\nCAMERA & CONTROLS\n- Damped OrbitControls with sensible limits (cannot go under the island or inside the pagoda).\n- A \"Cinematic\" toggle button: slowly orbits the island at a low dramatic angle with gentle drift; toggles back to free orbit.\n- A \"Pause time\" toggle for the day/night cycle.\n\nPERFORMANCE\n- Stable 60fps at 1080p on a mid-range laptop: use InstancedMesh for cubes, petals and clouds; keep draw calls low; cap pixel ratio at 2; handle resize.\n- All procedural placement uses a seeded PRNG (mulberry32, seed 1337) so the island is IDENTICAL on every load.\n\nUI\nMinimal corner overlay: title \"SKY TEMPLE\", one-line hint (\"Drag to orbit · Scroll to zoom\"), the two toggle buttons. Fade to low opacity after 10 seconds idle; restore on mouse move. No other UI. The scene must be screenshot-ready the moment it loads — no interaction needed for the hero shot.\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary before or after."
- },
- "sky-temple-agent": {
-  "title": "Sky Temple — agent rebuild",
-  "meta": "Qwen3.8-Flash-Next · agent build · 6 Oct 2026",
-  "desc": "The same brief, rebuilt from scratch by my agent harness driving the local model over the live server.",
-  "hint": "Drag to orbit · scroll to zoom · the cinematic toggle is top-left.",
-  "src": "demos/sky-temple-agent.html",
-  "repo": null,
-  "prompt": "Build one complete, self-contained web demo: a floating Japanese island in the sky, voxel/cube art style, cinematic and alive. It must look like a crafted scene, not a tech demo.\n\nDELIVERABLE\nA single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — \"three\": https://unpkg.com/three@0.160.0/build/three.module.js and \"three/addons/\": https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules, OrbitControls from three/addons. Nothing else external: no images, textures, models, fonts or audio files — every surface, shape and effect must be generated procedurally in code (canvas-generated textures are fine). No build step, no TypeScript, no npm, no frameworks. Opening the file in a browser must work with zero console errors.\n\nSCENE — all of the following must be present\n1. The island: an irregular floating landmass built from cubes — grass top layer, dirt and rock strata beneath, tapered underside so it reads as torn from the earth. The edge must be uneven, never a circle.\n2. A five-tier pagoda (cube-built): alternating wall bands, wide dark roofs with upturned corners (scaled boxes are fine), gold finial. It is the visual anchor — put it on the high point.\n3. A torii gate at the head of a stone path that climbs to the pagoda, stone lanterns along it with warm emissive glow, and a small cluster of cube houses with lantern-lit windows. A small reflecting pond with stone edging sits near the base.\n4. Vegetation: cube-style pines in clusters plus one large cherry tree with a pink cube canopy near the pagoda.\n5. A waterfall pouring off one edge of the island, with mist particles where it disappears into the clouds below.\n6. A sea of clouds below the island: several layered semi-transparent cloud slabs plus drifting cloud puffs, giving real depth far below.\n7. Cherry-blossom petals drifting across the scene (200+ instanced), and two or three small flocks of birds circling.\n8. Sky: vertical gradient, sun and moon, stars that appear at night, soft distance fog tinted to the time of day.\n\nANIMATION & LIGHTING\n- The island slowly bobs and tilts, as if drifting in air (subtle — a few degrees max).\n- Full day/night cycle on a ~60 second loop: dawn, noon, golden sunset, night. Sun/moon orbit the scene, light colour and fog follow, lanterns and windows glow at night, stars fade in.\n- Continuous motion everywhere: waterfall, mist, petals, clouds, pond shimmer, birds.\n- Soft shadows; warm rim light at sunset.\n\nCAMERA & CONTROLS\n- Damped OrbitControls with sensible limits (cannot go under the island or inside the pagoda).\n- A \"Cinematic\" toggle button: slowly orbits the island at a low dramatic angle with gentle drift; toggles back to free orbit.\n- A \"Pause time\" toggle for the day/night cycle.\n\nPERFORMANCE\n- Stable 60fps at 1080p on a mid-range laptop: use InstancedMesh for cubes, petals and clouds; keep draw calls low; cap pixel ratio at 2; handle resize.\n- All procedural placement uses a seeded PRNG (mulberry32, seed 1337) so the island is IDENTICAL on every load.\n\nUI\nMinimal corner overlay: title \"SKY TEMPLE\", one-line hint (\"Drag to orbit · Scroll to zoom\"), the two toggle buttons. Fade to low opacity after 10 seconds idle; restore on mouse move. No other UI. The scene must be screenshot-ready the moment it loads — no interaction needed for the hero shot.\n\nOUTPUT\nReturn the complete file as one HTML code block. No explanations, no commentary before or after."
- }
-};
-
-var modal = document.getElementById('modal');
-var frame = document.getElementById('m-frame');
-var lastFocus = null;
-
-function openDemo(id){
-  var d = DEMOS[id];
-  if (!d) return;
-  document.getElementById('m-title').textContent = d.title;
-  document.getElementById('m-meta').textContent = d.meta;
-  document.getElementById('m-desc').textContent = d.desc;
-  document.getElementById('m-hint').textContent = d.hint;
-  var src = document.getElementById('m-source');
-  var sep = document.getElementById('m-sourcesep');
-  if (d.repo) { src.href = d.repo; src.hidden = false; sep.hidden = false; }
-  else { src.hidden = true; sep.hidden = true; }
-  var op = document.getElementById('m-open');
-  op.href = d.src;
-  frame.title = d.title + ' — live demo';
-  frame.src = d.src;
-  document.getElementById('m-prompt').textContent = d.prompt;
-  lastFocus = document.activeElement;
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('m-close').focus();
-}
-function closeDemo(){
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-  frame.src = 'about:blank';
-  if (lastFocus && lastFocus.focus) lastFocus.focus();
-}
-document.querySelectorAll('.card').forEach(function(c){
-  c.addEventListener('click', function(e){
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let new-tab gestures work
-    e.preventDefault();
-    openDemo(c.dataset.demo);
-  });
-});
-document.getElementById('m-close').addEventListener('click', closeDemo);
-modal.addEventListener('click', function(e){ if (e.target === modal) closeDemo(); });
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) closeDemo(); });
-</script>
 </body>
 </html>

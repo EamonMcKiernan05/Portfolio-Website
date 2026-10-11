@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Living City &middot; One-shot bench — Eamon McKiernan</title>
+<meta name="description" content="Living City — the one-shot prompt and every build it produced. Run each version in the browser or open it full size.">
+<meta property="og:title" content="Living City — one-shot bench">
+<meta property="og:description" content="The prompt that made Living City, and every model's build — runnable.">
+<style>
+:root{
+  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --accent:#D8A73C;
+  --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
+  --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0 0}
+.back{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.back:hover{color:var(--ink)}
+.head-meta{font-family:var(--mono);font-size:12px;color:var(--dim);text-align:right;white-space:nowrap}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,5.6vw,52px);line-height:1.04;letter-spacing:.005em;margin:28px 0 0}
+.lede{margin-top:12px;max-width:70ch;color:var(--dim)}
+
+.sec{margin-top:44px}
+.sec-title{font-family:var(--display);font-weight:600;font-size:22px}
+.sec-sub{margin-top:5px;font-size:12.5px;color:var(--dim)}
+
+.result{border:1px solid var(--line);margin-top:16px}
+.rtop{display:flex;align-items:stretch}
+.rthumb{flex:0 0 380px;display:block;border-right:1px solid var(--line);background:#0c0b08}
+.rthumb img{display:block;width:100%;height:100%;object-fit:cover}
+.rbody{flex:1;padding:18px 20px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rt{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.15}
+.rm{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.rd{font-size:13.5px;color:var(--dim);max-width:70ch}
+.ractions{margin-top:auto;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+
+.btn{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:none;border:1px solid var(--line);padding:8px 13px;cursor:pointer;transition:border-color .15s ease,color .15s ease;display:inline-block}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.gold{color:var(--accent);border-color:#4a3f28}
+.btn.gold:hover{border-color:var(--accent)}
+.btn.ghost{color:var(--dim)}
+.btn.on{color:var(--accent);border-color:var(--accent)}
+
+.runbox{border-top:1px solid var(--line);background:#0c0b08}
+.runbox iframe{display:block;width:100%;aspect-ratio:16/10;border:0}
+.runhint{padding:10px 18px;font-family:var(--mono);font-size:11px;color:var(--dim);border-top:1px solid var(--line)}
+
+.promptbox{border:1px solid var(--line);margin-top:16px;padding:18px 20px;max-height:420px;overflow:auto;white-space:pre-wrap;font-family:var(--mono);font-size:12px;line-height:1.66;color:var(--dim)}
+
+footer{margin-top:60px;border-top:1px solid var(--line);padding:18px 0 70px}
+.f1{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.f2{margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--quiet);max-width:100ch}
+.f2 a{color:var(--quiet);text-decoration:underline}
+.f2 a:hover{color:var(--dim)}
+
+@media (max-width:760px){
+  .rtop{flex-direction:column}
+  .rthumb{flex:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .rtop .rthumb img{aspect-ratio:16/10;height:auto}
+}
+@media (max-width:640px){.top{flex-wrap:wrap;row-gap:6px}.head-meta{white-space:normal;text-align:left}}
+@media (prefers-reduced-motion: reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <a class="back" href="../gallery.html">&#8592;&nbsp;demo gallery</a>
+    <span class="head-meta">1 build · 4 Oct 2026</span>
+  </div>
+
+  <h1>Living City</h1>
+  <p class="lede">A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</p>
+
+  <section class="sec">
+    <div class="sec-title">Results</div>
+    <div class="sec-sub">One build of this prompt.</div>
+      <article class="result">
+        <div class="rtop">
+          <a class="rthumb" href="../demos/living-city.html" target="_blank" rel="noopener" aria-label="Open Qwen3.8-Flash-Next — one-shot in a new tab">
+            <img src="../demos/thumbs/living-city.jpg" alt="Living City — a procedural city of towers and avenues">
+          </a>
+          <div class="rbody">
+            <div class="rt">Qwen3.8-Flash-Next — one-shot</div>
+            <div class="rm">4 Oct 2026 &middot; one shot, no follow-ups &middot; 79 KB</div>
+            <div class="rd">The original bench run — one message, no follow-ups.</div>
+            <div class="ractions">
+              <button class="btn" type="button" data-run>run in this page</button>
+              <a class="btn gold" href="../demos/living-city.html" target="_blank" rel="noopener">open in new tab &#8599;</a>
+              <a class="btn ghost" href="https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S%20-%20Strata/City" target="_blank" rel="noopener">source &#8599;</a>
+            </div>
+          </div>
+        </div>
+        <div class="runbox" hidden>
+          <iframe src="about:blank" data-src="../demos/living-city.html" title="Qwen3.8-Flash-Next — one-shot — live demo" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allowfullscreen></iframe>
+          <div class="runhint">Runs sandboxed in this page — click inside to interact. Drag to orbit — try the fly-through button.</div>
+        </div>
+      </article>
+  </section>
+
+  <section class="sec">
+    <div class="sec-title">The prompt</div>
+    <div class="sec-sub">The brief, exactly as it was sent to the model.</div>
+    <pre class="promptbox">Build one complete, self-contained web demo: a living procedural city — generated fresh in code, full of traffic, lit through a day/night cycle. It must feel like a real place you could fly through, not a grid of grey boxes.
+
+DELIVERABLE
+A single HTML file, self-contained: all HTML, CSS and JavaScript inline. Three.js r160 via importmap from unpkg — &quot;three&quot;: https://unpkg.com/three@0.160.0/build/three.module.js and &quot;three/addons/&quot;: https://unpkg.com/three@0.160.0/examples/jsm/ — ES modules. Nothing else external: no images, textures, models or fonts — everything generated in code (canvas-generated textures are fine). No build step, no TypeScript, no npm, no frameworks. Zero console errors when opened.
+
+THE CITY (all of the following)
+1. Procedural layout, one generator run at load: a central downtown of tall towers (up to ~40 floors), a mid-rise ring, low-rise outskirts; a park block with trees and a pond; at least two diagonal avenues cutting across the grid; a river along one edge with two or more bridges. Seeded (mulberry32, seed 1337) — the SAME city every load.
+2. Roads: asphalt with lane markings and sidewalks, streetlights along the avenues, traffic lights at major intersections that actually change state.
+3. Buildings: window bands, rooftop details (AC units, antennae, water towers), varied palettes, an occasional construction crane; billboards with animated procedural content (draw them with canvas-generated textures).
+4. Traffic: cars driving in lanes and stopping at red lights; at night, headlights and tail lights; buses with lit windows; a helicopter circling downtown with a blinking light. Vehicles recycled/instanced — a few hundred max.
+5. Day/night cycle (~90 seconds): sky gradient with sun and moon, buildings&#x27; windows light up progressively at dusk (vary both per building and per floor), streetlights and billboards come on, light fog, stars at night.
+
+CAMERA
+- Damped OrbitControls for free look, plus a &quot;Fly-through&quot; mode button: the camera follows a smooth closed Catmull-Rom spline at street/rooftop level through the city with subtle banking, then toggles back. Minimise clipping through buildings — raise the path above obstacles or nudge points; brief grazes only.
+
+HUD
+Small dark translucent overlay: FPS, building count, vehicle count, a day/night pause button, a camera mode button. Small type, tidy.
+
+PERFORMANCE
+- Stable 60fps at 1080p on a mid-range laptop: InstancedMesh for buildings, windows, cars and streetlights; distance fog to shorten draw distance; pixel ratio capped at 2; resize handled.
+
+OUTPUT
+Return the complete file as one HTML code block. No explanations, no commentary.</pre>
+  </section>
+
+  <footer>
+    <div class="f1">&copy; 2026 Eamon McKiernan &mdash; <a href="../index.html" style="color:var(--dim);text-decoration:underline">back to the portfolio</a></div>
+    <div class="f2">Demos: single-file HTML, Three.js r160 via unpkg &mdash; open in a new tab or run in a sandboxed frame on this page. Sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+  </footer>
+
+</div>
+
+<script>
+document.querySelectorAll('[data-run]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var art = btn.closest('.result');
+    var box = art.querySelector('.runbox');
+    var fr = box.querySelector('iframe');
+    if (box.hidden) {
+      fr.src = fr.getAttribute('data-src');
+      box.hidden = false;
+      btn.textContent = 'stop';
+      btn.classList.add('on');
+    } else {
+      fr.src = 'about:blank';
+      box.hidden = true;
+      btn.textContent = 'run in this page';
+      btn.classList.remove('on');
+    }
+  });
+});
+</script>
+</body>
+</html>
