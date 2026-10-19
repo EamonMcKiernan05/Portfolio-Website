@@ -212,7 +212,7 @@ def build_projects():
             tags = ('<div class="ptags"><b>TAGS</b>' +
                     "<i>&#183;</i>".join(f"<span>{e(t)}</span>" for t in p["tags"]) + "</div>")
 
-        sheets.append(f'''<details class="psheet rv" id="proj-{i+1}"{" open" if i == 0 else ""}>
+        sheets.append(f'''<details class="psheet rv" name="work" id="proj-{i+1}"{" open" if i == 0 else ""}>
       <summary>
         <span class="pnum">{n}</span>
         <span class="ptitle">{e(p["title"])}</span>
@@ -414,6 +414,7 @@ def build():
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="rail">
   <div class="rail-prog" id="prog"></div>
   <div class="rail-in">
@@ -431,13 +432,14 @@ def build():
 
 <div class="msheet" id="menu" hidden>
   <button class="msheet-close" id="menuClose">{hicon("hgi-cancel-01")}Close</button>
-  <nav aria-label="Sections">
+  <nav aria-label="Site sections, menu">
     {"".join(f'<a href="#{a}"><span>{i:02d}</span>{t}</a>' for i, (a, t, _) in enumerate(SECTIONS, 1))}
     <a href="gallery.html"><span>07</span>Demo gallery</a>
   </nav>
 </div>
 ''')
 
+    parts.append('<main id="main">')
     parts.append(build_hero())
     parts.append(build_siteplan())
     parts.append(build_capability())
@@ -447,6 +449,7 @@ def build():
     parts.append(build_projects())
     parts.append(build_credentials())
     parts.append(build_contact())
+    parts.append('</main>')
 
     parts.append('''<footer class="foot">
   <div class="wrap foot-in">
@@ -569,8 +572,9 @@ def build():
         var a = map[en.target.id];
         if (!a) return;
         if (en.isIntersecting) {
-          links.forEach(function (l) { l.classList.remove('on'); });
+          links.forEach(function (l) { l.classList.remove('on'); l.removeAttribute('aria-current'); });
           a.classList.add('on');
+          a.setAttribute('aria-current', 'true');
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px' });

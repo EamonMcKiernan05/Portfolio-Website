@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="rail">
   <div class="rail-prog" id="prog"></div>
   <div class="rail-in">
@@ -47,12 +48,13 @@
 
 <div class="msheet" id="menu" hidden>
   <button class="msheet-close" id="menuClose"><i class="hgi-stroke hgi-cancel-01" aria-hidden="true"></i>Close</button>
-  <nav aria-label="Sections">
+  <nav aria-label="Site sections, menu">
     <a href="#siteplan"><span>01</span>Site plan</a><a href="#capability"><span>02</span>Capability</a><a href="#experience"><span>03</span>Experience</a><a href="#impact"><span>04</span>Impact</a><a href="#measurements"><span>05</span>Measurements</a><a href="#projects"><span>06</span>Work</a><a href="#credentials"><span>07</span>Credentials</a><a href="#contact"><span>08</span>Contact</a>
     <a href="gallery.html"><span>07</span>Demo gallery</a>
   </nav>
 </div>
 
+<main id="main">
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
@@ -499,7 +501,7 @@
     </header>
     <div class="pindex rv"><a href="#proj-1"><b>01</b> Local AI</a><a href="#proj-2"><b>02</b> Proxmox Cluster</a><a href="#proj-3"><b>03</b> OPNsense Router</a><a href="#proj-4"><b>04</b> Media Server</a><a href="#proj-5"><b>05</b> Fantasy Football Isle of Man</a><a href="#proj-6"><b>06</b> AI Trading Bot &amp; Backtesting</a><a href="#proj-7"><b>07</b> Office Downgrade Script</a><a href="#proj-8"><b>08</b> RepLog — iOS Workout Tracker</a><a href="#proj-9"><b>09</b> Automated Video Production Pipeline</a></div>
     <div class="sheets">
-      <details class="psheet rv" id="proj-1" open>
+      <details class="psheet rv" name="work" id="proj-1" open>
       <summary>
         <span class="pnum">01</span>
         <span class="ptitle">Local AI</span>
@@ -517,7 +519,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>llama.cpp</span><i>&#183;</i><span>Strata</span><i>&#183;</i><span>Speculative Decoding</span><i>&#183;</i><span>LLM</span><i>&#183;</i><span>Tesla V100</span><i>&#183;</i><span>MTP</span><i>&#183;</i><span>Benchmarking</span><i>&#183;</i><span>Hermes</span><i>&#183;</i><span>Discord Bot</span><i>&#183;</i><span>Self-hosted AI</span><i>&#183;</i><span>Open Source</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-2">
+    </details><details class="psheet rv" name="work" id="proj-2">
       <summary>
         <span class="pnum">02</span>
         <span class="ptitle">Proxmox Cluster</span>
@@ -532,7 +534,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>Proxmox</span><i>&#183;</i><span>Ceph</span><i>&#183;</i><span>LXC</span><i>&#183;</i><span>HA</span><i>&#183;</i><span>Virtualisation</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-3">
+    </details><details class="psheet rv" name="work" id="proj-3">
       <summary>
         <span class="pnum">03</span>
         <span class="ptitle">OPNsense Router</span>
@@ -547,7 +549,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>OPNsense</span><i>&#183;</i><span>Firewall</span><i>&#183;</i><span>VLANs</span><i>&#183;</i><span>Pi-hole</span><i>&#183;</i><span>Tailscale</span><i>&#183;</i><span>Networking</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-4">
+    </details><details class="psheet rv" name="work" id="proj-4">
       <summary>
         <span class="pnum">04</span>
         <span class="ptitle">Media Server</span>
@@ -565,7 +567,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>Jellyfin</span><i>&#183;</i><span>TrueNAS</span><i>&#183;</i><span>NVENC</span><i>&#183;</i><span>HandBrake</span><i>&#183;</i><span>ZFS</span><i>&#183;</i><span>Sonarr</span><i>&#183;</i><span>Radarr</span><i>&#183;</i><span>Docker</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-5">
+    </details><details class="psheet rv" name="work" id="proj-5">
       <summary>
         <span class="pnum">05</span>
         <span class="ptitle">Fantasy Football Isle of Man</span>
@@ -595,7 +597,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>FastAPI</span><i>&#183;</i><span>SQLite</span><i>&#183;</i><span>SQLAlchemy</span><i>&#183;</i><span>Alembic</span><i>&#183;</i><span>SwiftUI</span><i>&#183;</i><span>Swift</span><i>&#183;</i><span>iOS</span><i>&#183;</i><span>Xcode</span><i>&#183;</i><span>CI/CD</span><i>&#183;</i><span>JWT</span><i>&#183;</i><span>REST API</span><i>&#183;</i><span>Vanilla JS</span><i>&#183;</i><span>Pytest</span><i>&#183;</i><span>MCP</span><i>&#183;</i><span>XcodeBuildMCP</span><i>&#183;</i><span>Capacitor</span><i>&#183;</i><span>iOS Build</span><i>&#183;</i><span>Security Audit</span><i>&#183;</i><span>OAuth</span><i>&#183;</i><span>PKCE</span><i>&#183;</i><span>CORS</span><i>&#183;</i><span>Rate Limiting</span><i>&#183;</i><span>Code Review</span><i>&#183;</i><span>CSP</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-6">
+    </details><details class="psheet rv" name="work" id="proj-6">
       <summary>
         <span class="pnum">06</span>
         <span class="ptitle">AI Trading Bot &amp; Backtesting</span>
@@ -628,7 +630,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>Python</span><i>&#183;</i><span>Quant</span><i>&#183;</i><span>Backtesting</span><i>&#183;</i><span>Trend-Following</span><i>&#183;</i><span>Walk-Forward</span><i>&#183;</i><span>API Integration</span><i>&#183;</i><span>AI Agent</span><i>&#183;</i><span>Risk Management</span><i>&#183;</i><span>Docker</span><i>&#183;</i><span>s6-overlay</span><i>&#183;</i><span>Production Bot</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-7">
+    </details><details class="psheet rv" name="work" id="proj-7">
       <summary>
         <span class="pnum">07</span>
         <span class="ptitle">Office Downgrade Script</span>
@@ -643,7 +645,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>PowerShell</span><i>&#183;</i><span>Office Deployment Tool</span><i>&#183;</i><span>Microsoft 365</span><i>&#183;</i><span>Automation</span><i>&#183;</i><span>Windows</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-8">
+    </details><details class="psheet rv" name="work" id="proj-8">
       <summary>
         <span class="pnum">08</span>
         <span class="ptitle">RepLog — iOS Workout Tracker</span>
@@ -667,7 +669,7 @@
         </div>
         <div class="ptags"><b>TAGS</b><span>Swift</span><i>&#183;</i><span>SwiftUI</span><i>&#183;</i><span>SwiftData</span><i>&#183;</i><span>Swift Charts</span><i>&#183;</i><span>iOS</span><i>&#183;</i><span>XCUITest</span><i>&#183;</i><span>FastAPI</span><i>&#183;</i><span>Docker</span><i>&#183;</i><span>CSV</span><i>&#183;</i><span>Offline-first</span></div>
       </div>
-    </details><details class="psheet rv" id="proj-9">
+    </details><details class="psheet rv" name="work" id="proj-9">
       <summary>
         <span class="pnum">09</span>
         <span class="ptitle">Automated Video Production Pipeline</span>
@@ -784,6 +786,7 @@
     </div>
   </div>
 </section>
+</main>
 <footer class="foot">
   <div class="wrap foot-in">
     <div class="foot-l">&#169; 2026 Eamon McKiernan</div>
@@ -905,8 +908,9 @@
         var a = map[en.target.id];
         if (!a) return;
         if (en.isIntersecting) {
-          links.forEach(function (l) { l.classList.remove('on'); });
+          links.forEach(function (l) { l.classList.remove('on'); l.removeAttribute('aria-current'); });
           a.classList.add('on');
+          a.setAttribute('aria-current', 'true');
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px' });

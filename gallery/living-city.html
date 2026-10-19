@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
 <div class="wrap gal-wrap">
 
   <div class="gal-top">
@@ -31,7 +33,7 @@
   <p class="gal-lede">A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</p>
 
   <section class="gal-sec">
-    <div class="gal-sec-t">Results</div>
+    <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">Results</div><span class="gal-sec-rule"></span></div>
     <div class="gal-sec-s">One build of this prompt.</div>
       <article class="gal-res">
         <div class="gal-rt">
@@ -57,7 +59,7 @@
   </section>
 
   <section class="gal-sec">
-    <div class="gal-sec-t">The prompt</div>
+    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
     <div class="gal-sec-s">The brief, exactly as it was sent to the model.</div>
     <pre class="gal-prompt">Build one complete, self-contained web demo: a living procedural city — generated fresh in code, full of traffic, lit through a day/night cycle. It must feel like a real place you could fly through, not a grid of grey boxes.
 
@@ -111,5 +113,6 @@ document.querySelectorAll('[data-run]').forEach(function(btn){
   });
 });
 </script>
+</main>
 </body>
 </html>
