@@ -340,7 +340,7 @@ def build_hero():
         </h1>
         <p class="hero-role">{e(h["role"]).replace("&amp;#183;", "&#183;")}</p>
         <p class="hero-sum">{e(h["summary"])}</p>
-        <p class="hero-status"><span class="pip"></span><span>Based in the <b>Isle of Man</b> &#183; open to remote and on-site work</span></p>
+        <p class="hero-status"><span class="pip"></span><span>Based in the <b>Isle of Man</b> &#183; open to remote and on&#8209;site work</span></p>
         <div class="hero-links">
           {"".join(links)}
         </div>
