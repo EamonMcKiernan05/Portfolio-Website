@@ -53,6 +53,22 @@ Edit the JSON (or the SVG builders) and re-run — never hand-edit `index.html`.
 
 The gallery pages are hand-authored and share `assets/site.css`.
 
+## Icons
+
+`assets/favicon.svg` is the EM monogram — the same mark as the brand in the
+rail, drawn as vector paths because a favicon cannot rely on a web font, with
+the E in ink and the M in the accent. `favicon-32.png` and
+`apple-touch-icon.png` are raster fallbacks rendered from it:
+
+```bash
+python3 tools/icons.py
+```
+
+The script serves the repo over a throwaway local HTTP server and drives
+headless Chrome through the DevTools protocol to capture each size, because
+Chrome's window has a minimum size and the icon has to be rendered at exactly
+32 and 180 pixels.
+
 ## Social preview
 
 `assets/og.png` is the link-preview card (1200×630), generated from `tools/og.html`:
