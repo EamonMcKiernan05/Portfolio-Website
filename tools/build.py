@@ -332,8 +332,8 @@ def build_hero():
     <div class="hero-grid">
       <div class="hero-left">
         <h1 class="hero-name">
-          <span class="ln"><span>Eamon</span></span>
-          <span class="ln"><span>McKiernan</span></span>
+          <span class="ln" style="--l:0"><span>Eamon</span></span>
+          <span class="ln" style="--l:1"><span>McKiernan</span></span>
         </h1>
         <p class="hero-role">{e(h["role"]).replace("&amp;#183;", "&#183;")}</p>
         <p class="hero-sum">{e(h["summary"])}</p>
@@ -399,7 +399,7 @@ def build():
   <div class="rail-prog" id="prog"></div>
   <div class="rail-in">
     <a class="brand" href="#top">
-      <span class="brand-mark">EM</span>
+      <span class="brand-mark"><span>EM</span></span>
       <span class="brand-txt">Eamon <i>McKiernan</i></span>
     </a>
     <nav class="rail-nav" aria-label="Sections">
@@ -488,6 +488,25 @@ def build():
     nums.forEach(function (n) { nio.observe(n); });
   }
 
+  // ---- the site plan inks itself in when it scrolls into view
+  var plan = document.querySelector('.plan-svg');
+  if (plan && !reduce) {
+    if ('IntersectionObserver' in window) {
+      var pio = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting) { plan.classList.add('drawn'); pio.unobserve(en.target); }
+        });
+      }, { threshold: 0.15 });
+      pio.observe(plan);
+    } else {
+      plan.classList.add('drawn');
+    }
+    // safety net: if the observer never fires, show the finished sheet
+    setTimeout(function () { plan.classList.add('drawn'); }, 6000);
+  } else if (plan) {
+    plan.classList.add('drawn');
+  }
+
   // ---- duration bars
   var bars = Array.prototype.slice.call(document.querySelectorAll('.dur-bar i'));
   function grow(el) { el.style.transform = 'scaleX(1)'; }
@@ -498,6 +517,12 @@ def build():
       es.forEach(function (en) { if (en.isIntersecting) { grow(en.target); bio.unobserve(en.target); } });
     }, { threshold: 0.4 });
     bars.forEach(function (b) { bio.observe(b); });
+  }
+
+  // ---- hero name rises out of its mask
+  var heroName = document.querySelector('.hero-name');
+  if (heroName) {
+    requestAnimationFrame(function () { heroName.classList.add('lit'); });
   }
 
   // ---- scroll progress

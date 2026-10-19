@@ -92,13 +92,22 @@ p{text-wrap:pretty}
   max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);
   height:58px;display:flex;align-items:center;gap:20px;
 }
-.rail-prog{position:absolute;left:0;top:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:var(--accent);z-index:2}
+.rail-prog{position:absolute;left:0;top:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;z-index:2;
+  background:linear-gradient(90deg,var(--accent),#D98A3C)}
 .brand{display:flex;align-items:center;gap:11px;flex:none}
 .brand-mark{
   width:27px;height:27px;display:grid;place-items:center;flex:none;
   border:1px solid var(--ink);font-family:var(--serif);font-size:.94rem;line-height:1;
-  letter-spacing:.02em;
+  letter-spacing:.02em;position:relative;overflow:hidden;
 }
+/* the mark carries the accent as a single warm wash, not a flat fill */
+.brand-mark::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(178,58,28,.18),rgba(178,58,28,0) 64%);
+  opacity:0;transition:opacity .3s var(--ease);
+}
+.brand-mark:hover::after{opacity:1}
+.brand-mark>span{position:relative;z-index:1}
 .brand-txt{font-family:var(--serif);font-size:1.06rem;letter-spacing:.005em;white-space:nowrap}
 .brand-txt i{font-style:normal;color:var(--ink-3)}
 .rail-nav{margin-left:auto;display:flex;align-items:center;gap:4px}
@@ -133,8 +142,12 @@ p{text-wrap:pretty}
 @media(min-width:1000px){.hero-grid{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(40px,4.5vw,72px);align-items:center}}
 
 .hero-name{position:relative}
-.hero-name .ln{display:block;overflow:hidden}
-.hero-name .ln>span{display:block}
+.hero-name .ln{display:block;overflow:hidden;padding-bottom:.06em}
+/* the name rises out of its own mask on load */
+.js .hero-name .ln>span{display:block;transform:translateY(105%);
+  transition:transform 1s var(--ease);
+  transition-delay:calc(120ms + var(--l,0) * 90ms)}
+.js .hero-name.lit .ln>span{transform:translateY(0)}
 .hero-role{
   margin-top:22px;font-family:var(--mono);font-size:clamp(.72rem,1.1vw,.82rem);
   letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
@@ -444,6 +457,8 @@ p{text-wrap:pretty}
 .pl-ln{fill:none;stroke:var(--ink);stroke-width:1}
 .pl-ln2{fill:none;stroke:var(--rule-2);stroke-width:1}
 .pl-ln3{fill:none;stroke:var(--accent);stroke-width:1}
+.pl-tun{fill:none;stroke:var(--rule-2);stroke-width:1;stroke-dasharray:4 3}
+.pl-tbf{fill:none;stroke:var(--rule-2);stroke-width:1}
 .pl-dim{fill:none;stroke:var(--rule-2);stroke-width:.8;marker-start:url(#arw);marker-end:url(#arw)}
 .pl-t{font-family:var(--mono);font-size:8.5px;fill:var(--ink-3);letter-spacing:.1em}
 .pl-t9{font-family:var(--mono);font-size:9.5px;fill:var(--ink);letter-spacing:.06em}
@@ -460,6 +475,49 @@ p{text-wrap:pretty}
 .pl-bar{fill:var(--ink)}
 .pl-bar2{fill:var(--accent)}
 .pl-barg{fill:var(--rule-3)}
+
+/* ============================================================
+   THE SHEET INKS ITSELF IN
+   The plan draws line by line when it scrolls into view. The
+   animation only ever adds — if JS or the observer fails, the
+   finished sheet is already on the page.
+   ============================================================ */
+.js .plan-svg .pl-ln,
+.js .plan-svg .pl-ln2,
+.js .plan-svg .pl-ln3,
+.js .plan-svg .pl-dim,
+.js .plan-svg .pl-tun{
+  stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset .9s var(--ease);
+  transition-delay:calc(var(--i,0) * 55ms);
+}
+.js .plan-svg .pl-frame,
+.js .plan-svg .pl-zone,
+.js .plan-svg .pl-zone2,
+.js .plan-svg .pl-box,
+.js .plan-svg .pl-box2,
+.js .plan-svg .pl-hatch,
+.js .plan-svg .pl-tbf{
+  opacity:0;transition:opacity .5s var(--ease);
+  transition-delay:calc(120ms + var(--i,0) * 45ms);
+}
+.js .plan-svg text{
+  opacity:0;transition:opacity .45s var(--ease);
+  transition-delay:calc(520ms + var(--i,0) * 14ms);
+}
+.js .plan-svg.drawn .pl-ln,
+.js .plan-svg.drawn .pl-ln2,
+.js .plan-svg.drawn .pl-ln3,
+.js .plan-svg.drawn .pl-dim,
+.js .plan-svg.drawn .pl-tun{stroke-dashoffset:0}
+.js .plan-svg.drawn .pl-frame,
+.js .plan-svg.drawn .pl-zone,
+.js .plan-svg.drawn .pl-zone2,
+.js .plan-svg.drawn .pl-box,
+.js .plan-svg.drawn .pl-box2,
+.js .plan-svg.drawn .pl-hatch,
+.js .plan-svg.drawn .pl-tbf,
+.js .plan-svg.drawn text{opacity:1}
 
 /* ============================================================
    RESPONSIVE
@@ -480,6 +538,21 @@ p{text-wrap:pretty}
   .js .rv{opacity:1!important;transform:none!important;transition:none!important}
   *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .psheet::details-content{transition:none}
+  /* the sheet is simply present — it never draws itself */
+  .js .plan-svg .pl-ln,
+  .js .plan-svg .pl-ln2,
+  .js .plan-svg .pl-ln3,
+  .js .plan-svg .pl-dim,
+  .js .plan-svg .pl-tun{stroke-dashoffset:0!important}
+  .js .plan-svg .pl-frame,
+  .js .plan-svg .pl-zone,
+  .js .plan-svg .pl-zone2,
+  .js .plan-svg .pl-box,
+  .js .plan-svg .pl-box2,
+  .js .plan-svg .pl-hatch,
+  .js .plan-svg .pl-tbf,
+  .js .plan-svg text{opacity:1!important}
+  .js .hero-name .ln>span{transform:none!important}
 }
 
 

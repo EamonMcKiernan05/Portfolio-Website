@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import re
 """SVG builders: the homelab site plan + real-data charts."""
 
 INK = "#1A1917"
@@ -27,6 +28,27 @@ def site_plan():
     M = "'IBM Plex Mono',ui-monospace,monospace"
     CH = 5.9  # mono advance per char at 8.5px + letter-spacing
 
+    # Draw-on ordering. Three counters so the sheet stages cleanly:
+    # the ink lines draw first, then the structure boxes, then the annotation.
+    _i = {"p": 0, "b": 0, "t": 0}
+
+    def ip():
+        _i["p"] += 1
+        return _i["p"]
+
+    def ib():
+        _i["b"] += 1
+        return _i["b"]
+
+    def it():
+        _i["t"] += 1
+        return _i["t"]
+
+    def rect(cls, x, y, w, h, rx=0, extra=""):
+        r = f'rx="{rx}" ' if rx else ""
+        return (f'<rect class="{cls}" style="--i:{ib()}" {r}x="{x}" y="{y}" '
+                f'width="{w}" height="{h}" {extra}/>')
+
     a(f'<svg viewBox="0 0 {W} {H}" role="img" aria-labelledby="planTitle planDesc" '
       f'class="plan-svg" xmlns="http://www.w3.org/2000/svg">')
     a('<title id="planTitle">Homelab site plan</title>')
@@ -44,14 +66,15 @@ def site_plan():
     a('</defs>')
 
     # ---------------------------------------------------------------- frame
-    a(f'<rect class="pl-frame" x="16" y="16" width="{W-32}" height="{H-32}"/>')
+    a(rect("pl-frame", 16, 16, W - 32, H - 32))
     for cx, cy, sx, sy in ((16, 16, 1, 1), (W-16, 16, -1, 1), (16, H-16, 1, -1), (W-16, H-16, -1, -1)):
-        a(f'<path class="pl-ln2" d="M{cx} {cy+18*sy} L{cx} {cy} L{cx+18*sx} {cy}"/>')
+        a(f'<path class="pl-ln2" pathLength="1" style="--i:{ip()}" '
+          f'd="M{cx} {cy+18*sy} L{cx} {cy} L{cx+18*sx} {cy}"/>')
 
     # ---------------------------------------------------------------- header
     a('<text class="pl-tb" x="46" y="48">EAMON McKIERNAN</text>')
     a('<text class="pl-t" x="46" y="64">HOMELAB SITE PLAN &#183; ISLE OF MAN</text>')
-    a(f'<line class="pl-ln2" x1="46" y1="76" x2="{W-46}" y2="76"/>')
+    a(f'<line class="pl-ln2" pathLength="1" style="--i:{ip()}" x1="46" y1="76" x2="{W-46}" y2="76"/>')
     a(f'<text class="pl-t" x="{W-46}" y="48" text-anchor="end">SHEET 00 &#183; REV A &#183; 2026</text>')
     a(f'<text class="pl-t" x="{W-46}" y="64" text-anchor="end">NOT TO SCALE</text>')
 
@@ -62,23 +85,23 @@ def site_plan():
     EX1, EX2 = 274, 480               # EDGE
     SX1, SX2 = 504, 1034              # SERVER SUBNET
 
-    a(f'<rect class="pl-zone" x="{PX1}" y="{ZY}" width="{PX2-PX1}" height="{ZH}"/>')
+    a(rect("pl-zone", PX1, ZY, PX2 - PX1, ZH))
     a(f'<text class="pl-zl" x="76" y="{ZY+24}">PUBLIC</text>')
     a(f'<text class="pl-zs" x="76" y="{ZY+38}">CONSUMER + INTERNET</text>')
 
-    a(f'<rect class="pl-zone" x="{EX1}" y="{ZY}" width="{EX2-EX1}" height="{ZH}"/>')
+    a(rect("pl-zone", EX1, ZY, EX2 - EX1, ZH))
     a(f'<text class="pl-zl" x="{EX1+14}" y="{ZY+24}">EDGE</text>')
     a(f'<text class="pl-zs" x="{EX1+14}" y="{ZY+38}">ROUTER + NETWORK</text>')
 
-    a(f'<rect class="pl-zone2" x="{SX1}" y="{ZY}" width="{SX2-SX1}" height="{ZH}"/>')
+    a(rect("pl-zone2", SX1, ZY, SX2 - SX1, ZH))
     a(f'<text class="pl-zl" x="{SX1+16}" y="{ZY+22}" fill="{ACC}">SERVER SUBNET</text>')
     a(f'<text class="pl-zs" x="{SX1+16}" y="{ZY+36}">ISOLATED &#183; VLAN-SEGREGATED &#183; 3 NODES</text>')
 
     # ---------------------------------------------------------------- PUBLIC bay
-    a(f'<rect class="pl-box2" x="76" y="150" width="160" height="52" rx="2"/>')
+    a(rect("pl-box2", 76, 150, 160, 52, 2))
     a('<text class="pl-t9" x="88" y="172">CONSUMER DEVICES</text>')
     a('<text class="pl-t" x="88" y="188">LAPTOPS &#183; PHONES &#183; TV</text>')
-    a(f'<rect class="pl-box2" x="76" y="218" width="160" height="52" rx="2"/>')
+    a(rect("pl-box2", 76, 218, 160, 52, 2))
     a('<text class="pl-t9" x="88" y="240">PUBLIC INTERNET</text>')
     a('<text class="pl-t" x="88" y="256">CLOUDFLARE TUNNEL</text>')
     a(f'<text class="pl-zs" x="60" y="296">INBOUND</text>')
@@ -86,7 +109,7 @@ def site_plan():
     a(f'<text class="pl-t" x="60" y="324">APPS &#183; DOWNLOADS</text>')
 
     # ---------------------------------------------------------------- EDGE bay
-    a(f'<rect class="pl-box" x="288" y="150" width="178" height="72" rx="2"/>')
+    a(rect("pl-box", 288, 150, 178, 72, 2))
     a('<text class="pl-t9" x="300" y="172">OPNSENSE</text>')
     a('<text class="pl-t" x="300" y="188">HP 280 G2 SFF</text>')
     a('<text class="pl-t" x="300" y="202">INTEL i350 NIC</text>')
@@ -94,7 +117,7 @@ def site_plan():
     for i, (nm, sub) in enumerate([("PI-HOLE", "DNS FILTERING"), ("TAILSCALE", "VPN &#183; ZERO TRUST"),
                                    ("MANAGED SWITCH", "VLAN TAGGING")]):
         yy = 238 + i * 50
-        a(f'<rect class="pl-box2" x="288" y="{yy}" width="178" height="38" rx="2"/>')
+        a(rect("pl-box2", 288, yy, 178, 38, 2))
         a(f'<text class="pl-t9" x="300" y="{yy+16}">{nm}</text>')
         a(f'<text class="pl-t" x="300" y="{yy+30}">{sub}</text>')
 
@@ -107,22 +130,22 @@ def site_plan():
     BUS_Y, LINK_Y = 166, 452
 
     # -- PROXMOX
-    a(f'<rect class="pl-box2" x="{LX1}" y="{BY1}" width="{LX2-LX1}" height="{BY2-BY1}" rx="2"/>')
+    a(rect("pl-box2", LX1, BY1, LX2 - LX1, BY2 - BY1, 2))
     a(f'<text class="pl-th2" x="{LX1+12}" y="{BY1+22}">PROXMOX VE 9.2</text>')
     a(f'<text class="pl-t" x="{LX1+12}" y="{BY1+36}">3-NODE HA CLUSTER</text>')
     for i, (n1, n2) in enumerate([("NODE 01", "DELL 3050"), ("NODE 02", "HP PRODESK"),
                                   ("NODE 03", "HP ELITEDESK")]):
         yy = BY1 + 46 + i * 30
-        a(f'<rect class="pl-box" x="{LX1+12}" y="{yy}" width="{LX2-LX1-24}" height="24" rx="2"/>')
+        a(rect("pl-box", LX1 + 12, yy, LX2 - LX1 - 24, 24, 2))
         a(f'<text class="pl-t9" x="{LX1+24}" y="{yy+16}">{n1}</text>')
         a(f'<text class="pl-t" x="{LX2-24}" y="{yy+16}" text-anchor="end">{n2}</text>')
     a(f'<text class="pl-t" x="{LX1+12}" y="{BY2-10}">HA FAILOVER &#183; CLOUD INIT</text>')
 
     # -- LOCAL AI
-    a(f'<rect class="pl-box" x="{RX1}" y="{BY1}" width="{RX2-RX1}" height="{BY2-BY1}" rx="2"/>')
+    a(rect("pl-box", RX1, BY1, RX2 - RX1, BY2 - BY1, 2))
     a(f'<text class="pl-th2" x="{RX1+12}" y="{BY1+22}">LOCAL AI</text>')
     a(f'<text class="pl-t" x="{RX1+12}" y="{BY1+36}">INFERENCE NODE</text>')
-    a(f'<rect class="pl-hatch" x="{RX1+12}" y="{BY1+46}" width="{RX2-RX1-24}" height="26" rx="2"/>')
+    a(rect("pl-hatch", RX1 + 12, BY1 + 46, RX2 - RX1 - 24, 26, 2))
     a(f'<text class="pl-t9" x="{RX1+22}" y="{BY1+63}">2&#215; TESLA V100 32 GB</text>')
     for i, t in enumerate(["Xeon E5-2680 v4", "CUDA 12.9 &#183; sm_70", "llama.cpp &#183; Strata",
                            "HERMES AGENT &#183; DISCORD"]):
@@ -130,7 +153,7 @@ def site_plan():
     a(f'<text class="pl-tc" x="{RX1+12}" y="{BY2-8}">262,144 CTX</text>')
 
     # -- STORAGE
-    a(f'<rect class="pl-box2" x="{LX1}" y="{CY1}" width="{LX2-LX1}" height="{CY2-CY1}" rx="2"/>')
+    a(rect("pl-box2", LX1, CY1, LX2 - LX1, CY2 - CY1, 2))
     a(f'<text class="pl-th2" x="{LX1+12}" y="{CY1+22}">STORAGE + OBSERVABILITY</text>')
     for i, (n1, n2) in enumerate([("CEPH SQUID 19.2.5", "REPLICATED POOLS"),
                                   ("PROXMOX BACKUP SERVER", "SCHEDULED SNAPSHOTS"),
@@ -140,7 +163,7 @@ def site_plan():
         a(f'<text class="pl-t" x="{LX1+12}" y="{yy+13}">{n2}</text>')
 
     # -- MEDIA
-    a(f'<rect class="pl-box2" x="{RX1}" y="{CY1}" width="{RX2-RX1}" height="{CY2-CY1}" rx="2"/>')
+    a(rect("pl-box2", RX1, CY1, RX2 - RX1, CY2 - CY1, 2))
     a(f'<text class="pl-th2" x="{RX1+12}" y="{CY1+22}">MEDIA + PRIVATE CLOUD</text>')
     for i, (n1, n2) in enumerate([("TRUENAS ZFS", "REDUNDANT STORAGE"),
                                   ("JELLYFIN &#183; SONARR &#183; RADARR", "GTX 1650 NVENC"),
@@ -153,30 +176,30 @@ def site_plan():
     # bus
     a(f'<path class="pl-ln" d="M{CH_L} {BUS_Y} L1020 {BUS_Y}"/>')
     # left channel spine: bus -> proxmox, storage, and the inbound link
-    a(f'<path class="pl-ln" d="M{CH_L} {BUS_Y} L{CH_L} {LINK_Y}"/>')
-    a(f'<path class="pl-ln" d="M{CH_L} 250 L{LX1} 250"/>')
-    a(f'<path class="pl-ln" d="M{CH_L} 410 L{LX1} 410"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{CH_L} {BUS_Y} L{CH_L} {LINK_Y}"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{CH_L} 250 L{LX1} 250"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{CH_L} 410 L{LX1} 410"/>')
     # right channel spine
-    a(f'<path class="pl-ln" d="M{CH_R} {BUS_Y} L{CH_R} 410"/>')
-    a(f'<path class="pl-ln" d="M{CH_R} 250 L{RX1} 250"/>')
-    a(f'<path class="pl-ln" d="M{CH_R} 410 L{RX1} 410"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{CH_R} {BUS_Y} L{CH_R} 410"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{CH_R} 250 L{RX1} 250"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{CH_R} 410 L{RX1} 410"/>')
     # junction dots
     for cx, cy in ((CH_L, BUS_Y), (CH_R, BUS_Y), (CH_L, 250), (CH_L, 410),
                    (CH_R, 250), (CH_R, 410)):
         a(f'<circle cx="{cx}" cy="{cy}" r="2.8" fill="{INK}"/>')
 
     # public -> edge -> server
-    a(f'<path class="pl-ln" d="M{PX2} {LINK_Y} L{EX1} {LINK_Y}"/>')
-    a(f'<path class="pl-ln" d="M{EX2} {LINK_Y} L{SX1} {LINK_Y}"/>')
-    a(f'<path class="pl-ln" d="M{SX1} {LINK_Y} L{CH_L} {LINK_Y}"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{PX2} {LINK_Y} L{EX1} {LINK_Y}"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{EX2} {LINK_Y} L{SX1} {LINK_Y}"/>')
+    a(f'<path class="pl-ln" pathLength="1" style="--i:{ip()}" d="M{SX1} {LINK_Y} L{CH_L} {LINK_Y}"/>')
     a(f'<circle cx="{PX2}" cy="{LINK_Y}" r="2.8" fill="{INK}"/>')
     a(f'<circle cx="{EX1}" cy="{LINK_Y}" r="2.8" fill="{INK}"/>')
     a(f'<circle cx="{SX1}" cy="{LINK_Y}" r="3" fill="{ACC}"/>')
     # firewall gate marker on the edge->server hop
-    a(f'<line class="pl-ln3" x1="492" y1="{LINK_Y-9}" x2="492" y2="{LINK_Y+9}"/>')
+    a(f'<line class="pl-ln3" pathLength="1" style="--i:{ip()}" x1="492" y1="{LINK_Y-9}" x2="492" y2="{LINK_Y+9}"/>')
 
     # cloudflare tunnel: public internet -> proxmox bay, routed over the top
-    a(f'<path class="pl-ln2" stroke-dasharray="4 3" d="M76 262 L60 262 L60 98 L494 98 L494 250 L{CH_L} 250"/>')
+    a(f'<path class="pl-tun" style="--i:{ip()}" d="M76 262 L60 262 L60 98 L494 98 L494 250 L{CH_L} 250"/>')
     tl = "CLOUDFLARE TUNNEL &#8594; FFIOM VM"
     tw = 30 * CH
     a(f'<rect x="170" y="90" width="{tw:.0f}" height="15" fill="#F4F1EA"/>')
@@ -184,13 +207,13 @@ def site_plan():
 
     # ---------------------------------------------------------------- dimension line
     dly = ZB + 26
-    a(f'<line class="pl-dim" x1="{SX1}" y1="{dly}" x2="{SX2}" y2="{dly}"/>')
+    a(f'<line class="pl-dim" pathLength="1" style="--i:{ip()}" x1="{SX1}" y1="{dly}" x2="{SX2}" y2="{dly}"/>')
     a(f'<text class="pl-t" x="{(SX1+SX2)/2}" y="{dly-9}" text-anchor="middle">'
       f'SERVER SUBNET &#183; 3 PROXMOX NODES &#183; CEPH REPLICATION</text>')
 
     # ---------------------------------------------------------------- footer
     fy = 546
-    a(f'<line class="pl-ln2" x1="46" y1="{fy}" x2="{W-46}" y2="{fy}"/>')
+    a(f'<line class="pl-ln2" pathLength="1" style="--i:{ip()}" x1="46" y1="{fy}" x2="{W-46}" y2="{fy}"/>')
 
     # legend
     a(f'<text class="pl-tc" x="46" y="{fy+22}">LEGEND</text>')
@@ -203,16 +226,16 @@ def site_plan():
         ly = fy + 44 + ri * 30
         for kind, label in row:
             if kind == "host":
-                a(f'<rect class="pl-box" x="{lx}" y="{ly-9}" width="18" height="12" rx="1"/>')
+                a(rect("pl-box", lx, ly - 9, 18, 12, 1))
             elif kind == "svc":
-                a(f'<rect class="pl-box2" x="{lx}" y="{ly-9}" width="18" height="12" rx="1"/>')
+                a(rect("pl-box2", lx, ly - 9, 18, 12, 1))
             elif kind == "flow":
                 a(f'<path class="pl-ln" d="M{lx} {ly-3} L{lx+18} {ly-3}"/>')
                 a(f'<circle cx="{lx+18}" cy="{ly-3}" r="2.6" fill="{ACC}"/>')
             elif kind == "tun":
-                a(f'<path class="pl-ln2" stroke-dasharray="4 3" d="M{lx} {ly-3} L{lx+18} {ly-3}"/>')
+                a(f'<path class="pl-tun" style="--i:{ip()}" d="M{lx} {ly-3} L{lx+18} {ly-3}"/>')
             elif kind == "gpu":
-                a(f'<rect class="pl-hatch" x="{lx}" y="{ly-9}" width="18" height="12" rx="1"/>')
+                a(rect("pl-hatch", lx, ly - 9, 18, 12, 1))
             else:
                 a(f'<path class="pl-ln2" d="M{lx} {ly-3} L{lx+18} {ly-3}"/>')
                 a(f'<line class="pl-ln3" x1="{lx+9}" y1="{ly-13}" x2="{lx+9}" y2="{ly+7}"/>')
@@ -222,11 +245,11 @@ def site_plan():
     # title block
     tbx0, tbx1 = 640, W - 46
     tby0, tby1 = fy + 20, H - 46
-    a(f'<rect class="pl-ln2" x="{tbx0}" y="{tby0}" width="{tbx1-tbx0}" height="{tby1-tby0}"/>')
+    a(rect("pl-tbf", tbx0, tby0, tbx1 - tbx0, tby1 - tby0))
     for yy in (tby0 + 30, tby0 + 60):
-        a(f'<line class="pl-ln2" x1="{tbx0}" y1="{yy}" x2="{tbx1}" y2="{yy}"/>')
-    a(f'<line class="pl-ln2" x1="{tbx0+160}" y1="{tby0}" x2="{tbx0+160}" y2="{tby1}"/>')
-    a(f'<line class="pl-ln2" x1="{tbx0+300}" y1="{tby0}" x2="{tbx0+300}" y2="{tby1}"/>')
+        a(f'<line class="pl-ln2" pathLength="1" style="--i:{ip()}" x1="{tbx0}" y1="{yy}" x2="{tbx1}" y2="{yy}"/>')
+    a(f'<line class="pl-ln2" pathLength="1" style="--i:{ip()}" x1="{tbx0+160}" y1="{tby0}" x2="{tbx0+160}" y2="{tby1}"/>')
+    a(f'<line class="pl-ln2" pathLength="1" style="--i:{ip()}" x1="{tbx0+300}" y1="{tby0}" x2="{tbx0+300}" y2="{tby1}"/>')
     rows = [("PROJECT", "EAMON McKIERNAN", "REV A"),
             ("DRAWING", "HOMELAB SITE PLAN", "SHEET 00 OF 00"),
             ("ISSUED", "2026", "SCALE NTS")]
@@ -237,7 +260,17 @@ def site_plan():
         a(f'<text class="pl-t9" x="{tbx0+310}" y="{yy}">{v2}</text>')
 
     a('</svg>')
-    return "\n".join(o)
+    svg = "\n".join(o)
+
+    # Annotation stages last: number every <text> in document order.
+    def _num(m):
+        tag = m.group(0)
+        if "style=" in tag:
+            return tag
+        return tag.replace("<text ", '<text style="--i:%d" ' % it(), 1)
+
+    svg = re.sub(r"<text\b[^>]*>", _num, svg)
+    return svg
 
 
 # ---------------------------------------------------------------- charts
@@ -383,6 +416,3 @@ def chart_findings():
     return "\n".join(o)
 
 
-if __name__ == "__main__":
-    open("plan.svg", "w").write(site_plan())
-    print("site_plan ok", len(site_plan()))
