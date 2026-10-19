@@ -531,9 +531,13 @@ p{text-wrap:pretty}
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media(max-width:980px){
-  .rail-nav{display:none}
+/* The rail sheds load before it sheds space: first the location, then the
+   nav links, so the bar never has to overflow. */
+@media(max-width:1240px){
   .rail-where{display:none}
+}
+@media(max-width:1120px){
+  .rail-nav{display:none}
   .rail-btn{display:inline-flex;align-items:center;gap:8px;margin-left:auto;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
   .rail-btn i{font-size:17px}
 }
