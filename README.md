@@ -53,11 +53,28 @@ Edit the JSON (or the SVG builders) and re-run — never hand-edit `index.html`.
 
 The gallery pages are hand-authored and share `assets/site.css`.
 
+## Social preview
+
+`assets/og.png` is the link-preview card (1200×630), generated from `tools/og.html`:
+
+```bash
+google-chrome --headless=new --disable-gpu --no-sandbox --hide-scrollbars \
+  --window-size=1200,630 --screenshot=assets/og.png tools/og.html
+```
+
+The card is the same drafting language as the site: a title block, the name set in
+Instrument Serif, and a rack elevation with the accelerator unit picked out in the
+accent. Every page carries `og:` and `twitter:` tags pointing at it.
+
+`SITE_URL` at the top of `tools/build.py` is the public address used for the
+canonical link and the absolute image URL. Change that one line if the site moves.
+
 ## Accessibility and behaviour
 
 - Reveal animations are additive: content is visible by default and only ever moves.
   If JavaScript fails, the page still reads.
-- `prefers-reduced-motion` disables the reveals, the count-up and the bar growth.
+- `prefers-reduced-motion` disables the reveals, the count-up, the bar growth and
+  the site plan's draw-on — the sheet is simply present rather than drawn.
 - All 43 text/background pairs meet WCAG AA; verified in-browser, not by eye.
 - The project sheets are real `<details>` elements, so they work without JavaScript.
   A small script keeps only one open at a time.

@@ -13,6 +13,9 @@ import svgs as p2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+
+# The public address of the site. Change this one line if it moves.
+SITE_URL = "https://eamonmckiernan05.github.io/Portfolio-Website"
 D = json.load(open(os.path.join(HERE, "site-data.json"), encoding="utf-8"))
 OUT = os.path.join(ROOT, "index.html")
 
@@ -387,6 +390,22 @@ def build():
 <title>Eamon McKiernan — IT Support Engineer &#183; Self-Hosted AI Infrastructure</title>
 <meta name="description" content="IT Support Engineer on the Isle of Man — Microsoft 365 support, self-hosted infrastructure and a local AI stack running on used hardware.">
 <meta name="theme-color" content="#F4F1EA">
+<link rel="canonical" href="{SITE_URL}/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eamon McKiernan">
+<meta property="og:title" content="Eamon McKiernan &#183; IT Support Engineer &#183; Self-Hosted AI Infrastructure">
+<meta property="og:description" content="IT Support Engineer on the Isle of Man &#8212; Microsoft 365 support, self-hosted infrastructure and a local AI stack running on used hardware.">
+<meta property="og:url" content="{SITE_URL}/">
+<meta property="og:image" content="{SITE_URL}/assets/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Eamon McKiernan &#8212; a drafting-sheet title block with a rack elevation of the homelab">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eamon McKiernan &#183; IT Support Engineer">
+<meta name="twitter:description" content="Microsoft 365 support, self-hosted infrastructure and a local AI stack running on used hardware.">
+<meta name="twitter:image" content="{SITE_URL}/assets/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://use.hugeicons.com" crossorigin>
