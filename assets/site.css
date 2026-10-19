@@ -411,8 +411,6 @@ p{text-wrap:pretty}
 .contact-list a:hover{color:var(--accent-lift);padding-left:8px}
 .contact-list i{font-size:19px;line-height:1;color:inherit;flex:none}
 .contact-list .cl-ico{width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--band-rule);flex:none}
-.contact-note{margin-top:24px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--band-dim);line-height:1.9}
-.contact-note b{color:var(--paper);font-weight:500}
 
 /* ============================================================
    FOOTER

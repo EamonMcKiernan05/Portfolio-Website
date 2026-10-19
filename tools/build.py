@@ -294,10 +294,6 @@ def build_contact():
     <div class="contact">
       <div>
         <p class="contact-lead">Open to <em>remote and on-site</em> work across Microsoft 365, virtualisation and self-hosted AI.</p>
-        <p class="contact-note">
-          <b>enquiries@eamonmckiernan.im</b><br>
-          Based in the Isle of Man &#183; available for new work
-        </p>
       </div>
       <div class="contact-list">
         {"".join(links)}
