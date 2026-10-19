@@ -7,115 +7,73 @@
 <meta name="description" content="Browser demos written by AI models running locally — one prompt each. Open a benchmark to read its prompt and run every build it produced.">
 <meta property="og:title" content="One-shot demo gallery — Eamon McKiernan">
 <meta property="og:description" content="Single-file browser demos written by AI models running locally — read the prompt, run every build.">
-<style>
-:root{
-  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --accent:#D8A73C;
-  --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
-  --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
-
-.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0 0}
-.back{font-family:var(--mono);font-size:12px;color:var(--dim)}
-.back:hover{color:var(--ink)}
-h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);line-height:1.02;letter-spacing:.005em;margin:30px 0 0;color:var(--accent)}
-.lede{margin-top:14px;max-width:68ch;color:var(--dim)}
-
-.sec{margin-top:50px}
-.sec-title{font-family:var(--display);font-weight:600;font-size:22px}
-.sec-sub{margin-top:5px;font-size:12.5px;color:var(--dim)}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
-@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.grid{grid-template-columns:1fr}}
-
-.card{display:flex;flex-direction:column;border:1px solid var(--line);cursor:pointer;background:transparent;transition:border-color .18s ease;min-width:0}
-.card:hover{border-color:var(--accent)}
-.card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
-.card .thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--line);background:#0c0b08}
-.cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
-.ct{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.15}
-.cm{font-family:var(--mono);font-size:11px;color:var(--dim)}
-.cd{font-size:13px;color:var(--dim);line-height:1.5}
-.go{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--accent)}
-
-footer{margin-top:60px;border-top:1px solid var(--line);padding:18px 0 70px}
-.f1{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
-.f2{margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--quiet);max-width:100ch}
-.f2 a{color:var(--quiet);text-decoration:underline}
-.f2 a:hover{color:var(--dim)}
-
-@media (prefers-reduced-motion: reduce){.card{transition:none}}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="wrap">
+<div class="wrap gal-wrap">
 
-  <div class="top">
-    <a class="back" href="index.html">&#8592;&nbsp;Eamon McKiernan</a>
+  <div class="gal-top">
+    <a class="gal-back" href="index.html">&#8592;&nbsp;Eamon McKiernan</a>
   </div>
 
-  <h1>One-shot demo gallery</h1>
-  <p class="lede">Browser demos written by AI models running on my own hardware &mdash; one prompt each, no cloud services, no build step. Open a benchmark to read the prompt it was built from and run every build it produced.</p>
+  <h1 class="gal-h1">One-shot demo gallery</h1>
+  <p class="gal-lede">Browser demos written by AI models running on my own hardware &mdash; one prompt each, no cloud services, no build step. Open a benchmark to read the prompt it was built from and run every build it produced.</p>
 
-  <section class="sec">
-    <div class="sec-title">The bench</div>
-    <div class="sec-sub">One message per test &mdash; no follow-ups, no fixes. Every file was opened and checked in a browser before it earned a place here.</div>
-    <div class="grid">
-      <a class="card" href="gallery/sky-temple.html">
-        <img class="thumb" src="demos/thumbs/sky-temple.jpg" alt="Sky Temple — a floating voxel island with a pagoda in a pink dusk sky">
-        <div class="cbody">
-          <div class="ct">Sky Temple</div>
-          <div class="cm">Qwen3.8-Flash-Next + 27B &middot; 3 builds &middot; Oct 2026</div>
-          <div class="cd">A floating Japanese island in cube art — a five-tier pagoda, torii gate, waterfall, drifting petals and a 60-second day/night cycle.</div>
-          <div class="go">prompt + 3 builds &#8594;</div>
+  <section class="gal-sec">
+    <div class="gal-sec-t">The bench</div>
+    <div class="gal-sec-s">One message per test &mdash; no follow-ups, no fixes. Every file was opened and checked in a browser before it earned a place here.</div>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/sky-temple.html">
+        <img class="gal-thumb" src="demos/thumbs/sky-temple.jpg" alt="Sky Temple — a floating voxel island with a pagoda in a pink dusk sky">
+        <div class="gal-body">
+          <div class="gal-t">Sky Temple</div>
+          <div class="gal-m">Qwen3.8-Flash-Next + 27B &middot; 3 builds &middot; Oct 2026</div>
+          <div class="gal-d">A floating Japanese island in cube art — a five-tier pagoda, torii gate, waterfall, drifting petals and a 60-second day/night cycle.</div>
+          <div class="gal-go">prompt + 3 builds &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/living-city.html">
-        <img class="thumb" src="demos/thumbs/living-city.jpg" alt="Living City — a procedural city of towers and avenues">
-        <div class="cbody">
-          <div class="ct">Living City</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/living-city.html">
+        <img class="gal-thumb" src="demos/thumbs/living-city.jpg" alt="Living City — a procedural city of towers and avenues">
+        <div class="gal-body">
+          <div class="gal-t">Living City</div>
+          <div class="gal-m">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="gal-d">A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/neon-drift.html">
-        <img class="thumb" src="demos/thumbs/neon-drift.jpg" alt="Neon Drift — a synthwave highway with neon arches and a striped sun">
-        <div class="cbody">
-          <div class="ct">Neon Drift</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A playable synthwave racer — an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/neon-drift.html">
+        <img class="gal-thumb" src="demos/thumbs/neon-drift.jpg" alt="Neon Drift — a synthwave highway with neon arches and a striped sun">
+        <div class="gal-body">
+          <div class="gal-t">Neon Drift</div>
+          <div class="gal-m">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="gal-d">A playable synthwave racer — an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/pulse-engine.html">
-        <img class="thumb" src="demos/thumbs/pulse-engine.jpg" alt="Pulse Engine — glowing particle visuals over a drum machine">
-        <div class="cbody">
-          <div class="ct">Pulse Engine</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A generative instrument — a drum machine and synth that compose on their own while a particle galaxy pulses on the beat.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/pulse-engine.html">
+        <img class="gal-thumb" src="demos/thumbs/pulse-engine.jpg" alt="Pulse Engine — glowing particle visuals over a drum machine">
+        <div class="gal-body">
+          <div class="gal-t">Pulse Engine</div>
+          <div class="gal-m">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="gal-d">A generative instrument — a drum machine and synth that compose on their own while a particle galaxy pulses on the beat.</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/cloth-lab.html">
-        <img class="thumb" src="demos/thumbs/cloth-lab.jpg" alt="Cloth Lab — a draped cloth hanging between two posts beside a sphere">
-        <div class="cbody">
-          <div class="ct">Cloth Lab</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A from-scratch cloth physics lab — drag it, tear it, switch on the wind, drop balls on it. The solver is hand-written; no physics library.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/cloth-lab.html">
+        <img class="gal-thumb" src="demos/thumbs/cloth-lab.jpg" alt="Cloth Lab — a draped cloth hanging between two posts beside a sphere">
+        <div class="gal-body">
+          <div class="gal-t">Cloth Lab</div>
+          <div class="gal-m">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
+          <div class="gal-d">A from-scratch cloth physics lab — drag it, tear it, switch on the wind, drop balls on it. The solver is hand-written; no physics library.</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
     </div>
   </section>
 
   <footer>
-    <div class="f1">&copy; 2026 Eamon McKiernan &mdash; <a href="index.html" style="color:var(--dim);text-decoration:underline">back to the portfolio</a></div>
-    <div class="f2">Demos: single-file HTML, Three.js r160 via unpkg. Prompts and sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+    <div class="gal-f1">&copy; 2026 Eamon McKiernan &mdash; <a href="index.html">back to the portfolio</a></div>
+    <div class="gal-f2">Demos: single-file HTML, Three.js r160 via unpkg. Prompts and sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
   </footer>
 
 </div>

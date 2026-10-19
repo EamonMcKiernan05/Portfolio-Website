@@ -3,262 +3,811 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Eamon McKiernan — IT Support Engineer · Self-Hosted AI Infrastructure</title>
+<title>Eamon McKiernan — IT Support Engineer &#183; Self-Hosted AI Infrastructure</title>
 <meta name="description" content="IT Support Engineer on the Isle of Man — Microsoft 365 support, self-hosted infrastructure and a local AI stack running on used hardware.">
+<meta name="theme-color" content="#F4F1EA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://use.hugeicons.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.hugeicons.com/font/icons.css">
-<style>
-:root{
-  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --line-strong:#4a4132; --accent:#D8A73C;
-  --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
-  --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
-  --ease-out:cubic-bezier(.22,.61,.36,1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px}
-::selection{background:rgba(216,167,60,.25)}
-a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(216,167,60,.38);transition:border-color .2s}
-a:hover{border-color:var(--accent)}
-a:focus-visible,summary:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
-.wrap{max-width:880px;margin:0 auto;padding:0 32px}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
-.reveal.in{opacity:1;transform:none}
-
-/* Hero */
-.hero{
-  background:var(--bg);color:var(--ink);
-  min-height:calc(100vh + 12px);display:flex;flex-direction:column;justify-content:center;
-  padding:80px 0 92px;border-bottom:1px solid var(--line);position:relative;
-}
-.hero h1{font-family:var(--display);font-size:clamp(56px,12vw,128px);font-weight:600;line-height:.92;letter-spacing:-.005em;color:var(--ink)}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero .role{margin-top:22px;font-size:clamp(18px,2.6vw,26px);font-weight:500;color:var(--dim)}
-.hero .summary{margin-top:28px;max-width:560px;font-size:16px;color:var(--dim)}
-.hero .status{margin-top:22px;font-size:14px;color:var(--quiet)}
-.hero .status b{color:var(--ink);font-weight:600}
-.hero .hero-links{margin-top:30px;display:flex;flex-wrap:wrap;gap:26px;font-size:14px}
-.hero .hero-links a{display:inline-flex;align-items:center;gap:8px;color:var(--dim);font-weight:500;text-decoration:none;border-bottom:none}
-.hero .hero-links a:hover{color:var(--ink)}
-.hero .hero-links i.hgi-stroke{font-size:19px;line-height:1;color:inherit;flex:none}
-
-/* Sections */
-section{padding:54px 0;border-top:1px solid var(--line)}
-section:first-of-type{border-top:none}
-.sec-title{font-family:var(--display);font-size:30px;font-weight:600;color:var(--ink);margin-bottom:30px}
-
-/* Skills */
-.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.skill{border:1px solid var(--line);padding:18px 20px;background:transparent}
-.skill h3{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:12px}
-.skill ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
-.skill li{font-size:12px;padding:3px 9px;border:1px solid var(--line);color:var(--dim)}
-
-/* Experience */
-.exp{display:flex;flex-direction:column;gap:26px}
-.job{border:1px solid var(--line);padding:22px 24px}
-.job+.job{margin-top:14px}
-.job h3{font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink)}
-.job .co{font-size:14px;color:var(--accent);margin:2px 0 4px;font-weight:500}
-.job .when{font-family:var(--mono);font-size:12px;color:var(--quiet);margin-bottom:10px}
-.job ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-.job li{position:relative;padding-left:16px;font-size:15px;color:var(--dim)}
-.job li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-
-/* Stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stat{border:1px solid var(--line);padding:26px 18px}
-.stat .n{font-family:var(--mono);font-size:40px;font-weight:600;line-height:1;color:var(--ink)}
-.stat .l{margin-top:10px;font-size:12.5px;color:var(--dim)}
-.stat .s{margin-top:2px;font-size:11px;color:var(--quiet)}
-
-/* Cert */
-.cert{display:flex;align-items:center;gap:18px;border:1px solid var(--line);padding:16px 22px}
-.cert .badge{width:42px;height:42px;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cert h3{font-size:15px;font-weight:600;color:var(--ink)}
-.cert .meta{font-size:12.5px;color:var(--quiet)}
-.cert .meta b{color:var(--accent);font-weight:500}
-.cert .yr{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--quiet)}
-
-/* Projects (details) */
-.proj{display:flex;flex-direction:column;gap:12px}
-.proj-item{border:1px solid var(--line);overflow:hidden}
-.proj-item summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:14px;padding:18px 22px;transition:background .2s}
-.proj-item summary::-webkit-details-marker{display:none}
-.proj-item summary:hover{background:#1a1710}
-.proj-item summary .ph{font-family:var(--display);font-size:17px;font-weight:600;color:var(--ink)}
-.proj-item summary .pm{font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:auto;text-align:right}
-.proj-item summary::before{content:"+";font-family:var(--mono);font-size:16px;color:var(--accent);transition:transform .25s}
-.proj-item[open] summary::before{content:"\2212"}
-.proj-body{padding:0 22px 22px}
-.proj-body .pdesc{font-size:15px;color:var(--dim);margin-bottom:18px}
-.proj-body code{font-family:var(--mono);font-size:.9em;color:var(--ink);background:#1d1a14;padding:1px 5px}
-.msec{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:18px 0 10px}
-.proj-body ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.proj-body li{position:relative;padding-left:16px;font-size:14px;color:var(--dim)}
-.proj-body li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
-.tags span{font-size:11px;padding:3px 9px;border:1px solid var(--line);color:var(--dim)}
-
-/* Education */
-.edu{display:flex;flex-direction:column;gap:22px}
-.ed{border:1px solid var(--line);padding:22px 24px}
-.ed+.ed{margin-top:14px}
-.ed h3{font-family:var(--display);font-size:19px;font-weight:600;color:var(--ink)}
-.ed .sub{font-size:13px;color:var(--quiet);margin-bottom:10px}
-.ed .when{font-family:var(--mono);font-size:12px;color:var(--quiet);margin-bottom:8px}
-.grades{display:flex;flex-wrap:wrap;gap:8px}
-.grade{font-size:12.5px;padding:4px 11px;border:1px solid var(--line);color:var(--dim)}
-.grade b{color:var(--ink)}
-
-/* Contact + footer */
-.contact{display:flex;flex-wrap:wrap;gap:22px;font-size:15px}
-.contact a,.contact span{color:var(--dim);border-bottom:1px solid var(--line)}
-.contact a:hover{border-color:var(--accent);color:var(--ink)}
-.contact a,.contact span{display:inline-flex;align-items:center;gap:7px}
-.contact i.hgi-stroke{font-size:18px;line-height:1;color:inherit}
-footer{padding:44px 0 60px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--quiet);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-
-@media(max-width:720px){.hero{padding:64px 0}.stats{grid-template-columns:repeat(2,1fr)}.proj-item summary{flex-wrap:wrap}.proj-item summary .pm{margin-left:0;width:100%;text-align:left}}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="wrap">
-
-<header class="hero">
-  <h1>Eamon <em>McKiernan</em></h1>
-  <div class="role">IT Support Engineer · Self-Hosted AI Infrastructure</div>
-  <p class="summary">IT Support Technician with a foundation in Microsoft 365, frontier and local AI deployment, and self-hosted infrastructure.</p>
-  <p class="status">Based in the <b>Isle of Man</b> &middot; open to remote and on-site work</p>
-  <div class="hero-links">
-    <a href="mailto:enquiries@eamonmckiernan.im">
-      <i class="hgi-stroke hgi-mail-01" aria-hidden="true"></i>
-      enquiries@eamonmckiernan.im
+<header class="rail">
+  <div class="rail-prog" id="prog"></div>
+  <div class="rail-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark">EM</span>
+      <span class="brand-txt">Eamon <i>McKiernan</i></span>
     </a>
-    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">
-      <i class="hgi-stroke hgi-linkedin-01" aria-hidden="true"></i>
-      LinkedIn
-    </a>
-    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">
-      <i class="hgi-stroke hgi-github" aria-hidden="true"></i>
-      GitHub
-    </a>
-    <a href="gallery.html">
-      <i class="hgi-stroke hgi-cube" aria-hidden="true"></i>
-      Demo gallery
-    </a>
+    <nav class="rail-nav" aria-label="Sections">
+      <a href="#siteplan">SITE PLAN</a><a href="#capability">CAPABILITY</a><a href="#experience">EXPERIENCE</a><a href="#impact">IMPACT</a><a href="#measurements">MEASUREMENTS</a><a href="#projects">WORK</a><a href="#credentials">CREDENTIALS</a><a href="#contact">CONTACT</a>
+    </nav>
+    <span class="rail-where"><i class="hgi-stroke hgi-location-01" aria-hidden="true"></i>Isle of Man</span>
+    <button class="rail-btn" id="menuBtn" aria-expanded="false" aria-controls="menu"><i class="hgi-stroke hgi-menu-01" aria-hidden="true"></i>Menu</button>
   </div>
 </header>
 
-<section class="reveal">
-  <h2 class="sec-title">Skills</h2>
-  <div class="skills">
-    <div class="skill"><h3>Microsoft 365 &amp; Azure</h3><ul><li>Exchange</li><li>Entra ID / Azure AD</li><li>Intune</li><li>Licensing</li><li>Conditional Access</li><li>Active Directory On-Prem</li></ul></div>
-    <div class="skill"><h3>Virtualisation &amp; Containers</h3><ul><li>Proxmox</li><li>VM Deployment</li><li>LXC Containers</li><li>Docker</li><li>s6-overlay</li><li>Resource Planning</li><li>High Availability</li></ul></div>
-    <div class="skill"><h3>Backup &amp; Monitoring</h3><ul><li>Veeam Backup</li><li>TrueNAS Replication</li><li>Proxmox Backup</li><li>Uptime Kuma</li><li>Rsync</li><li>Snapshot & Replication</li></ul></div>
-    <div class="skill"><h3>Networking</h3><ul><li>OPNsense</li><li>Firewall Rules</li><li>Subnetting</li><li>VLANs</li><li>VPN</li><li>Zero Trust (Tailscale, Twingate)</li><li>Cloudflare Tunnels</li><li>nginx</li><li>DNS</li></ul></div>
-    <div class="skill"><h3>Operating Systems</h3><ul><li>Windows 10 &amp; 11</li><li>Windows Server</li><li>Proxmox</li><li>TrueNAS</li><li>Ubuntu</li><li>Debian</li><li>WSL2</li></ul></div>
-    <div class="skill"><h3>Programming &amp; Scripting</h3><ul><li>Python</li><li>FastAPI</li><li>PowerShell</li><li>C#</li><li>HTML &amp; JavaScript</li><li>Git</li><li>Chrome DevTools Protocol</li></ul></div>
-    <div class="skill"><h3>End-User Support</h3><ul><li>Datto</li><li>Zoho</li><li>RustDesk</li><li>AnyDesk</li><li>Quick Assist</li><li>SuperOps</li><li>Splashtop</li><li>Documentation</li></ul></div>
-    <div class="skill"><h3>AI &amp; LLMs</h3><ul><li>llama.cpp</li><li>Strata</li><li>Maya</li><li>CUDA</li><li>Hermes Agent</li><li>DSH</li><li>Codex</li><li>Local AI</li><li>MCP</li><li>RAG</li></ul></div>
+<div class="msheet" id="menu" hidden>
+  <button class="msheet-close" id="menuClose"><i class="hgi-stroke hgi-cancel-01" aria-hidden="true"></i>Close</button>
+  <nav aria-label="Sections">
+    <a href="#siteplan"><span>01</span>Site plan</a><a href="#capability"><span>02</span>Capability</a><a href="#experience"><span>03</span>Experience</a><a href="#impact"><span>04</span>Impact</a><a href="#measurements"><span>05</span>Measurements</a><a href="#projects"><span>06</span>Work</a><a href="#credentials"><span>07</span>Credentials</a><a href="#contact"><span>08</span>Contact</a>
+    <a href="gallery.html"><span>07</span>Demo gallery</a>
+  </nav>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-name">
+          <span class="ln"><span>Eamon</span></span>
+          <span class="ln"><span>McKiernan</span></span>
+        </h1>
+        <p class="hero-role">IT Support Engineer · Self-Hosted AI Infrastructure</p>
+        <p class="hero-sum">IT Support Technician with a foundation in Microsoft 365, frontier and local AI deployment, and self-hosted infrastructure.</p>
+        <p class="hero-status"><span class="pip"></span><span>Based in the <b>Isle of Man</b> &#183; open to remote and on-site work</span></p>
+        <div class="hero-links">
+          <a class="lk-mail" href="mailto:enquiries@eamonmckiernan.im"><i class="hgi-stroke hgi-mail-01" aria-hidden="true"></i>enquiries@eamonmckiernan.im</a><a class="" href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener"><i class="hgi-stroke hgi-linkedin-01" aria-hidden="true"></i>LinkedIn</a><a class="" href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener"><i class="hgi-stroke hgi-github" aria-hidden="true"></i>GitHub</a><a href="gallery.html"><i class="hgi-stroke hgi-cube" aria-hidden="true"></i>Demo gallery</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="ident">
+          <div class="ident-cap">
+            <span class="ident-t">Identification</span>
+            <span class="ident-r">Rev A</span>
+          </div>
+          <dl class="ident-list"><div class="id-row"><dt>Role</dt><dd>IT Support Engineer</dd></div><div class="id-row"><dt>Discipline</dt><dd>Self-hosted AI infrastructure</dd></div><div class="id-row"><dt>Base</dt><dd>Isle of Man</dd></div><div class="id-row"><dt>Availability</dt><dd>Remote &amp; on-site</dd></div><div class="id-row"><dt>AI hardware</dt><dd>2&#215; Tesla V100 32 GB</dd></div><div class="id-row"><dt>Cluster</dt><dd>3-node Proxmox VE 9.2</dd></div></dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="sec sec-plan" id="siteplan">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">00</span>
+      <h2 id="siteplan">Site plan</h2>
+      <span class="sdesc">THE HOMELAB, DRAWN TO SCALE OF WHAT IT IS</span>
+    </header>
+    <figure class="plan-figure rv">
+      <div class="plan-scroll">
+        <svg viewBox="0 0 1080 700" role="img" aria-labelledby="planTitle planDesc" class="plan-svg" xmlns="http://www.w3.org/2000/svg">
+<title id="planTitle">Homelab site plan</title>
+<desc id="planDesc">Schematic plan of the homelab. Public and consumer traffic reaches an OPNsense router, which separates it from a VLAN-segmented server subnet: a three-node Proxmox cluster with Ceph replication and scheduled backups, a local AI node holding two Tesla V100 cards, and a media and private-cloud host on TrueNAS. A Cloudflare tunnel reaches the game server inside the Proxmox cluster.</desc>
+<defs>
+<pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#CFC9BB" stroke-width="1"/></pattern>
+<marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#B3AC9B"/></marker>
+</defs>
+<rect class="pl-frame" x="16" y="16" width="1048" height="668"/>
+<path class="pl-ln2" d="M16 34 L16 16 L34 16"/>
+<path class="pl-ln2" d="M1064 34 L1064 16 L1046 16"/>
+<path class="pl-ln2" d="M16 666 L16 684 L34 684"/>
+<path class="pl-ln2" d="M1064 666 L1064 684 L1046 684"/>
+<text class="pl-tb" x="46" y="48">EAMON McKIERNAN</text>
+<text class="pl-t" x="46" y="64">HOMELAB SITE PLAN &#183; ISLE OF MAN</text>
+<line class="pl-ln2" x1="46" y1="76" x2="1034" y2="76"/>
+<text class="pl-t" x="1034" y="48" text-anchor="end">SHEET 00 &#183; REV A &#183; 2026</text>
+<text class="pl-t" x="1034" y="64" text-anchor="end">NOT TO SCALE</text>
+<rect class="pl-zone" x="46" y="116" width="204" height="372"/>
+<text class="pl-zl" x="76" y="140">PUBLIC</text>
+<text class="pl-zs" x="76" y="154">CONSUMER + INTERNET</text>
+<rect class="pl-zone" x="274" y="116" width="206" height="372"/>
+<text class="pl-zl" x="288" y="140">EDGE</text>
+<text class="pl-zs" x="288" y="154">ROUTER + NETWORK</text>
+<rect class="pl-zone2" x="504" y="116" width="530" height="372"/>
+<text class="pl-zl" x="520" y="138" fill="#B23A1C">SERVER SUBNET</text>
+<text class="pl-zs" x="520" y="152">ISOLATED &#183; VLAN-SEGREGATED &#183; 3 NODES</text>
+<rect class="pl-box2" x="76" y="150" width="160" height="52" rx="2"/>
+<text class="pl-t9" x="88" y="172">CONSUMER DEVICES</text>
+<text class="pl-t" x="88" y="188">LAPTOPS &#183; PHONES &#183; TV</text>
+<rect class="pl-box2" x="76" y="218" width="160" height="52" rx="2"/>
+<text class="pl-t9" x="88" y="240">PUBLIC INTERNET</text>
+<text class="pl-t" x="88" y="256">CLOUDFLARE TUNNEL</text>
+<text class="pl-zs" x="60" y="296">INBOUND</text>
+<text class="pl-t" x="60" y="310">FFIOM.COM</text>
+<text class="pl-t" x="60" y="324">APPS &#183; DOWNLOADS</text>
+<rect class="pl-box" x="288" y="150" width="178" height="72" rx="2"/>
+<text class="pl-t9" x="300" y="172">OPNSENSE</text>
+<text class="pl-t" x="300" y="188">HP 280 G2 SFF</text>
+<text class="pl-t" x="300" y="202">INTEL i350 NIC</text>
+<text class="pl-t" x="300" y="216">IDS / IPS</text>
+<rect class="pl-box2" x="288" y="238" width="178" height="38" rx="2"/>
+<text class="pl-t9" x="300" y="254">PI-HOLE</text>
+<text class="pl-t" x="300" y="268">DNS FILTERING</text>
+<rect class="pl-box2" x="288" y="288" width="178" height="38" rx="2"/>
+<text class="pl-t9" x="300" y="304">TAILSCALE</text>
+<text class="pl-t" x="300" y="318">VPN &#183; ZERO TRUST</text>
+<rect class="pl-box2" x="288" y="338" width="178" height="38" rx="2"/>
+<text class="pl-t9" x="300" y="354">MANAGED SWITCH</text>
+<text class="pl-t" x="300" y="368">VLAN TAGGING</text>
+<rect class="pl-box2" x="522" y="176" width="254" height="150" rx="2"/>
+<text class="pl-th2" x="534" y="198">PROXMOX VE 9.2</text>
+<text class="pl-t" x="534" y="212">3-NODE HA CLUSTER</text>
+<rect class="pl-box" x="534" y="222" width="230" height="24" rx="2"/>
+<text class="pl-t9" x="546" y="238">NODE 01</text>
+<text class="pl-t" x="752" y="238" text-anchor="end">DELL 3050</text>
+<rect class="pl-box" x="534" y="252" width="230" height="24" rx="2"/>
+<text class="pl-t9" x="546" y="268">NODE 02</text>
+<text class="pl-t" x="752" y="268" text-anchor="end">HP PRODESK</text>
+<rect class="pl-box" x="534" y="282" width="230" height="24" rx="2"/>
+<text class="pl-t9" x="546" y="298">NODE 03</text>
+<text class="pl-t" x="752" y="298" text-anchor="end">HP ELITEDESK</text>
+<text class="pl-t" x="534" y="316">HA FAILOVER &#183; CLOUD INIT</text>
+<rect class="pl-box" x="796" y="176" width="218" height="150" rx="2"/>
+<text class="pl-th2" x="808" y="198">LOCAL AI</text>
+<text class="pl-t" x="808" y="212">INFERENCE NODE</text>
+<rect class="pl-hatch" x="808" y="222" width="194" height="26" rx="2"/>
+<text class="pl-t9" x="818" y="239">2&#215; TESLA V100 32 GB</text>
+<text class="pl-t" x="808" y="266">Xeon E5-2680 v4</text>
+<text class="pl-t" x="808" y="279">CUDA 12.9 &#183; sm_70</text>
+<text class="pl-t" x="808" y="292">llama.cpp &#183; Strata</text>
+<text class="pl-t" x="808" y="305">HERMES AGENT &#183; DISCORD</text>
+<text class="pl-tc" x="808" y="318">262,144 CTX</text>
+<rect class="pl-box2" x="522" y="342" width="254" height="136" rx="2"/>
+<text class="pl-th2" x="534" y="364">STORAGE + OBSERVABILITY</text>
+<text class="pl-t9" x="534" y="388">CEPH SQUID 19.2.5</text>
+<text class="pl-t" x="534" y="401">REPLICATED POOLS</text>
+<text class="pl-t9" x="534" y="418">PROXMOX BACKUP SERVER</text>
+<text class="pl-t" x="534" y="431">SCHEDULED SNAPSHOTS</text>
+<text class="pl-t9" x="534" y="448">24 MONITORS</text>
+<text class="pl-t" x="534" y="461">LIBRENMS &#183; UPTIME KUMA</text>
+<rect class="pl-box2" x="796" y="342" width="218" height="136" rx="2"/>
+<text class="pl-th2" x="808" y="364">MEDIA + PRIVATE CLOUD</text>
+<text class="pl-t9" x="808" y="388">TRUENAS ZFS</text>
+<text class="pl-t" x="808" y="401">REDUNDANT STORAGE</text>
+<text class="pl-t9" x="808" y="416">JELLYFIN &#183; SONARR &#183; RADARR</text>
+<text class="pl-t" x="808" y="429">GTX 1650 NVENC</text>
+<text class="pl-t9" x="808" y="444">NEXTCLOUD 35</text>
+<text class="pl-t" x="808" y="457">NGINX PROXY MANAGER</text>
+<path class="pl-ln" d="M512 166 L1020 166"/>
+<path class="pl-ln" d="M512 166 L512 452"/>
+<path class="pl-ln" d="M512 250 L522 250"/>
+<path class="pl-ln" d="M512 410 L522 410"/>
+<path class="pl-ln" d="M786 166 L786 410"/>
+<path class="pl-ln" d="M786 250 L796 250"/>
+<path class="pl-ln" d="M786 410 L796 410"/>
+<circle cx="512" cy="166" r="2.8" fill="#1A1917"/>
+<circle cx="786" cy="166" r="2.8" fill="#1A1917"/>
+<circle cx="512" cy="250" r="2.8" fill="#1A1917"/>
+<circle cx="512" cy="410" r="2.8" fill="#1A1917"/>
+<circle cx="786" cy="250" r="2.8" fill="#1A1917"/>
+<circle cx="786" cy="410" r="2.8" fill="#1A1917"/>
+<path class="pl-ln" d="M250 452 L274 452"/>
+<path class="pl-ln" d="M480 452 L504 452"/>
+<path class="pl-ln" d="M504 452 L512 452"/>
+<circle cx="250" cy="452" r="2.8" fill="#1A1917"/>
+<circle cx="274" cy="452" r="2.8" fill="#1A1917"/>
+<circle cx="504" cy="452" r="3" fill="#B23A1C"/>
+<line class="pl-ln3" x1="492" y1="443" x2="492" y2="461"/>
+<path class="pl-ln2" stroke-dasharray="4 3" d="M76 262 L60 262 L60 98 L494 98 L494 250 L512 250"/>
+<rect x="170" y="90" width="177" height="15" fill="#F4F1EA"/>
+<text class="pl-t" x="170" y="98" dominant-baseline="middle">CLOUDFLARE TUNNEL &#8594; FFIOM VM</text>
+<line class="pl-dim" x1="504" y1="514" x2="1034" y2="514"/>
+<text class="pl-t" x="769.0" y="505" text-anchor="middle">SERVER SUBNET &#183; 3 PROXMOX NODES &#183; CEPH REPLICATION</text>
+<line class="pl-ln2" x1="46" y1="546" x2="1034" y2="546"/>
+<text class="pl-tc" x="46" y="568">LEGEND</text>
+<rect class="pl-box" x="46" y="581" width="18" height="12" rx="1"/>
+<text class="pl-t" x="71" y="590">RACK / HOST</text>
+<rect class="pl-box2" x="161.9" y="581" width="18" height="12" rx="1"/>
+<text class="pl-t" x="186.9" y="590">SERVICE</text>
+<path class="pl-ln" d="M254.20000000000002 587 L272.20000000000005 587"/>
+<circle cx="272.20000000000005" cy="587" r="2.6" fill="#B23A1C"/>
+<text class="pl-t" x="279.20000000000005" y="590">NETWORK FLOW</text>
+<path class="pl-ln2" stroke-dasharray="4 3" d="M46 617 L64 617"/>
+<text class="pl-t" x="71" y="620">CLOUDFLARE TUNNEL</text>
+<rect class="pl-hatch" x="197.3" y="611" width="18" height="12" rx="1"/>
+<text class="pl-t" x="222.3" y="620">GPU / ACCELERATOR</text>
+<path class="pl-ln2" d="M348.6 617 L366.6 617"/>
+<line class="pl-ln3" x1="357.6" y1="607" x2="357.6" y2="627"/>
+<text class="pl-t" x="373.6" y="620">FIREWALL GATE</text>
+<rect class="pl-ln2" x="640" y="566" width="394" height="88"/>
+<line class="pl-ln2" x1="640" y1="596" x2="1034" y2="596"/>
+<line class="pl-ln2" x1="640" y1="626" x2="1034" y2="626"/>
+<line class="pl-ln2" x1="800" y1="566" x2="800" y2="654"/>
+<line class="pl-ln2" x1="940" y1="566" x2="940" y2="654"/>
+<text class="pl-t" x="650" y="586">PROJECT</text>
+<text class="pl-t9" x="810" y="586">EAMON McKIERNAN</text>
+<text class="pl-t9" x="950" y="586">REV A</text>
+<text class="pl-t" x="650" y="616">DRAWING</text>
+<text class="pl-t9" x="810" y="616">HOMELAB SITE PLAN</text>
+<text class="pl-t9" x="950" y="616">SHEET 00 OF 00</text>
+<text class="pl-t" x="650" y="646">ISSUED</text>
+<text class="pl-t9" x="810" y="646">2026</text>
+<text class="pl-t9" x="950" y="646">SCALE NTS</text>
+</svg>
+      </div>
+      <figcaption class="plan-cap-note">
+        <span class="pcn-l">Figure 00 &#183; Homelab site plan</span>
+        <span class="pcn-r">Public and consumer traffic terminates at the OPNsense router, which
+        separates it from the VLAN-segmented server subnet &#8212; three Proxmox nodes over Ceph
+        replication, the local AI node, and the media and private-cloud host.</span>
+      </figcaption>
+    </figure>
   </div>
 </section>
-
-<section class="reveal">
-  <h2 class="sec-title">Experience</h2>
-  <div class="exp">
-    <div class="job"><h3>IT Support Engineer</h3><div class="co">Manx Technology Group</div><div class="when">Jan 2026 – Present</div><ul><li>Level 1 and Level 2 helpdesk support</li><li>On-call for out-of-hours incident response</li><li>Resolved 900+ tickets in 7 months (avg. ~30/week, ~130/month)</li></ul></div>
-    <div class="job"><h3>Junior Support Technician</h3><div class="co">SynergyIT</div><div class="when">Aug 2024 – Dec 2025</div><ul><li>Level 1 support – first point of contact for clients</li><li>Backup and replication management and monitoring</li><li>Management and delegation of tickets</li><li>Client user onboarding and offboarding</li></ul></div>
+<section class="sec" id="capability">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">01</span>
+      <h2 id="capability">Capability</h2>
+      <span class="sdesc">EIGHT DISCIPLINES &#183; 60 TECHNOLOGIES</span>
+    </header>
+    <div class="sched">
+      <div class="sk rv d1">
+        <h3>Microsoft 365 &amp; Azure</h3>
+        <ul class="sk-list"><li>Exchange</li><li>Entra ID / Azure AD</li><li>Intune</li><li>Licensing</li><li>Conditional Access</li><li>Active Directory On-Prem</li></ul>
+      </div><div class="sk rv d2">
+        <h3>Virtualisation &amp; Containers</h3>
+        <ul class="sk-list"><li>Proxmox</li><li>VM Deployment</li><li>LXC Containers</li><li>Docker</li><li>s6-overlay</li><li>Resource Planning</li><li>High Availability</li></ul>
+      </div><div class="sk rv d3">
+        <h3>Backup &amp; Monitoring</h3>
+        <ul class="sk-list"><li>Veeam Backup</li><li>TrueNAS Replication</li><li>Proxmox Backup</li><li>Uptime Kuma</li><li>Rsync</li><li>Snapshot &amp; Replication</li></ul>
+      </div><div class="sk rv d1">
+        <h3>Networking</h3>
+        <ul class="sk-list"><li>OPNsense</li><li>Firewall Rules</li><li>Subnetting</li><li>VLANs</li><li>VPN</li><li>Zero Trust (Tailscale, Twingate)</li><li>Cloudflare Tunnels</li><li>nginx</li><li>DNS</li></ul>
+      </div><div class="sk rv d2">
+        <h3>Operating Systems</h3>
+        <ul class="sk-list"><li>Windows 10 &amp; 11</li><li>Windows Server</li><li>Proxmox</li><li>TrueNAS</li><li>Ubuntu</li><li>Debian</li><li>WSL2</li></ul>
+      </div><div class="sk rv d3">
+        <h3>Programming &amp; Scripting</h3>
+        <ul class="sk-list"><li>Python</li><li>FastAPI</li><li>PowerShell</li><li>C#</li><li>HTML &amp; JavaScript</li><li>Git</li><li>Chrome DevTools Protocol</li></ul>
+      </div><div class="sk rv d1">
+        <h3>End-User Support</h3>
+        <ul class="sk-list"><li>Datto</li><li>Zoho</li><li>RustDesk</li><li>AnyDesk</li><li>Quick Assist</li><li>SuperOps</li><li>Splashtop</li><li>Documentation</li></ul>
+      </div><div class="sk rv d2">
+        <h3>AI &amp; LLMs</h3>
+        <ul class="sk-list"><li>llama.cpp</li><li>Strata</li><li>Maya</li><li>CUDA</li><li>Hermes Agent</li><li>DSH</li><li>Codex</li><li>Local AI</li><li>MCP</li><li>RAG</li></ul>
+      </div>
+    </div>
   </div>
 </section>
-
-<section class="reveal">
-  <h2 class="sec-title">Impact</h2>
-  <div class="stats">
-    <div class="stat"><div class="n" data-count="900" data-suffix="+">0</div><div class="l">Tickets Resolved</div><div class="s">in 7 months</div></div>
-    <div class="stat"><div class="n" data-count="30" data-prefix="~">0</div><div class="l">Tickets Per Week</div><div class="s">average</div></div>
-    <div class="stat"><div class="n" data-count="130" data-prefix="~">0</div><div class="l">Tickets Per Month</div><div class="s">average</div></div>
-    <div class="stat"><div class="n" data-count="15" data-suffix="+">0</div><div class="l">Platform Integrations</div><div class="s">supported</div></div>
+<section class="sec" id="experience">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">02</span>
+      <h2 id="experience">Experience</h2>
+      <span class="sdesc">HELPDESK &#183; INFRASTRUCTURE</span>
+    </header>
+    <div class="exp-layout">
+      <div class="exp">
+        <div class="exp-item rv">
+      <div class="exp-when">Jan 2026 – Present</div>
+      <div class="exp-body">
+        <h3 class="exp-co">Manx Technology Group</h3>
+        <div class="exp-role">IT Support Engineer</div>
+        <ul class="exp-list"><li>Level 1 and Level 2 helpdesk support</li><li>On-call for out-of-hours incident response</li><li>Resolved 900+ tickets in 7 months (avg. ~30/week, ~130/month)</li></ul>
+      </div>
+    </div><div class="exp-item rv">
+      <div class="exp-when">Aug 2024 – Dec 2025</div>
+      <div class="exp-body">
+        <h3 class="exp-co">SynergyIT</h3>
+        <div class="exp-role">Junior Support Technician</div>
+        <ul class="exp-list"><li>Level 1 support – first point of contact for clients</li><li>Backup and replication management and monitoring</li><li>Management and delegation of tickets</li><li>Client user onboarding and offboarding</li></ul>
+      </div>
+    </div>
+      </div>
+      <aside class="dur rv" aria-label="Employment timeline">
+        <div class="dur-cap">TENURE</div>
+        <div class="dur-ticks"><span class="dur-tick" style="left:0.00%">AUG '24</span><span class="dur-tick" style="left:19.00%">JAN '25</span><span class="dur-tick" style="left:41.63%">JUL '25</span><span class="dur-tick" style="left:64.25%">JAN '26</span><span class="dur-tick" style="left:86.88%">JUL '26</span></div>
+        <div class="dur-axis"></div>
+        <div class="dur-now"><span>NOW</span></div>
+        <div class="dur-job">
+        <div class="dur-head">
+          <span class="dur-who">SynergyIT</span>
+          <span class="dur-span">Aug 2024 – Dec 2025</span>
+        </div>
+        <div class="dur-bar"><i style="--l:0.00%;--w:64.25%"></i></div>
+      </div><div class="dur-job live">
+        <div class="dur-head">
+          <span class="dur-who">Manx Technology Group</span>
+          <span class="dur-span">Jan 2026 – Present</span>
+        </div>
+        <div class="dur-bar"><i style="--l:64.25%;--w:35.75%"></i></div>
+      </div>
+      </aside>
+    </div>
   </div>
 </section>
-
-<section class="reveal">
-  <h2 class="sec-title">Certifications</h2>
-  <div class="cert"><div class="badge"><svg width="22" height="22" viewBox="0 0 23 23"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="12" y="1" width="9" height="9" fill="#7fba00"/><rect x="1" y="12" width="9" height="9" fill="#00a4ef"/><rect x="12" y="12" width="9" height="9" fill="#ffb900"/></svg></div><div><h3>Microsoft 365 Certified: Fundamentals</h3><div class="meta">Microsoft · MS-900 · <b>ID: 1AF2E23DEFE59917</b></div></div><div class="yr">Nov 2024</div></div>
-</section>
-
-<section class="reveal">
-  <h2 class="sec-title">Projects</h2>
-  <div class="proj">
-    <details class="proj-item" open><summary><span class="ph">Local AI</span><span class="pm">Xeon E5-2680 v4 · 2× Tesla V100 32 GB</span></summary><div class="proj-body"><p class="pdesc">Fully local LLM inference stack — open-source models served on a pair of Tesla V100 32 GB cards by llama.cpp and the Strata engine, wrapped in a Hermes agent layer with a custom Discord frontend. Every measured run, table and write-up is published in the repo: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>.</p><div class="msec">Stack</div><ul><li>2× Tesla V100 32 GB linked at PCIe 3.0 ×16 — driver 580 pinned as the last Volta driver branch, CUDA 12.9, and llama.cpp rebuilt sm_70-only (144 embedded sm_70 cubins); the Strata engine built for sm_70 serves a 128K-context Qwen3.8-Flash-Next with MTP speculative decoding</li><li>Extended the box to NVIDIA's Nemotron 3.5 Bolt 74B the day after upstream support merged: rebuilt llama.cpp from master to build 11700 (CUDA 12.9, sm_70 cubins) and served the 74B MoE at 262,144 ctx across both V100s with NVIDIA's separate 1.1B LiLiCorr drafter on llama.cpp's dflash speculative path — 128 of 490 draft tokens accepted and 53 tok/s decode on a prose prompt, against 139 tok/s on a counting test where drafting hits its ceiling</li><li>A third engine, Project Maya — GLM-5.3-Flash, a ~320B Mixture-of-Experts (~18B active) layer-split across both cards. The newest quant is a 313B-parameter, hand-mixed 87 GB IQ2_XXS whose publisher prunes the MTP block, so it benches with speculative drafting off: at the full 262,144-token window it holds 22.5–24.9 tok/s decode and 714 tok/s prefill at 20K rising to 870 at 200K (851 at 250K), every figure the mean of three fresh-load runs per depth, and engine v1.1.13 → v1.1.15 lifted prefill 7.6–10.3% at every depth while decode stayed inside its run-to-run spread. That window fits because the cache is streamed: a 32,768-position slice of each attention layer stays in VRAM (0.37 GB across both cards) while the other 88% of the 262K positions sit in 2.95 GB of pinned, device-mapped host RAM, and 93–99% of block reads still hit VRAM. Halving the window to 131K changes nothing measurable (+0.3% prefill / +2.6% decode at the shared depths) — long context is essentially free on this box. The Maya-S 321B quant, MTP drafting on, reads 20.4–22.6 tok/s decode and 595–646 tok/s prefill. Moving the model set off a DRAM-less boot SSD onto a dedicated NVMe was worth +23.9% decode / +46.0% prefill mean on a same-day, three-runs-per-side controlled pair.</li><li>Measured speculative decoding on that quant instead of assuming it pays: the GLM-5.3-Flash DFlash2 drafter (Q4_K_M, 697 MB, five layers) accepted 63% of its drafts and still ran 27–31% slower than the same engine without it — 15.9–18.0 tok/s decode against 22.5–24.9 — so drafting stays off for this model</li><li>Two-card tensor split with MTP; the full 262,144-token window runs end to end — a 250,632-token prompt prefilled at 1,495 tok/s, then 6,000 tokens generated at 48.8 tok/s</li><li>Cooling rebuilt around a single 7k-rpm PWM fan driven by a systemd hwmon fan curve — a ten-minute soak of six back-to-back 100k-token prefills held dead-flat at 61–62 °C (1,078 tok/s, 0.7 tok/s spread). Redesigned the 80 mm ducting into a mirrored one-fan-per-card pair — each fan 30 mm outboard of the stack, the cards&rsquo; original one-slot (40 mm) mouth spacing kept, and both meshes closed and single-body on export</li></ul><div class="msec">Current Numbers (October 2026)</div><ul><li>Engine v0.1.32 → v0.1.39, same model and config byte-for-byte: decode +22–31% at every depth (20k: 56.6 → 73.9 tok/s; 250k: 50.3 → 65.0) and prefill +23–26% from 60k up (peak 1,973 tok/s at 100k)</li><li>126-run MTP sweep against the live server across all six depths: gate 0.50 confirmed fastest and the stock configuration measured fastest overall, with 250k-prompt prefill flat at 1,494–1,498 tok/s</li><li><code>model-bench</code> harness for any OpenAI-compatible endpoint — browser UI + CLI, auto-detects llama.cpp or Strata, writes per-run JSONL/CSV/markdown; published at github.com/EamonMcKiernan05/Local-AI-Speed-Test-Harness</li><li>Enabled vision on the base model — the image encoder built locally for sm_70, verified with a real image read in 4.0 s at 93 tok/s decode</li><li>One-shot demo bench — single-prompt browser demos written by the local model: <a href="gallery.html">run them all in the demo gallery</a></li></ul><div class="tags"><span>llama.cpp</span><span>Strata</span><span>Speculative Decoding</span><span>LLM</span><span>Tesla V100</span><span>MTP</span><span>Benchmarking</span><span>Hermes</span><span>Discord Bot</span><span>Self-hosted AI</span><span>Open Source</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">Proxmox Cluster</span><span class="pm">Dell 3050 · HP ProDesk · HP EliteDesk</span></summary><div class="proj-body"><p class="pdesc">Three-node high-availability cluster on Proxmox VE 9.2 with Ceph Squid distributed storage, running a mix of LXC containers and full VMs for homelab services.</p><div class="msec">Details</div><ul><li>Major version upgrade (August 2026): rolled Proxmox VE 8.4 → 9.2.11 (Debian 12 → 13, kernel 7.0.14) and Ceph Reef 18.2 → Squid 19.2.5 node-by-node across all three nodes — pre-upgrade checks, rolling Ceph daemon restarts with mgr failover, no data loss, final cluster health HEALTH_OK</li><li>Automatic VM and LXC failover between nodes via Proxmox HA</li><li>Ceph replicated storage pools distributed across all three nodes</li><li>Separate resource pools isolating different workload types</li><li>Proxmox Backup Server for scheduled snapshot backups</li><li>Monitored via LibreNMS and Uptime Kuma — 24 HTTP/API monitors covering every container and VM service across all three nodes, provisioned via the Uptime Kuma API</li></ul><div class="tags"><span>Proxmox</span><span>Ceph</span><span>LXC</span><span>HA</span><span>Virtualisation</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">OPNsense Router</span><span class="pm">HP 280 G2 SFF · Intel i350 NIC</span></summary><div class="proj-body"><p class="pdesc">Custom router/firewall separating server infrastructure from consumer traffic, with a managed switch and wireless access point for full network control.</p><div class="msec">Details</div><ul><li>Dedicated server subnet isolated from consumer devices via firewall rules</li><li>Managed switch handling VLAN tagging and port segregation</li><li>Pi-hole for network-wide DNS filtering and ad blocking</li><li>Tailscale VPN for secure remote access to home network resources</li><li>OPNsense IDS/IPS for traffic inspection</li></ul><div class="tags"><span>OPNsense</span><span>Firewall</span><span>VLANs</span><span>Pi-hole</span><span>Tailscale</span><span>Networking</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">Media Server</span><span class="pm">Xeon E5-2630 v4 · GTX 1650 · TrueNAS</span></summary><div class="proj-body"><p class="pdesc">Self-hosted media stack with a fully automated download pipeline, GPU transcoding on a GTX 1650 mapped into the app containers, and ZFS-backed redundant storage.</p><div class="msec">Details</div><ul><li>Sonarr, Radarr, and Prowlarr for automated media acquisition</li><li>Jellyfin on TrueNAS with the GTX 1650 passed into the app container — the card, its device nodes and NVIDIA's userspace libraries are all visible from inside it, and its bundled ffmpeg offers h264, hevc and av1 NVENC encoders plus CUDA decode</li><li>TrueNAS with ZFS for redundant storage and data integrity</li><li>TrueNAS replication for off-site backup of the media library</li><li>The same box also runs Nextcloud 35 as a self-hosted private cloud — PostgreSQL database and file data on separate host paths under the existing snapshot and replication coverage</li><li>Reverse proxied via Nginx Proxy Manager with HTTPS</li></ul><div class="msec">GPU Transcoding</div><ul><li>Found Jellyfin's hardware acceleration switched off in its own settings — the config read <code>HardwareAccelerationType: none</code> while every read-only check said the GPU was available, so every stream had been transcoding on the CPU; enabled NVENC and re-read the config to confirm it took</li><li>Proved a catalog HandBrake app could never use that GPU, whatever its settings: the image is Alpine/musl and NVIDIA's encoder userspace is glibc-only, so <code>ldd</code> inside the container failed on a missing loader and the encoder library never opened — and the catalog template strips the device from both containers anyway, an upstream issue its own template flags</li><li>Stood up a glibc-based HandBrake image with an explicit GPU device reservation instead, and verified it inside the running container: <code>nvidia-smi -L</code> sees the GTX 1650 and <code>HandBrakeCLI --help</code> lists <code>nvenc_h264</code> and <code>nvenc_h265</code> with zero library-load errors</li><li>Diagnosed a crash-looping app install on the way: TrueNAS 25.04 creates app data folders root-owned while the containers run as uid 568, and its permissions helper now only checks rather than fixes — the container died on <code>EACCES</code> before it ever bound a port, while every <code>app.start</code> job still reported success</li><li>Worked out which encoder the card actually supports from NVIDIA's own matrix (TU117): H.264 4:2:0 and HEVC up to 10-bit encode, no H.264 10-bit encode or decode, no HEVC B-frames, no AV1 — so 10-bit sources go to HEVC and Hi10P falls back to the CPU</li></ul><div class="tags"><span>Jellyfin</span><span>TrueNAS</span><span>NVENC</span><span>HandBrake</span><span>ZFS</span><span>Sonarr</span><span>Radarr</span><span>Docker</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">Fantasy Football Isle of Man</span><span class="pm">FastAPI · SQLite · SwiftUI · Vanilla JS</span></summary><div class="proj-body"><p class="pdesc">FPL-style fantasy football game built for the Canada Life Premier League (Isle of Man). Full-stack application with FastAPI backend, web SPA, and a native iOS client integrating live match data from the FullTime API.</p><div class="msec">Backend</div><ul><li>FastAPI REST API with JWT authentication and bcrypt password hashing</li><li>Social sign-in (August 2026): Google and Apple OAuth consolidated onto a single shared Authlib layer — PKCE S256 with signed state cookies (no server session), JWKS-verified id_tokens (iss/aud/exp), Apple client_secret minted per exchange as an ES256 JWT, and user linking that keys on (provider, provider_id) before email to handle Apple's no-guaranteed-email and private-relay accounts; 31 new tests</li><li>SQLite + SQLAlchemy with Alembic migrations for schema management</li><li>FPL-style scoring engine with captain/vice-captain, transfers, and chips</li><li>APScheduler for automated gameweek scoring and data sync jobs</li><li>Position-based player scoring with performance-adjusted pricing</li></ul><div class="msec">Frontend & iOS App</div><ul><li>Vanilla JS SPA with carousel-style page transitions, FPL-inspired design, and CSS custom property token system</li>
-<li>Complete frontend redesign (2026): 14 dedicated page templates, modular JS architecture replacing monolithic app, matching official FPL site structure</li><li>Native iOS app built with SwiftUI (iOS 17+) – MVVM architecture with 18 views across 8 modules</li><li>Swift Concurrency (async/await) with URLSession actor and auto-refresh token rotation</li><li>Keychain Services for secure token persistence and session management</li><li>@Observable macro for reactive state management</li></ul><div class="msec">Security</div><ul><li>Comprehensive security audit (July 2026): 18 files refactored, 22 vulnerabilities remediated and verified</li><li>Eliminated legacy auth bypass — all endpoints now enforce JWT-based authentication</li><li>Admin endpoints gated behind <code>require_admin</code> middleware with role-based access control</li><li>IDOR prevention: all state-mutating endpoints derive user identity from JWT, not client input</li><li>CORS restricted to <code>APP_BASE_URL</code> environment variable (was wildcard + credentials)</li><li>PKCE <code>code_verifier</code> stored in signed HttpOnly cookie instead of plain URL parameter</li><li>Rate limiting on login/register/refresh endpoints (5 req/min per IP)</li><li>Refresh tokens bound to user-agent string with <code>HttpOnly; Secure; SameSite=Strict</code> flags</li><li>Pydantic request schemas on all transfer endpoints preventing arbitrary key injection</li><li>Password policy enforcement: minimum 10 chars, uppercase + lowercase + digit required</li><li>Parameterized SQLite <code>ATTACH DATABASE</code> queries (prevented SQL injection via f-strings)</li><li>Database files removed from git history with <code>*.db</code> in <code>.gitignore</code></li></ul><div class="msec">Data & DevOps</div><ul><li>Live data pipeline syncing fixtures, results, and league tables from FullTime API</li><li>Separate database management service (FFIOM-DB) with automated data ingestion</li><li>GitHub Actions CI/CD pipeline</li><li>Docker containerization: multi-container orchestration with separate API and database images, deployed to a dedicated Debian VM on Proxmox</li><li>Production deployment via Cloudflare Tunnel (cloudflared systemd service) with DNS routing to ffiom.com</li><li>Automated production updates: GitHub deploy key plus update script on the production VM pull the latest image from GitHub, take a pre-swap database backup, and health-verify the container swap (live-verified on ffiom.com)</li><li>Pytest test suite with production database isolation</li><li>App Store compliance: Info.plist hardening, ATS configuration, PrivacyInfo manifest, Keychain access groups</li></ul><div class="msec">FullTime Data Service</div><ul><li>Self-hosted C# .NET 9 API on a dedicated Debian server, systemd-managed with Kestrel bound to the LAN — scrapes the Cloudflare-protected FullTime site with headless Chromium via Playwright, keeping the scraper warm with a persistent profile and a per-fetch <code>cf_clearance</code> cookie</li><li>Serves fixtures, results and league tables to the production app; maintained as a standalone service with reversible .bak backups of every changed file</li></ul><div class="msec">Quality Assurance</div><ul><li>Full code review (August 2026): structured audit of the entire codebase — auth, scoring engine, scheduler, API routes, frontend, and deployment — run as parallel subagent reviews with a consolidated findings report</li><li>Remediated all 34 High/Medium/Low findings (10 High, 15 Medium, 9 Low): deterministic re-scoring, process locking on squad-mutation endpoints to prevent double-applied transfers, strict Content-Security-Policy on all 13 pages, and 14 new tests (138 → 152 passing)</li><li>Full production security audit (August 2026): tested all 106 live endpoints unauthenticated and as two fresh accounts, walked every UI page in a real browser, and inspected the production database directly — 0 critical, 6 high, 8 medium, 3 low findings, with all previously flagged criticals verified fixed in production</li><li>Remediated all 6 high + 8 medium audit findings (Aug 2026): access tokens moved to HttpOnly cookies so nothing token-related is JS-readable, full security-header set (CSP / HSTS / XFO / Referrer-Policy / Permissions-Policy), admin-gated a state-changing endpoint, disabled API docs in production, fixed corrupted gameweek state with a deadline guard, built the missing /account page, and closed user-enumeration — all verified end-to-end against copies of the live production database</li></ul><div class="tags"><span>FastAPI</span><span>SQLite</span><span>SQLAlchemy</span><span>Alembic</span><span>SwiftUI</span><span>Swift</span><span>iOS</span><span>Xcode</span><span>CI/CD</span><span>JWT</span><span>REST API</span><span>Vanilla JS</span><span>Pytest</span><span>MCP</span><span>XcodeBuildMCP</span><span>Capacitor</span><span>iOS Build</span><span>Security Audit</span><span>OAuth</span><span>PKCE</span><span>CORS</span><span>Rate Limiting</span><span>Code Review</span><span>CSP</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">AI Trading Bot &amp; Backtesting</span><span class="pm">Python · Binance · Walk-Forward · Docker + s6</span></summary><div class="proj-body"><p class="pdesc">AI-agent-driven trading system in two phases: a rigorous backtesting methodology (mechanical trend-following rules, realistic cost modelling, out-of-sample validation), then a production trading bot that ran the validated strategy live on Binance for 22 days — built to test whether disciplined rules beat buy-and-hold on real 2026 market data.</p><div class="msec">Backtesting Engine</div><ul><li>Python backtesting engine over real daily OHLC (Binance crypto, Yahoo stocks) with realistic costs: taker fees, funding-rate accrual, and overnight stock financing</li><li>Blind backtest: strategy rules committed to a written receipt <em>before</em> inspecting any price data — six sleeves (BTC/ETH/SOL 10x perp, NVDA/TSLA 5x long, COIN 5x short), daily hard stops, weekly trend filters, and earnings blackouts</li><li>Result: £100 → £135.85 (+35.9%) over ~8 months vs −14.5% for equal-weight buy-and-hold of the same six assets — the edge came from trend filters keeping capital out of three crashing crypto assets</li></ul><div class="msec">Validation</div><ul><li>Top-50 crypto universe swept across 120 parameter combinations, then walk-forward validation: tuned on Jan–Apr, ran the single best config untouched on the unseen May–Aug window</li><li>Out-of-sample +16.5% vs +0.6% buy-and-hold — confirming the result was not a curve-fit artefact; all top-8 train configs clustered within £1.20 on the test window (robustness check)</li><li>Live paper trading: 10x BTC perpetual, +146.5% on £10 margin (take-profit exit), with full trade log and daily equity curve retained</li></ul><div class="msec">Live Trading Bot</div><ul><li>Deployed the walk-forward-validated top-3 strategy (BTC/ETH/SOL, spot, long-only, no leverage) as a 24/7 production bot on a dedicated Debian LXC on the Proxmox cluster: SMA20 trend filter, 8% trailing stop, 3% fixed stop checked live on every 5-minute poll</li><li>Deterministic rules engine in pure Python (stdlib + requests only) — no improvisation: persistent state, unit tests, and a backtest-reproduction test asserting the validated engine&rsquo;s exact £129.24 outcome (±0.5%)</li><li>Binance REST integration with a hard dry-run gate: real order code implemented but disabled until go-live; keys never committed (gitignored, chmod 600, wired only at go-live)</li><li>Single Docker image appliance: s6-overlay supervises the bot loop and a read-only web dashboard (GET-only, no exchange import), persistent data on a host bind mount, non-root</li><li>AI analysis bridge: trade events call a Hermes trading profile via API server; autonomous monitoring — a daily 06:00 agent-mode review pulls bot state and independently cross-checks live Binance prices (positions, armed stops, stop breaches, 7-day P&amp;L vs buy-and-hold), plus a monthly review against the walk-forward baseline with an explicit strategy/investment verdict; documented go-live checklist</li><li>Went live with real funds (September 2026): first BTC order filled on Binance, then root-caused and fixed two live-only bugs — exchange info cached for the first symbol only (ETH/SOL rejected by LOT_SIZE) and MARKET fills recording a zero price — plus container-timezone and real-account-equity tracking fixes, all verified against the live API</li><li>Hardened the read-only dashboard after a live review of its charts: the klines endpoint was asking Binance for a single page (its 1,000-candle hard limit), so a 7-day per-minute view actually began just after midnight. The window is now walked backwards until it is covered or a 12,000-row cap is reached, and a granularity that cannot cover the chosen range says so in the hint line instead of quietly drawing less. Axis ticks moved onto natural steps (1/5/15/30 min through to 28 days) at round clock times, with the date added once a window crosses a day, and the page now fills the window rather than capping at 1200 px. Also fixed a destroyed-chart bug where one failed kline fetch left a dead reference that threw on the next resize and blanked the whole dashboard until a page reload — a transient exchange error could take monitoring down for the day; failures are now caught per section and self-heal on the next 60-second refresh</li><li>Ran live for 22 days on real funds (6–28 September 2026): funded $38.26, finished flat at $38.25 (−0.03%), then wound down deliberately — final real-account state snapshotted, the container stopped and verified unreachable, and auto-restart disabled so a reboot could not bring it back</li></ul><div class="msec">Decision-Model Evaluation (September 2026)</div><ul><li>Screened a hosted decision model (TypeSafe&rsquo;s Jev-1.13, a typed decision API rather than a chat model) as a candidate trading brain: a ten-cadence replay of the live bot&rsquo;s own three-week window plus a three-month 5-minute replay — 113,000+ calls, 0.32–0.38s mean latency, ~$4.50 in total API spend. It underperformed buy-and-hold of the same three coins in both windows and acted on just 0.07–0.08% of the questions asked, so it stayed out of production.</li><li>Established the real break-even from Binance&rsquo;s live order filters: at a $10 stake a BTC round trip needs a +8.65% move against a 0.25% mean hourly move (lot-step flooring and the $5 minNotional strand cash permanently), and lot-step dust alone stranded 13.2% of the sleeve across the three-month replay — at these stakes the binding cost is exchange mechanics, not the model.</li><li>Validated forward before trusting it: an 11-hour live paper run (1,993 calls, ten books at 1–10 minute cadences on real prices, $0.07 of spend) took one trade per book at near coin-flip confidence, and the negative result was written up with a corrections section, stated limits and a re-runnable harness rather than shelved — the live account kept its walk-forward-validated rules.</li><li>Extended the evaluation to its full window: a seven-month replay (Jan–Jul 2026, 61,056 five-minute ticks per book) at $60 and then $100 book sizes, the larger pass running four books side by side — control and rich state under the live mechanics and under a fee-aware buy guard — 243,797 Jev calls and $10.80 of spend, completed after a mid-run re-fill when the API provider's account-level budget cap cut the first pass short. It surfaced a genuine execution-mechanics defect: every sell floors to Binance's lot step, so a position bought with the last ~$5 of cash sits under the $5 minimum order once the fee is taken and can never be sold — the rich-state book under the live mechanics froze again, dead from May with three positions it could never sell (the same defect froze both $60 books), while the guarded book ended the window with zero trapped positions.</li><li>The verdict held at both book sizes and with the fix: in a window where the three coins fell 28–42%, no book beat buy-and-hold once unsellable lot-step dust was excluded — $12–35 of sellable value against $63.45 for simply holding, and the heaviest-churn book paid $12.72 in fees plus $70.82 stranded as unsellable dust across its 339 round trips.</li><li>Stress-tested whether a confidence gate could rescue it — offline, against the stored answers, so no new API calls: a gate sweep from 0.50 to 0.85, then a full buy×sell mixed grid. The higher gates "won" only by trading less (≥0.70 left 1 and 5 round trips across the seven months, mostly cash at $93.07 / $88.67), and the mixed grid showed no consistent sell-side effect — the flip-flopping signature of small-sample noise, not signal: 78% of the executed round trips came from 50–60% confidence buys at a 32% win rate, and only 16 buys in the entire window cleared P≥0.70. Read as what it is: the gate is an off-switch, not alpha.</li><li>Closed out the start-mode and rule-guard questions — a final pre-invested run plus offline sweeps against the stored answers: the pre-invested book ($33/coin bought at the 1 Jan close, managed from tick 0) finished at $66.25 of $99 against $63.79 for never trading, and a full cash-vs-invested gate grid confirmed every winning cell won by not participating. Hard rule overrides — take-profit, dip-exit with a re-entry lockout, and a trailing stop on each position's own peak with a rebound re-entry — all helped in the falling window (best settings: $66 → $96 against $63.79 for holding) and all lost in the rising one (the tightest guard turned the rise's $45 into $31, while doing nothing made $48): protection in a fall is the whipsaw tax in a rise.</li></ul><div class="msec">Further Strategy Studies (September 2026)</div><ul><li>Tested the "hold while rising, cash while falling" filter family across five speeds (SMA20–SMA200 plus a 2% buffer band) as pre-committed rules on 2017→2026 daily closes: in the modern window it did not beat holding — pooled $300: best filter $1,724 vs $1,917 for buy-and-hold — while roughly halving drawdowns (BTC −53% → −32%, ETH −68% → −38%, SOL −76% → −58%) and dodging nearly the whole 2026 fall; the full-history version where the same rules win big ($5.6k–$29.4k vs $1.9k) is arithmetic from dodging 2018/2022, a structurally different era. Whipsaws were real — six switches in five weeks at BTC's late-2025 top — and a one-day execution lag moves finals 20–40%: recorded as crash insurance, not a wealth tool.</li><li>Encoded two "volume profile" setups from a trading thread — a value-area-low fakeout bounce and a thin-zone breakout — as pre-committed rules on cached 1-minute bars across matched falling and rising windows: 587 round trips with a weighted expectancy of −0.056% per trade before costs (a coin flip), the entire loss coming from fees ($95.86) and lot-size stranding ($161.42); 11 of 12 books ended below their $100 start, all 36 sensitivity cells negative, and the thread's advertised 80% win rate was not in the data.</li></ul><div class="msec">Forward Paper-Testing Tracks (September 2026)</div><ul><li>Built three supervised forward paper-testing tracks — crypto, US stocks and Polymarket — all driven by Jev and paper-only end to end (no keys, no orders anywhere): a crypto track (two state variants over a 21-day window: a control replicating the earlier one-day test, plus a richer state carrying code-computed RSI-14, EMA-20/50, 15/60/240-minute changes, volume deltas and Jev's own last three answers per coin — first swept across ten decision cadences, then settled to a single 5-minute cadence once the replays had shown interval choice was noise); a stocks track (20 liquid US large caps, events from EDGAR filings — 8-K full text, 10-Q/10-K metadata — plus a daily per-ticker news digest, across filings-only, filings+news and price-state control books); and a Polymarket track (a daily scan of ~150 top open markets judged for resolution clarity, news staleness and P(yes), trading divergence across three books with the gates added one at a time).</li><li>Every track trades on the real market mechanics: Binance lot-size flooring with sub-$5 dust stranded and never sellable on crypto; whole-share flooring at a $500 clip with IBKR commission max($0.35, 0.35% of shares) per side on stocks; Polymarket's per-category taker-fee formula on $25 positions — max 10 open per book, resolutions within 30 days, held to settlement.</li><li>Anti-cheat timing by construction: a stock entry fills at the first open after max(event date, discovery date), so a simulated fill can never land at an open from before the answer that caused it, and the crypto comparator carries the same stranded-cash mechanics as the books it is measured against.</li><li>Production-shaped supervision: a continuous systemd service for crypto (restart-and-resume from its ledgers) plus persistent daily timers for stocks and Polymarket; per-track Jev spend caps enforced in code ($15 / $5 / $5); escalations queued to the trading agent profile over its Bot Chat (idle-checked, batched, at most one per 30 minutes); a daily digest posts each track's headline numbers, and a read-only dashboard shows the live books — wallet cards, equity charts and buy-and-hold comparators — with a 30-second auto-refresh. The tracks went live on 27 September 2026 and are still inside their first results window.</li><li>Extended the crypto track at the end of September with two confidence-gated books — act only when Jev's chosen action carries P≥0.70, else hold — running alongside the ungated controls so the gate earns forward evidence instead of another replay: logic-tested offline before a live restart, and both gated books are live with low-confidence actions already being skipped.</li></ul><div class="msec">Methodology</div><ul><li>Explicit, documented limits — max drawdown, parameter-sweep selection bias, single-period caveat — results presented with the honest boundary of what the test does and does not prove</li></ul><div class="tags"><span>Python</span><span>Quant</span><span>Backtesting</span><span>Trend-Following</span><span>Walk-Forward</span><span>API Integration</span><span>AI Agent</span><span>Risk Management</span><span>Docker</span><span>s6-overlay</span><span>Production Bot</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">Office Downgrade Script</span><span class="pm">PowerShell · Office Deployment Tool</span></summary><div class="proj-body"><p class="pdesc">Single PowerShell script for IT teams to upgrade or downgrade Microsoft Office across many machines at once, using the Office Deployment Tool for a clean uninstall-then-install deployment.</p><div class="msec">Details</div><ul><li>Automatically downloads and silently extracts the latest Office Deployment Tool (ODT)</li><li>Dynamically generates XML configuration for a clean uninstallation and targeted reinstall</li><li>Uninstalls existing Office versions before deploying the specified build</li><li>Selects target/latest Office version in the generated config</li><li>Runs as Administrator or System on Windows 11, executing uninstall then download then install sequentially</li><li>Runs completely silently, with zero end user input or interruption</li></ul><div class="tags"><span>PowerShell</span><span>Office Deployment Tool</span><span>Microsoft 365</span><span>Automation</span><span>Windows</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">RepLog — iOS Workout Tracker</span><span class="pm">Swift 6 · SwiftUI · SwiftData · FastAPI · Docker</span></summary><div class="proj-body"><p class="pdesc">A native iOS strength-training tracker written from scratch as a full alternative to a commercial lifting app, with an RPE column the original lacks — plus a small self-hosted sync service that mirrors finished sessions into one flat CSV an AI coaching agent can read.</p><div class="msec">App</div><ul><li>SwiftUI app on an iOS 26 target: Swift 6, a SwiftData on-device store, an XcodeGen project definition and zero third-party Swift packages — 39 source files, roughly 6,800 lines of Swift</li><li>All eight exercise types a real training log needs (weight × reps, weighted holds, added-load and assisted bodyweight, pure bodyweight reps and timed holds, cardio, note-only sets), plus supersets, drop sets, routines with warm-up and working schemes, a rest timer and repeat-workout from history</li><li>RPE column carried through every surface — active workout rows, saved sessions, exercise history, routine targets and the sync CSV; optional, half-point steps from 1.0 to 10.0, displayed as <code>8</code> rather than <code>8.0</code></li><li>Statistics hub on Swift Charts: per-exercise volume and estimated one-rep-max trends, personal records per rep range, seasonal bests and session records</li><li>Shipped 1.0.0 to the owner's iPhone and iterated on his feedback from daily use: a second round of six fixes made deleting a workout local-only (a session already in the sync database is never destroyed from the phone), kept an open workout finishable after leaving the editor, put a confirmation in front of "finish", gave the Log a manual sync control that reports its real state (up to date / relative time / auth failure), centred set cells under their exercise titles and dropped a dead settings section — each change carried by a new unit or UI test, with the simulator's offline drill reworked to assert the queued count is visible from the Log before a manual sync</li><li>Third round of owner feedback, from daily use in the gym (September 2026): routines lost the shared warm-up/working scheme, so a routine exercise is now a set count plus a note held <em>per routine</em> — the same lift reads "3×5, go light" in one routine and "4×4, no belt" in another — and that note is drawn on the routine row and carried into the workout from both start paths; a finished workout now opens the same editor as an active one, with no Finish control and no live timer (1.1.4 on the download page); and the set row was rebuilt against three candidate layouts put side by side in the simulator, shipping the winner after equalising the column gaps and centring the set-number circle on the row</li><li>Fourth round of owner feedback (October 2026): the keyboard bar gained <code>← → ✓</code> — chevrons step through every inline box in on-screen order, the check closes the keyboard, and the box being edited now scrolls clear of the software keys; shipped to the download page as 1.1.8, with the test gate green on the simulator (36/36 unit, 19/19 UI tests).</li><li>A store that fails to open starts a fresh file store instead of falling back to memory, so a damaged database can never masquerade as an empty training history</li></ul><div class="msec">Sync Service</div><ul><li>lift-sync: a FastAPI service that upserts finished sessions into a single flat CSV — bearer auth, a single-writer lock, upsert by session ID, delete tombstones, atomic file rewrite, JSONL audit log and a health endpoint; 55 passing pytest tests, including two simultaneous uploads and an eight-thread upsert race</li><li>Ships as one Docker image with a compose file, and the CSV header is frozen so the file stays legible to a human and a model alike</li><li>Offline-first client: an outbox queues finished sessions and retries with backoff, tombstones deletions and guarantees a single upload per session — sync is optional and off by default, the phone stays the source of truth</li></ul><div class="msec">Distribution &amp; Device Install</div><ul><li>Over-the-air install path built from scratch: an ad-hoc Release archive exported on the Mac and published to a dedicated app-downloads LXC (Debian 12, 2 vCPU / 1 GB, container 111) running nginx over /srv/downloads with a cloudflared tunnel hostname, so a build reaches the phone by opening one URL in Safari — no cable, no Xcode and no Bonjour. Also established why the first attempt failed: signing needs the Mac's GUI session (<code>launchctl asuser</code>), because a plain SSH session cannot reach the signing keychain</li><li>One command publishes a build: <code>publish.sh</code> takes the IPA plus name, bundle id, version and base URL, writes the <code>manifest.plist</code>, a themed install page carrying the build's real identity (version, bundle id, size, build timestamp and the <code>itms-services</code> link) and a <code>meta.json</code>, then rebuilds the root index from every app's <code>meta.json</code>. Both pages are <code>noindex</code>, and ad-hoc signing limits installation to devices in the provisioning profile — a public URL that Apple's own distribution rules keep closed</li></ul><div class="msec">Migration &amp; Testing</div><ul><li>One-time importer over four years of the old app's export (6,524 set rows, 636 sessions, 88 exercises, 11 categories) that lifts RPE out of the free-text notes where it had been buried as bare numbers and ranges, and rewrites it as a real column</li><li>Whole Mac test gate green in a single run (Xcode 26.5, iPhone 17 Pro simulator): the build succeeds, 36 unit tests across 5 suites pass, and all 14 XCUITest cases pass — including an in-simulator offline drill that stops the sync service, finishes a workout, restarts the app, brings the service back, and proves exactly one upload, one tombstone and a 409 on re-import. The service's 55 pytest tests pass in the fast gate, and a scripted tour re-captures 30 screens in dark mode for screen-by-screen comparison against the 17 reference screenshots</li><li>The failing UI tests were real app defects, not flaky tests: session and exercise rows looked tappable but only the top row worked (a <code>.plain</code> button's hit target is the label's content shape, so taps landing under a <code>Spacer</code> did nothing) — pinned down by scanning tap coordinates across a row, then fixed with <code>.contentShape()</code>. Also found an iOS 26 toolbar clipping the Edit button to a single letter, a statistics screen that pushed and immediately popped back, and a test-reset flag that wiped the queued session mid-drill</li><li>Accessibility and Dynamic Type treated as evidence rather than assertion: the audit runs as its own test class at the largest accessibility text size, its 33 findings (contrast, hit areas under 44 pt, clipped labels) are logged as a known polish list instead of hidden, and everything a simulator cannot prove — HealthKit writes, Live Activities on a real lock screen, haptics — is listed as unverified rather than claimed</li><li>Testing policy changed on the owner's call (24 September 2026) and applied for the rest of the pass: end-to-end only — new behaviour is proven by UI tests that drive the app in the simulator and assert what is visible on screen, and the seven unit tests written for the routine-note rule were deleted the same day. The five older unit files stay only because they cover the sync engine and the maths a UI test cannot reach</li><li>Developed on a MacBook over SSH from the fleet host, driving the iOS simulator from the command line, with the implementation plan put through an adversarial review before any code was written</li></ul><div class="tags"><span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>Swift Charts</span><span>iOS</span><span>XCUITest</span><span>FastAPI</span><span>Docker</span><span>CSV</span><span>Offline-first</span></div></div></details>
-    <details class="proj-item"><summary><span class="ph">Automated Video Production Pipeline</span><span class="pm">Python · Pillow · Remotion · ffmpeg · ElevenLabs</span></summary><div class="proj-body"><p class="pdesc">Code-first video pipeline that turns a researched script into a finished narrated history explainer — period imagery plus programmatic animation, rendered and assembled entirely in code.</p><div class="msec">Pipeline</div><ul><li>End-to-end build: researched script → per-scene narration → programmatic scenes → ffmpeg assembly. The reference episode — the Great Hunger (Ireland, 1845–51) — runs 3m22s at 1080p: 6,074 frames at 30 fps, H.264 video with stereo audio.</li><li>Visual mix keeps real context: period photographs, engravings and portraits sourced from Wikimedia Commons against a per-file licence manifest (39 public-domain files, the rest openly licensed or unrestricted), with maps plotted from Natural Earth data, charts and kinetic typography drawn programmatically where no imagery exists.</li><li>Narration tooled end-to-end: a purpose-built generator calls the ElevenLabs Brian voice (model auto-falls back v4 → v3 → multilingual v2), pulls the key at point of use from Bitwarden Secrets Manager, respells Irish-language names for the voice, and emits per-scene timing data that drives the renderer.</li><li>The renderer draws every frame with Pillow and streams them to ffmpeg; assembly produced the 1080p master plus a compressed preview cut, alongside three candidate thumbnail designs.</li><li>Extended the pipeline with browser-rendered motion: built RESONANCE, a self-contained one-shot 10-second canvas piece — a cymatics study with ~17,000 sand-grain particles settling into real Chladni standing-wave patterns, driven by a deterministic seek with a fixed seed. Proved the frame-exact capture path that can bring this class of animation into episodes: 120 deterministic frames captured over CDP at 1920×1080/30 fps, encoded with the pipeline's own libx264 settings into a 4.0-second MP4, verified by extracting frames back out of the encoded file.</li></ul><div class="msec">Agentic Pipeline</div><ul><li>A second, fully agentic production line: a local model under an autonomous agent harness takes a single one-shot prompt from the researched dossier and brief to a finished, narrated film — script fact-checked against the dossier, ElevenLabs narration with per-scene timing, sourced imagery, a complete Remotion (React + TypeScript) project, the rendered MP4 and three thumbnail designs.</li><li>First episode complete: "Will Ireland Reunify? The Border Poll Explained" — 20 scenes, 12m51s, 23,116 frames at 1920×1080/30 fps, H.264 with the narration muxed in; charts drawn from eight data CSVs, SVG maps built from openly licensed county outlines, and 17 Wikimedia Commons images logged in a licence manifest.</li><li>Verified through the build: a fact-check bullet for every number, name and date in the script (57 in all), a readable proof frame for each of the 20 scenes, and a byte-identical re-render of one frame in two separate processes to pin determinism.</li><li>Being run as a controlled comparison across models and agent harnesses — the same episode produced once per run under an identical, hash-checked one-shot prompt, outputs kept side by side: local quants of Qwen3.8-Flash-Next (base at 2-bit and 3-bit, the Swift 1.5 fine-tune at 2-bit) under the DeepSeek Harness and Hermes, and DeepSeek V4.1 Flash under both harnesses. Ten finished episodes so far — each a complete film, 11m59s–13m51s.</li></ul><div class="tags"><span>Python</span><span>ffmpeg</span><span>Pillow</span><span>Remotion</span><span>ElevenLabs</span><span>TTS</span><span>Video Encoding</span><span>Canvas 2D</span><span>Chrome DevTools Protocol</span><span>Wikimedia Commons</span><span>Automation</span></div></div></details>
+<section class="sec sec--band" id="impact">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">03</span>
+      <h2 id="impact">Impact</h2>
+      <span class="sdesc">MEASURED, NOT CLAIMED</span>
+    </header>
+    <div class="meas">
+      <div class="meas-cell rv d1">
+        <div class="meas-n tnum" data-count="900" data-prefix="" data-suffix="+">900+</div>
+        <div class="meas-l">Tickets Resolved</div>
+        <div class="meas-s">in 7 months</div>
+      </div><div class="meas-cell rv d2">
+        <div class="meas-n tnum" data-count="30" data-prefix="~" data-suffix="">~30</div>
+        <div class="meas-l">Tickets Per Week</div>
+        <div class="meas-s">average</div>
+      </div><div class="meas-cell rv d3">
+        <div class="meas-n tnum" data-count="130" data-prefix="~" data-suffix="">~130</div>
+        <div class="meas-l">Tickets Per Month</div>
+        <div class="meas-s">average</div>
+      </div><div class="meas-cell rv d4">
+        <div class="meas-n tnum" data-count="15" data-prefix="" data-suffix="+">15+</div>
+        <div class="meas-l">Platform Integrations</div>
+        <div class="meas-s">supported</div>
+      </div>
+    </div>
   </div>
 </section>
-
-<section class="reveal">
-  <h2 class="sec-title">Education</h2>
-  <div class="edu">
-    <div class="ed"><div class="when">2021 – 2024</div><h3>A-Levels</h3><div class="sub">Ramsey Grammar School</div><div class="grades"><span class="grade"><b>B</b> IT</span><span class="grade"><b>B</b> Photography</span><span class="grade"><b>D</b> Computer Science</span><span class="grade"><b>L3 Pass</b> Sports Leaders</span></div></div>
-    <div class="ed"><div class="when">2018 – 2021</div><h3>GCSEs</h3><div class="sub">Ramsey Grammar School</div><div class="grades"><span class="grade"><b>A</b> Maths</span><span class="grade"><b>B</b> English</span><span class="grade"><b>BB</b> Science (Double)</span><span class="grade"><b>B</b> ICT</span><span class="grade"><b>C</b> Computer Science</span><span class="grade"><b>C</b> Business Studies</span></div></div>
+<section class="sec" id="measurements">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">04</span>
+      <h2 id="measurements">Measurements</h2>
+      <span class="sdesc">FIGURES TAKEN FROM THE REPOSITORIES</span>
+    </header>
+    <div class="mgrid">
+      <div class="fig rv d1">
+        <div class="fig-cap">
+          <span class="fig-t">Prefill throughput by prompt depth</span>
+          <span class="fig-s">PROJECT MAYA &#183; 262,144 CTX</span>
+        </div>
+        <svg viewBox="0 0 520 300" class="chart-svg" role="img" aria-labelledby="cpT">
+<title id="cpT">Project Maya prefill throughput: 714 tok/s at 20K context, 870 tok/s at 200K, 851 tok/s at 250K</title>
+<line class="pl-grid" x1="62" y1="248.0" x2="500" y2="248.0"/>
+<text class="pl-vals" x="52" y="251.5" text-anchor="end">0</text>
+<line class="pl-grid" x1="62" y1="193.0" x2="500" y2="193.0"/>
+<text class="pl-vals" x="52" y="196.5" text-anchor="end">250</text>
+<line class="pl-grid" x1="62" y1="138.0" x2="500" y2="138.0"/>
+<text class="pl-vals" x="52" y="141.5" text-anchor="end">500</text>
+<line class="pl-grid" x1="62" y1="83.0" x2="500" y2="83.0"/>
+<text class="pl-vals" x="52" y="86.5" text-anchor="end">750</text>
+<line class="pl-grid" x1="62" y1="28.0" x2="500" y2="28.0"/>
+<text class="pl-vals" x="52" y="31.5" text-anchor="end">1000</text>
+<line class="pl-axis" x1="62" y1="248" x2="500" y2="248"/>
+<text class="pl-vals" x="62" y="16">TOK/S</text>
+<text class="pl-vals" x="500" y="16" text-anchor="end">PREFILL THROUGHPUT</text>
+<path d="M 102.0 248 L 102.0 90.9 L 281.0 56.6 L 460.0 60.8 L 460.0 248 Z" fill="#B23A1C" opacity=".10"/>
+<path d="M102.0 90.9 L281.0 56.6 L460.0 60.8" fill="none" stroke="#B23A1C" stroke-width="2"/>
+<circle cx="102.0" cy="90.9" r="4" fill="#B23A1C"/>
+<text class="pl-val" x="102.0" y="76.9" text-anchor="middle">714</text>
+<text class="pl-vals" x="102.0" y="268" text-anchor="middle">20K</text>
+<circle cx="281.0" cy="56.6" r="4" fill="#B23A1C"/>
+<text class="pl-val" x="281.0" y="42.6" text-anchor="middle">870</text>
+<text class="pl-vals" x="281.0" y="268" text-anchor="middle">200K</text>
+<circle cx="460.0" cy="60.8" r="4" fill="#B23A1C"/>
+<text class="pl-val" x="460.0" y="46.8" text-anchor="middle">851</text>
+<text class="pl-vals" x="460.0" y="268" text-anchor="middle">250K</text>
+<text class="pl-vals" x="281.0" y="288" text-anchor="middle">PROMPT DEPTH (TOKENS)</text>
+</svg>
+        <p class="fig-note">Mean of three fresh-load runs per depth on the 313B IQ2_XXS quant, streamed KV cache, speculative drafting off.</p>
+      </div><div class="fig rv d2">
+        <div class="fig-cap">
+          <span class="fig-t">Decode throughput before and after the engine bump</span>
+          <span class="fig-s">STRATA v0.1.32 &#8594; v0.1.39</span>
+        </div>
+        <svg viewBox="0 0 520 300" class="chart-svg" role="img" aria-labelledby="cdT">
+<title id="cdT">Decode throughput after the engine upgrade: at 20K context 56.6 to 73.9 tokens per second, at 250K context 50.3 to 65.0</title>
+<line class="pl-grid" x1="62" y1="248.0" x2="500" y2="248.0"/>
+<text class="pl-vals" x="52" y="251.5" text-anchor="end">0</text>
+<line class="pl-grid" x1="62" y1="174.7" x2="500" y2="174.7"/>
+<text class="pl-vals" x="52" y="178.2" text-anchor="end">30</text>
+<line class="pl-grid" x1="62" y1="101.3" x2="500" y2="101.3"/>
+<text class="pl-vals" x="52" y="104.8" text-anchor="end">60</text>
+<line class="pl-grid" x1="62" y1="28.0" x2="500" y2="28.0"/>
+<text class="pl-vals" x="52" y="31.5" text-anchor="end">90</text>
+<line class="pl-axis" x1="62" y1="248" x2="500" y2="248"/>
+<text class="pl-vals" x="62" y="16">TOK/S</text>
+<text class="pl-vals" x="500" y="16" text-anchor="end">DECODE THROUGHPUT</text>
+<rect class="pl-barg" x="92.0" y="109.6" width="44" height="138.4"/>
+<text class="pl-val" x="114.0" y="101.6" text-anchor="middle">56.6</text>
+<text class="pl-vals" x="114.0" y="268" text-anchor="middle">v0.1.32</text>
+<rect class="pl-bar" x="148.0" y="67.4" width="44" height="180.6"/>
+<text class="pl-val" x="170.0" y="59.4" text-anchor="middle">73.9</text>
+<text class="pl-vals" x="170.0" y="268" text-anchor="middle">v0.1.39</text>
+<text class="pl-vals" x="136.0" y="288" text-anchor="middle">20K</text>
+<rect class="pl-barg" x="281.0" y="125.0" width="44" height="123.0"/>
+<text class="pl-val" x="303.0" y="117.0" text-anchor="middle">50.3</text>
+<text class="pl-vals" x="303.0" y="268" text-anchor="middle">v0.1.32</text>
+<rect class="pl-bar" x="337.0" y="89.1" width="44" height="158.9"/>
+<text class="pl-val" x="359.0" y="81.1" text-anchor="middle">65.0</text>
+<text class="pl-vals" x="359.0" y="268" text-anchor="middle">v0.1.39</text>
+<text class="pl-vals" x="325.0" y="288" text-anchor="middle">250K</text>
+</svg>
+        <p class="fig-note">Same model and config byte-for-byte. Decode gained 22&#8211;31% at every depth; prefill gained 23&#8211;26% from 60k up, peaking at 1,973 tok/s.</p>
+      </div><div class="fig rv d1">
+        <div class="fig-cap">
+          <span class="fig-t">Strategy against equal-weight buy-and-hold</span>
+          <span class="fig-s">TRADING BOT &#183; WALK-FORWARD</span>
+        </div>
+        <svg viewBox="0 0 520 300" class="chart-svg" role="img" aria-labelledby="cbT">
+<title id="cbT">Strategy return against equal-weight buy-and-hold: 35.9 percent versus minus 14.5 percent in the blind backtest, 16.5 versus 0.6 percent out of sample</title>
+<line class="pl-grid" x1="62" y1="49.3" x2="500" y2="49.3"/>
+<text class="pl-vals" x="52" y="52.8" text-anchor="end">+40</text>
+<line class="pl-grid" x1="62" y1="110.4" x2="500" y2="110.4"/>
+<text class="pl-vals" x="52" y="113.9" text-anchor="end">+20</text>
+<line class="pl-grid" x1="62" y1="171.6" x2="500" y2="171.6"/>
+<text class="pl-vals" x="52" y="175.1" text-anchor="end">+0</text>
+<line class="pl-grid" x1="62" y1="232.7" x2="500" y2="232.7"/>
+<text class="pl-vals" x="52" y="236.2" text-anchor="end">-20</text>
+<line class="pl-axis" x1="62" y1="171.6" x2="500" y2="171.6"/>
+<text class="pl-vals" x="62" y="20">RETURN %</text>
+<text class="pl-vals" x="500" y="20" text-anchor="end">STRATEGY vs BUY-AND-HOLD</text>
+<rect class="pl-bar2" x="92.0" y="61.8" width="44" height="109.8"/>
+<text class="pl-val" x="114.0" y="54.8" text-anchor="middle">+35.9%</text>
+<text class="pl-vals" x="114.0" y="268" text-anchor="middle">STRATEGY</text>
+<rect class="pl-barg" x="148.0" y="171.6" width="44" height="44.3"/>
+<text class="pl-val" x="170.0" y="228.9" text-anchor="middle">-14.5%</text>
+<text class="pl-vals" x="170.0" y="268" text-anchor="middle">BUY & HOLD</text>
+<text class="pl-vals" x="136.0" y="288" text-anchor="middle">BLIND BACKTEST</text>
+<rect class="pl-bar2" x="281.0" y="121.1" width="44" height="50.4"/>
+<text class="pl-val" x="303.0" y="114.1" text-anchor="middle">+16.5%</text>
+<text class="pl-vals" x="303.0" y="268" text-anchor="middle">STRATEGY</text>
+<rect class="pl-barg" x="337.0" y="169.7" width="44" height="1.8"/>
+<text class="pl-val" x="359.0" y="162.7" text-anchor="middle">+0.6%</text>
+<text class="pl-vals" x="359.0" y="268" text-anchor="middle">BUY & HOLD</text>
+<text class="pl-vals" x="325.0" y="288" text-anchor="middle">OUT-OF-SAMPLE</text>
+</svg>
+        <p class="fig-note">Rules committed to a written receipt before any price data was inspected. The higher gates only won by trading less, so the gate is an off-switch, not alpha.</p>
+      </div><div class="fig fig-wide rv d2">
+        <div class="fig-cap">
+          <span class="fig-t">Code-review findings, all remediated</span>
+          <span class="fig-s">FFIOM &#183; AUGUST 2026</span>
+        </div>
+        <svg viewBox="0 0 520 220" class="chart-svg" role="img" aria-labelledby="cfT">
+<title id="cfT">Code review findings: 10 high, 15 medium, 9 low, 34 in total, all remediated</title>
+<text class="pl-vals" x="62" y="30">FINDINGS BY SEVERITY</text>
+<text class="pl-tc" x="500" y="30" text-anchor="end">34 TOTAL &#183; ALL REMEDIATED</text>
+<rect x="62.0" y="46" width="128.8" height="26" fill="#B23A1C"/>
+<text x="126.4" y="64" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="11" fill="#fff">10</text>
+<rect x="190.8" y="46" width="193.2" height="26" fill="#C77A4A"/>
+<text x="287.4" y="64" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="11" fill="#fff">15</text>
+<rect x="384.1" y="46" width="115.9" height="26" fill="#D8D2C4"/>
+<text x="442.0" y="64" text-anchor="middle" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="11" fill="#1A1917">9</text>
+<line class="pl-axis" x1="62" y1="72" x2="500" y2="72"/>
+<text class="pl-vals" x="126.4" y="92" text-anchor="middle">HIGH</text>
+<text class="pl-vals" x="287.4" y="92" text-anchor="middle">MEDIUM</text>
+<text class="pl-vals" x="442.0" y="92" text-anchor="middle">LOW</text>
+</svg>
+        <p class="fig-note">34 findings from a structured audit of the whole codebase, run as parallel subagent reviews. Every one was remediated and verified.</p>
+      </div>
+    </div>
   </div>
 </section>
-
-<section class="reveal">
-  <h2 class="sec-title">Contact</h2>
-  <div class="contact">
-    <a href="mailto:enquiries@eamonmckiernan.im">
-      <i class="hgi-stroke hgi-mail-01" aria-hidden="true"></i>
-      enquiries@eamonmckiernan.im
-    </a>
-    <a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">
-      <i class="hgi-stroke hgi-linkedin-01" aria-hidden="true"></i>
-      LinkedIn
-    </a>
-    <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">
-      <i class="hgi-stroke hgi-github" aria-hidden="true"></i>
-      GitHub
-    </a>
-    <span><i class="hgi-stroke hgi-location-01" aria-hidden="true"></i> Isle of Man</span>
+<section class="sec" id="projects">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">05</span>
+      <h2 id="projects">Work</h2>
+      <span class="sdesc">NINE BUILDS &#183; 134 DOCUMENTED DECISIONS</span>
+    </header>
+    <div class="pindex rv"><a href="#proj-1"><b>01</b> Local AI</a><a href="#proj-2"><b>02</b> Proxmox Cluster</a><a href="#proj-3"><b>03</b> OPNsense Router</a><a href="#proj-4"><b>04</b> Media Server</a><a href="#proj-5"><b>05</b> Fantasy Football Isle of Man</a><a href="#proj-6"><b>06</b> AI Trading Bot &amp; Backtesting</a><a href="#proj-7"><b>07</b> Office Downgrade Script</a><a href="#proj-8"><b>08</b> RepLog — iOS Workout Tracker</a><a href="#proj-9"><b>09</b> Automated Video Production Pipeline</a></div>
+    <div class="sheets">
+      <details class="psheet rv" id="proj-1" open>
+      <summary>
+        <span class="pnum">01</span>
+        <span class="ptitle">Local AI</span>
+        <span class="pmeta">Xeon E5-2680 v4 · 2× Tesla V100 32 GB</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">Fully local LLM inference stack — open-source models served on a pair of Tesla V100 32 GB cards by llama.cpp and the Strata engine, wrapped in a Hermes agent layer with a custom Discord frontend. Every measured run, table and write-up is published in the repo: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>.</p>
+        <div class="spec">
+          <div class="slabel">Stack</div>
+          <ul class="spec-items two"><li>2× Tesla V100 32 GB linked at PCIe 3.0 ×16 — driver 580 pinned as the last Volta driver branch, CUDA 12.9, and llama.cpp rebuilt sm_70-only (144 embedded sm_70 cubins); the Strata engine built for sm_70 serves a 128K-context Qwen3.8-Flash-Next with MTP speculative decoding</li><li>Extended the box to NVIDIA's Nemotron 3.5 Bolt 74B the day after upstream support merged: rebuilt llama.cpp from master to build 11700 (CUDA 12.9, sm_70 cubins) and served the 74B MoE at 262,144 ctx across both V100s with NVIDIA's separate 1.1B LiLiCorr drafter on llama.cpp's dflash speculative path — 128 of 490 draft tokens accepted and 53 tok/s decode on a prose prompt, against 139 tok/s on a counting test where drafting hits its ceiling</li><li>A third engine, Project Maya — GLM-5.3-Flash, a ~320B Mixture-of-Experts (~18B active) layer-split across both cards. The newest quant is a 313B-parameter, hand-mixed 87 GB IQ2_XXS whose publisher prunes the MTP block, so it benches with speculative drafting off: at the full 262,144-token window it holds 22.5–24.9 tok/s decode and 714 tok/s prefill at 20K rising to 870 at 200K (851 at 250K), every figure the mean of three fresh-load runs per depth, and engine v1.1.13 → v1.1.15 lifted prefill 7.6–10.3% at every depth while decode stayed inside its run-to-run spread. That window fits because the cache is streamed: a 32,768-position slice of each attention layer stays in VRAM (0.37 GB across both cards) while the other 88% of the 262K positions sit in 2.95 GB of pinned, device-mapped host RAM, and 93–99% of block reads still hit VRAM. Halving the window to 131K changes nothing measurable (+0.3% prefill / +2.6% decode at the shared depths) — long context is essentially free on this box. The Maya-S 321B quant, MTP drafting on, reads 20.4–22.6 tok/s decode and 595–646 tok/s prefill. Moving the model set off a DRAM-less boot SSD onto a dedicated NVMe was worth +23.9% decode / +46.0% prefill mean on a same-day, three-runs-per-side controlled pair.</li><li>Measured speculative decoding on that quant instead of assuming it pays: the GLM-5.3-Flash DFlash2 drafter (Q4_K_M, 697 MB, five layers) accepted 63% of its drafts and still ran 27–31% slower than the same engine without it — 15.9–18.0 tok/s decode against 22.5–24.9 — so drafting stays off for this model</li><li>Two-card tensor split with MTP; the full 262,144-token window runs end to end — a 250,632-token prompt prefilled at 1,495 tok/s, then 6,000 tokens generated at 48.8 tok/s</li><li>Cooling rebuilt around a single 7k-rpm PWM fan driven by a systemd hwmon fan curve — a ten-minute soak of six back-to-back 100k-token prefills held dead-flat at 61–62 °C (1,078 tok/s, 0.7 tok/s spread). Redesigned the 80 mm ducting into a mirrored one-fan-per-card pair — each fan 30 mm outboard of the stack, the cards&rsquo; original one-slot (40 mm) mouth spacing kept, and both meshes closed and single-body on export</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Current Numbers (October 2026)</div>
+          <ul class="spec-items"><li>Engine v0.1.32 → v0.1.39, same model and config byte-for-byte: decode +22–31% at every depth (20k: 56.6 → 73.9 tok/s; 250k: 50.3 → 65.0) and prefill +23–26% from 60k up (peak 1,973 tok/s at 100k)</li><li>126-run MTP sweep against the live server across all six depths: gate 0.50 confirmed fastest and the stock configuration measured fastest overall, with 250k-prompt prefill flat at 1,494–1,498 tok/s</li><li><code>model-bench</code> harness for any OpenAI-compatible endpoint — browser UI + CLI, auto-detects llama.cpp or Strata, writes per-run JSONL/CSV/markdown; published at github.com/EamonMcKiernan05/Local-AI-Speed-Test-Harness</li><li>Enabled vision on the base model — the image encoder built locally for sm_70, verified with a real image read in 4.0 s at 93 tok/s decode</li><li>One-shot demo bench — single-prompt browser demos written by the local model: <a href="gallery.html">run them all in the demo gallery</a></li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>llama.cpp</span><i>&#183;</i><span>Strata</span><i>&#183;</i><span>Speculative Decoding</span><i>&#183;</i><span>LLM</span><i>&#183;</i><span>Tesla V100</span><i>&#183;</i><span>MTP</span><i>&#183;</i><span>Benchmarking</span><i>&#183;</i><span>Hermes</span><i>&#183;</i><span>Discord Bot</span><i>&#183;</i><span>Self-hosted AI</span><i>&#183;</i><span>Open Source</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-2">
+      <summary>
+        <span class="pnum">02</span>
+        <span class="ptitle">Proxmox Cluster</span>
+        <span class="pmeta">Dell 3050 · HP ProDesk · HP EliteDesk</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">Three-node high-availability cluster on Proxmox VE 9.2 with Ceph Squid distributed storage, running a mix of LXC containers and full VMs for homelab services.</p>
+        <div class="spec">
+          <div class="slabel">Details</div>
+          <ul class="spec-items two"><li>Major version upgrade (August 2026): rolled Proxmox VE 8.4 → 9.2.11 (Debian 12 → 13, kernel 7.0.14) and Ceph Reef 18.2 → Squid 19.2.5 node-by-node across all three nodes — pre-upgrade checks, rolling Ceph daemon restarts with mgr failover, no data loss, final cluster health HEALTH_OK</li><li>Automatic VM and LXC failover between nodes via Proxmox HA</li><li>Ceph replicated storage pools distributed across all three nodes</li><li>Separate resource pools isolating different workload types</li><li>Proxmox Backup Server for scheduled snapshot backups</li><li>Monitored via LibreNMS and Uptime Kuma — 24 HTTP/API monitors covering every container and VM service across all three nodes, provisioned via the Uptime Kuma API</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>Proxmox</span><i>&#183;</i><span>Ceph</span><i>&#183;</i><span>LXC</span><i>&#183;</i><span>HA</span><i>&#183;</i><span>Virtualisation</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-3">
+      <summary>
+        <span class="pnum">03</span>
+        <span class="ptitle">OPNsense Router</span>
+        <span class="pmeta">HP 280 G2 SFF · Intel i350 NIC</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">Custom router/firewall separating server infrastructure from consumer traffic, with a managed switch and wireless access point for full network control.</p>
+        <div class="spec">
+          <div class="slabel">Details</div>
+          <ul class="spec-items"><li>Dedicated server subnet isolated from consumer devices via firewall rules</li><li>Managed switch handling VLAN tagging and port segregation</li><li>Pi-hole for network-wide DNS filtering and ad blocking</li><li>Tailscale VPN for secure remote access to home network resources</li><li>OPNsense IDS/IPS for traffic inspection</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>OPNsense</span><i>&#183;</i><span>Firewall</span><i>&#183;</i><span>VLANs</span><i>&#183;</i><span>Pi-hole</span><i>&#183;</i><span>Tailscale</span><i>&#183;</i><span>Networking</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-4">
+      <summary>
+        <span class="pnum">04</span>
+        <span class="ptitle">Media Server</span>
+        <span class="pmeta">Xeon E5-2630 v4 · GTX 1650 · TrueNAS</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">Self-hosted media stack with a fully automated download pipeline, GPU transcoding on a GTX 1650 mapped into the app containers, and ZFS-backed redundant storage.</p>
+        <div class="spec">
+          <div class="slabel">Details</div>
+          <ul class="spec-items two"><li>Sonarr, Radarr, and Prowlarr for automated media acquisition</li><li>Jellyfin on TrueNAS with the GTX 1650 passed into the app container — the card, its device nodes and NVIDIA's userspace libraries are all visible from inside it, and its bundled ffmpeg offers h264, hevc and av1 NVENC encoders plus CUDA decode</li><li>TrueNAS with ZFS for redundant storage and data integrity</li><li>TrueNAS replication for off-site backup of the media library</li><li>The same box also runs Nextcloud 35 as a self-hosted private cloud — PostgreSQL database and file data on separate host paths under the existing snapshot and replication coverage</li><li>Reverse proxied via Nginx Proxy Manager with HTTPS</li></ul>
+        </div><div class="spec">
+          <div class="slabel">GPU Transcoding</div>
+          <ul class="spec-items"><li>Found Jellyfin's hardware acceleration switched off in its own settings — the config read <code>HardwareAccelerationType: none</code> while every read-only check said the GPU was available, so every stream had been transcoding on the CPU; enabled NVENC and re-read the config to confirm it took</li><li>Proved a catalog HandBrake app could never use that GPU, whatever its settings: the image is Alpine/musl and NVIDIA's encoder userspace is glibc-only, so <code>ldd</code> inside the container failed on a missing loader and the encoder library never opened — and the catalog template strips the device from both containers anyway, an upstream issue its own template flags</li><li>Stood up a glibc-based HandBrake image with an explicit GPU device reservation instead, and verified it inside the running container: <code>nvidia-smi -L</code> sees the GTX 1650 and <code>HandBrakeCLI --help</code> lists <code>nvenc_h264</code> and <code>nvenc_h265</code> with zero library-load errors</li><li>Diagnosed a crash-looping app install on the way: TrueNAS 25.04 creates app data folders root-owned while the containers run as uid 568, and its permissions helper now only checks rather than fixes — the container died on <code>EACCES</code> before it ever bound a port, while every <code>app.start</code> job still reported success</li><li>Worked out which encoder the card actually supports from NVIDIA's own matrix (TU117): H.264 4:2:0 and HEVC up to 10-bit encode, no H.264 10-bit encode or decode, no HEVC B-frames, no AV1 — so 10-bit sources go to HEVC and Hi10P falls back to the CPU</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>Jellyfin</span><i>&#183;</i><span>TrueNAS</span><i>&#183;</i><span>NVENC</span><i>&#183;</i><span>HandBrake</span><i>&#183;</i><span>ZFS</span><i>&#183;</i><span>Sonarr</span><i>&#183;</i><span>Radarr</span><i>&#183;</i><span>Docker</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-5">
+      <summary>
+        <span class="pnum">05</span>
+        <span class="ptitle">Fantasy Football Isle of Man</span>
+        <span class="pmeta">FastAPI · SQLite · SwiftUI · Vanilla JS</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">FPL-style fantasy football game built for the Canada Life Premier League (Isle of Man). Full-stack application with FastAPI backend, web SPA, and a native iOS client integrating live match data from the FullTime API.</p>
+        <div class="spec">
+          <div class="slabel">Backend</div>
+          <ul class="spec-items two"><li>FastAPI REST API with JWT authentication and bcrypt password hashing</li><li>Social sign-in (August 2026): Google and Apple OAuth consolidated onto a single shared Authlib layer — PKCE S256 with signed state cookies (no server session), JWKS-verified id_tokens (iss/aud/exp), Apple client_secret minted per exchange as an ES256 JWT, and user linking that keys on (provider, provider_id) before email to handle Apple's no-guaranteed-email and private-relay accounts; 31 new tests</li><li>SQLite + SQLAlchemy with Alembic migrations for schema management</li><li>FPL-style scoring engine with captain/vice-captain, transfers, and chips</li><li>APScheduler for automated gameweek scoring and data sync jobs</li><li>Position-based player scoring with performance-adjusted pricing</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Frontend &amp; iOS App</div>
+          <ul class="spec-items two"><li>Vanilla JS SPA with carousel-style page transitions, FPL-inspired design, and CSS custom property token system</li><li>Complete frontend redesign (2026): 14 dedicated page templates, modular JS architecture replacing monolithic app, matching official FPL site structure</li><li>Native iOS app built with SwiftUI (iOS 17+) – MVVM architecture with 18 views across 8 modules</li><li>Swift Concurrency (async/await) with URLSession actor and auto-refresh token rotation</li><li>Keychain Services for secure token persistence and session management</li><li>@Observable macro for reactive state management</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Security</div>
+          <ul class="spec-items two"><li>Comprehensive security audit (July 2026): 18 files refactored, 22 vulnerabilities remediated and verified</li><li>Eliminated legacy auth bypass — all endpoints now enforce JWT-based authentication</li><li>Admin endpoints gated behind <code>require_admin</code> middleware with role-based access control</li><li>IDOR prevention: all state-mutating endpoints derive user identity from JWT, not client input</li><li>CORS restricted to <code>APP_BASE_URL</code> environment variable (was wildcard + credentials)</li><li>PKCE <code>code_verifier</code> stored in signed HttpOnly cookie instead of plain URL parameter</li><li>Rate limiting on login/register/refresh endpoints (5 req/min per IP)</li><li>Refresh tokens bound to user-agent string with <code>HttpOnly; Secure; SameSite=Strict</code> flags</li><li>Pydantic request schemas on all transfer endpoints preventing arbitrary key injection</li><li>Password policy enforcement: minimum 10 chars, uppercase + lowercase + digit required</li><li>Parameterized SQLite <code>ATTACH DATABASE</code> queries (prevented SQL injection via f-strings)</li><li>Database files removed from git history with <code>*.db</code> in <code>.gitignore</code></li></ul>
+        </div><div class="spec">
+          <div class="slabel">Data &amp; DevOps</div>
+          <ul class="spec-items two"><li>Live data pipeline syncing fixtures, results, and league tables from FullTime API</li><li>Separate database management service (FFIOM-DB) with automated data ingestion</li><li>GitHub Actions CI/CD pipeline</li><li>Docker containerization: multi-container orchestration with separate API and database images, deployed to a dedicated Debian VM on Proxmox</li><li>Production deployment via Cloudflare Tunnel (cloudflared systemd service) with DNS routing to ffiom.com</li><li>Automated production updates: GitHub deploy key plus update script on the production VM pull the latest image from GitHub, take a pre-swap database backup, and health-verify the container swap (live-verified on ffiom.com)</li><li>Pytest test suite with production database isolation</li><li>App Store compliance: Info.plist hardening, ATS configuration, PrivacyInfo manifest, Keychain access groups</li></ul>
+        </div><div class="spec">
+          <div class="slabel">FullTime Data Service</div>
+          <ul class="spec-items"><li>Self-hosted C# .NET 9 API on a dedicated Debian server, systemd-managed with Kestrel bound to the LAN — scrapes the Cloudflare-protected FullTime site with headless Chromium via Playwright, keeping the scraper warm with a persistent profile and a per-fetch <code>cf_clearance</code> cookie</li><li>Serves fixtures, results and league tables to the production app; maintained as a standalone service with reversible .bak backups of every changed file</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Quality Assurance</div>
+          <ul class="spec-items"><li>Full code review (August 2026): structured audit of the entire codebase — auth, scoring engine, scheduler, API routes, frontend, and deployment — run as parallel subagent reviews with a consolidated findings report</li><li>Remediated all 34 High/Medium/Low findings (10 High, 15 Medium, 9 Low): deterministic re-scoring, process locking on squad-mutation endpoints to prevent double-applied transfers, strict Content-Security-Policy on all 13 pages, and 14 new tests (138 → 152 passing)</li><li>Full production security audit (August 2026): tested all 106 live endpoints unauthenticated and as two fresh accounts, walked every UI page in a real browser, and inspected the production database directly — 0 critical, 6 high, 8 medium, 3 low findings, with all previously flagged criticals verified fixed in production</li><li>Remediated all 6 high + 8 medium audit findings (Aug 2026): access tokens moved to HttpOnly cookies so nothing token-related is JS-readable, full security-header set (CSP / HSTS / XFO / Referrer-Policy / Permissions-Policy), admin-gated a state-changing endpoint, disabled API docs in production, fixed corrupted gameweek state with a deadline guard, built the missing /account page, and closed user-enumeration — all verified end-to-end against copies of the live production database</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>FastAPI</span><i>&#183;</i><span>SQLite</span><i>&#183;</i><span>SQLAlchemy</span><i>&#183;</i><span>Alembic</span><i>&#183;</i><span>SwiftUI</span><i>&#183;</i><span>Swift</span><i>&#183;</i><span>iOS</span><i>&#183;</i><span>Xcode</span><i>&#183;</i><span>CI/CD</span><i>&#183;</i><span>JWT</span><i>&#183;</i><span>REST API</span><i>&#183;</i><span>Vanilla JS</span><i>&#183;</i><span>Pytest</span><i>&#183;</i><span>MCP</span><i>&#183;</i><span>XcodeBuildMCP</span><i>&#183;</i><span>Capacitor</span><i>&#183;</i><span>iOS Build</span><i>&#183;</i><span>Security Audit</span><i>&#183;</i><span>OAuth</span><i>&#183;</i><span>PKCE</span><i>&#183;</i><span>CORS</span><i>&#183;</i><span>Rate Limiting</span><i>&#183;</i><span>Code Review</span><i>&#183;</i><span>CSP</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-6">
+      <summary>
+        <span class="pnum">06</span>
+        <span class="ptitle">AI Trading Bot &amp; Backtesting</span>
+        <span class="pmeta">Python · Binance · Walk-Forward · Docker + s6</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">AI-agent-driven trading system in two phases: a rigorous backtesting methodology (mechanical trend-following rules, realistic cost modelling, out-of-sample validation), then a production trading bot that ran the validated strategy live on Binance for 22 days — built to test whether disciplined rules beat buy-and-hold on real 2026 market data.</p>
+        <div class="spec">
+          <div class="slabel">Backtesting Engine</div>
+          <ul class="spec-items"><li>Python backtesting engine over real daily OHLC (Binance crypto, Yahoo stocks) with realistic costs: taker fees, funding-rate accrual, and overnight stock financing</li><li>Blind backtest: strategy rules committed to a written receipt <em>before</em> inspecting any price data — six sleeves (BTC/ETH/SOL 10x perp, NVDA/TSLA 5x long, COIN 5x short), daily hard stops, weekly trend filters, and earnings blackouts</li><li>Result: £100 → £135.85 (+35.9%) over ~8 months vs −14.5% for equal-weight buy-and-hold of the same six assets — the edge came from trend filters keeping capital out of three crashing crypto assets</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Validation</div>
+          <ul class="spec-items"><li>Top-50 crypto universe swept across 120 parameter combinations, then walk-forward validation: tuned on Jan–Apr, ran the single best config untouched on the unseen May–Aug window</li><li>Out-of-sample +16.5% vs +0.6% buy-and-hold — confirming the result was not a curve-fit artefact; all top-8 train configs clustered within £1.20 on the test window (robustness check)</li><li>Live paper trading: 10x BTC perpetual, +146.5% on £10 margin (take-profit exit), with full trade log and daily equity curve retained</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Live Trading Bot</div>
+          <ul class="spec-items two"><li>Deployed the walk-forward-validated top-3 strategy (BTC/ETH/SOL, spot, long-only, no leverage) as a 24/7 production bot on a dedicated Debian LXC on the Proxmox cluster: SMA20 trend filter, 8% trailing stop, 3% fixed stop checked live on every 5-minute poll</li><li>Deterministic rules engine in pure Python (stdlib + requests only) — no improvisation: persistent state, unit tests, and a backtest-reproduction test asserting the validated engine&rsquo;s exact £129.24 outcome (±0.5%)</li><li>Binance REST integration with a hard dry-run gate: real order code implemented but disabled until go-live; keys never committed (gitignored, chmod 600, wired only at go-live)</li><li>Single Docker image appliance: s6-overlay supervises the bot loop and a read-only web dashboard (GET-only, no exchange import), persistent data on a host bind mount, non-root</li><li>AI analysis bridge: trade events call a Hermes trading profile via API server; autonomous monitoring — a daily 06:00 agent-mode review pulls bot state and independently cross-checks live Binance prices (positions, armed stops, stop breaches, 7-day P&amp;L vs buy-and-hold), plus a monthly review against the walk-forward baseline with an explicit strategy/investment verdict; documented go-live checklist</li><li>Went live with real funds (September 2026): first BTC order filled on Binance, then root-caused and fixed two live-only bugs — exchange info cached for the first symbol only (ETH/SOL rejected by LOT_SIZE) and MARKET fills recording a zero price — plus container-timezone and real-account-equity tracking fixes, all verified against the live API</li><li>Hardened the read-only dashboard after a live review of its charts: the klines endpoint was asking Binance for a single page (its 1,000-candle hard limit), so a 7-day per-minute view actually began just after midnight. The window is now walked backwards until it is covered or a 12,000-row cap is reached, and a granularity that cannot cover the chosen range says so in the hint line instead of quietly drawing less. Axis ticks moved onto natural steps (1/5/15/30 min through to 28 days) at round clock times, with the date added once a window crosses a day, and the page now fills the window rather than capping at 1200 px. Also fixed a destroyed-chart bug where one failed kline fetch left a dead reference that threw on the next resize and blanked the whole dashboard until a page reload — a transient exchange error could take monitoring down for the day; failures are now caught per section and self-heal on the next 60-second refresh</li><li>Ran live for 22 days on real funds (6–28 September 2026): funded $38.26, finished flat at $38.25 (−0.03%), then wound down deliberately — final real-account state snapshotted, the container stopped and verified unreachable, and auto-restart disabled so a reboot could not bring it back</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Decision-Model Evaluation (September 2026)</div>
+          <ul class="spec-items two"><li>Screened a hosted decision model (TypeSafe&rsquo;s Jev-1.13, a typed decision API rather than a chat model) as a candidate trading brain: a ten-cadence replay of the live bot&rsquo;s own three-week window plus a three-month 5-minute replay — 113,000+ calls, 0.32–0.38s mean latency, ~$4.50 in total API spend. It underperformed buy-and-hold of the same three coins in both windows and acted on just 0.07–0.08% of the questions asked, so it stayed out of production.</li><li>Established the real break-even from Binance&rsquo;s live order filters: at a $10 stake a BTC round trip needs a +8.65% move against a 0.25% mean hourly move (lot-step flooring and the $5 minNotional strand cash permanently), and lot-step dust alone stranded 13.2% of the sleeve across the three-month replay — at these stakes the binding cost is exchange mechanics, not the model.</li><li>Validated forward before trusting it: an 11-hour live paper run (1,993 calls, ten books at 1–10 minute cadences on real prices, $0.07 of spend) took one trade per book at near coin-flip confidence, and the negative result was written up with a corrections section, stated limits and a re-runnable harness rather than shelved — the live account kept its walk-forward-validated rules.</li><li>Extended the evaluation to its full window: a seven-month replay (Jan–Jul 2026, 61,056 five-minute ticks per book) at $60 and then $100 book sizes, the larger pass running four books side by side — control and rich state under the live mechanics and under a fee-aware buy guard — 243,797 Jev calls and $10.80 of spend, completed after a mid-run re-fill when the API provider's account-level budget cap cut the first pass short. It surfaced a genuine execution-mechanics defect: every sell floors to Binance's lot step, so a position bought with the last ~$5 of cash sits under the $5 minimum order once the fee is taken and can never be sold — the rich-state book under the live mechanics froze again, dead from May with three positions it could never sell (the same defect froze both $60 books), while the guarded book ended the window with zero trapped positions.</li><li>The verdict held at both book sizes and with the fix: in a window where the three coins fell 28–42%, no book beat buy-and-hold once unsellable lot-step dust was excluded — $12–35 of sellable value against $63.45 for simply holding, and the heaviest-churn book paid $12.72 in fees plus $70.82 stranded as unsellable dust across its 339 round trips.</li><li>Stress-tested whether a confidence gate could rescue it — offline, against the stored answers, so no new API calls: a gate sweep from 0.50 to 0.85, then a full buy×sell mixed grid. The higher gates "won" only by trading less (≥0.70 left 1 and 5 round trips across the seven months, mostly cash at $93.07 / $88.67), and the mixed grid showed no consistent sell-side effect — the flip-flopping signature of small-sample noise, not signal: 78% of the executed round trips came from 50–60% confidence buys at a 32% win rate, and only 16 buys in the entire window cleared P≥0.70. Read as what it is: the gate is an off-switch, not alpha.</li><li>Closed out the start-mode and rule-guard questions — a final pre-invested run plus offline sweeps against the stored answers: the pre-invested book ($33/coin bought at the 1 Jan close, managed from tick 0) finished at $66.25 of $99 against $63.79 for never trading, and a full cash-vs-invested gate grid confirmed every winning cell won by not participating. Hard rule overrides — take-profit, dip-exit with a re-entry lockout, and a trailing stop on each position's own peak with a rebound re-entry — all helped in the falling window (best settings: $66 → $96 against $63.79 for holding) and all lost in the rising one (the tightest guard turned the rise's $45 into $31, while doing nothing made $48): protection in a fall is the whipsaw tax in a rise.</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Further Strategy Studies (September 2026)</div>
+          <ul class="spec-items"><li>Tested the "hold while rising, cash while falling" filter family across five speeds (SMA20–SMA200 plus a 2% buffer band) as pre-committed rules on 2017→2026 daily closes: in the modern window it did not beat holding — pooled $300: best filter $1,724 vs $1,917 for buy-and-hold — while roughly halving drawdowns (BTC −53% → −32%, ETH −68% → −38%, SOL −76% → −58%) and dodging nearly the whole 2026 fall; the full-history version where the same rules win big ($5.6k–$29.4k vs $1.9k) is arithmetic from dodging 2018/2022, a structurally different era. Whipsaws were real — six switches in five weeks at BTC's late-2025 top — and a one-day execution lag moves finals 20–40%: recorded as crash insurance, not a wealth tool.</li><li>Encoded two "volume profile" setups from a trading thread — a value-area-low fakeout bounce and a thin-zone breakout — as pre-committed rules on cached 1-minute bars across matched falling and rising windows: 587 round trips with a weighted expectancy of −0.056% per trade before costs (a coin flip), the entire loss coming from fees ($95.86) and lot-size stranding ($161.42); 11 of 12 books ended below their $100 start, all 36 sensitivity cells negative, and the thread's advertised 80% win rate was not in the data.</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Forward Paper-Testing Tracks (September 2026)</div>
+          <ul class="spec-items"><li>Built three supervised forward paper-testing tracks — crypto, US stocks and Polymarket — all driven by Jev and paper-only end to end (no keys, no orders anywhere): a crypto track (two state variants over a 21-day window: a control replicating the earlier one-day test, plus a richer state carrying code-computed RSI-14, EMA-20/50, 15/60/240-minute changes, volume deltas and Jev's own last three answers per coin — first swept across ten decision cadences, then settled to a single 5-minute cadence once the replays had shown interval choice was noise); a stocks track (20 liquid US large caps, events from EDGAR filings — 8-K full text, 10-Q/10-K metadata — plus a daily per-ticker news digest, across filings-only, filings+news and price-state control books); and a Polymarket track (a daily scan of ~150 top open markets judged for resolution clarity, news staleness and P(yes), trading divergence across three books with the gates added one at a time).</li><li>Every track trades on the real market mechanics: Binance lot-size flooring with sub-$5 dust stranded and never sellable on crypto; whole-share flooring at a $500 clip with IBKR commission max($0.35, 0.35% of shares) per side on stocks; Polymarket's per-category taker-fee formula on $25 positions — max 10 open per book, resolutions within 30 days, held to settlement.</li><li>Anti-cheat timing by construction: a stock entry fills at the first open after max(event date, discovery date), so a simulated fill can never land at an open from before the answer that caused it, and the crypto comparator carries the same stranded-cash mechanics as the books it is measured against.</li><li>Production-shaped supervision: a continuous systemd service for crypto (restart-and-resume from its ledgers) plus persistent daily timers for stocks and Polymarket; per-track Jev spend caps enforced in code ($15 / $5 / $5); escalations queued to the trading agent profile over its Bot Chat (idle-checked, batched, at most one per 30 minutes); a daily digest posts each track's headline numbers, and a read-only dashboard shows the live books — wallet cards, equity charts and buy-and-hold comparators — with a 30-second auto-refresh. The tracks went live on 27 September 2026 and are still inside their first results window.</li><li>Extended the crypto track at the end of September with two confidence-gated books — act only when Jev's chosen action carries P≥0.70, else hold — running alongside the ungated controls so the gate earns forward evidence instead of another replay: logic-tested offline before a live restart, and both gated books are live with low-confidence actions already being skipped.</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Methodology</div>
+          <ul class="spec-items"><li>Explicit, documented limits — max drawdown, parameter-sweep selection bias, single-period caveat — results presented with the honest boundary of what the test does and does not prove</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>Python</span><i>&#183;</i><span>Quant</span><i>&#183;</i><span>Backtesting</span><i>&#183;</i><span>Trend-Following</span><i>&#183;</i><span>Walk-Forward</span><i>&#183;</i><span>API Integration</span><i>&#183;</i><span>AI Agent</span><i>&#183;</i><span>Risk Management</span><i>&#183;</i><span>Docker</span><i>&#183;</i><span>s6-overlay</span><i>&#183;</i><span>Production Bot</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-7">
+      <summary>
+        <span class="pnum">07</span>
+        <span class="ptitle">Office Downgrade Script</span>
+        <span class="pmeta">PowerShell · Office Deployment Tool</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">Single PowerShell script for IT teams to upgrade or downgrade Microsoft Office across many machines at once, using the Office Deployment Tool for a clean uninstall-then-install deployment.</p>
+        <div class="spec">
+          <div class="slabel">Details</div>
+          <ul class="spec-items two"><li>Automatically downloads and silently extracts the latest Office Deployment Tool (ODT)</li><li>Dynamically generates XML configuration for a clean uninstallation and targeted reinstall</li><li>Uninstalls existing Office versions before deploying the specified build</li><li>Selects target/latest Office version in the generated config</li><li>Runs as Administrator or System on Windows 11, executing uninstall then download then install sequentially</li><li>Runs completely silently, with zero end user input or interruption</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>PowerShell</span><i>&#183;</i><span>Office Deployment Tool</span><i>&#183;</i><span>Microsoft 365</span><i>&#183;</i><span>Automation</span><i>&#183;</i><span>Windows</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-8">
+      <summary>
+        <span class="pnum">08</span>
+        <span class="ptitle">RepLog — iOS Workout Tracker</span>
+        <span class="pmeta">Swift 6 · SwiftUI · SwiftData · FastAPI · Docker</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">A native iOS strength-training tracker written from scratch as a full alternative to a commercial lifting app, with an RPE column the original lacks — plus a small self-hosted sync service that mirrors finished sessions into one flat CSV an AI coaching agent can read.</p>
+        <div class="spec">
+          <div class="slabel">App</div>
+          <ul class="spec-items two"><li>SwiftUI app on an iOS 26 target: Swift 6, a SwiftData on-device store, an XcodeGen project definition and zero third-party Swift packages — 39 source files, roughly 6,800 lines of Swift</li><li>All eight exercise types a real training log needs (weight × reps, weighted holds, added-load and assisted bodyweight, pure bodyweight reps and timed holds, cardio, note-only sets), plus supersets, drop sets, routines with warm-up and working schemes, a rest timer and repeat-workout from history</li><li>RPE column carried through every surface — active workout rows, saved sessions, exercise history, routine targets and the sync CSV; optional, half-point steps from 1.0 to 10.0, displayed as <code>8</code> rather than <code>8.0</code></li><li>Statistics hub on Swift Charts: per-exercise volume and estimated one-rep-max trends, personal records per rep range, seasonal bests and session records</li><li>Shipped 1.0.0 to the owner's iPhone and iterated on his feedback from daily use: a second round of six fixes made deleting a workout local-only (a session already in the sync database is never destroyed from the phone), kept an open workout finishable after leaving the editor, put a confirmation in front of "finish", gave the Log a manual sync control that reports its real state (up to date / relative time / auth failure), centred set cells under their exercise titles and dropped a dead settings section — each change carried by a new unit or UI test, with the simulator's offline drill reworked to assert the queued count is visible from the Log before a manual sync</li><li>Third round of owner feedback, from daily use in the gym (September 2026): routines lost the shared warm-up/working scheme, so a routine exercise is now a set count plus a note held <em>per routine</em> — the same lift reads "3×5, go light" in one routine and "4×4, no belt" in another — and that note is drawn on the routine row and carried into the workout from both start paths; a finished workout now opens the same editor as an active one, with no Finish control and no live timer (1.1.4 on the download page); and the set row was rebuilt against three candidate layouts put side by side in the simulator, shipping the winner after equalising the column gaps and centring the set-number circle on the row</li><li>Fourth round of owner feedback (October 2026): the keyboard bar gained <code>← → ✓</code> — chevrons step through every inline box in on-screen order, the check closes the keyboard, and the box being edited now scrolls clear of the software keys; shipped to the download page as 1.1.8, with the test gate green on the simulator (36/36 unit, 19/19 UI tests).</li><li>A store that fails to open starts a fresh file store instead of falling back to memory, so a damaged database can never masquerade as an empty training history</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Sync Service</div>
+          <ul class="spec-items"><li>lift-sync: a FastAPI service that upserts finished sessions into a single flat CSV — bearer auth, a single-writer lock, upsert by session ID, delete tombstones, atomic file rewrite, JSONL audit log and a health endpoint; 55 passing pytest tests, including two simultaneous uploads and an eight-thread upsert race</li><li>Ships as one Docker image with a compose file, and the CSV header is frozen so the file stays legible to a human and a model alike</li><li>Offline-first client: an outbox queues finished sessions and retries with backoff, tombstones deletions and guarantees a single upload per session — sync is optional and off by default, the phone stays the source of truth</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Distribution &amp; Device Install</div>
+          <ul class="spec-items"><li>Over-the-air install path built from scratch: an ad-hoc Release archive exported on the Mac and published to a dedicated app-downloads LXC (Debian 12, 2 vCPU / 1 GB, container 111) running nginx over /srv/downloads with a cloudflared tunnel hostname, so a build reaches the phone by opening one URL in Safari — no cable, no Xcode and no Bonjour. Also established why the first attempt failed: signing needs the Mac's GUI session (<code>launchctl asuser</code>), because a plain SSH session cannot reach the signing keychain</li><li>One command publishes a build: <code>publish.sh</code> takes the IPA plus name, bundle id, version and base URL, writes the <code>manifest.plist</code>, a themed install page carrying the build's real identity (version, bundle id, size, build timestamp and the <code>itms-services</code> link) and a <code>meta.json</code>, then rebuilds the root index from every app's <code>meta.json</code>. Both pages are <code>noindex</code>, and ad-hoc signing limits installation to devices in the provisioning profile — a public URL that Apple's own distribution rules keep closed</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Migration &amp; Testing</div>
+          <ul class="spec-items two"><li>One-time importer over four years of the old app's export (6,524 set rows, 636 sessions, 88 exercises, 11 categories) that lifts RPE out of the free-text notes where it had been buried as bare numbers and ranges, and rewrites it as a real column</li><li>Whole Mac test gate green in a single run (Xcode 26.5, iPhone 17 Pro simulator): the build succeeds, 36 unit tests across 5 suites pass, and all 14 XCUITest cases pass — including an in-simulator offline drill that stops the sync service, finishes a workout, restarts the app, brings the service back, and proves exactly one upload, one tombstone and a 409 on re-import. The service's 55 pytest tests pass in the fast gate, and a scripted tour re-captures 30 screens in dark mode for screen-by-screen comparison against the 17 reference screenshots</li><li>The failing UI tests were real app defects, not flaky tests: session and exercise rows looked tappable but only the top row worked (a <code>.plain</code> button's hit target is the label's content shape, so taps landing under a <code>Spacer</code> did nothing) — pinned down by scanning tap coordinates across a row, then fixed with <code>.contentShape()</code>. Also found an iOS 26 toolbar clipping the Edit button to a single letter, a statistics screen that pushed and immediately popped back, and a test-reset flag that wiped the queued session mid-drill</li><li>Accessibility and Dynamic Type treated as evidence rather than assertion: the audit runs as its own test class at the largest accessibility text size, its 33 findings (contrast, hit areas under 44 pt, clipped labels) are logged as a known polish list instead of hidden, and everything a simulator cannot prove — HealthKit writes, Live Activities on a real lock screen, haptics — is listed as unverified rather than claimed</li><li>Testing policy changed on the owner's call (24 September 2026) and applied for the rest of the pass: end-to-end only — new behaviour is proven by UI tests that drive the app in the simulator and assert what is visible on screen, and the seven unit tests written for the routine-note rule were deleted the same day. The five older unit files stay only because they cover the sync engine and the maths a UI test cannot reach</li><li>Developed on a MacBook over SSH from the fleet host, driving the iOS simulator from the command line, with the implementation plan put through an adversarial review before any code was written</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>Swift</span><i>&#183;</i><span>SwiftUI</span><i>&#183;</i><span>SwiftData</span><i>&#183;</i><span>Swift Charts</span><i>&#183;</i><span>iOS</span><i>&#183;</i><span>XCUITest</span><i>&#183;</i><span>FastAPI</span><i>&#183;</i><span>Docker</span><i>&#183;</i><span>CSV</span><i>&#183;</i><span>Offline-first</span></div>
+      </div>
+    </details><details class="psheet rv" id="proj-9">
+      <summary>
+        <span class="pnum">09</span>
+        <span class="ptitle">Automated Video Production Pipeline</span>
+        <span class="pmeta">Python · Pillow · Remotion · ffmpeg · ElevenLabs</span>
+        <span class="px" aria-hidden="true"></span>
+      </summary>
+      <div class="pbody">
+        <p class="pdesc">Code-first video pipeline that turns a researched script into a finished narrated history explainer — period imagery plus programmatic animation, rendered and assembled entirely in code.</p>
+        <div class="spec">
+          <div class="slabel">Pipeline</div>
+          <ul class="spec-items"><li>End-to-end build: researched script → per-scene narration → programmatic scenes → ffmpeg assembly. The reference episode — the Great Hunger (Ireland, 1845–51) — runs 3m22s at 1080p: 6,074 frames at 30 fps, H.264 video with stereo audio.</li><li>Visual mix keeps real context: period photographs, engravings and portraits sourced from Wikimedia Commons against a per-file licence manifest (39 public-domain files, the rest openly licensed or unrestricted), with maps plotted from Natural Earth data, charts and kinetic typography drawn programmatically where no imagery exists.</li><li>Narration tooled end-to-end: a purpose-built generator calls the ElevenLabs Brian voice (model auto-falls back v4 → v3 → multilingual v2), pulls the key at point of use from Bitwarden Secrets Manager, respells Irish-language names for the voice, and emits per-scene timing data that drives the renderer.</li><li>The renderer draws every frame with Pillow and streams them to ffmpeg; assembly produced the 1080p master plus a compressed preview cut, alongside three candidate thumbnail designs.</li><li>Extended the pipeline with browser-rendered motion: built RESONANCE, a self-contained one-shot 10-second canvas piece — a cymatics study with ~17,000 sand-grain particles settling into real Chladni standing-wave patterns, driven by a deterministic seek with a fixed seed. Proved the frame-exact capture path that can bring this class of animation into episodes: 120 deterministic frames captured over CDP at 1920×1080/30 fps, encoded with the pipeline's own libx264 settings into a 4.0-second MP4, verified by extracting frames back out of the encoded file.</li></ul>
+        </div><div class="spec">
+          <div class="slabel">Agentic Pipeline</div>
+          <ul class="spec-items"><li>A second, fully agentic production line: a local model under an autonomous agent harness takes a single one-shot prompt from the researched dossier and brief to a finished, narrated film — script fact-checked against the dossier, ElevenLabs narration with per-scene timing, sourced imagery, a complete Remotion (React + TypeScript) project, the rendered MP4 and three thumbnail designs.</li><li>First episode complete: "Will Ireland Reunify? The Border Poll Explained" — 20 scenes, 12m51s, 23,116 frames at 1920×1080/30 fps, H.264 with the narration muxed in; charts drawn from eight data CSVs, SVG maps built from openly licensed county outlines, and 17 Wikimedia Commons images logged in a licence manifest.</li><li>Verified through the build: a fact-check bullet for every number, name and date in the script (57 in all), a readable proof frame for each of the 20 scenes, and a byte-identical re-render of one frame in two separate processes to pin determinism.</li><li>Being run as a controlled comparison across models and agent harnesses — the same episode produced once per run under an identical, hash-checked one-shot prompt, outputs kept side by side: local quants of Qwen3.8-Flash-Next (base at 2-bit and 3-bit, the Swift 1.5 fine-tune at 2-bit) under the DeepSeek Harness and Hermes, and DeepSeek V4.1 Flash under both harnesses. Ten finished episodes so far — each a complete film, 11m59s–13m51s.</li></ul>
+        </div>
+        <div class="ptags"><b>TAGS</b><span>Python</span><i>&#183;</i><span>ffmpeg</span><i>&#183;</i><span>Pillow</span><i>&#183;</i><span>Remotion</span><i>&#183;</i><span>ElevenLabs</span><i>&#183;</i><span>TTS</span><i>&#183;</i><span>Video Encoding</span><i>&#183;</i><span>Canvas 2D</span><i>&#183;</i><span>Chrome DevTools Protocol</span><i>&#183;</i><span>Wikimedia Commons</span><i>&#183;</i><span>Automation</span></div>
+      </div>
+    </details>
+    </div>
   </div>
 </section>
+<section class="sec" id="credentials">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">06</span>
+      <h2 id="credentials">Credentials</h2>
+      <span class="sdesc">CERTIFICATION &#183; EDUCATION</span>
+    </header>
 
-<footer>
-  <span>© 2026 Eamon McKiernan</span>
+    <div class="cert rv">
+      <div class="cert-badge"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 23 23"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="12" y="1" width="9" height="9" fill="#7fba00"/><rect x="1" y="12" width="9" height="9" fill="#00a4ef"/><rect x="12" y="12" width="9" height="9" fill="#ffb900"/></svg></div>
+      <div>
+        <h3>Microsoft 365 Certified: Fundamentals</h3>
+        <div class="cert-meta">Microsoft · MS-900 · ID: 1AF2E23DEFE59917</div>
+      </div>
+      <div class="yr">Nov 2024</div>
+    </div>
+
+    <div class="edu">
+      <div class="edu-block rv d2">
+      <div class="edu-when">2021 – 2024</div>
+      <h3>A-Levels</h3>
+      <div class="edu-sub">Ramsey Grammar School</div>
+      <div class="grades"><div class="grade">
+          <div class="gbox">B</div>
+          <div class="grade-sub">IT</div>
+        </div><div class="grade">
+          <div class="gbox">B</div>
+          <div class="grade-sub">Photography</div>
+        </div><div class="grade">
+          <div class="gbox">D</div>
+          <div class="grade-sub">Computer Science</div>
+        </div><div class="grade">
+          <div class="gbox pass">L3 Pass</div>
+          <div class="grade-sub">Sports Leaders</div>
+        </div></div>
+    </div><div class="edu-block rv d2">
+      <div class="edu-when">2018 – 2021</div>
+      <h3>GCSEs</h3>
+      <div class="edu-sub">Ramsey Grammar School</div>
+      <div class="grades"><div class="grade">
+          <div class="gbox">A</div>
+          <div class="grade-sub">Maths</div>
+        </div><div class="grade">
+          <div class="gbox">B</div>
+          <div class="grade-sub">English</div>
+        </div><div class="grade">
+          <div class="gbox">BB</div>
+          <div class="grade-sub">Science (Double)</div>
+        </div><div class="grade">
+          <div class="gbox">B</div>
+          <div class="grade-sub">ICT</div>
+        </div><div class="grade">
+          <div class="gbox">C</div>
+          <div class="grade-sub">Computer Science</div>
+        </div><div class="grade">
+          <div class="gbox">C</div>
+          <div class="grade-sub">Business Studies</div>
+        </div></div>
+    </div>
+    </div>
+  </div>
+</section>
+<section class="sec sec--band" id="contact">
+  <div class="wrap">
+    <header class="shead rv">
+      <span class="snum">07</span>
+      <h2 id="contact">Contact</h2>
+      <span class="sdesc">ISLE OF MAN &#183; REMOTE &amp; ON-SITE</span>
+    </header>
+    <div class="contact">
+      <div>
+        <p class="contact-lead">Open to <em>remote and on-site</em> work across Microsoft 365, virtualisation and self-hosted AI.</p>
+        <p class="contact-note">
+          <b>enquiries@eamonmckiernan.im</b><br>
+          Based in the Isle of Man &#183; available for new work
+        </p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:enquiries@eamonmckiernan.im">
+        <span class="cl-ico"><i class="hgi-stroke hgi-mail-01" aria-hidden="true"></i></span>
+        enquiries@eamonmckiernan.im
+      </a><a href="https://www.linkedin.com/in/eamon-mckiernan-24a563307/" target="_blank" rel="noopener">
+        <span class="cl-ico"><i class="hgi-stroke hgi-linkedin-01" aria-hidden="true"></i></span>
+        LinkedIn
+      </a><a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">
+        <span class="cl-ico"><i class="hgi-stroke hgi-github" aria-hidden="true"></i></span>
+        GitHub
+      </a><span>
+        <span class="cl-ico"><i class="hgi-stroke hgi-location-01" aria-hidden="true"></i></span>
+        Isle of Man
+      </span>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-l">&#169; 2026 Eamon McKiernan</div>
+    <div class="foot-r">
+      <a href="#top">Top</a>
+      <a href="gallery.html">Demo gallery</a>
+      <a href="https://github.com/EamonMcKiernan05" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
+(function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
 
-  // Scroll reveal (emilkowalski .reveal fade-up) — each section reveals on its own scroll-in only.
-  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  // ---- scroll reveal (additive only; content visible if JS or IO fails)
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  function showAll() { reveals.forEach(function (el) { el.classList.add('in'); }); }
   if (reduce || !('IntersectionObserver' in window)) {
-    reveals.forEach(function(el){ el.classList.add('in'); });
+    showAll();
   } else {
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0, rootMargin: '0px 0px -125px 0px' });
-    reveals.forEach(function(el){ io.observe(el); });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+    setTimeout(showAll, 4000);
   }
 
-  // Count-up on Impact numbers (first scroll into view), ported from emilkowalski.
-  function fmt(n){ return n.toLocaleString('en-US'); }
-  function animateCount(el){
+  // ---- count-up
+  function fmt(n) { return n.toLocaleString('en-US'); }
+  function run(el) {
     var target = parseFloat(el.dataset.count);
     var pre = el.dataset.prefix || '';
     var suf = el.dataset.suffix || '';
     if (isNaN(target)) { el.textContent = pre + suf; return; }
     if (reduce) { el.textContent = pre + fmt(target) + suf; return; }
-    var dur = 1100, t0 = performance.now();
-    function tick(t){
+    var dur = 1200, t0 = performance.now();
+    function tick(t) {
       var p = Math.min(1, (t - t0) / dur);
       var eased = 1 - Math.pow(1 - p, 3);
       el.textContent = pre + fmt(Math.round(eased * target)) + suf;
@@ -267,18 +816,93 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     requestAnimationFrame(tick);
   }
-  var nums = Array.prototype.slice.call(document.querySelectorAll('.stat .n'));
+  var nums = Array.prototype.slice.call(document.querySelectorAll('.meas-n[data-count]'));
   if (reduce || !('IntersectionObserver' in window)) {
-    nums.forEach(animateCount);
+    nums.forEach(run);
   } else {
-    var cio = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (!e.isIntersecting) return; animateCount(e.target); cio.unobserve(e.target); });
-    }, { threshold: 0.6 });
-    nums.forEach(function(n){ cio.observe(n); });
+    var nio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { run(en.target); nio.unobserve(en.target); } });
+    }, { threshold: 0.5 });
+    nums.forEach(function (n) { nio.observe(n); });
   }
-});
-</script>
 
-</div>
+  // ---- duration bars
+  var bars = Array.prototype.slice.call(document.querySelectorAll('.dur-bar i'));
+  function grow(el) { el.style.transform = 'scaleX(1)'; }
+  if (reduce || !('IntersectionObserver' in window)) {
+    bars.forEach(grow);
+  } else {
+    var bio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { grow(en.target); bio.unobserve(en.target); } });
+    }, { threshold: 0.4 });
+    bars.forEach(function (b) { bio.observe(b); });
+  }
+
+  // ---- scroll progress
+  var prog = document.getElementById('prog');
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+    prog.style.transform = 'scaleX(' + p + ')';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // ---- section scroll-spy
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail-nav a'));
+  var map = {};
+  links.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) map[id] = a;
+  });
+  if ('IntersectionObserver' in window) {
+    var sio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        var a = map[en.target.id];
+        if (!a) return;
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('on'); });
+          a.classList.add('on');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(map).forEach(function (id) { sio.observe(document.getElementById(id)); });
+  }
+
+  // ---- mobile menu
+  var btn = document.getElementById('menuBtn');
+  var sheet = document.getElementById('menu');
+  function setMenu(open) {
+    sheet.hidden = !open;
+    if (open) {
+      sheet.classList.add('open');
+      requestAnimationFrame(function () { sheet.classList.add('open'); });
+    } else {
+      sheet.classList.remove('open');
+    }
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  btn.addEventListener('click', function () { setMenu(sheet.hidden); });
+  document.getElementById('menuClose').addEventListener('click', function () { setMenu(false); });
+  sheet.addEventListener('click', function (ev) {
+    if (ev.target.tagName === 'A') setMenu(false);
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !sheet.hidden) setMenu(false);
+  });
+
+  // ---- details: only one project open at a time
+  var sheets = Array.prototype.slice.call(document.querySelectorAll('.psheet'));
+  sheets.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      sheets.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>
