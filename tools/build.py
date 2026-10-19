@@ -364,6 +364,7 @@ def build_siteplan():
       <div class="plan-scroll">
         {p2.site_plan()}
       </div>
+      <p class="plan-scroll-hint" aria-hidden="true">SCROLL &#8594; for the full sheet</p>
       <figcaption class="plan-cap-note">
         <span class="pcn-l">Figure 00 &#183; Homelab site plan</span>
         <span class="pcn-r">Public and consumer traffic terminates at the OPNsense router, which
