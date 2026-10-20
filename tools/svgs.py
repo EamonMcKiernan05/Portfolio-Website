@@ -380,14 +380,16 @@ def chart_shard():
         a(f'<rect class="{cls}" x="{bx:.1f}" y="{T+ph-bh:.1f}" width="{bw}" height="{bh:.1f}"/>')
         a(f'<text class="pl-val" x="{bx+bw/2:.1f}" y="{T+ph-bh-8:.1f}" text-anchor="middle">{v:,}</text>')
         a(f'<text class="pl-vals" x="{bx+bw/2:.1f}" y="{T+ph+20}" text-anchor="middle">{lab}</text>')
-    # the gain bracket between the two bars
-    ax = L + gw * 0.5 + (gw - 76) / 2 + 76
-    bx2 = L + gw * 1.5 + (gw - 76) / 2
-    by = T + 26
-    a(f'<line class="pl-ln3" x1="{ax+6:.1f}" y1="{by}" x2="{bx2-6:.1f}" y2="{by}"/>')
-    a(f'<line class="pl-ln3" x1="{ax+6:.1f}" y1="{by-5}" x2="{ax+6:.1f}" y2="{by+5}"/>')
-    a(f'<line class="pl-ln3" x1="{bx2-6:.1f}" y1="{by-5}" x2="{bx2-6:.1f}" y2="{by+5}"/>')
-    a(f'<text class="pl-tc" x="{(ax+bx2)/2:.1f}" y="{by-11}" text-anchor="middle">+54.2%</text>')
+    # a dimension span between the two bars, in the drawing's own idiom
+    sata_right = L + gw * 0 + (gw - 76) / 2 + 76
+    nvme_left = L + gw * 1 + (gw - 76) / 2
+    sata_top = T + ph - (groups[0][1] / ymax) * ph
+    nvme_top = T + ph - (groups[1][1] / ymax) * ph
+    by = T + 58
+    a(f'<path class="pl-ln3" d="M{sata_right:.1f} {sata_top:.1f} L{sata_right:.1f} {by} '
+      f'L{nvme_left:.1f} {by} L{nvme_left:.1f} {nvme_top:.1f}"/>')
+    a(f'<text class="pl-tc" x="{(sata_right+nvme_left)/2:.1f}" y="{by-10:.1f}" '
+      f'text-anchor="middle">+54.2%</text>')
     a(f'<text class="pl-vals" x="{L+pw/2:.1f}" y="{T+ph+42}" text-anchor="middle">'
       f'SAME ENGINE, SAME QUANT &#8212; ONLY THE STORAGE MOVED</text>')
     a('</svg>')
