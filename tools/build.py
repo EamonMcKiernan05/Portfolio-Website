@@ -153,14 +153,21 @@ def build_impact():
 def build_measurements():
     """Charts built from figures already published on the site."""
     figs = [
+        ("Prefill across six depths", "ENGINE 0.2.0-BETA",
+         p2.chart_depths(),
+         "Same IQ3_S quant, six depths from 20K to 250K. Prefill peaks at 2,149 tok/s "
+         "part way through the sweep and settles to 1,974 at 250K; decode eases "
+         "73.7 &#8594; 64.2 tok/s across the same six depths."),
+        ("Where the shard lived", "NVMe VS SATA",
+         p2.chart_shard(),
+         "The release itself was worth only +2.2% prefill and +0.8% decode against "
+         "0.1.44. The real gain was placement: the new 4 KiB random-read path for the "
+         "28.8 GB PLE n-gram table read it off the SATA boot SSD at 10,447 rows/s "
+         "(~43 MB/s), and moving it to NVMe lifted prefill 54.2% on the six-depth mean."),
         ("Prefill throughput by prompt depth", "PROJECT MAYA &#183; 262,144 CTX",
          p2.chart_prefill(),
          "Mean of three fresh-load runs per depth on the 313B IQ2_XXS quant, "
          "streamed KV cache, speculative drafting off."),
-        ("Decode throughput before and after the engine bump", "STRATA v0.1.32 &#8594; v0.1.39",
-         p2.chart_decode(),
-         "Same model and config byte-for-byte. Decode gained 22&#8211;31% at every depth; "
-         "prefill gained 23&#8211;26% from 60k up, peaking at 1,973 tok/s."),
         ("Strategy against equal-weight buy-and-hold", "TRADING BOT &#183; WALK-FORWARD",
          p2.chart_backtest(),
          "Rules committed to a written receipt before any price data was inspected. "

@@ -371,6 +371,76 @@
     <div class="mgrid">
       <div class="fig rv d1">
         <div class="fig-cap">
+          <span class="fig-t">Prefill across six depths</span>
+          <span class="fig-s">ENGINE 0.2.0-BETA</span>
+        </div>
+        <svg viewBox="0 0 520 300" class="chart-svg" role="img" aria-labelledby="cdT">
+<title id="cdT">Prefill across six depths on engine 0.2.0-beta: 1568, 2098, 2149, 2127, 2055 and 1974 tokens per second, from 20K to 250K</title>
+<line class="pl-grid" x1="62" y1="238.0" x2="500" y2="238.0"/>
+<text class="pl-vals" x="52" y="241.5" text-anchor="end">0</text>
+<line class="pl-grid" x1="62" y1="187.0" x2="500" y2="187.0"/>
+<text class="pl-vals" x="52" y="190.5" text-anchor="end">600</text>
+<line class="pl-grid" x1="62" y1="136.0" x2="500" y2="136.0"/>
+<text class="pl-vals" x="52" y="139.5" text-anchor="end">1,200</text>
+<line class="pl-grid" x1="62" y1="85.0" x2="500" y2="85.0"/>
+<text class="pl-vals" x="52" y="88.5" text-anchor="end">1,800</text>
+<line class="pl-grid" x1="62" y1="34.0" x2="500" y2="34.0"/>
+<text class="pl-vals" x="52" y="37.5" text-anchor="end">2,400</text>
+<line class="pl-axis" x1="62" y1="238" x2="500" y2="238"/>
+<text class="pl-vals" x="62" y="18">TOK/S</text>
+<text class="pl-vals" x="500" y="18" text-anchor="end">PREFILL, SIX DEPTHS</text>
+<rect class="pl-bar" x="79.5" y="104.7" width="38.0" height="133.3"/>
+<text class="pl-val" x="98.5" y="96.7" text-anchor="middle">1,568</text>
+<rect class="pl-bar" x="152.5" y="59.7" width="38.0" height="178.3"/>
+<text class="pl-val" x="171.5" y="51.7" text-anchor="middle">2,098</text>
+<rect class="pl-bar2" x="225.5" y="55.3" width="38.0" height="182.7"/>
+<text class="pl-val" x="244.5" y="47.3" text-anchor="middle">2,149</text>
+<rect class="pl-bar" x="298.5" y="57.2" width="38.0" height="180.8"/>
+<text class="pl-val" x="317.5" y="49.2" text-anchor="middle">2,127</text>
+<rect class="pl-bar" x="371.5" y="63.3" width="38.0" height="174.7"/>
+<text class="pl-val" x="390.5" y="55.3" text-anchor="middle">2,055</text>
+<rect class="pl-bar" x="444.5" y="70.2" width="38.0" height="167.8"/>
+<text class="pl-val" x="463.5" y="62.2" text-anchor="middle">1,974</text>
+<text class="pl-vals" x="98.5" y="258" text-anchor="middle">20K</text>
+<text class="pl-vals" x="463.5" y="258" text-anchor="middle">250K</text>
+<text class="pl-vals" x="281.0" y="280" text-anchor="middle">SIX DEPTHS, 20K &#8594; 250K &#183; DECODE 73.7 &#8594; 64.2</text>
+</svg>
+        <p class="fig-note">Same IQ3_S quant, six depths from 20K to 250K. Prefill peaks at 2,149 tok/s part way through the sweep and settles to 1,974 at 250K; decode eases 73.7 &#8594; 64.2 tok/s across the same six depths.</p>
+      </div><div class="fig rv d2">
+        <div class="fig-cap">
+          <span class="fig-t">Where the shard lived</span>
+          <span class="fig-s">NVMe VS SATA</span>
+        </div>
+        <svg viewBox="0 0 520 300" class="chart-svg" role="img" aria-labelledby="csT">
+<title id="csT">Prefill at 250K context: 1314 tokens per second with the shard on the SATA boot SSD against 1974 on NVMe</title>
+<line class="pl-grid" x1="62" y1="238.0" x2="500" y2="238.0"/>
+<text class="pl-vals" x="52" y="241.5" text-anchor="end">0</text>
+<line class="pl-grid" x1="62" y1="188.5" x2="500" y2="188.5"/>
+<text class="pl-vals" x="52" y="192.0" text-anchor="end">600</text>
+<line class="pl-grid" x1="62" y1="139.0" x2="500" y2="139.0"/>
+<text class="pl-vals" x="52" y="142.5" text-anchor="end">1,200</text>
+<line class="pl-grid" x1="62" y1="89.5" x2="500" y2="89.5"/>
+<text class="pl-vals" x="52" y="93.0" text-anchor="end">1,800</text>
+<line class="pl-grid" x1="62" y1="40.0" x2="500" y2="40.0"/>
+<text class="pl-vals" x="52" y="43.5" text-anchor="end">2,400</text>
+<line class="pl-axis" x1="62" y1="238" x2="500" y2="238"/>
+<text class="pl-vals" x="62" y="22">TOK/S</text>
+<text class="pl-vals" x="500" y="22" text-anchor="end">PREFILL AT 250K</text>
+<rect class="pl-barg" x="133.5" y="129.6" width="76" height="108.4"/>
+<text class="pl-val" x="171.5" y="121.6" text-anchor="middle">1,314</text>
+<text class="pl-vals" x="171.5" y="258" text-anchor="middle">SATA BOOT SSD</text>
+<rect class="pl-bar2" x="352.5" y="75.1" width="76" height="162.9"/>
+<text class="pl-val" x="390.5" y="67.1" text-anchor="middle">1,974</text>
+<text class="pl-vals" x="390.5" y="258" text-anchor="middle">NVMe</text>
+<line class="pl-ln3" x1="325.0" y1="66" x2="456.0" y2="66"/>
+<line class="pl-ln3" x1="325.0" y1="61" x2="325.0" y2="71"/>
+<line class="pl-ln3" x1="456.0" y1="61" x2="456.0" y2="71"/>
+<text class="pl-tc" x="390.5" y="55" text-anchor="middle">+54.2%</text>
+<text class="pl-vals" x="281.0" y="280" text-anchor="middle">SAME ENGINE, SAME QUANT &#8212; ONLY THE STORAGE MOVED</text>
+</svg>
+        <p class="fig-note">The release itself was worth only +2.2% prefill and +0.8% decode against 0.1.44. The real gain was placement: the new 4 KiB random-read path for the 28.8 GB PLE n-gram table read it off the SATA boot SSD at 10,447 rows/s (~43 MB/s), and moving it to NVMe lifted prefill 54.2% on the six-depth mean.</p>
+      </div><div class="fig rv d1">
+        <div class="fig-cap">
           <span class="fig-t">Prefill throughput by prompt depth</span>
           <span class="fig-s">PROJECT MAYA &#183; 262,144 CTX</span>
         </div>
@@ -403,41 +473,7 @@
 <text class="pl-vals" x="281.0" y="288" text-anchor="middle">PROMPT DEPTH (TOKENS)</text>
 </svg>
         <p class="fig-note">Mean of three fresh-load runs per depth on the 313B IQ2_XXS quant, streamed KV cache, speculative drafting off.</p>
-      </div><div class="fig rv d2">
-        <div class="fig-cap">
-          <span class="fig-t">Decode throughput before and after the engine bump</span>
-          <span class="fig-s">STRATA v0.1.32 &#8594; v0.1.39</span>
-        </div>
-        <svg viewBox="0 0 520 300" class="chart-svg" role="img" aria-labelledby="cdT">
-<title id="cdT">Decode throughput after the engine upgrade: at 20K context 56.6 to 73.9 tokens per second, at 250K context 50.3 to 65.0</title>
-<line class="pl-grid" x1="62" y1="248.0" x2="500" y2="248.0"/>
-<text class="pl-vals" x="52" y="251.5" text-anchor="end">0</text>
-<line class="pl-grid" x1="62" y1="174.7" x2="500" y2="174.7"/>
-<text class="pl-vals" x="52" y="178.2" text-anchor="end">30</text>
-<line class="pl-grid" x1="62" y1="101.3" x2="500" y2="101.3"/>
-<text class="pl-vals" x="52" y="104.8" text-anchor="end">60</text>
-<line class="pl-grid" x1="62" y1="28.0" x2="500" y2="28.0"/>
-<text class="pl-vals" x="52" y="31.5" text-anchor="end">90</text>
-<line class="pl-axis" x1="62" y1="248" x2="500" y2="248"/>
-<text class="pl-vals" x="62" y="16">TOK/S</text>
-<text class="pl-vals" x="500" y="16" text-anchor="end">DECODE THROUGHPUT</text>
-<rect class="pl-barg" x="92.0" y="109.6" width="44" height="138.4"/>
-<text class="pl-val" x="114.0" y="101.6" text-anchor="middle">56.6</text>
-<text class="pl-vals" x="114.0" y="268" text-anchor="middle">v0.1.32</text>
-<rect class="pl-bar" x="148.0" y="67.4" width="44" height="180.6"/>
-<text class="pl-val" x="170.0" y="59.4" text-anchor="middle">73.9</text>
-<text class="pl-vals" x="170.0" y="268" text-anchor="middle">v0.1.39</text>
-<text class="pl-vals" x="136.0" y="288" text-anchor="middle">20K</text>
-<rect class="pl-barg" x="281.0" y="125.0" width="44" height="123.0"/>
-<text class="pl-val" x="303.0" y="117.0" text-anchor="middle">50.3</text>
-<text class="pl-vals" x="303.0" y="268" text-anchor="middle">v0.1.32</text>
-<rect class="pl-bar" x="337.0" y="89.1" width="44" height="158.9"/>
-<text class="pl-val" x="359.0" y="81.1" text-anchor="middle">65.0</text>
-<text class="pl-vals" x="359.0" y="268" text-anchor="middle">v0.1.39</text>
-<text class="pl-vals" x="325.0" y="288" text-anchor="middle">250K</text>
-</svg>
-        <p class="fig-note">Same model and config byte-for-byte. Decode gained 22&#8211;31% at every depth; prefill gained 23&#8211;26% from 60k up, peaking at 1,973 tok/s.</p>
-      </div><div class="fig rv d1">
+      </div><div class="fig fig-wide rv d2">
         <div class="fig-cap">
           <span class="fig-t">Strategy against equal-weight buy-and-hold</span>
           <span class="fig-s">TRADING BOT &#183; WALK-FORWARD</span>
@@ -471,7 +507,7 @@
 <text class="pl-vals" x="325.0" y="288" text-anchor="middle">OUT-OF-SAMPLE</text>
 </svg>
         <p class="fig-note">Rules committed to a written receipt before any price data was inspected. The higher gates only won by trading less, so the gate is an off-switch, not alpha.</p>
-      </div><div class="fig fig-wide rv d2">
+      </div><div class="fig rv d1">
         <div class="fig-cap">
           <span class="fig-t">Code-review findings, all remediated</span>
           <span class="fig-s">FFIOM &#183; AUGUST 2026</span>
@@ -519,7 +555,7 @@
           <ul class="spec-items two"><li>2× Tesla V100 32 GB linked at PCIe 3.0 ×16 — driver 580 pinned as the last Volta driver branch, CUDA 12.9, and llama.cpp rebuilt sm_70-only (144 embedded sm_70 cubins); the Strata engine built for sm_70 serves a 128K-context Qwen3.8-Flash-Next with MTP speculative decoding</li><li>Extended the box to NVIDIA's Nemotron 3.5 Bolt 74B the day after upstream support merged: rebuilt llama.cpp from master to build 11700 (CUDA 12.9, sm_70 cubins) and served the 74B MoE at 262,144 ctx across both V100s with NVIDIA's separate 1.1B LiLiCorr drafter on llama.cpp's dflash speculative path — 128 of 490 draft tokens accepted and 53 tok/s decode on a prose prompt, against 139 tok/s on a counting test where drafting hits its ceiling</li><li>A third engine, Project Maya — GLM-5.3-Flash, a ~320B Mixture-of-Experts (~18B active) layer-split across both cards. The newest quant is a 313B-parameter, hand-mixed 87 GB IQ2_XXS whose publisher prunes the MTP block, so it benches with speculative drafting off: at the full 262,144-token window it holds 22.5–24.9 tok/s decode and 714 tok/s prefill at 20K rising to 870 at 200K (851 at 250K), every figure the mean of three fresh-load runs per depth, and engine v1.1.13 → v1.1.15 lifted prefill 7.6–10.3% at every depth while decode stayed inside its run-to-run spread. That window fits because the cache is streamed: a 32,768-position slice of each attention layer stays in VRAM (0.37 GB across both cards) while the other 88% of the 262K positions sit in 2.95 GB of pinned, device-mapped host RAM, and 93–99% of block reads still hit VRAM. Halving the window to 131K changes nothing measurable (+0.3% prefill / +2.6% decode at the shared depths) — long context is essentially free on this box. The Maya-S 321B quant, MTP drafting on, reads 20.4–22.6 tok/s decode and 595–646 tok/s prefill. Moving the model set off a DRAM-less boot SSD onto a dedicated NVMe was worth +23.9% decode / +46.0% prefill mean on a same-day, three-runs-per-side controlled pair.</li><li>Measured speculative decoding on that quant instead of assuming it pays: the GLM-5.3-Flash DFlash2 drafter (Q4_K_M, 697 MB, five layers) accepted 63% of its drafts and still ran 27–31% slower than the same engine without it — 15.9–18.0 tok/s decode against 22.5–24.9 — so drafting stays off for this model</li><li>Two-card tensor split with MTP; the full 262,144-token window runs end to end — a 250,632-token prompt prefilled at 1,495 tok/s, then 6,000 tokens generated at 48.8 tok/s</li><li>Cooling rebuilt around a single 7k-rpm PWM fan driven by a systemd hwmon fan curve — a ten-minute soak of six back-to-back 100k-token prefills held dead-flat at 61–62 °C (1,078 tok/s, 0.7 tok/s spread). Redesigned the 80 mm ducting into a mirrored one-fan-per-card pair — each fan 30 mm outboard of the stack, the cards&rsquo; original one-slot (40 mm) mouth spacing kept, and both meshes closed and single-body on export</li></ul>
         </div><div class="spec">
           <div class="slabel">Current Numbers (October 2026)</div>
-          <ul class="spec-items"><li>Engine v0.1.32 → v0.1.39, same model and config byte-for-byte: decode +22–31% at every depth (20k: 56.6 → 73.9 tok/s; 250k: 50.3 → 65.0) and prefill +23–26% from 60k up (peak 1,973 tok/s at 100k)</li><li>126-run MTP sweep against the live server across all six depths: gate 0.50 confirmed fastest and the stock configuration measured fastest overall, with 250k-prompt prefill flat at 1,494–1,498 tok/s</li><li><code>model-bench</code> harness for any OpenAI-compatible endpoint — browser UI + CLI, auto-detects llama.cpp or Strata, writes per-run JSONL/CSV/markdown; published at github.com/EamonMcKiernan05/Local-AI-Speed-Test-Harness</li><li>Enabled vision on the base model — the image encoder built locally for sm_70, verified with a real image read in 4.0 s at 93 tok/s decode</li><li>One-shot demo bench — single-prompt browser demos written by the local model: <a href="gallery.html">run them all in the demo gallery</a></li></ul>
+          <ul class="spec-items"><li>Engine 0.2.0-beta (engine 0.1.45.3) on the same IQ3_S quant, six depths from 20K to 250K: prefill 1,568 / 2,098 / 2,149 / 2,127 / 2,055 / 1,974 tok/s, decode 73.7 easing to 64.2 — and against 0.1.44 the release itself is only +2.2% prefill / +0.8% decode. The real gain was where the shard lived: 0.2.0&rsquo;s new 4 KiB random-read path for the 28.8 GB PLE n-gram table found it on the SATA boot SSD at 10,447 rows/s (~43 MB/s), and moving it to NVMe lifted prefill 54.2% on the six-depth mean — 1,314 → 1,974 tok/s at 250K</li><li>126-run MTP sweep against the live server across all six depths: gate 0.50 confirmed fastest and the stock configuration measured fastest overall, with 250k-prompt prefill flat at 1,494–1,498 tok/s</li><li><code>model-bench</code> harness for any OpenAI-compatible endpoint — browser UI + CLI, auto-detects llama.cpp or Strata, writes per-run JSONL/CSV/markdown; published at github.com/EamonMcKiernan05/Local-AI-Speed-Test-Harness</li><li>Enabled vision on the base model — the image encoder built locally for sm_70, verified with a real image read in 4.0 s at 93 tok/s decode</li><li>One-shot demo bench — single-prompt browser demos written by the local model: <a href="gallery.html">run them all in the demo gallery</a></li></ul>
         </div>
         <div class="ptags"><b>TAGS</b><span>llama.cpp</span><i>&#183;</i><span>Strata</span><i>&#183;</i><span>Speculative Decoding</span><i>&#183;</i><span>LLM</span><i>&#183;</i><span>Tesla V100</span><i>&#183;</i><span>MTP</span><i>&#183;</i><span>Benchmarking</span><i>&#183;</i><span>Hermes</span><i>&#183;</i><span>Discord Bot</span><i>&#183;</i><span>Self-hosted AI</span><i>&#183;</i><span>Open Source</span></div>
       </div>

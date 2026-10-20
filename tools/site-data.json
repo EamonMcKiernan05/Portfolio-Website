@@ -211,7 +211,7 @@
     {
      "label": "Current Numbers (October 2026)",
      "items": [
-      "Engine v0.1.32 → v0.1.39, same model and config byte-for-byte: decode +22–31% at every depth (20k: 56.6 → 73.9 tok/s; 250k: 50.3 → 65.0) and prefill +23–26% from 60k up (peak 1,973 tok/s at 100k)",
+      "Engine 0.2.0-beta (engine 0.1.45.3) on the same IQ3_S quant, six depths from 20K to 250K: prefill 1,568 / 2,098 / 2,149 / 2,127 / 2,055 / 1,974 tok/s, decode 73.7 easing to 64.2 — and against 0.1.44 the release itself is only +2.2% prefill / +0.8% decode. The real gain was where the shard lived: 0.2.0&rsquo;s new 4 KiB random-read path for the 28.8 GB PLE n-gram table found it on the SATA boot SSD at 10,447 rows/s (~43 MB/s), and moving it to NVMe lifted prefill 54.2% on the six-depth mean — 1,314 → 1,974 tok/s at 250K",
       "126-run MTP sweep against the live server across all six depths: gate 0.50 confirmed fastest and the stock configuration measured fastest overall, with 250k-prompt prefill flat at 1,494–1,498 tok/s",
       "<code>model-bench</code> harness for any OpenAI-compatible endpoint — browser UI + CLI, auto-detects llama.cpp or Strata, writes per-run JSONL/CSV/markdown; published at github.com/EamonMcKiernan05/Local-AI-Speed-Test-Harness",
       "Enabled vision on the base model — the image encoder built locally for sm_70, verified with a real image read in 4.0 s at 93 tok/s decode",

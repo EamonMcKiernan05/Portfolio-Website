@@ -311,37 +311,85 @@ def chart_prefill():
     return "\n".join(o)
 
 
-def chart_decode():
-    """Strata engine v0.1.32 -> v0.1.39 decode tok/s at 20k and 250k depth."""
+def chart_depths():
+    """Engine 0.2.0-beta: prefill across six depths, 20K to 250K."""
     W, H = 520, 300
-    L, R, T, B = 62, 20, 28, 52
+    L, R, T, B = 62, 20, 34, 62
     pw, ph = W - L - R, H - T - B
-    ymax = 90
-    groups = [("20K", 56.6, 73.9), ("250K", 50.3, 65.0)]
+    ymax = 2400
+    vals = [1568, 2098, 2149, 2127, 2055, 1974]
     o = []
     a = o.append
     a(f'<svg viewBox="0 0 {W} {H}" class="chart-svg" role="img" aria-labelledby="cdT">')
-    a('<title id="cdT">Decode throughput after the engine upgrade: at 20K context '
-      '56.6 to 73.9 tokens per second, at 250K context 50.3 to 65.0</title>')
-    for i in range(0, 4):
-        v = ymax * i / 3
+    a('<title id="cdT">Prefill across six depths on engine 0.2.0-beta: 1568, 2098, '
+      '2149, 2127, 2055 and 1974 tokens per second, from 20K to 250K</title>')
+    for i in range(0, 5):
+        v = ymax * i / 4
         y = T + ph - (v / ymax) * ph
         a(f'<line class="pl-grid" x1="{L}" y1="{y:.1f}" x2="{L+pw}" y2="{y:.1f}"/>')
-        a(f'<text class="pl-vals" x="{L-10}" y="{y+3.5:.1f}" text-anchor="end">{v:.0f}</text>')
+        a(f'<text class="pl-vals" x="{L-10}" y="{y+3.5:.1f}" text-anchor="end">{int(v):,}</text>')
     a(f'<line class="pl-axis" x1="{L}" y1="{T+ph}" x2="{L+pw}" y2="{T+ph}"/>')
-    a(f'<text class="pl-vals" x="{L}" y="{T-12}">TOK/S</text>')
-    a(f'<text class="pl-vals" x="{L+pw}" y="{T-12}" text-anchor="end">DECODE THROUGHPUT</text>')
-    gw = (pw - 60) / len(groups)
-    for gi, (lab, old, new) in enumerate(groups):
-        gx = L + 30 + gi * gw
-        bw = 44
-        for bi, (v, cls, cap) in enumerate([(old, "pl-barg", "v0.1.32"), (new, "pl-bar", "v0.1.39")]):
-            bx = gx + bi * (bw + 12)
-            bh = (v / ymax) * ph
-            a(f'<rect class="{cls}" x="{bx:.1f}" y="{T+ph-bh:.1f}" width="{bw}" height="{bh:.1f}"/>')
-            a(f'<text class="pl-val" x="{bx+bw/2:.1f}" y="{T+ph-bh-8:.1f}" text-anchor="middle">{v}</text>')
-            a(f'<text class="pl-vals" x="{bx+bw/2:.1f}" y="{T+ph+20}" text-anchor="middle">{cap}</text>')
-        a(f'<text class="pl-vals" x="{gx+bw:.1f}" y="{T+ph+40}" text-anchor="middle">{lab}</text>')
+    a(f'<text class="pl-vals" x="{L}" y="{T-16}">TOK/S</text>')
+    a(f'<text class="pl-vals" x="{L+pw}" y="{T-16}" text-anchor="end">PREFILL, SIX DEPTHS</text>')
+
+    slot = pw / len(vals)
+    bw = slot * 0.52
+    for i, v in enumerate(vals):
+        bx = L + slot * i + (slot - bw) / 2
+        bh = (v / ymax) * ph
+        hot = (v == max(vals))
+        cls = "pl-bar2" if hot else "pl-bar"
+        a(f'<rect class="{cls}" x="{bx:.1f}" y="{T+ph-bh:.1f}" width="{bw:.1f}" height="{bh:.1f}"/>')
+        a(f'<text class="pl-val" x="{bx+bw/2:.1f}" y="{T+ph-bh-8:.1f}" text-anchor="middle">{v:,}</text>')
+    # depth labels: only the two the source names
+    a(f'<text class="pl-vals" x="{L+slot*0.5:.1f}" y="{T+ph+20}" text-anchor="middle">20K</text>')
+    a(f'<text class="pl-vals" x="{L+slot*5.5:.1f}" y="{T+ph+20}" text-anchor="middle">250K</text>')
+    a(f'<text class="pl-vals" x="{L+pw/2:.1f}" y="{T+ph+42}" text-anchor="middle">'
+      f'SIX DEPTHS, 20K &#8594; 250K &#183; DECODE 73.7 &#8594; 64.2</text>')
+    a('</svg>')
+    return "\n".join(o)
+
+
+def chart_shard():
+    """Where the shard lived: SATA boot SSD vs NVMe, 250K prefill."""
+    W, H = 520, 300
+    L, R, T, B = 62, 20, 40, 62
+    pw, ph = W - L - R, H - T - B
+    ymax = 2400
+    groups = [("SATA BOOT SSD", 1314), ("NVMe", 1974)]
+    o = []
+    a = o.append
+    a(f'<svg viewBox="0 0 {W} {H}" class="chart-svg" role="img" aria-labelledby="csT">')
+    a('<title id="csT">Prefill at 250K context: 1314 tokens per second with the shard on '
+      'the SATA boot SSD against 1974 on NVMe</title>')
+    for i in range(0, 5):
+        v = ymax * i / 4
+        y = T + ph - (v / ymax) * ph
+        a(f'<line class="pl-grid" x1="{L}" y1="{y:.1f}" x2="{L+pw}" y2="{y:.1f}"/>')
+        a(f'<text class="pl-vals" x="{L-10}" y="{y+3.5:.1f}" text-anchor="end">{int(v):,}</text>')
+    a(f'<line class="pl-axis" x1="{L}" y1="{T+ph}" x2="{L+pw}" y2="{T+ph}"/>')
+    a(f'<text class="pl-vals" x="{L}" y="{T-18}">TOK/S</text>')
+    a(f'<text class="pl-vals" x="{L+pw}" y="{T-18}" text-anchor="end">PREFILL AT 250K</text>')
+    gw = pw / len(groups)
+    for i, (lab, v) in enumerate(groups):
+        gx = L + gw * i
+        bw = 76
+        bx = gx + (gw - bw) / 2
+        bh = (v / ymax) * ph
+        cls = "pl-barg" if i == 0 else "pl-bar2"
+        a(f'<rect class="{cls}" x="{bx:.1f}" y="{T+ph-bh:.1f}" width="{bw}" height="{bh:.1f}"/>')
+        a(f'<text class="pl-val" x="{bx+bw/2:.1f}" y="{T+ph-bh-8:.1f}" text-anchor="middle">{v:,}</text>')
+        a(f'<text class="pl-vals" x="{bx+bw/2:.1f}" y="{T+ph+20}" text-anchor="middle">{lab}</text>')
+    # the gain bracket between the two bars
+    ax = L + gw * 0.5 + (gw - 76) / 2 + 76
+    bx2 = L + gw * 1.5 + (gw - 76) / 2
+    by = T + 26
+    a(f'<line class="pl-ln3" x1="{ax+6:.1f}" y1="{by}" x2="{bx2-6:.1f}" y2="{by}"/>')
+    a(f'<line class="pl-ln3" x1="{ax+6:.1f}" y1="{by-5}" x2="{ax+6:.1f}" y2="{by+5}"/>')
+    a(f'<line class="pl-ln3" x1="{bx2-6:.1f}" y1="{by-5}" x2="{bx2-6:.1f}" y2="{by+5}"/>')
+    a(f'<text class="pl-tc" x="{(ax+bx2)/2:.1f}" y="{by-11}" text-anchor="middle">+54.2%</text>')
+    a(f'<text class="pl-vals" x="{L+pw/2:.1f}" y="{T+ph+42}" text-anchor="middle">'
+      f'SAME ENGINE, SAME QUANT &#8212; ONLY THE STORAGE MOVED</text>')
     a('</svg>')
     return "\n".join(o)
 
