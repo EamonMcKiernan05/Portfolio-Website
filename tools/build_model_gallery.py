@@ -265,6 +265,9 @@ a.gal-btn:hover{border-bottom-color:var(--accent)}
 .gal-chip.local{color:var(--accent);border-color:rgba(216,167,60,.45)}
 .gal-chip.cloud{color:var(--quiet)}
 .gal-chip.unknown{color:var(--quiet);border-style:dashed}
+.gal-hero{margin:38px 0 6px;border:1px solid var(--line);background:#0c0b08}
+.gal-hero img{display:block;width:100%;height:auto}
+.gal-hero figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);padding:11px 16px;border-top:1px solid var(--line)}
 .gal-dl{display:grid;grid-template-columns:170px 1fr;column-gap:0;margin-top:24px;border-top:1px solid var(--line)}
 .gal-dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);padding:15px 18px 15px 0;border-bottom:1px solid var(--line)}
 .gal-dl dd{font-size:14px;color:var(--dim);padding:15px 0;border-bottom:1px solid var(--line);line-height:1.62}
@@ -376,6 +379,12 @@ def build_page(b):
     else:
         prompt_meta = "Prompt from the one-shot demo bench pack (v3.4)"
     note = f'<p class="gal-meta">{html.escape(b["note"])}</p>' if b.get("note") else ""
+    thumb = ROOT / "demos" / "thumbs" / "model-testing" / f"{b['slug']}.jpg"
+    hero = ""
+    if thumb.exists() and thumb.stat().st_size > 15000:
+        hero = (f'<figure class="gal-hero"><img src="../../demos/thumbs/model-testing/{b["slug"]}.jpg" '
+                f'alt="{html.escape(b["title"])} — {html.escape(b["model"])}, running" width="1280" height="800">'
+                f'<figcaption>{html.escape(b["model"])} &middot; {html.escape(mt)} &middot; preview</figcaption></figure>')
     return HEAD.format(
         title=f"{html.escape(b['title'])} &middot; {html.escape(b['model'])} &middot; Model testing gallery — Eamon McKiernan",
         desc=html.escape(f"{b['title']} — {b['model']}. The one-shot prompt, verbatim, and the build it produced."),
@@ -389,6 +398,7 @@ def build_page(b):
   <p class="gal-lede">{html.escape(b['blurb'])}</p>
   <p class="gal-meta">{html.escape(b['model'])}{(' &middot; ' + html.escape(b['harness'])) if b.get('harness') else ''}{(' &middot; ' + html.escape(b['variant'])) if b['variant'] else ''} &middot; {kb} KB &middot; {mt}</p>
   {note}
+  {hero}
 
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">The build</div><span class="gal-sec-rule"></span></div>
