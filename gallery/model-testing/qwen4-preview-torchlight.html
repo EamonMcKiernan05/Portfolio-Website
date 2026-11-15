@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torchlight Depths &middot; Qwen 4 Preview &middot; Model testing gallery — Eamon McKiernan</title>
+<meta name="description" content="Torchlight Depths — Qwen 4 Preview. The one-shot prompt, verbatim, and the build it produced.">
+<meta name="author" content="Eamon McKiernan">
+<meta property="og:title" content="Torchlight Depths — Qwen 4 Preview">
+<meta property="og:description" content="Torchlight Depths — Qwen 4 Preview. The one-shot prompt, verbatim, and the build it produced.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eamon McKiernan">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<div class="wrap gal-wrap">
+
+  <div class="gal-top">
+    <a class="gal-back" href="../../gallery.html">&#8592;&nbsp;model testing gallery</a>
+  </div>
+
+  <h1 class="gal-h1">Torchlight Depths</h1>
+  <p class="gal-lede">A self-playing isometric dungeon crawler — the model animates the torchbearer itself.</p>
+  <p class="gal-meta">Qwen 4 Preview &middot; 718 KB &middot; 12 Nov 2026</p>
+  
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">The build</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-s">One-shot output, unedited. Run it here or open it full size.</div>
+    <article class="gal-res">
+      <div class="gal-rt">
+        <div class="gal-rb">
+          <div class="gal-rt-t">Torchlight Depths</div>
+          <div class="gal-rm">Qwen 4 Preview &middot; 718 KB &middot; 12 Nov 2026</div>
+          <div class="gal-rd">A self-playing isometric dungeon crawler — the model animates the torchbearer itself.</div>
+          <div class="gal-ra">
+            <button class="gal-btn" type="button" data-run>run in this page</button>
+            <a class="gal-btn go" href="../../demos/model-testing/Qwen 4 Preview/torchlight-depths.html" target="_blank" rel="noopener">open in new tab &#8599;</a>
+            <a class="gal-btn" href="https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Model%20Testing%20Gallery/Qwen%204%20Preview/torchlight-depths.html" target="_blank" rel="noopener">source &#8599;</a>
+          </div>
+        </div>
+      </div>
+      <div class="gal-run" hidden>
+        <iframe src="about:blank" data-src="../../demos/model-testing/Qwen 4 Preview/torchlight-depths.html" title="Torchlight Depths — live demo" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allowfullscreen></iframe>
+        <div class="gal-runhint">Runs sandboxed in this page — click inside to interact.</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-s">Prompt captured from DeepSeek Harness session <code>c00f5356</code>, one shot, no follow-ups.</div>
+    <pre class="gal-prompt">Create one complete, self-contained HTML file for TORCHLIGHT DEPTHS, a self-playing 3D isometric dungeon explorer game in three.js that needs no user input (the player can take over at any time): a lone adventurer carrying a burning torch in one hand and a sword in the other explores a gritty stone dungeon, room by room, by torchlight.
+
+Use a dark, gritty, lovingly lit aesthetic. The camera is a true isometric-style view (orthographic or a long-lens perspective at a classic three-quarter angle from above) that follows the player smoothly. The overall vibe is dark, but never so dark that you cannot see: the dungeon reads clearly everywhere the light reaches, and unlit areas fall into deep blue-grey shadow with a faint cold ambient so walls and floors still show their shapes. LIGHT IS THE STAR: the player&#x27;s torch is a flickering warm point light that casts real moving shadows of pillars, crates, bars and monsters across the floor and walls; wall torches and braziers in sconces throw their own warm pools of light; a few cold accents (a blue glow from a magic rune, moonlight through a grate) contrast with the warm fire; embers and sparks drift up from every flame; dust hangs in the torch beams. The look is inspired by an ordered-dither style, rendered LIGHTER than a heavy dither: render the scene to a reduced-resolution target (about half resolution) with nearest filtering for a slightly chunky, crafted pixel feel, then a full-screen post-process that applies a subtle ordered (Bayer) dither across many tonal levels (so the dither only shows as fine texture in the gradients, never as a heavy screen-door pattern over everything), keeping the colour: cold desaturated blue-greys for the stone in shadow, warm amber and orange for everything the torches light. Add a REAL TILT-SHIFT treatment in that post-process: a depth-aware lens blur that leaves a horizontal band through the player razor sharp and grows strongly toward the top and bottom of the screen, so the dungeon reads as a tiny miniature diorama; plus a soft vignette and light film grain. Do not use a heavy screen-door dither, bright saturated colours, glossy plastic materials, a clean modern look or a stained-glass look.
+
+Build the dungeon in code: rough stone-block walls with cut-away fronts so the isometric camera can always see the player, flagstone floors with cracks, moss and puddles that reflect the firelight, wooden doors, iron-barred cells, pillars, stairs down, rubble, barrels, crates, bones, cobwebs, chests, banners and a few traps (spike plates, a swinging blade); rooms linked by corridors, with a sense of going deeper. Monsters roam: skeletons, giant rats and a slime or two, each readable by torchlight with a small glow in their eyes. The PLAYER is a small, clearly built adventurer (hooded cloak, armour, a torch held high casting the main light, a sword) with a proper walk cycle, a sword swing with a clear arc and impact, a hit flinch, and a torch that sways with each step. SELF-PLAYING, WITH OPTIONAL CONTROLS: the hero plays itself from the moment the page loads and never needs a key, click or touch, but the player can take over at any time with WASD or the arrow keys to move and Space to attack (a gamepad works too); after a few seconds without input, the hero goes back to playing itself, and it never gets stuck on walls, doors or props. It explores room by room on its own, walks to monsters and fights them, opens chests for gold and potions, drinks a potion when hurt, finds the key, unlocks the door to the stairs and descends to the next, deeper level, forever, so the page is a self-running game to watch. ENEMIES MUST BE PRESENT AND ACTIVE: every room and most corridors hold monsters that are clearly visible on screen (skeletons, giant rats, slimes, and a bigger boss monster on every third level), they notice the hero, approach and attack, and the hero fights them in frequent, readable sword fights with swings, hits, knockback, hit flashes and monsters collapsing or bursting into bones and goo; a fight should be on screen most of the time, never long stretches of an empty dungeon. A small HUD shows health hearts, gold, depth and monsters slain, in a crisp pixel font. Nothing passes through anything it should not: no walking through walls, pillars or monsters. Add synthesized sound with Web Audio: footsteps on stone, the crackling torch, sword swings and hits, monster squeals, coins, a door unlocking and a low dungeon drone; because browsers gate audio behind a gesture, show only a small, unobtrusive &quot;click for sound&quot; hint in a corner that enables audio when clicked; the game itself starts and runs immediately without it and never waits for any input. Make it fill the window, resize cleanly, run smoothly at 60 fps and start with zero console errors. Deliver it as a single self-contained HTML file; any libraries are allowed.</pre>
+  </section>
+
+  <footer>
+    <div class="gal-f1">&copy; 2026 Eamon McKiernan &mdash; <a href="../../gallery.html">model testing gallery</a></div>
+    <div class="gal-f2">Sources and prompts: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+  </footer>
+
+</div>
+<script>
+document.querySelectorAll('[data-run]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var art = btn.closest('.gal-res');
+    var box = art.querySelector('.gal-run');
+    var fr = box.querySelector('iframe');
+    if (box.hidden) {
+      fr.src = fr.getAttribute('data-src');
+      box.hidden = false;
+      btn.textContent = 'stop';
+      btn.classList.add('on');
+    } else {
+      fr.src = 'about:blank';
+      box.hidden = true;
+      btn.textContent = 'run in this page';
+      btn.classList.remove('on');
+    }
+  });
+});
+</script>
+</main>
+</body>
+</html>

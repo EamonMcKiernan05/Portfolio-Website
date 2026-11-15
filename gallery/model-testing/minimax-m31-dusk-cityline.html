@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dusk Cityline &middot; MiniMax M3.1 Flash &middot; Model testing gallery — Eamon McKiernan</title>
+<meta name="description" content="Dusk Cityline — MiniMax M3.1 Flash. The one-shot prompt, verbatim, and the build it produced.">
+<meta name="author" content="Eamon McKiernan">
+<meta property="og:title" content="Dusk Cityline — MiniMax M3.1 Flash">
+<meta property="og:description" content="Dusk Cityline — MiniMax M3.1 Flash. The one-shot prompt, verbatim, and the build it produced.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eamon McKiernan">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<div class="wrap gal-wrap">
+
+  <div class="gal-top">
+    <a class="gal-back" href="../../gallery.html">&#8592;&nbsp;model testing gallery</a>
+  </div>
+
+  <h1 class="gal-h1">Dusk Cityline</h1>
+  <p class="gal-lede">CSS 3D only — no WebGL allowed — and it still reads as a city at dusk.</p>
+  <p class="gal-meta">MiniMax M3.1 Flash &middot; 30 KB &middot; 21 Oct 2026</p>
+  
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">The build</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-s">One-shot output, unedited. Run it here or open it full size.</div>
+    <article class="gal-res">
+      <div class="gal-rt">
+        <div class="gal-rb">
+          <div class="gal-rt-t">Dusk Cityline</div>
+          <div class="gal-rm">MiniMax M3.1 Flash &middot; 30 KB &middot; 21 Oct 2026</div>
+          <div class="gal-rd">CSS 3D only — no WebGL allowed — and it still reads as a city at dusk.</div>
+          <div class="gal-ra">
+            <button class="gal-btn" type="button" data-run>run in this page</button>
+            <a class="gal-btn go" href="../../demos/model-testing/MiniMax M3.1-Flash Tests/dusk-cityline-minimax-m3.1-flash.html" target="_blank" rel="noopener">open in new tab &#8599;</a>
+            <a class="gal-btn" href="https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Model%20Testing%20Gallery/MiniMax%20M3.1-Flash%20Tests/dusk-cityline-minimax-m3.1-flash.html" target="_blank" rel="noopener">source &#8599;</a>
+          </div>
+        </div>
+      </div>
+      <div class="gal-run" hidden>
+        <iframe src="about:blank" data-src="../../demos/model-testing/MiniMax M3.1-Flash Tests/dusk-cityline-minimax-m3.1-flash.html" title="Dusk Cityline — live demo" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allowfullscreen></iframe>
+        <div class="gal-runhint">Runs sandboxed in this page — click inside to interact.</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-s">Prompt from the one-shot demo bench pack (v3.4).</div>
+    <pre class="gal-prompt">Build one self-contained HTML file: a city skyline at dusk, built as real 3D geometry with CSS 3D transforms. No canvas, no WebGL, no libraries — DOM and CSS only. The buildings are true 3D boxes with six faces seen in real perspective, not flat layered silhouettes.
+
+THE FRAME at t=0: a low viewpoint across the river toward the skyline, camera looking slightly up. The stage has perspective: 1200px and transform-style: preserve-3d, inherited by everything inside it. River fills the bottom third, skyline across the middle, deep blue-violet sky above with an amber band at the horizon. A suspension bridge crosses the river on the right third. Title &quot;DUSK CITYLINE&quot; bottom left in small, wide-tracked capitals.
+
+3D RULES — this is the test
+- Every tower is a box: one element with six child faces (front, back, left, right, top, bottom) placed with translateZ / rotateY / rotateX inside a preserve-3d parent. Right-hand faces catch the sun; left and back faces fall into cool shade.
+- Buildings sit at real x and z depths on one ground plane. Nearer towers occlude farther ones, and nothing floats or intersects.
+- Camera: a 10-second loop that trucks ±6% along x and rises 2%, returning exactly to frame 1. Parallax between near and far towers must be visible.
+- Window lights come from repeating-linear-gradient on each face, not one div per window.
+
+ART DIRECTION
+- Palette: sky #1a1e3a at the top to #e8895a at the horizon; concrete #3a3f4a with a warm bias; window light #ffd9a0 and #bcd8ff; sodium streetlights #ffab4d; water #0e1424.
+- Light: the last sun low on the right, rimming the towers on that side. Shadowed faces stay cool.
+- Mood: the ten minutes after sunset, city still busy.
+
+BUILD, IN THIS ORDER
+1. Ground plane, river plane and sky in the same 3D space.
+2. 30–40 towers as 3D boxes at varied depths, widths and heights, window gradients, rooftop clutter on the nearest few.
+3. The bridge in 3D: two towers, a catenary cable curve, a road deck with tiny warm lights along it.
+4. Water: a mirrored, flipped copy of the towers with blur and reduced opacity, broken by drifting ripple bands.
+5. Traffic: 6–10 headlight and tail-light pairs moving along the waterfront road.
+
+MOTION: window lights switch on in small groups over the first 8 seconds; car lights glide; ripples drift. The loop is 10 seconds and returns exactly to the opening frame.
+
+TECHNICAL — hard rules
+- One .html file, all CSS and JS inline. No external anything: no fonts, images, libraries, CDN. System font stack only.
+- No &lt;canvas&gt;, no WebGL. CSS 3D transforms and DOM only.
+- 60fps: animate transform and opacity only, never layout properties.
+- Seeded PRNG (mulberry32, seed 1337) for window lights and building variation.
+- Zero console errors.
+
+
+DO NOT: a flat layered skyline with a fake perspective scale; a purple gradient sky; one face per building; evenly spaced windows; a static backdrop.
+
+OUTPUT: return only the complete HTML file, no commentary. If you have file tools, write it as dusk-cityline-&lt;model&gt;.html and reply DONE.</pre>
+  </section>
+
+  <footer>
+    <div class="gal-f1">&copy; 2026 Eamon McKiernan &mdash; <a href="../../gallery.html">model testing gallery</a></div>
+    <div class="gal-f2">Sources and prompts: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+  </footer>
+
+</div>
+<script>
+document.querySelectorAll('[data-run]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var art = btn.closest('.gal-res');
+    var box = art.querySelector('.gal-run');
+    var fr = box.querySelector('iframe');
+    if (box.hidden) {
+      fr.src = fr.getAttribute('data-src');
+      box.hidden = false;
+      btn.textContent = 'stop';
+      btn.classList.add('on');
+    } else {
+      fr.src = 'about:blank';
+      box.hidden = true;
+      btn.textContent = 'run in this page';
+      btn.classList.remove('on');
+    }
+  });
+});
+</script>
+</main>
+</body>
+</html>
