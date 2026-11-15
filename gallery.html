@@ -41,17 +41,34 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-lede{font-size:clamp(16px,1.9vw,19px);color:var(--dim);max-width:62ch;margin-top:22px}
 .gal-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:18px;line-height:1.8}
 
-/* section header */
+/* sections + subsections (collapsible) */
 .gal-sec{margin-top:76px}
-.gal-sec-h{display:flex;align-items:center;gap:16px}
-.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent)}
-.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em}
-.gal-sec-rule{flex:1;height:1px;background:var(--line)}
+.gal-sec-m{margin-top:76px}
+.gal-sec-m>summary{display:flex;align-items:baseline;gap:16px;cursor:pointer;list-style:none;padding:2px 0}
+.gal-sec-m>summary::-webkit-details-marker{display:none}
+.gal-sec-m>summary:hover .gal-sec-t{color:#fff}
+.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent);flex-shrink:0}
+.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em;transition:color .2s}
+.gal-sec-rule{flex:1;height:1px;background:var(--line);align-self:center;min-width:24px}
+.gal-sec-c{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);flex-shrink:0}
+.gal-sec-m>summary::after{content:"+";font-family:var(--sans);font-size:19px;font-weight:400;line-height:1;color:var(--accent);flex-shrink:0;width:16px;text-align:center}
+.gal-sec-m[open]>summary::after{content:"–"}
 .gal-sec-s{font-size:14.5px;color:var(--quiet);margin:12px 0 26px;max-width:74ch}
 
+/* harness subsection */
+.gal-h{margin:30px 0 0}
+.gal-h>summary{display:flex;align-items:baseline;gap:12px;cursor:pointer;list-style:none;padding:0 0 11px;border-bottom:1px solid var(--line)}
+.gal-h>summary::-webkit-details-marker{display:none}
+.gal-h-t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);transition:color .2s}
+.gal-h[open]>summary .gal-h-t,.gal-h>summary:hover .gal-h-t{color:var(--ink)}
+.gal-h-c{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-left:auto}
+.gal-h>summary::after{content:"+";font-family:var(--sans);font-size:15px;line-height:1;color:var(--dim);width:13px;text-align:center}
+.gal-h[open]>summary::after{content:"–";color:var(--accent)}
+.gal-h .gal-grid{margin-top:22px}
+
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.gal-card{display:block;background:var(--bg);padding:24px 24px 20px;border:0;color:inherit;transition:background .22s var(--ease)}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.gal-card{display:block;background:var(--bg);padding:24px 24px 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:inherit;transition:background .22s var(--ease)}
 .gal-card:hover{background:#1b1812}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.005em;color:var(--ink);line-height:1.2}
 .gal-m{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:9px}
@@ -110,16 +127,16 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
 
   <h1 class="gal-h1">Model testing gallery</h1>
   <p class="gal-lede">19 one-shot browser demos written by AI models running on my own hardware, grouped by the model that wrote them. One prompt, one self-contained HTML file, no fixes — published as they came out, defects and all.</p>
-  <p class="gal-meta">7 models &middot; 19 builds &middot; prompts quoted verbatim</p>
+  <p class="gal-meta">6 models &middot; 19 builds &middot; prompts quoted verbatim</p>
 
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">Qwen3.8-27B</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">27B dense model, Q8_K_XL, four serving configurations — the same brief four times to isolate the engine&#x27;s effect on craft. &middot; 4 builds.</div>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">01</span><span class="gal-sec-t">Qwen3.8-27B</span><span class="gal-sec-rule"></span><span class="gal-sec-c">4 builds</span></summary>
+    <p class="gal-sec-s">27B dense model, Q8_K_XL, four serving configurations — the same brief four times to isolate the engine&#x27;s effect on craft.</p>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-dflash2-pagoda.html">
         <div class="gal-body">
           <div class="gal-t">The Pagoda — DFlash2</div>
-          <div class="gal-m">Qwen3.8-27B &middot; DFlash2 config</div>
+          <div class="gal-m">Qwen3.8-27B · DFlash2 config</div>
           <div class="gal-d">The full pagoda brief in one shot on the DFlash2 serving config.</div>
           <div class="gal-m">13 Nov 2026 &middot; 978 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -128,7 +145,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-dspine-pagoda.html">
         <div class="gal-body">
           <div class="gal-t">The Pagoda — DSpine</div>
-          <div class="gal-m">Qwen3.8-27B &middot; DSpine config</div>
+          <div class="gal-m">Qwen3.8-27B · DSpine config</div>
           <div class="gal-d">Same brief, four follow-ups — the run that kept iterating on roof and path fixes.</div>
           <div class="gal-m">10 Nov 2026 &middot; 731 KB &middot; 4 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -137,7 +154,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-mtp-pagoda.html">
         <div class="gal-body">
           <div class="gal-t">The Pagoda — MTP</div>
-          <div class="gal-m">Qwen3.8-27B &middot; MTP config</div>
+          <div class="gal-m">Qwen3.8-27B · MTP config</div>
           <div class="gal-d">MTP serving config, one follow-up, the pagoda landing as a sky temple.</div>
           <div class="gal-m">12 Nov 2026 &middot; 78 KB &middot; 1 follow-up</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -146,18 +163,20 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-plain-pagoda.html">
         <div class="gal-body">
           <div class="gal-t">The Pagoda — Plain</div>
-          <div class="gal-m">Qwen3.8-27B &middot; Plain config</div>
+          <div class="gal-m">Qwen3.8-27B · Plain config</div>
           <div class="gal-d">Stock config, single shot — the control run for the three above.</div>
           <div class="gal-m">13 Nov 2026 &middot; 753 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
     </div>
-  </section>
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">Qwen 4 Preview</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">The preview build of Qwen 4, run through the DeepSeek Harness with one prompt per build. &middot; 4 builds.</div>
-    <div class="gal-grid">
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">02</span><span class="gal-sec-t">Qwen 4 Preview</span><span class="gal-sec-rule"></span><span class="gal-sec-c">8 builds</span></summary>
+    <p class="gal-sec-s">The preview build of Qwen 4, run two ways — the DeepSeek Harness and the Qwen Code CLI. Same model, different scaffolding, so the builds are split by harness.</p>
+    <details class="gal-h" open>
+      <summary><span class="gal-h-t">DeepSeek Harness</span><span class="gal-h-c">4 builds</span></summary>
+      <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen4-preview-liberty.html">
         <div class="gal-body">
           <div class="gal-t">Liberty Island, 1886</div>
@@ -195,15 +214,14 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
     </div>
-  </section>
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">03</span><div class="gal-sec-t">Qwen Code</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">The same model driven through the Qwen Code CLI instead of the harness — agent scaffolding changes the output. &middot; 4 builds.</div>
-    <div class="gal-grid">
+    </details>
+    <details class="gal-h" open>
+      <summary><span class="gal-h-t">Qwen Code</span><span class="gal-h-c">4 builds</span></summary>
+      <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen-code-sky-temple.html">
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
-          <div class="gal-m">Qwen Code &middot; CLI, Qwen 4 Max Preview</div>
+          <div class="gal-m">Qwen 4 Preview</div>
           <div class="gal-d">The pagoda brief run through Qwen Code with two follow-ups.</div>
           <div class="gal-m">12 Nov 2026 &middot; 749 KB &middot; 2 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -212,7 +230,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <a class="gal-card" href="gallery/model-testing/qwen-code-village.html">
         <div class="gal-body">
           <div class="gal-t">Alderglen — medieval village</div>
-          <div class="gal-m">Qwen Code &middot; CLI, Qwen 4 Max Preview</div>
+          <div class="gal-m">Qwen 4 Preview</div>
           <div class="gal-d">The village brief, one shot, from the CLI agent rather than the harness.</div>
           <div class="gal-m">14 Nov 2026 &middot; 111 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -221,7 +239,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <a class="gal-card" href="gallery/model-testing/qwen-code-liberty.html">
         <div class="gal-body">
           <div class="gal-t">Liberty Island, 1886</div>
-          <div class="gal-m">Qwen Code &middot; CLI, Qwen 4 Max Preview</div>
+          <div class="gal-m">Qwen 4 Preview</div>
           <div class="gal-d">Liberty Island after four follow-ups — the most iterated build in the set.</div>
           <div class="gal-m">15 Nov 2026 &middot; 107 KB &middot; 4 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -230,17 +248,18 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <a class="gal-card" href="gallery/model-testing/qwen-code-liberty-baseline.html">
         <div class="gal-body">
           <div class="gal-t">Liberty Island — baseline gap</div>
-          <div class="gal-m">Qwen Code &middot; CLI, Qwen 4 Max Preview</div>
+          <div class="gal-m">Qwen 4 Preview</div>
           <div class="gal-d">A second build from the same session, kept as the comparison baseline.</div>
           <div class="gal-m">15 Nov 2026 &middot; 103 KB &middot; 4 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
     </div>
-  </section>
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">04</span><div class="gal-sec-t">DeepSeek V4.1 Flash</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">DeepSeek&#x27;s Flash tier on the same castle, sky-temple and city briefs. &middot; 3 builds.</div>
+    </details>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">03</span><span class="gal-sec-t">DeepSeek V4.1 Flash</span><span class="gal-sec-rule"></span><span class="gal-sec-c">3 builds</span></summary>
+    <p class="gal-sec-s">DeepSeek&#x27;s Flash tier on the same castle, sky-temple and city briefs.</p>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/deepseek-v41-castle.html">
         <div class="gal-body">
@@ -270,10 +289,10 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
     </div>
-  </section>
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">05</span><div class="gal-sec-t">MiniMax M3.1 Flash</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">Two surviving v3-pack runs. The earlier v2-era attempts are retired with the prompts that made them. &middot; 2 builds.</div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">04</span><span class="gal-sec-t">MiniMax M3.1 Flash</span><span class="gal-sec-rule"></span><span class="gal-sec-c">2 builds</span></summary>
+    <p class="gal-sec-s">Two surviving v3-pack runs. The earlier v2-era attempts are retired with the prompts that made them.</p>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/minimax-m31-sky-temple.html">
         <div class="gal-body">
@@ -294,10 +313,10 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
     </div>
-  </section>
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">06</span><div class="gal-sec-t">HY4</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">A single castle build from HY4. &middot; 1 build.</div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">05</span><span class="gal-sec-t">HY4</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
+    <p class="gal-sec-s">A single castle build from HY4.</p>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/hy4-castle.html">
         <div class="gal-body">
@@ -309,10 +328,10 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
     </div>
-  </section>
-  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">07</span><div class="gal-sec-t">LongCat 2.5</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">LongCat 2.5 on the pagoda brief, five follow-ups in. &middot; 1 build.</div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">06</span><span class="gal-sec-t">LongCat 2.5</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
+    <p class="gal-sec-s">LongCat 2.5 on the pagoda brief, five follow-ups in.</p>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/longcat-25-sky-temple.html">
         <div class="gal-body">
@@ -324,7 +343,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
     </div>
-  </section>
+  </details>
 
   <footer>
     <div class="gal-f1">&copy; 2026 Eamon McKiernan &mdash; <a href="index.html">back to the portfolio</a></div>

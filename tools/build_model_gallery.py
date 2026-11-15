@@ -23,53 +23,53 @@ REPO = "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Model%20
 BUILDS = [
     # Qwen3.8-27B
     dict(rel="Qwen3.8-27B/DFlash2/pagoda.html", slug="qwen38-27b-dflash2-pagoda",
-         model="Qwen3.8-27B", group="Qwen3.8-27B", variant="DFlash2 config",
+         model="Qwen3.8-27B", group="Qwen3.8-27B", harness="DeepSeek Harness", variant="DFlash2 config",
          title="The Pagoda — DFlash2", prompt="pagoda", session="65225474", followups=0,
          blurb="The full pagoda brief in one shot on the DFlash2 serving config."),
     dict(rel="Qwen3.8-27B/DSpine/THE-PAGODA.html", slug="qwen38-27b-dspine-pagoda",
-         model="Qwen3.8-27B", group="Qwen3.8-27B", variant="DSpine config",
+         model="Qwen3.8-27B", group="Qwen3.8-27B", harness="DeepSeek Harness", variant="DSpine config",
          title="The Pagoda — DSpine", prompt="pagoda", session="25c560ee", followups=4,
          blurb="Same brief, four follow-ups — the run that kept iterating on roof and path fixes."),
     dict(rel="Qwen3.8-27B/MTP/sky-temple.html", slug="qwen38-27b-mtp-pagoda",
-         model="Qwen3.8-27B", group="Qwen3.8-27B", variant="MTP config",
+         model="Qwen3.8-27B", group="Qwen3.8-27B", harness="DeepSeek Harness", variant="MTP config",
          title="The Pagoda — MTP", prompt="pagoda", session="6133e5ab", followups=1,
          blurb="MTP serving config, one follow-up, the pagoda landing as a sky temple."),
     dict(rel="Qwen3.8-27B/Plain/pagoda.html", slug="qwen38-27b-plain-pagoda",
-         model="Qwen3.8-27B", group="Qwen3.8-27B", variant="Plain config",
+         model="Qwen3.8-27B", group="Qwen3.8-27B", harness="DeepSeek Harness", variant="Plain config",
          title="The Pagoda — Plain", prompt="pagoda", session="004a6560", followups=0,
          blurb="Stock config, single shot — the control run for the three above."),
     # Qwen 4 Preview
     dict(rel="Qwen 4 Preview/liberty-1886.html", slug="qwen4-preview-liberty",
-         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="DeepSeek Harness",
          title="Liberty Island, 1886", prompt="liberty", session="17131dd2", followups=3,
          blurb="A voxel diorama of Liberty Island and the New York waterfront in autumn 1886."),
     dict(rel="Qwen 4 Preview/medieval-village.html", slug="qwen4-preview-village",
-         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="DeepSeek Harness",
          title="Alderbrook — medieval village", prompt="village", session="33c57346", followups=0,
          blurb="A medieval village at golden hour, one shot, no fixes."),
     dict(rel="Qwen 4 Preview/the-pagoda.html", slug="qwen4-preview-pagoda",
-         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="DeepSeek Harness",
          title="The Pagoda", prompt="pagoda", session="c23fdca6", followups=1,
          blurb="The pagoda brief again, one follow-up — its largest file of the set."),
     dict(rel="Qwen 4 Preview/torchlight-depths.html", slug="qwen4-preview-torchlight",
-         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="DeepSeek Harness",
          title="Torchlight Depths", prompt="torchlight", session="c00f5356", followups=0,
          blurb="A self-playing isometric dungeon crawler — the model animates the torchbearer itself."),
     # Qwen Code
     dict(rel="QwenCode/sky-temple.html", slug="qwen-code-sky-temple",
-         model="Qwen Code", group="Qwen Code", variant="CLI, Qwen 4 Max Preview",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="Qwen Code",
          title="Sky Temple", prompt="pagoda", session="6bb0ae54", followups=2,
          blurb="The pagoda brief run through Qwen Code with two follow-ups."),
     dict(rel="QwenCode/medieval-village.html", slug="qwen-code-village",
-         model="Qwen Code", group="Qwen Code", variant="CLI, Qwen 4 Max Preview",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="Qwen Code",
          title="Alderglen — medieval village", prompt="village", session="0886538b", followups=0,
          blurb="The village brief, one shot, from the CLI agent rather than the harness."),
     dict(rel="QwenCode/liberty-1886.html", slug="qwen-code-liberty",
-         model="Qwen Code", group="Qwen Code", variant="CLI, Qwen 4 Max Preview",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="Qwen Code",
          title="Liberty Island, 1886", prompt="liberty", session="787d2fe5", followups=4,
          blurb="Liberty Island after four follow-ups — the most iterated build in the set."),
     dict(rel="QwenCode/lbuild/baseline-gap.html", slug="qwen-code-liberty-baseline",
-         model="Qwen Code", group="Qwen Code", variant="CLI, Qwen 4 Max Preview",
+         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="Qwen Code",
          title="Liberty Island — baseline gap", prompt="liberty", session="787d2fe5", followups=4,
          blurb="A second build from the same session, kept as the comparison baseline."),
     # DeepSeek V4.1 Flash
@@ -107,12 +107,11 @@ BUILDS = [
          blurb="The pagoda brief on LongCat, five follow-ups before it settled."),
 ]
 
-GROUP_ORDER = ["Qwen3.8-27B", "Qwen 4 Preview", "Qwen Code", "DeepSeek V4.1 Flash",
+GROUP_ORDER = ["Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash",
                "MiniMax M3.1 Flash", "HY4", "LongCat 2.5"]
 GROUP_BLURB = {
     "Qwen3.8-27B": "27B dense model, Q8_K_XL, four serving configurations — the same brief four times to isolate the engine's effect on craft.",
-    "Qwen 4 Preview": "The preview build of Qwen 4, run through the DeepSeek Harness with one prompt per build.",
-    "Qwen Code": "The same model driven through the Qwen Code CLI instead of the harness — agent scaffolding changes the output.",
+    "Qwen 4 Preview": "The preview build of Qwen 4, run two ways — the DeepSeek Harness and the Qwen Code CLI. Same model, different scaffolding, so the builds are split by harness.",
     "DeepSeek V4.1 Flash": "DeepSeek's Flash tier on the same castle, sky-temple and city briefs.",
     "MiniMax M3.1 Flash": "Two surviving v3-pack runs. The earlier v2-era attempts are retired with the prompts that made them.",
     "HY4": "A single castle build from HY4.",
@@ -176,17 +175,34 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-lede{font-size:clamp(16px,1.9vw,19px);color:var(--dim);max-width:62ch;margin-top:22px}
 .gal-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:18px;line-height:1.8}
 
-/* section header */
+/* sections + subsections (collapsible) */
 .gal-sec{margin-top:76px}
-.gal-sec-h{display:flex;align-items:center;gap:16px}
-.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent)}
-.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em}
-.gal-sec-rule{flex:1;height:1px;background:var(--line)}
+.gal-sec-m{margin-top:76px}
+.gal-sec-m>summary{display:flex;align-items:baseline;gap:16px;cursor:pointer;list-style:none;padding:2px 0}
+.gal-sec-m>summary::-webkit-details-marker{display:none}
+.gal-sec-m>summary:hover .gal-sec-t{color:#fff}
+.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent);flex-shrink:0}
+.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em;transition:color .2s}
+.gal-sec-rule{flex:1;height:1px;background:var(--line);align-self:center;min-width:24px}
+.gal-sec-c{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);flex-shrink:0}
+.gal-sec-m>summary::after{content:"+";font-family:var(--sans);font-size:19px;font-weight:400;line-height:1;color:var(--accent);flex-shrink:0;width:16px;text-align:center}
+.gal-sec-m[open]>summary::after{content:"–"}
 .gal-sec-s{font-size:14.5px;color:var(--quiet);margin:12px 0 26px;max-width:74ch}
 
+/* harness subsection */
+.gal-h{margin:30px 0 0}
+.gal-h>summary{display:flex;align-items:baseline;gap:12px;cursor:pointer;list-style:none;padding:0 0 11px;border-bottom:1px solid var(--line)}
+.gal-h>summary::-webkit-details-marker{display:none}
+.gal-h-t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);transition:color .2s}
+.gal-h[open]>summary .gal-h-t,.gal-h>summary:hover .gal-h-t{color:var(--ink)}
+.gal-h-c{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-left:auto}
+.gal-h>summary::after{content:"+";font-family:var(--sans);font-size:15px;line-height:1;color:var(--dim);width:13px;text-align:center}
+.gal-h[open]>summary::after{content:"–";color:var(--accent)}
+.gal-h .gal-grid{margin-top:22px}
+
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.gal-card{display:block;background:var(--bg);padding:24px 24px 20px;border:0;color:inherit;transition:background .22s var(--ease)}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.gal-card{display:block;background:var(--bg);padding:24px 24px 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:inherit;transition:background .22s var(--ease)}
 .gal-card:hover{background:#1b1812}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.005em;color:var(--ink);line-height:1.2}
 .gal-m{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:9px}
@@ -305,7 +321,7 @@ def build_page(b):
 
   <h1 class="gal-h1">{html.escape(b['title'])}</h1>
   <p class="gal-lede">{html.escape(b['blurb'])}</p>
-  <p class="gal-meta">{html.escape(b['model'])}{(' &middot; ' + html.escape(b['variant'])) if b['variant'] else ''} &middot; {kb} KB &middot; {mt}</p>
+  <p class="gal-meta">{html.escape(b['model'])}{(' &middot; ' + html.escape(b['harness'])) if b.get('harness') else ''}{(' &middot; ' + html.escape(b['variant'])) if b['variant'] else ''} &middot; {kb} KB &middot; {mt}</p>
   {note}
 
   <section class="gal-sec">
@@ -349,6 +365,34 @@ def build_page(b):
 """
 
 
+def card_html(b):
+    kb, mt = meta(b["rel"])
+    fol = ("no session log" if b["followups"] is None
+           else ("one shot" if b["followups"] == 0
+                 else f"{b['followups']} follow-up{'s' if b['followups'] != 1 else ''}"))
+    bits = [b["model"]] + ([b["variant"]] if b.get("variant") else [])
+    return f"""      <a class="gal-card" href="gallery/model-testing/{b['slug']}.html">
+        <div class="gal-body">
+          <div class="gal-t">{html.escape(b['title'])}</div>
+          <div class="gal-m">{html.escape(' · '.join(bits))}</div>
+          <div class="gal-d">{html.escape(b['blurb'])}</div>
+          <div class="gal-m">{mt} &middot; {kb} KB &middot; {fol}</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>"""
+
+
+def grid(items):
+    return '<div class="gal-grid">\n' + "\n".join(card_html(b) for b in items) + '\n    </div>'
+
+
+def harness_block(name, items):
+    return f"""    <details class="gal-h" open>
+      <summary><span class="gal-h-t">{html.escape(name)}</span><span class="gal-h-c">{len(items)} build{'s' if len(items) != 1 else ''}</span></summary>
+      {grid(items)}
+    </details>"""
+
+
 def index_page():
     by_group = {}
     for b in BUILDS:
@@ -360,28 +404,21 @@ def index_page():
         if not items:
             continue
         n += 1
-        cards = []
-        for b in items:
-            kb, mt = meta(b["rel"])
-            fol = ("no session log" if b["followups"] is None
-                   else ("one shot" if b["followups"] == 0
-                         else f"{b['followups']} follow-up{'s' if b['followups'] != 1 else ''}"))
-            cards.append(f"""      <a class="gal-card" href="gallery/model-testing/{b['slug']}.html">
-        <div class="gal-body">
-          <div class="gal-t">{html.escape(b['title'])}</div>
-          <div class="gal-m">{html.escape(b['model'])}{(' &middot; ' + html.escape(b['variant'])) if b['variant'] else ''}</div>
-          <div class="gal-d">{html.escape(b['blurb'])}</div>
-          <div class="gal-m">{mt} &middot; {kb} KB &middot; {fol}</div>
-          <div class="gal-go">prompt + build &#8594;</div>
-        </div>
-      </a>""")
-        sections.append(f"""  <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">{n:02d}</span><div class="gal-sec-t">{html.escape(g)}</div><span class="gal-sec-rule"></span></div>
-    <div class="gal-sec-s">{html.escape(GROUP_BLURB[g])} &middot; {len(items)} build{'s' if len(items) != 1 else ''}.</div>
-    <div class="gal-grid">
-{chr(10).join(cards)}
-    </div>
-  </section>""")
+        labels = {b.get("harness", "") for b in items}
+        split = len([x for x in labels if x]) >= 2
+        if split:
+            order = []
+            for b in items:
+                if b["harness"] not in order:
+                    order.append(b["harness"])
+            body = "\n".join(harness_block(h, [b for b in items if b["harness"] == h]) for h in order)
+        else:
+            body = "    " + grid(items)
+        sections.append(f"""  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">{n:02d}</span><span class="gal-sec-t">{html.escape(g)}</span><span class="gal-sec-rule"></span><span class="gal-sec-c">{len(items)} build{'s' if len(items) != 1 else ''}</span></summary>
+    <p class="gal-sec-s">{html.escape(GROUP_BLURB[g])}</p>
+{body}
+  </details>""")
     total = len(BUILDS)
     return HEAD.format(
         title="Model testing gallery — Eamon McKiernan",
@@ -394,7 +431,7 @@ def index_page():
 
   <h1 class="gal-h1">Model testing gallery</h1>
   <p class="gal-lede">{total} one-shot browser demos written by AI models running on my own hardware, grouped by the model that wrote them. One prompt, one self-contained HTML file, no fixes — published as they came out, defects and all.</p>
-  <p class="gal-meta">{len(GROUP_ORDER)} models &middot; {total} builds &middot; prompts quoted verbatim</p>
+  <p class="gal-meta">{len([g for g in GROUP_ORDER if g in by_group])} models &middot; {total} builds &middot; prompts quoted verbatim</p>
 
 {chr(10).join(sections)}
 
