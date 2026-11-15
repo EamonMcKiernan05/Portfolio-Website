@@ -226,12 +226,16 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 
 /* cards (index) */
 .gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.gal-card{display:block;background:var(--bg);padding:24px 24px 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:inherit;transition:background .22s var(--ease)}
+.gal-card{display:block;background:var(--bg);padding:0 0 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:inherit;transition:background .22s var(--ease)}
+.gal-thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--line);background:#0c0b08;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
+.gal-card:hover .gal-thumb{filter:saturate(1.04) brightness(1)}
+.gal-thumb.empty{background:#12100c}
+.gal-body{padding:20px 22px 0}
 .gal-card:hover{background:#1b1812}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.005em;color:var(--ink);line-height:1.2}
 .gal-m{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:9px}
 .gal-d{font-size:14px;color:var(--dim);margin-top:12px;line-height:1.6;min-height:3.2em}
-.gal-go{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:16px;opacity:.75;transition:opacity .2s,transform .2s var(--ease)}
+.gal-go{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:18px;opacity:.75;transition:opacity .2s,transform .2s var(--ease)}
 .gal-card:hover .gal-go{opacity:1;transform:translateX(3px)}
 
 /* build page */
@@ -432,22 +436,21 @@ def build_page(b):
 
 
 def card_html(b):
-    kb, mt = meta(b)
-    fol = ("no session log" if b["followups"] is None
-           else ("one shot" if b["followups"] == 0
-                 else f"{b['followups']} follow-up{'s' if b['followups'] != 1 else ''}"))
-    bits = [b["model"]] + ([b["variant"]] if b.get("variant") else [])
     sv = SERVING.get(b["slug"], {})
     kind = sv.get("kind", "")
     tag = {"local": f"{html.escape(sv.get('provider',''))} · .5",
            "cloud": html.escape(sv.get('provider',''))}.get(kind, "provider unrecorded")
+    thumb = ROOT / "demos" / "thumbs" / "model-testing" / f"{b['slug']}.jpg"
+    img = (f'<img class="gal-thumb" src="demos/thumbs/model-testing/{b["slug"]}.jpg" '
+           f'alt="{html.escape(b["title"])} — {html.escape(b["model"])}" loading="lazy" width="1280" height="800">'
+           if thumb.exists() and thumb.stat().st_size > 15000 else
+           '<div class="gal-thumb empty" aria-hidden="true"></div>')
     return f"""      <a class="gal-card" href="gallery/model-testing/{b['slug']}.html">
+        {img}
         <div class="gal-body">
           <div class="gal-t">{html.escape(b['title'])}</div>
-          <div class="gal-m">{html.escape(' · '.join(bits))}</div>
+          <div class="gal-m">{html.escape(b['model'])}</div>
           <div class="gal-chip {kind or 'unknown'}">{tag}</div>
-          <div class="gal-d">{html.escape(b['blurb'])}</div>
-          <div class="gal-m">{mt} &middot; {kb} KB &middot; {fol}</div>
           <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>"""
