@@ -6,16 +6,98 @@
 <title>Sky Temple &middot; Qwen Code &middot; Model testing gallery — Eamon McKiernan</title>
 <meta name="description" content="Sky Temple — Qwen Code. The one-shot prompt, verbatim, and the build it produced.">
 <meta name="author" content="Eamon McKiernan">
+<meta name="theme-color" content="#15130F">
 <meta property="og:title" content="Sky Temple — Qwen Code">
 <meta property="og:description" content="Sky Temple — Qwen Code. The one-shot prompt, verbatim, and the build it produced.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eamon McKiernan">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../../assets/site.css">
-<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --line-strong:#4a4132; --accent:#D8A73C;
+  --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
+  --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(216,167,60,.25)}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(216,167,60,.32);transition:border-color .2s,color .2s}
+a:hover{border-color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;color:var(--ink)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:9;background:var(--bg);border:1px solid var(--accent);padding:8px 14px;font-family:var(--mono);font-size:12px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* top + headings */
+.gal-top{padding:34px 0 0}
+.gal-back{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:0}
+.gal-back:hover{color:var(--accent)}
+.gal-h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,7.4vw,88px);line-height:.94;letter-spacing:-.01em;margin:26px 0 0;max-width:18ch}
+.gal-lede{font-size:clamp(16px,1.9vw,19px);color:var(--dim);max-width:62ch;margin-top:22px}
+.gal-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:18px;line-height:1.8}
+
+/* section header */
+.gal-sec{margin-top:76px}
+.gal-sec-h{display:flex;align-items:center;gap:16px}
+.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent)}
+.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em}
+.gal-sec-rule{flex:1;height:1px;background:var(--line)}
+.gal-sec-s{font-size:14.5px;color:var(--quiet);margin:12px 0 26px;max-width:74ch}
+
+/* cards (index) */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gal-card{display:block;background:var(--bg);padding:24px 24px 20px;border:0;color:inherit;transition:background .22s var(--ease)}
+.gal-card:hover{background:#1b1812}
+.gal-t{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.005em;color:var(--ink);line-height:1.2}
+.gal-m{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:9px}
+.gal-d{font-size:14px;color:var(--dim);margin-top:12px;line-height:1.6;min-height:3.2em}
+.gal-go{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:16px;opacity:.75;transition:opacity .2s,transform .2s var(--ease)}
+.gal-card:hover .gal-go{opacity:1;transform:translateX(3px)}
+
+/* build page */
+.gal-res{border:1px solid var(--line)}
+.gal-rt{padding:26px}
+.gal-rt-t{font-family:var(--display);font-size:22px;font-weight:600}
+.gal-rm{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:8px}
+.gal-rd{font-size:14.5px;color:var(--dim);margin-top:14px;max-width:70ch}
+.gal-ra{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.gal-btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line-strong);padding:10px 16px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.gal-btn:hover{color:var(--ink);border-color:var(--accent)}
+.gal-btn.on{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+.gal-btn.go{color:var(--ink);border-color:var(--line-strong)}
+a.gal-btn{border-bottom:1px solid var(--line-strong)}
+a.gal-btn:hover{border-bottom-color:var(--accent)}
+.gal-run{border-top:1px solid var(--line);background:#0f0d0a}
+.gal-run iframe{display:block;width:100%;height:min(78vh,720px);border:0;background:#000}
+.gal-runhint{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);padding:10px 16px;border-top:1px solid var(--line)}
+
+/* prompt */
+.gal-prompt{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#d6cdbd;background:#1b1812;border:1px solid var(--line);padding:22px;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow:auto}
+.gal-prompt::selection{background:rgba(216,167,60,.3)}
+
+/* footer */
+footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.gal-f1,.gal-f2{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--quiet)}
+.gal-f2 a{color:var(--quiet);border-bottom-color:var(--line-strong)}
+.gal-f2 a:hover{color:var(--accent)}
+
+@media(max-width:760px){
+  .wrap{padding:0 20px}
+  .gal-sec{margin-top:54px}
+  .gal-grid{grid-template-columns:1fr}
+  .gal-d{min-height:0}
+  .gal-run iframe{height:60vh}
+  .gal-rt{padding:20px}
+  .gal-prompt{font-size:11.5px;padding:16px;max-height:none}
+  footer{flex-direction:column;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
