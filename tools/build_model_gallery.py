@@ -136,12 +136,6 @@ BUILDS = [
          title="Cloth Lab", prompt="legacy-cloth-lab", session="", followups=0,
          date="5 Oct 2026", kb=40,
          blurb="Cloth physics written from scratch — no library, no solver borrowed."),
-    # the October Qwen3.8-27B build that was on the site
-    dict(rel="Qwen3.8-27B/Plain/sky-temple-oct.html", slug="qwen38-27b-sky-temple-oct",
-         model="Qwen3.8-27B", group="Qwen3.8-27B", variant="", harness="DeepSeek Harness",
-         title="Sky Temple — October run", prompt="legacy-sky-temple", session="", followups=0,
-         date="6 Oct 2026", kb=41,
-         blurb="The 27B model on the Sky Temple brief a month before the pagoda runs."),
 ]
 
 GROUP_ORDER = ["Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash",
