@@ -97,6 +97,15 @@ a.gal-btn:hover{border-bottom-color:var(--accent)}
 .gal-prompt{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#d6cdbd;background:#1b1812;border:1px solid var(--line);padding:22px;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow:auto}
 .gal-prompt::selection{background:rgba(216,167,60,.3)}
 
+/* serving chips + description list */
+.gal-chip{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-strong);color:var(--dim);margin-top:12px}
+.gal-chip.local{color:var(--accent);border-color:rgba(216,167,60,.45)}
+.gal-chip.cloud{color:var(--quiet)}
+.gal-chip.unknown{color:var(--quiet);border-style:dashed}
+.gal-dl{display:grid;grid-template-columns:170px 1fr;column-gap:0;margin-top:24px;border-top:1px solid var(--line)}
+.gal-dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);padding:15px 18px 15px 0;border-bottom:1px solid var(--line)}
+.gal-dl dd{font-size:14px;color:var(--dim);padding:15px 0;border-bottom:1px solid var(--line);line-height:1.62}
+
 /* footer */
 footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .gal-f1,.gal-f2{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--quiet)}
@@ -111,6 +120,9 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   .gal-run iframe{height:60vh}
   .gal-rt{padding:20px}
   .gal-prompt{font-size:11.5px;padding:16px;max-height:none}
+  .gal-dl{grid-template-columns:1fr}
+  .gal-dl dt{padding:12px 0 0;border-bottom:0}
+  .gal-dl dd{padding:6px 0 14px}
   footer{flex-direction:column;gap:10px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -154,7 +166,20 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   </section>
 
   <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
+    <p class="gal-sec-s">This build was not produced on my hardware — there is no llama.cpp, Strata or Maya config behind it.</p><dl class="gal-dl">
+      <dt>Backend</dt><dd>Cloud API</dd>
+      <dt>Harness</dt><dd>DeepSeek Harness (cordis preset)</dd>
+      <dt>Provider</dt><dd>nous-portal</dd>
+      <dt>Model</dt><dd>hy4</dd>
+      <dt>Endpoint</dt><dd>cloud API</dd>
+      <dt>Serving config</dt><dd>Cloud Nous Portal — not served on this hardware.</dd>
+      <dt>Source</dt><dd>DSH session metadata (provider + model fields)</dd>
+    </dl>
+  </section>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">03</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
     <div class="gal-sec-s">Prompt captured from DeepSeek Harness session <code>61dd0d47</code>, one shot, no follow-ups.</div>
     <pre class="gal-prompt">Create one complete, self-contained HTML file for THE CASTLE, a photorealistic real-time 3D TINY WORLD in three.js: a stone castle and its courtyard on a chunk of land floating on a plain white page, in warm late-afternoon sun, as a self-running scene with no interaction.
 

@@ -120,6 +120,7 @@ GROUP_BLURB = {
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))
+SERVING = json.load(open(DOCS / "model-testing-serving.json"))
 
 
 def pack_prompt(name):
@@ -231,6 +232,15 @@ a.gal-btn:hover{border-bottom-color:var(--accent)}
 .gal-prompt{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#d6cdbd;background:#1b1812;border:1px solid var(--line);padding:22px;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow:auto}
 .gal-prompt::selection{background:rgba(216,167,60,.3)}
 
+/* serving chips + description list */
+.gal-chip{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-strong);color:var(--dim);margin-top:12px}
+.gal-chip.local{color:var(--accent);border-color:rgba(216,167,60,.45)}
+.gal-chip.cloud{color:var(--quiet)}
+.gal-chip.unknown{color:var(--quiet);border-style:dashed}
+.gal-dl{display:grid;grid-template-columns:170px 1fr;column-gap:0;margin-top:24px;border-top:1px solid var(--line)}
+.gal-dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);padding:15px 18px 15px 0;border-bottom:1px solid var(--line)}
+.gal-dl dd{font-size:14px;color:var(--dim);padding:15px 0;border-bottom:1px solid var(--line);line-height:1.62}
+
 /* footer */
 footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .gal-f1,.gal-f2{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--quiet)}
@@ -245,6 +255,9 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   .gal-run iframe{height:60vh}
   .gal-rt{padding:20px}
   .gal-prompt{font-size:11.5px;padding:16px;max-height:none}
+  .gal-dl{grid-template-columns:1fr}
+  .gal-dl dt{padding:12px 0 0;border-bottom:0}
+  .gal-dl dd{padding:6px 0 14px}
   footer{flex-direction:column;gap:10px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -295,6 +308,32 @@ document.querySelectorAll('[data-run]').forEach(function(btn){
 });
 </script>
 """
+
+
+def serving_rows(b):
+    sv = SERVING.get(b["slug"], {})
+    kind = sv.get("kind", "")
+    rows = [("Backend", {"local": "Local GPU", "cloud": "Cloud API"}.get(kind, "Not recorded"))]
+    if sv.get("harness"):
+        rows.append(("Harness", sv["harness"]))
+    if sv.get("provider"):
+        rows.append(("Provider", sv["provider"]))
+    if sv.get("model"):
+        rows.append(("Model", sv["model"]))
+    if sv.get("endpoint"):
+        rows.append(("Endpoint", sv["endpoint"]))
+    if sv.get("config"):
+        rows.append(("Serving config", sv["config"]))
+    if sv.get("measured"):
+        rows.append(("Measured", sv["measured"]))
+    if sv.get("source"):
+        rows.append(("Source", sv["source"]))
+    body = "".join(
+        f'      <dt>{html.escape(k)}</dt><dd>{html.escape(v)}</dd>\n' for k, v in rows)
+    note = ("" if kind == "local" else
+            '<p class="gal-sec-s">This build was not produced on my hardware — there is no llama.cpp, '
+            'Strata or Maya config behind it.</p>')
+    return note + '<dl class="gal-dl">\n' + body + '    </dl>'
 
 
 def build_page(b):
@@ -348,7 +387,12 @@ def build_page(b):
   </section>
 
   <section class="gal-sec">
-    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
+    {serving_rows(b)}
+  </section>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">03</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
     <div class="gal-sec-s">{prompt_meta}.</div>
     <pre class="gal-prompt">{html.escape(prompt)}</pre>
   </section>
@@ -371,10 +415,15 @@ def card_html(b):
            else ("one shot" if b["followups"] == 0
                  else f"{b['followups']} follow-up{'s' if b['followups'] != 1 else ''}"))
     bits = [b["model"]] + ([b["variant"]] if b.get("variant") else [])
+    sv = SERVING.get(b["slug"], {})
+    kind = sv.get("kind", "")
+    tag = {"local": "local · .5",
+           "cloud": f"cloud · {html.escape(sv.get('model',''))}"}.get(kind, "backend unrecorded")
     return f"""      <a class="gal-card" href="gallery/model-testing/{b['slug']}.html">
         <div class="gal-body">
           <div class="gal-t">{html.escape(b['title'])}</div>
           <div class="gal-m">{html.escape(' · '.join(bits))}</div>
+          <div class="gal-chip {kind or 'unknown'}">{tag}</div>
           <div class="gal-d">{html.escape(b['blurb'])}</div>
           <div class="gal-m">{mt} &middot; {kb} KB &middot; {fol}</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -422,7 +471,7 @@ def index_page():
     total = len(BUILDS)
     return HEAD.format(
         title="Model testing gallery — Eamon McKiernan",
-        desc="One-shot browser demos written by AI models running on my own hardware, organised by model. Every build published unedited, with the prompt that made it.",
+        desc="One-shot browser demos written by AI models — local and cloud — organised by model, with the harness and serving config behind each build.",
         ogtitle="Model testing gallery — one-shot demos, grouped by model",
         style=STYLE) + f"""
   <div class="gal-top">
@@ -430,7 +479,7 @@ def index_page():
   </div>
 
   <h1 class="gal-h1">Model testing gallery</h1>
-  <p class="gal-lede">{total} one-shot browser demos written by AI models running on my own hardware, grouped by the model that wrote them. One prompt, one self-contained HTML file, no fixes — published as they came out, defects and all.</p>
+  <p class="gal-lede">{total} one-shot browser demos written by AI models, grouped by the model that wrote them. One prompt, one self-contained HTML file, no fixes — published as they came out, defects and all. Each build records the harness it ran under and where it was served: my own V100s for the local runs, a cloud plan for the rest.</p>
   <p class="gal-meta">{len([g for g in GROUP_ORDER if g in by_group])} models &middot; {total} builds &middot; prompts quoted verbatim</p>
 
 {chr(10).join(sections)}

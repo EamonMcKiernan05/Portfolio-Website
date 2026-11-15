@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Model testing gallery — Eamon McKiernan</title>
-<meta name="description" content="One-shot browser demos written by AI models running on my own hardware, organised by model. Every build published unedited, with the prompt that made it.">
+<meta name="description" content="One-shot browser demos written by AI models — local and cloud — organised by model, with the harness and serving config behind each build.">
 <meta name="author" content="Eamon McKiernan">
 <meta name="theme-color" content="#15130F">
 <meta property="og:title" content="Model testing gallery — one-shot demos, grouped by model">
-<meta property="og:description" content="One-shot browser demos written by AI models running on my own hardware, organised by model. Every build published unedited, with the prompt that made it.">
+<meta property="og:description" content="One-shot browser demos written by AI models — local and cloud — organised by model, with the harness and serving config behind each build.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eamon McKiernan">
 <meta property="og:locale" content="en_GB">
@@ -97,6 +97,15 @@ a.gal-btn:hover{border-bottom-color:var(--accent)}
 .gal-prompt{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#d6cdbd;background:#1b1812;border:1px solid var(--line);padding:22px;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow:auto}
 .gal-prompt::selection{background:rgba(216,167,60,.3)}
 
+/* serving chips + description list */
+.gal-chip{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-strong);color:var(--dim);margin-top:12px}
+.gal-chip.local{color:var(--accent);border-color:rgba(216,167,60,.45)}
+.gal-chip.cloud{color:var(--quiet)}
+.gal-chip.unknown{color:var(--quiet);border-style:dashed}
+.gal-dl{display:grid;grid-template-columns:170px 1fr;column-gap:0;margin-top:24px;border-top:1px solid var(--line)}
+.gal-dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);padding:15px 18px 15px 0;border-bottom:1px solid var(--line)}
+.gal-dl dd{font-size:14px;color:var(--dim);padding:15px 0;border-bottom:1px solid var(--line);line-height:1.62}
+
 /* footer */
 footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .gal-f1,.gal-f2{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--quiet)}
@@ -111,6 +120,9 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   .gal-run iframe{height:60vh}
   .gal-rt{padding:20px}
   .gal-prompt{font-size:11.5px;padding:16px;max-height:none}
+  .gal-dl{grid-template-columns:1fr}
+  .gal-dl dt{padding:12px 0 0;border-bottom:0}
+  .gal-dl dd{padding:6px 0 14px}
   footer{flex-direction:column;gap:10px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -126,7 +138,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   </div>
 
   <h1 class="gal-h1">Model testing gallery</h1>
-  <p class="gal-lede">19 one-shot browser demos written by AI models running on my own hardware, grouped by the model that wrote them. One prompt, one self-contained HTML file, no fixes — published as they came out, defects and all.</p>
+  <p class="gal-lede">19 one-shot browser demos written by AI models, grouped by the model that wrote them. One prompt, one self-contained HTML file, no fixes — published as they came out, defects and all. Each build records the harness it ran under and where it was served: my own V100s for the local runs, a cloud plan for the rest.</p>
   <p class="gal-meta">6 models &middot; 19 builds &middot; prompts quoted verbatim</p>
 
   <details class="gal-sec-m" open>
@@ -137,6 +149,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Pagoda — DFlash2</div>
           <div class="gal-m">Qwen3.8-27B · DFlash2 config</div>
+          <div class="gal-chip local">local · .5</div>
           <div class="gal-d">The full pagoda brief in one shot on the DFlash2 serving config.</div>
           <div class="gal-m">13 Nov 2026 &middot; 978 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -146,6 +159,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Pagoda — DSpine</div>
           <div class="gal-m">Qwen3.8-27B · DSpine config</div>
+          <div class="gal-chip local">local · .5</div>
           <div class="gal-d">Same brief, four follow-ups — the run that kept iterating on roof and path fixes.</div>
           <div class="gal-m">10 Nov 2026 &middot; 731 KB &middot; 4 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -155,6 +169,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Pagoda — MTP</div>
           <div class="gal-m">Qwen3.8-27B · MTP config</div>
+          <div class="gal-chip local">local · .5</div>
           <div class="gal-d">MTP serving config, one follow-up, the pagoda landing as a sky temple.</div>
           <div class="gal-m">12 Nov 2026 &middot; 78 KB &middot; 1 follow-up</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -164,6 +179,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Pagoda — Plain</div>
           <div class="gal-m">Qwen3.8-27B · Plain config</div>
+          <div class="gal-chip local">local · .5</div>
           <div class="gal-d">Stock config, single shot — the control run for the three above.</div>
           <div class="gal-m">13 Nov 2026 &middot; 753 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -181,6 +197,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Liberty Island, 1886</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4-max-preview</div>
           <div class="gal-d">A voxel diorama of Liberty Island and the New York waterfront in autumn 1886.</div>
           <div class="gal-m">15 Nov 2026 &middot; 103 KB &middot; 3 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -190,6 +207,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Alderbrook — medieval village</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4-max-preview</div>
           <div class="gal-d">A medieval village at golden hour, one shot, no fixes.</div>
           <div class="gal-m">14 Nov 2026 &middot; 1452 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -199,6 +217,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Pagoda</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4-max-preview</div>
           <div class="gal-d">The pagoda brief again, one follow-up — its largest file of the set.</div>
           <div class="gal-m">13 Nov 2026 &middot; 1365 KB &middot; 1 follow-up</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -208,6 +227,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Torchlight Depths</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4-max-preview</div>
           <div class="gal-d">A self-playing isometric dungeon crawler — the model animates the torchbearer itself.</div>
           <div class="gal-m">12 Nov 2026 &middot; 718 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -222,6 +242,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4.0-max-preview</div>
           <div class="gal-d">The pagoda brief run through Qwen Code with two follow-ups.</div>
           <div class="gal-m">12 Nov 2026 &middot; 749 KB &middot; 2 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -231,6 +252,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Alderglen — medieval village</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4.0-max-preview</div>
           <div class="gal-d">The village brief, one shot, from the CLI agent rather than the harness.</div>
           <div class="gal-m">14 Nov 2026 &middot; 111 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -240,6 +262,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Liberty Island, 1886</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4.0-max-preview</div>
           <div class="gal-d">Liberty Island after four follow-ups — the most iterated build in the set.</div>
           <div class="gal-m">15 Nov 2026 &middot; 107 KB &middot; 4 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -249,6 +272,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Liberty Island — baseline gap</div>
           <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">cloud · qwen4.0-max-preview</div>
           <div class="gal-d">A second build from the same session, kept as the comparison baseline.</div>
           <div class="gal-m">15 Nov 2026 &middot; 103 KB &middot; 4 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -265,6 +289,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Castle</div>
           <div class="gal-m">DeepSeek V4.1 Flash</div>
+          <div class="gal-chip cloud">cloud · deepseek-flash</div>
           <div class="gal-d">The castle brief, one shot, the largest single render in the gallery.</div>
           <div class="gal-m">5 Nov 2026 &middot; 823 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -274,6 +299,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">DeepSeek V4.1 Flash</div>
+          <div class="gal-chip unknown">backend unrecorded</div>
           <div class="gal-d">The bench pack&#x27;s raw-WebGL Sky Temple brief, before the session logs start.</div>
           <div class="gal-m">25 Oct 2026 &middot; 126 KB &middot; no session log</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -283,6 +309,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Nightfall — procedural city</div>
           <div class="gal-m">DeepSeek V4.1 Flash</div>
+          <div class="gal-chip unknown">backend unrecorded</div>
           <div class="gal-d">A procedural city at night — kept because it was the first convincing city render.</div>
           <div class="gal-m">19 Oct 2026 &middot; 665 KB &middot; no session log</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -298,6 +325,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">MiniMax M3.1 Flash</div>
+          <div class="gal-chip unknown">backend unrecorded</div>
           <div class="gal-d">Sky Temple from the v3 pack — the rebuild that replaced the flat v2 attempt.</div>
           <div class="gal-m">21 Oct 2026 &middot; 51 KB &middot; no session log</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -307,6 +335,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Dusk Cityline</div>
           <div class="gal-m">MiniMax M3.1 Flash</div>
+          <div class="gal-chip unknown">backend unrecorded</div>
           <div class="gal-d">CSS 3D only — no WebGL allowed — and it still reads as a city at dusk.</div>
           <div class="gal-m">21 Oct 2026 &middot; 30 KB &middot; no session log</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -322,6 +351,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">The Castle</div>
           <div class="gal-m">HY4</div>
+          <div class="gal-chip cloud">cloud · hy4</div>
           <div class="gal-d">The castle brief on HY4, one shot.</div>
           <div class="gal-m">5 Nov 2026 &middot; 655 KB &middot; one shot</div>
           <div class="gal-go">prompt + build &#8594;</div>
@@ -337,6 +367,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">LongCat 2.5</div>
+          <div class="gal-chip cloud">cloud · longcat-2.5:free</div>
           <div class="gal-d">The pagoda brief on LongCat, five follow-ups before it settled.</div>
           <div class="gal-m">12 Nov 2026 &middot; 754 KB &middot; 5 follow-ups</div>
           <div class="gal-go">prompt + build &#8594;</div>
