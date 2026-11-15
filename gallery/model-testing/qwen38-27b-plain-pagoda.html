@@ -167,15 +167,15 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
 
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
-    <dl class="gal-dl">
+    <p class="gal-sec-s">Sampling is not set at the server in any llama.cpp launcher — the harness sends it per request (temp 0.5, seed 12345 in ~/model-bench/runs/&lt;run&gt;/meta.json).</p><dl class="gal-dl">
       <dt>Backend</dt><dd>Local GPU</dd>
       <dt>Harness</dt><dd>DeepSeek Harness (cordis preset)</dd>
       <dt>Provider</dt><dd>maya</dd>
       <dt>Model</dt><dd>Qwen3.8-27B-UD-Q8_K_XL.gguf (Q8_K_XL, 31.5 GB)</dd>
       <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB), :8080</dd>
-      <dt>Serving config</dt><dd>same box and model file · speculative decoding OFF (--spec-type none) · launched by launch-qwen-plain-q8-1slot.sh · 393,216 ctx one slot, q8_0 KV, FA on, -t 24</dd>
-      <dt>Measured</dt><dd>20.5 tok/s decode / 1,048 tok/s prefill at 15.9K — slower decode than the drafters, faster prefill</dd>
-      <dt>Source</dt><dd>homelab/inference-backends.md (vault)</dd>
+      <dt>Serving config</dt><dd>Mainline llama.cpp fork with DSpine draft support (~/llama-dspine @ d493f84) · -ngl 99 · --split-mode layer · -t 24 · Qwen3.8-27B-UD-Q8_K_XL.gguf + BF16 mmproj, --image-min-tokens 1024 · port 8080<br>~/launch-qwen-plain-q8-1slot.sh: --spec-type none and no -md, otherwise identical to the MTP launcher — -c 393216 -np 1, YaRN 1.5 over a 262,144 base, q8_0 K and V, -fa on</dd>
+      <dt>Measured</dt><dd>20.5 tok/s decode / 1,048 tok/s prefill at 15.9K — loses decode to the drafters, wins prefill</dd>
+      <dt>Source</dt><dd>launcher on .5, transcribed by Bench (paths quoted below)</dd>
     </dl>
   </section>
 

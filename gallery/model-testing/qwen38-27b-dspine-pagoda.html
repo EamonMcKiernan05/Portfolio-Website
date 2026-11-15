@@ -173,9 +173,9 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <dt>Provider</dt><dd>maya</dd>
       <dt>Model</dt><dd>Qwen3.8-27B-UD-Q8_K_XL.gguf (Q8_K_XL, 31.5 GB)</dd>
       <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB), :8080</dd>
-      <dt>Serving config</dt><dd>same box and model file · DSpine-b16-Q8_0 drafter (2.2 GB) at n_max 5 · q8_0 KV, FA on, tensor/layer split per the arm</dd>
-      <dt>Measured</dt><dd>857 tok/s prefill / 31.4 tok/s decode on the bench prompt; the fastest arm on code in the 9 Nov battery</dd>
-      <dt>Source</dt><dd>homelab/inference-backends.md (vault)</dd>
+      <dt>Serving config</dt><dd>Mainline llama.cpp fork with DSpine draft support (~/llama-dspine @ d493f84) · -ngl 99 · --split-mode layer · -t 24 · Qwen3.8-27B-UD-Q8_K_XL.gguf + BF16 mmproj, --image-min-tokens 1024 · port 8080<br>~/launch-qwen-dspine-n5.sh: -md Qwen3.8-27B-DSpine-b16-Q8_0.gguf --spec-type draft-dflash --spec-draft-n-max 5 --spec-draft-p-min 0.5 -c 262144 --cache-type-k bf16 --cache-type-v bf16 -fa on --jinja</dd>
+      <dt>Measured</dt><dd>857 tok/s prefill / 31.4 tok/s decode on the bench prompt — fastest on code in the 9 Nov battery</dd>
+      <dt>Source</dt><dd>launcher on .5, transcribed by Bench (paths quoted below); log ~/qwen-dspine-n5-server.log</dd>
     </dl>
   </section>
 

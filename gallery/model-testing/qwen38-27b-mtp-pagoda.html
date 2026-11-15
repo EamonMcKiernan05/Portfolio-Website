@@ -173,9 +173,9 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <dt>Provider</dt><dd>maya</dd>
       <dt>Model</dt><dd>Qwen3.8-27B-UD-Q8_K_XL.gguf (Q8_K_XL, 31.5 GB)</dd>
       <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB), :8080</dd>
-      <dt>Serving config</dt><dd>same box and model file · the model&#x27;s own MTP head at n_max 5 · q8_0 KV, FA on</dd>
+      <dt>Serving config</dt><dd>Mainline llama.cpp fork with DSpine draft support (~/llama-dspine @ d493f84) · -ngl 99 · --split-mode layer · -t 24 · Qwen3.8-27B-UD-Q8_K_XL.gguf + BF16 mmproj, --image-min-tokens 1024 · port 8080<br>~/launch-qwen-mtp-q8-1slot.sh: --spec-type draft-mtp --spec-draft-n-max 5 --spec-draft-p-min 0.5 -c 393216 -np 1 --rope-scaling yarn --rope-scale 1.5 --yarn-orig-ctx 262144 --cache-type-k q8_0 --cache-type-v q8_0 -fa on (no -md; the model&#x27;s own blk.64.nextn head)</dd>
       <dt>Measured</dt><dd>838.4 tok/s prefill / 32.5 tok/s decode, 63.5% draft acceptance (mean accepted length 3.13)</dd>
-      <dt>Source</dt><dd>homelab/inference-backends.md (vault)</dd>
+      <dt>Source</dt><dd>launcher on .5, transcribed by Bench (paths quoted below)</dd>
     </dl>
   </section>
 

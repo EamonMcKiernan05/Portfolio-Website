@@ -329,10 +329,13 @@ def serving_rows(b):
     if sv.get("source"):
         rows.append(("Source", sv["source"]))
     body = "".join(
-        f'      <dt>{html.escape(k)}</dt><dd>{html.escape(v)}</dd>\n' for k, v in rows)
+        f'      <dt>{html.escape(k)}</dt><dd>{html.escape(v).replace(chr(10), "<br>")}</dd>\n'
+        for k, v in rows)
     note = ("" if kind == "local" else
             '<p class="gal-sec-s">This build was not produced on my hardware — there is no llama.cpp, '
             'Strata or Maya config behind it.</p>')
+    if sv.get("note"):
+        note += f'<p class="gal-sec-s">{html.escape(sv["note"])}</p>'
     return note + '<dl class="gal-dl">\n' + body + '    </dl>'
 
 
