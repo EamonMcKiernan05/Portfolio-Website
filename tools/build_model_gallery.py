@@ -190,7 +190,7 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-top{padding:34px 0 0}
 .gal-back{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:0}
 .gal-back:hover{color:var(--accent)}
-.gal-h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,7.4vw,88px);line-height:.94;letter-spacing:-.01em;margin:26px 0 0;max-width:18ch}
+.gal-h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);line-height:1.02;letter-spacing:.005em;margin:30px 0 0;color:var(--accent);max-width:26ch}
 .gal-lede{font-size:clamp(16px,1.9vw,19px);color:var(--dim);max-width:62ch;margin-top:22px}
 .gal-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:18px;line-height:1.8}
 
