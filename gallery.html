@@ -67,11 +67,12 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-h .gal-grid{margin-top:22px}
 
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .gal-card{display:block;background:var(--bg);padding:0 0 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:inherit;transition:background .22s var(--ease)}
-.gal-thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--line);background:#0c0b08;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
-.gal-card:hover .gal-thumb{filter:saturate(1.04) brightness(1)}
-.gal-thumb.empty{background:#12100c}
+.gal-thumbwrap{display:block;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--line);background:#0c0b08}
+.gal-thumbwrap img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
+.gal-card:hover .gal-thumbwrap img{filter:saturate(1.04) brightness(1)}
+.gal-thumbwrap.empty{background:#12100c}
 .gal-body{padding:20px 22px 0}
 .gal-card:hover{background:#1b1812}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.005em;color:var(--ink);line-height:1.2}
@@ -149,7 +150,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <summary><span class="gal-sec-n">01</span><span class="gal-sec-t">Qwen3.8 Flash-Next</span><span class="gal-sec-rule"></span><span class="gal-sec-c">6 builds</span></summary>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-sky-temple.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-flash-next-sky-temple.jpg" alt="Sky Temple — Qwen3.8 Flash-Next" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-sky-temple.jpg" alt="Sky Temple — Qwen3.8 Flash-Next" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">Qwen3.8 Flash-Next</div>
@@ -158,7 +159,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-sky-temple-agent.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-flash-next-sky-temple-agent.jpg" alt="Sky Temple — agent rebuild — Qwen3.8 Flash-Next" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-sky-temple-agent.jpg" alt="Sky Temple — agent rebuild — Qwen3.8 Flash-Next" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Sky Temple — agent rebuild</div>
           <div class="gal-m">Qwen3.8 Flash-Next</div>
@@ -167,7 +168,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-living-city.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-flash-next-living-city.jpg" alt="Living City — Qwen3.8 Flash-Next" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-living-city.jpg" alt="Living City — Qwen3.8 Flash-Next" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Living City</div>
           <div class="gal-m">Qwen3.8 Flash-Next</div>
@@ -176,7 +177,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-neon-drift.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-flash-next-neon-drift.jpg" alt="Neon Drift — Qwen3.8 Flash-Next" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-neon-drift.jpg" alt="Neon Drift — Qwen3.8 Flash-Next" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Neon Drift</div>
           <div class="gal-m">Qwen3.8 Flash-Next</div>
@@ -185,7 +186,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-pulse-engine.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-flash-next-pulse-engine.jpg" alt="Pulse Engine — Qwen3.8 Flash-Next" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-pulse-engine.jpg" alt="Pulse Engine — Qwen3.8 Flash-Next" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Pulse Engine</div>
           <div class="gal-m">Qwen3.8 Flash-Next</div>
@@ -194,7 +195,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-cloth-lab.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-flash-next-cloth-lab.jpg" alt="Cloth Lab — Qwen3.8 Flash-Next" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-cloth-lab.jpg" alt="Cloth Lab — Qwen3.8 Flash-Next" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Cloth Lab</div>
           <div class="gal-m">Qwen3.8 Flash-Next</div>
@@ -208,7 +209,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <summary><span class="gal-sec-n">02</span><span class="gal-sec-t">Qwen3.8-27B</span><span class="gal-sec-rule"></span><span class="gal-sec-c">4 builds</span></summary>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-dflash2-pagoda.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-27b-dflash2-pagoda.jpg" alt="The Pagoda — DFlash2 — Qwen3.8-27B" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-dflash2-pagoda.jpg" alt="The Pagoda — DFlash2 — Qwen3.8-27B" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Pagoda — DFlash2</div>
           <div class="gal-m">Qwen3.8-27B</div>
@@ -217,7 +218,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-dspine-pagoda.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-27b-dspine-pagoda.jpg" alt="The Pagoda — DSpine — Qwen3.8-27B" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-dspine-pagoda.jpg" alt="The Pagoda — DSpine — Qwen3.8-27B" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Pagoda — DSpine</div>
           <div class="gal-m">Qwen3.8-27B</div>
@@ -226,7 +227,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-mtp-pagoda.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-27b-mtp-pagoda.jpg" alt="The Pagoda — MTP — Qwen3.8-27B" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-mtp-pagoda.jpg" alt="The Pagoda — MTP — Qwen3.8-27B" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Pagoda — MTP</div>
           <div class="gal-m">Qwen3.8-27B</div>
@@ -235,7 +236,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen38-27b-plain-pagoda.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen38-27b-plain-pagoda.jpg" alt="The Pagoda — Plain — Qwen3.8-27B" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-plain-pagoda.jpg" alt="The Pagoda — Plain — Qwen3.8-27B" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Pagoda — Plain</div>
           <div class="gal-m">Qwen3.8-27B</div>
@@ -251,7 +252,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <summary><span class="gal-h-t">DeepSeek Harness</span><span class="gal-h-c">4 builds</span></summary>
       <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen4-preview-liberty.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen4-preview-liberty.jpg" alt="Liberty Island, 1886 — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-liberty.jpg" alt="Liberty Island, 1886 — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Liberty Island, 1886</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -260,7 +261,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen4-preview-village.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen4-preview-village.jpg" alt="Alderbrook — medieval village — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-village.jpg" alt="Alderbrook — medieval village — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Alderbrook — medieval village</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -269,7 +270,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen4-preview-pagoda.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen4-preview-pagoda.jpg" alt="The Pagoda — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-pagoda.jpg" alt="The Pagoda — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Pagoda</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -278,7 +279,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen4-preview-torchlight.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen4-preview-torchlight.jpg" alt="Torchlight Depths — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-torchlight.jpg" alt="Torchlight Depths — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Torchlight Depths</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -292,7 +293,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <summary><span class="gal-h-t">Qwen Code</span><span class="gal-h-c">4 builds</span></summary>
       <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/qwen-code-sky-temple.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen-code-sky-temple.jpg" alt="Sky Temple — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-sky-temple.jpg" alt="Sky Temple — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -301,7 +302,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen-code-village.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen-code-village.jpg" alt="Alderglen — medieval village — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-village.jpg" alt="Alderglen — medieval village — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Alderglen — medieval village</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -310,7 +311,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen-code-liberty.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen-code-liberty.jpg" alt="Liberty Island, 1886 — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-liberty.jpg" alt="Liberty Island, 1886 — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Liberty Island, 1886</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -319,7 +320,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/qwen-code-liberty-baseline.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/qwen-code-liberty-baseline.jpg" alt="Liberty Island — baseline gap — Qwen 4 Preview" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-liberty-baseline.jpg" alt="Liberty Island — baseline gap — Qwen 4 Preview" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Liberty Island — baseline gap</div>
           <div class="gal-m">Qwen 4 Preview</div>
@@ -334,7 +335,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <summary><span class="gal-sec-n">04</span><span class="gal-sec-t">DeepSeek V4.1 Flash</span><span class="gal-sec-rule"></span><span class="gal-sec-c">3 builds</span></summary>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/deepseek-v41-castle.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/deepseek-v41-castle.jpg" alt="The Castle — DeepSeek V4.1 Flash" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/deepseek-v41-castle.jpg" alt="The Castle — DeepSeek V4.1 Flash" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Castle</div>
           <div class="gal-m">DeepSeek V4.1 Flash</div>
@@ -343,7 +344,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/deepseek-v41-sky-temple.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/deepseek-v41-sky-temple.jpg" alt="Sky Temple — DeepSeek V4.1 Flash" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/deepseek-v41-sky-temple.jpg" alt="Sky Temple — DeepSeek V4.1 Flash" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">DeepSeek V4.1 Flash</div>
@@ -352,7 +353,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/deepseek-v41-nightfall.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/deepseek-v41-nightfall.jpg" alt="Nightfall — procedural city — DeepSeek V4.1 Flash" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/deepseek-v41-nightfall.jpg" alt="Nightfall — procedural city — DeepSeek V4.1 Flash" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Nightfall — procedural city</div>
           <div class="gal-m">DeepSeek V4.1 Flash</div>
@@ -366,7 +367,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <summary><span class="gal-sec-n">05</span><span class="gal-sec-t">MiniMax M3.1 Flash</span><span class="gal-sec-rule"></span><span class="gal-sec-c">2 builds</span></summary>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/minimax-m31-sky-temple.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/minimax-m31-sky-temple.jpg" alt="Sky Temple — MiniMax M3.1 Flash" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/minimax-m31-sky-temple.jpg" alt="Sky Temple — MiniMax M3.1 Flash" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">MiniMax M3.1 Flash</div>
@@ -375,7 +376,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
         </div>
       </a>
       <a class="gal-card" href="gallery/model-testing/minimax-m31-dusk-cityline.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/minimax-m31-dusk-cityline.jpg" alt="Dusk Cityline — MiniMax M3.1 Flash" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/minimax-m31-dusk-cityline.jpg" alt="Dusk Cityline — MiniMax M3.1 Flash" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Dusk Cityline</div>
           <div class="gal-m">MiniMax M3.1 Flash</div>
@@ -389,7 +390,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <summary><span class="gal-sec-n">06</span><span class="gal-sec-t">HY4</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/hy4-castle.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/hy4-castle.jpg" alt="The Castle — HY4" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/hy4-castle.jpg" alt="The Castle — HY4" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">The Castle</div>
           <div class="gal-m">HY4</div>
@@ -403,7 +404,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <summary><span class="gal-sec-n">07</span><span class="gal-sec-t">LongCat 2.5</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
     <div class="gal-grid">
       <a class="gal-card" href="gallery/model-testing/longcat-25-sky-temple.html">
-        <img class="gal-thumb" src="demos/thumbs/model-testing/longcat-25-sky-temple.jpg" alt="Sky Temple — LongCat 2.5" loading="lazy" width="1280" height="800">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/longcat-25-sky-temple.jpg" alt="Sky Temple — LongCat 2.5" loading="lazy"></span>
         <div class="gal-body">
           <div class="gal-t">Sky Temple</div>
           <div class="gal-m">LongCat 2.5</div>

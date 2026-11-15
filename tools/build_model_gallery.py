@@ -225,11 +225,12 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-h .gal-grid{margin-top:22px}
 
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .gal-card{display:block;background:var(--bg);padding:0 0 20px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:inherit;transition:background .22s var(--ease)}
-.gal-thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--line);background:#0c0b08;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
-.gal-card:hover .gal-thumb{filter:saturate(1.04) brightness(1)}
-.gal-thumb.empty{background:#12100c}
+.gal-thumbwrap{display:block;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--line);background:#0c0b08}
+.gal-thumbwrap img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
+.gal-card:hover .gal-thumbwrap img{filter:saturate(1.04) brightness(1)}
+.gal-thumbwrap.empty{background:#12100c}
 .gal-body{padding:20px 22px 0}
 .gal-card:hover{background:#1b1812}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.005em;color:var(--ink);line-height:1.2}
@@ -441,10 +442,10 @@ def card_html(b):
     tag = {"local": f"{html.escape(sv.get('provider',''))} · .5",
            "cloud": html.escape(sv.get('provider',''))}.get(kind, "provider unrecorded")
     thumb = ROOT / "demos" / "thumbs" / "model-testing" / f"{b['slug']}.jpg"
-    img = (f'<img class="gal-thumb" src="demos/thumbs/model-testing/{b["slug"]}.jpg" '
-           f'alt="{html.escape(b["title"])} — {html.escape(b["model"])}" loading="lazy" width="1280" height="800">'
+    img = (f'<span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/{b["slug"]}.jpg" '
+           f'alt="{html.escape(b["title"])} — {html.escape(b["model"])}" loading="lazy"></span>'
            if thumb.exists() and thumb.stat().st_size > 15000 else
-           '<div class="gal-thumb empty" aria-hidden="true"></div>')
+           '<span class="gal-thumbwrap empty" aria-hidden="true"></span>')
     return f"""      <a class="gal-card" href="gallery/model-testing/{b['slug']}.html">
         {img}
         <div class="gal-body">
