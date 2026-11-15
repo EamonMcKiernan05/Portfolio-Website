@@ -1,1 +1,1 @@
-website to go alongside my cv. reviewed nightly through ai automation. only updated with relevant information or significant projects/work completed
+website to go alongside my cv. reviewed nightly by my hermes agant. only updated with relevant information or significant projects/work completed
