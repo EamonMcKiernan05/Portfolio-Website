@@ -68,11 +68,6 @@ BUILDS = [
          model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="Qwen Code",
          title="Liberty Island, 1886", prompt="liberty", session="787d2fe5", followups=4,
          blurb="Liberty Island after four follow-ups — the most iterated build in the set."),
-    dict(rel="QwenCode/lbuild/baseline-gap.html", slug="qwen-code-liberty-baseline",
-         model="Qwen 4 Preview", group="Qwen 4 Preview", variant="", harness="Qwen Code",
-         title="Liberty Island — baseline gap", prompt="liberty", session="787d2fe5", followups=4,
-         blurb="A second build from the same session, kept as the comparison baseline."),
-    # DeepSeek V4.1 Flash
     dict(rel="DeepSeek-V4.1-Flash-1017/THE-CASTLE.html", slug="deepseek-v41-castle",
          model="DeepSeek V4.1 Flash", group="DeepSeek V4.1 Flash", variant="",
          title="The Castle", prompt="castle", session="23f01a1f", followups=0,
