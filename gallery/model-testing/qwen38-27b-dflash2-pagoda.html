@@ -168,14 +168,12 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
     <dl class="gal-dl">
-      <dt>Backend</dt><dd>Local GPU</dd>
-      <dt>Harness</dt><dd>DeepSeek Harness (cordis preset)</dd>
-      <dt>Provider</dt><dd>maya</dd>
+      <dt>Provider</dt><dd>llama.cpp</dd>
+      <dt>Harness</dt><dd>DeepSeek Harness</dd>
       <dt>Model</dt><dd>Qwen3.8-27B-UD-Q8_K_XL.gguf (Q8_K_XL, 31.5 GB)</dd>
-      <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB), :8080</dd>
-      <dt>Serving config</dt><dd>Mainline llama.cpp fork with DSpine draft support (~/llama-dspine @ d493f84) · -ngl 99 · --split-mode layer · -t 24 · Qwen3.8-27B-UD-Q8_K_XL.gguf + BF16 mmproj, --image-min-tokens 1024 · port 8080<br>~/dflash2_sweep.sh, winning arm n-max 5: -md /mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-DFlash2-Q8_0.gguf --spec-type draft-dflash --spec-draft-n-max 5 --spec-draft-p-min 0.5 -c 393216 -np 1 --rope-scaling yarn --rope-scale 1.5 --yarn-orig-ctx 262144 --cache-type-k q8_0 --cache-type-v q8_0 -fa on</dd>
+      <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB) :8080</dd>
+      <dt>Serving config</dt><dd>~/llama-dspine @ d493f84 · -ngl 99 · --split-mode layer · -t 24 · port 8080 · Qwen3.8-27B-UD-Q8_K_XL.gguf + BF16 mmproj, --image-min-tokens 1024<br>~/dflash2_sweep.sh, winning arm n-max 5: -md Qwen3.8-27B-DFlash2-Q8_0.gguf --spec-type draft-dflash --spec-draft-n-max 5 --spec-draft-p-min 0.5 -c 393216 -np 1 --rope-scaling yarn --rope-scale 1.5 --yarn-orig-ctx 262144 --cache-type-k q8_0 --cache-type-v q8_0 -fa on</dd>
       <dt>Measured</dt><dd>33.9 tok/s decode / 867 tok/s prefill at a 15.9K prompt, 256 generated</dd>
-      <dt>Source</dt><dd>launcher on .5, transcribed by Bench (paths quoted below); log ~/qwen-dflash2-q8-393216.log</dd>
     </dl>
   </section>
 

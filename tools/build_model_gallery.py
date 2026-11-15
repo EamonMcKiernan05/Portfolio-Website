@@ -313,27 +313,23 @@ document.querySelectorAll('[data-run]').forEach(function(btn){
 def serving_rows(b):
     sv = SERVING.get(b["slug"], {})
     kind = sv.get("kind", "")
-    rows = [("Backend", {"local": "Local GPU", "cloud": "Cloud API"}.get(kind, "Not recorded"))]
-    if sv.get("harness"):
-        rows.append(("Harness", sv["harness"]))
+    rows = []
     if sv.get("provider"):
         rows.append(("Provider", sv["provider"]))
+    if sv.get("harness"):
+        rows.append(("Harness", sv["harness"]))
     if sv.get("model"):
         rows.append(("Model", sv["model"]))
-    if sv.get("endpoint"):
+    if sv.get("endpoint") and kind == "local":
         rows.append(("Endpoint", sv["endpoint"]))
     if sv.get("config"):
         rows.append(("Serving config", sv["config"]))
     if sv.get("measured"):
         rows.append(("Measured", sv["measured"]))
-    if sv.get("source"):
-        rows.append(("Source", sv["source"]))
     body = "".join(
         f'      <dt>{html.escape(k)}</dt><dd>{html.escape(v).replace(chr(10), "<br>")}</dd>\n'
         for k, v in rows)
-    note = ("" if kind == "local" else
-            '<p class="gal-sec-s">This build was not produced on my hardware — there is no llama.cpp, '
-            'Strata or Maya config behind it.</p>')
+    note = ""
     if sv.get("note"):
         note += f'<p class="gal-sec-s">{html.escape(sv["note"])}</p>'
     return note + '<dl class="gal-dl">\n' + body + '    </dl>'
@@ -420,8 +416,8 @@ def card_html(b):
     bits = [b["model"]] + ([b["variant"]] if b.get("variant") else [])
     sv = SERVING.get(b["slug"], {})
     kind = sv.get("kind", "")
-    tag = {"local": "local · .5",
-           "cloud": f"cloud · {html.escape(sv.get('model',''))}"}.get(kind, "backend unrecorded")
+    tag = {"local": f"{html.escape(sv.get('provider',''))} · .5",
+           "cloud": html.escape(sv.get('provider',''))}.get(kind, "provider unrecorded")
     return f"""      <a class="gal-card" href="gallery/model-testing/{b['slug']}.html">
         <div class="gal-body">
           <div class="gal-t">{html.escape(b['title'])}</div>
