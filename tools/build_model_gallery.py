@@ -140,15 +140,6 @@ BUILDS = [
 
 GROUP_ORDER = ["Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash",
                "MiniMax M3.1 Flash", "HY4", "LongCat 2.5"]
-GROUP_BLURB = {
-    "Qwen3.8 Flash-Next": "The model the gallery started with — Qwen3.8 Flash-Next on Strata, one prompt per build, back in early October.",
-    "Qwen3.8-27B": "27B dense model, Q8_K_XL, four serving configurations — the same brief four times to isolate the engine's effect on craft.",
-    "Qwen 4 Preview": "The preview build of Qwen 4, run two ways — the DeepSeek Harness and the Qwen Code CLI. Same model, different scaffolding, so the builds are split by harness.",
-    "DeepSeek V4.1 Flash": "DeepSeek's Flash tier on the same castle, sky-temple and city briefs.",
-    "MiniMax M3.1 Flash": "Two surviving v3-pack runs. The earlier v2-era attempts are retired with the prompts that made them.",
-    "HY4": "A single castle build from HY4.",
-    "LongCat 2.5": "LongCat 2.5 on the pagoda brief, five follow-ups in.",
-}
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))
@@ -496,7 +487,6 @@ def index_page():
             body = "    " + grid(items)
         sections.append(f"""  <details class="gal-sec-m" open>
     <summary><span class="gal-sec-n">{n:02d}</span><span class="gal-sec-t">{html.escape(g)}</span><span class="gal-sec-rule"></span><span class="gal-sec-c">{len(items)} build{'s' if len(items) != 1 else ''}</span></summary>
-    <p class="gal-sec-s">{html.escape(GROUP_BLURB[g])}</p>
 {body}
   </details>""")
     total = len(BUILDS)
