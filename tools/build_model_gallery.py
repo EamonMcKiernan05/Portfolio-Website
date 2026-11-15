@@ -511,7 +511,7 @@ def index_page():
   </div>
 
   <h1 class="gal-h1">Model testing gallery</h1>
-  <p class="gal-lede">{total} browser demos written by AI models, grouped by the model that wrote them. Most are one prompt and one self-contained HTML file; a few ran as a short session with follow-ups. Published as they came out — defects and all. Every build records the harness it ran under and what served it: my own V100s, or a cloud plan. Where no record survived, the build says so.</p>
+  <p class="gal-lede">{total} browser demos written by AI models, grouped by the model that wrote them. Most are one prompt and one self-contained HTML file; a few ran as a short session with follow-ups. Published as they came out — defects and all. Every build records the harness it ran under and what served it: my own V100s, or a cloud plan.</p>
   <p class="gal-meta">{len([g for g in GROUP_ORDER if g in by_group])} models &middot; {total} builds &middot; prompts quoted verbatim</p>
 
 {chr(10).join(sections)}
