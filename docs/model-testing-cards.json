@@ -1,0 +1,173 @@
+[
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "THE-CASTLE.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/THE-CASTLE.html",
+  "kb": 823,
+  "title": "THE CASTLE",
+  "date": "5 Nov 2026",
+  "date_iso": "2026-11-05"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "sky-temple-DeepSeek-V4.1-Flash-1017.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/sky-temple-DeepSeek-V4.1-Flash-1017.html",
+  "kb": 126,
+  "title": "Sky Temple \u2014 a floating sanctuary",
+  "date": "25 Oct 2026",
+  "date_iso": "2026-10-25"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "test1-deepseek-v4.1-flash-1017.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/test1-deepseek-v4.1-flash-1017.html",
+  "kb": 665,
+  "title": "Nightfall \u2014 Procedural City",
+  "date": "19 Oct 2026",
+  "date_iso": "2026-10-19"
+ },
+ {
+  "model": "HY4",
+  "file": "THE-CASTLE.html",
+  "rel": "HY4/THE-CASTLE.html",
+  "kb": 655,
+  "title": "THE CASTLE \u2014 a tiny world",
+  "date": "5 Nov 2026",
+  "date_iso": "2026-11-05"
+ },
+ {
+  "model": "LongCat-2.5",
+  "file": "sky-temple.html",
+  "rel": "LongCat-2.5/sky-temple.html",
+  "kb": 754,
+  "title": "SKY TEMPLE \u00e2\u20ac\u201d a floating tiny world",
+  "date": "12 Nov 2026",
+  "date_iso": "2026-11-12"
+ },
+ {
+  "model": "MiniMax M3.1-Flash Tests",
+  "file": "dusk-cityline-minimax-m3.1-flash.html",
+  "rel": "MiniMax M3.1-Flash Tests/dusk-cityline-minimax-m3.1-flash.html",
+  "kb": 30,
+  "title": "Dusk Cityline",
+  "date": "21 Oct 2026",
+  "date_iso": "2026-10-21"
+ },
+ {
+  "model": "MiniMax M3.1-Flash Tests",
+  "file": "sky-temple-minimax-m3-1-flash.html",
+  "rel": "MiniMax M3.1-Flash Tests/sky-temple-minimax-m3-1-flash.html",
+  "kb": 51,
+  "title": "Sky Temple",
+  "date": "21 Oct 2026",
+  "date_iso": "2026-10-21"
+ },
+ {
+  "model": "Qwen 4 Preview",
+  "file": "liberty-1886.html",
+  "rel": "Qwen 4 Preview/liberty-1886.html",
+  "kb": 103,
+  "title": "Liberty Island &amp; New York \u2014 Dedication Day, October 28, 1886",
+  "date": "15 Nov 2026",
+  "date_iso": "2026-11-15"
+ },
+ {
+  "model": "Qwen 4 Preview",
+  "file": "medieval-village.html",
+  "rel": "Qwen 4 Preview/medieval-village.html",
+  "kb": 1452,
+  "title": "Alderbrook \u2014 a medieval village at golden hour",
+  "date": "14 Nov 2026",
+  "date_iso": "2026-11-14"
+ },
+ {
+  "model": "Qwen 4 Preview",
+  "file": "the-pagoda.html",
+  "rel": "Qwen 4 Preview/the-pagoda.html",
+  "kb": 1365,
+  "title": "SKY TEMPLE \u2014 The Pagoda",
+  "date": "13 Nov 2026",
+  "date_iso": "2026-11-13"
+ },
+ {
+  "model": "Qwen 4 Preview",
+  "file": "torchlight-depths.html",
+  "rel": "Qwen 4 Preview/torchlight-depths.html",
+  "kb": 718,
+  "title": "TORCHLIGHT DEPTHS \u2014 a self-playing dungeon diorama",
+  "date": "12 Nov 2026",
+  "date_iso": "2026-11-12"
+ },
+ {
+  "model": "Qwen3.8-27B",
+  "file": "pagoda.html",
+  "rel": "Qwen3.8-27B/DFlash2/pagoda.html",
+  "kb": 978,
+  "title": "THE PAGODA \u2014 a tiny world adrift",
+  "date": "13 Nov 2026",
+  "date_iso": "2026-11-13"
+ },
+ {
+  "model": "Qwen3.8-27B",
+  "file": "THE-PAGODA.html",
+  "rel": "Qwen3.8-27B/DSpine/THE-PAGODA.html",
+  "kb": 731,
+  "title": "THE PAGODA \u2014 Sky Temple",
+  "date": "10 Nov 2026",
+  "date_iso": "2026-11-10"
+ },
+ {
+  "model": "Qwen3.8-27B",
+  "file": "sky-temple.html",
+  "rel": "Qwen3.8-27B/MTP/sky-temple.html",
+  "kb": 78,
+  "title": "SKY TEMPLE \u2014 The Pagoda",
+  "date": "12 Nov 2026",
+  "date_iso": "2026-11-12"
+ },
+ {
+  "model": "Qwen3.8-27B",
+  "file": "pagoda.html",
+  "rel": "Qwen3.8-27B/Plain/pagoda.html",
+  "kb": 753,
+  "title": "THE PAGODA \u2014 a floating temple in the late sun",
+  "date": "13 Nov 2026",
+  "date_iso": "2026-11-13"
+ },
+ {
+  "model": "QwenCode",
+  "file": "baseline-gap.html",
+  "rel": "QwenCode/lbuild/baseline-gap.html",
+  "kb": 103,
+  "title": "Liberty Island &amp; New York \u2014 Autumn 1886",
+  "date": "15 Nov 2026",
+  "date_iso": "2026-11-15"
+ },
+ {
+  "model": "QwenCode",
+  "file": "liberty-1886.html",
+  "rel": "QwenCode/liberty-1886.html",
+  "kb": 107,
+  "title": "Liberty Island &amp; New York \u2014 Autumn 1886",
+  "date": "15 Nov 2026",
+  "date_iso": "2026-11-15"
+ },
+ {
+  "model": "QwenCode",
+  "file": "medieval-village.html",
+  "rel": "QwenCode/medieval-village.html",
+  "kb": 111,
+  "title": "Alderglen \u2014 A Medieval Village at Golden Hour",
+  "date": "14 Nov 2026",
+  "date_iso": "2026-11-14"
+ },
+ {
+  "model": "QwenCode",
+  "file": "sky-temple.html",
+  "rel": "QwenCode/sky-temple.html",
+  "kb": 749,
+  "title": "SKY TEMPLE \u2014 a tiny world",
+  "date": "12 Nov 2026",
+  "date_iso": "2026-11-12"
+ }
+]

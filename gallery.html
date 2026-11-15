@@ -3,121 +3,401 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>One-shot demo gallery — Eamon McKiernan</title>
-<meta name="description" content="Browser demos written by AI models running locally — one prompt each. Open a benchmark to read its prompt and run every build it produced.">
-<meta property="og:title" content="One-shot demo gallery — Eamon McKiernan">
-<meta property="og:description" content="Single-file browser demos written by AI models running locally — read the prompt, run every build.">
+<title>Model testing gallery — Eamon McKiernan</title>
+<meta name="description" content="One-shot browser demos written by AI models — local and cloud — organised by model, with the harness and serving config behind each build.">
+<meta name="author" content="Eamon McKiernan">
+<meta name="theme-color" content="#15130F">
+<meta property="og:title" content="Model testing gallery — one-shot demos, grouped by model">
+<meta property="og:description" content="One-shot browser demos written by AI models — local and cloud — organised by model, with the harness and serving config behind each build.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eamon McKiernan">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
-  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --accent:#D8A73C;
+  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --line-strong:#4a4132; --accent:#D8A73C;
   --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
   --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(216,167,60,.25)}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(216,167,60,.32);transition:border-color .2s,color .2s}
+a:hover{border-color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;color:var(--ink)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:9;background:var(--bg);border:1px solid var(--accent);padding:8px 14px;font-family:var(--mono);font-size:12px}
 .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
 
-.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0 0}
-.back{font-family:var(--mono);font-size:12px;color:var(--dim)}
-.back:hover{color:var(--ink)}
-h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);line-height:1.02;letter-spacing:.005em;margin:30px 0 0;color:var(--accent)}
-.lede{margin-top:14px;max-width:68ch;color:var(--dim)}
+/* top + headings */
+.gal-top{padding:34px 0 0}
+.gal-back{font-family:var(--mono);font-size:12px;letter-spacing:0;text-transform:none;color:var(--dim);border:0}
+.gal-back:hover{color:var(--accent)}
+.gal-h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);line-height:1.02;letter-spacing:.005em;margin:30px 0 0;color:var(--accent);max-width:26ch}
+.gal-lede{font-size:15px;line-height:1.6;color:var(--dim);margin-top:14px;max-width:68ch}
+.gal-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:18px;line-height:1.8}
 
-.sec{margin-top:50px}
-.sec-title{font-family:var(--display);font-weight:600;font-size:22px}
-.sec-sub{margin-top:5px;font-size:12.5px;color:var(--dim)}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
-@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.grid{grid-template-columns:1fr}}
+/* sections + subsections (collapsible) */
+.gal-sec{margin-top:76px}
+.gal-sec-m{margin-top:76px}
+.gal-sec-m>summary{display:flex;align-items:baseline;gap:16px;cursor:pointer;list-style:none;padding:2px 0}
+.gal-sec-m>summary::-webkit-details-marker{display:none}
+.gal-sec-m>summary:hover .gal-sec-t{color:#fff}
+.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent);flex-shrink:0}
+.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em;transition:color .2s}
+.gal-sec-rule{flex:1;height:1px;background:var(--line);align-self:center;min-width:24px}
+.gal-sec-c{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);flex-shrink:0}
+.gal-sec-m>summary::after{content:"+";font-family:var(--sans);font-size:19px;font-weight:400;line-height:1;color:var(--accent);flex-shrink:0;width:16px;text-align:center}
+.gal-sec-m[open]>summary::after{content:"–"}
+.gal-sec-s{font-size:14.5px;color:var(--quiet);margin:12px 0 26px;max-width:74ch}
 
-.card{display:flex;flex-direction:column;border:1px solid var(--line);cursor:pointer;background:transparent;transition:border-color .18s ease;min-width:0}
-.card:hover{border-color:var(--accent)}
-.card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
-.card .thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--line);background:#0c0b08}
-.cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
-.ct{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.15}
-.cm{font-family:var(--mono);font-size:11px;color:var(--dim)}
-.cd{font-size:13px;color:var(--dim);line-height:1.5}
-.go{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--accent)}
+/* harness subsection */
+.gal-h{margin:30px 0 0}
+.gal-h>summary{display:flex;align-items:baseline;gap:12px;cursor:pointer;list-style:none;padding:0 0 11px;border-bottom:1px solid var(--line)}
+.gal-h>summary::-webkit-details-marker{display:none}
+.gal-h-t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);transition:color .2s}
+.gal-h[open]>summary .gal-h-t,.gal-h>summary:hover .gal-h-t{color:var(--ink)}
+.gal-h-c{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-left:auto}
+.gal-h>summary::after{content:"+";font-family:var(--sans);font-size:15px;line-height:1;color:var(--dim);width:13px;text-align:center}
+.gal-h[open]>summary::after{content:"–";color:var(--accent)}
+.gal-h .gal-grid{margin-top:22px}
 
-footer{margin-top:60px;border-top:1px solid var(--line);padding:18px 0 70px}
-.f1{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
-.f2{margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--quiet);max-width:100ch}
-.f2 a{color:var(--quiet);text-decoration:underline}
-.f2 a:hover{color:var(--dim)}
+/* cards (index) */
+.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.gal-card{display:flex;flex-direction:column;min-width:0;background:transparent;border:1px solid var(--line);color:inherit;transition:border-color .18s ease}
+.gal-card:hover{border-color:var(--accent)}
+.gal-card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
+.gal-thumbwrap{display:block;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--line);background:#0c0b08}
+.gal-thumbwrap img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
+.gal-card:hover .gal-thumbwrap img{filter:saturate(1.04) brightness(1)}
+.gal-thumbwrap.empty{background:#12100c}
+.gal-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.gal-t{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.15;letter-spacing:.005em;color:var(--ink)}
+.gal-m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.gal-go{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin-top:auto;padding-top:12px;transition:transform .2s var(--ease)}
+.gal-card:hover .gal-go{transform:translateX(3px)}
 
-@media (prefers-reduced-motion: reduce){.card{transition:none}}
+/* build page */
+.gal-res{border:1px solid var(--line)}
+.gal-rt{padding:26px}
+.gal-rt-t{font-family:var(--display);font-size:22px;font-weight:600}
+.gal-rm{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:8px}
+.gal-rd{font-size:14.5px;color:var(--dim);margin-top:14px;max-width:70ch}
+.gal-ra{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.gal-btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line-strong);padding:10px 16px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.gal-btn:hover{color:var(--ink);border-color:var(--accent)}
+.gal-btn.on{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+.gal-btn.go{color:var(--ink);border-color:var(--line-strong)}
+a.gal-btn{border-bottom:1px solid var(--line-strong)}
+a.gal-btn:hover{border-bottom-color:var(--accent)}
+.gal-run{border-top:1px solid var(--line);background:#0f0d0a}
+.gal-run iframe{display:block;width:100%;height:min(78vh,720px);border:0;background:#000}
+.gal-runhint{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);padding:10px 16px;border-top:1px solid var(--line)}
+
+/* prompt */
+.gal-prompt{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#d6cdbd;background:#1b1812;border:1px solid var(--line);padding:22px;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow:auto}
+.gal-prompt::selection{background:rgba(216,167,60,.3)}
+
+/* serving chips + description list */
+.gal-chip{align-self:flex-start;display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-strong);color:var(--dim);margin-top:2px}
+.gal-chip.local{color:var(--accent);border-color:rgba(216,167,60,.45)}
+.gal-chip.cloud{color:var(--quiet)}
+.gal-chip.unknown{color:var(--quiet);border-style:dashed}
+.gal-hero{margin:38px 0 6px;border:1px solid var(--line);background:#0c0b08}
+.gal-hero img{display:block;width:100%;height:auto}
+.gal-hero figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);padding:11px 16px;border-top:1px solid var(--line)}
+.gal-dl{display:grid;grid-template-columns:170px 1fr;column-gap:0;margin-top:24px;border-top:1px solid var(--line)}
+.gal-dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);padding:15px 18px 15px 0;border-bottom:1px solid var(--line)}
+.gal-dl dd{font-size:14px;color:var(--dim);padding:15px 0;border-bottom:1px solid var(--line);line-height:1.62}
+
+/* footer */
+footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.gal-f1,.gal-f2{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--quiet)}
+.gal-f2 a{color:var(--quiet);border-bottom-color:var(--line-strong)}
+.gal-f2 a:hover{color:var(--accent)}
+
+@media(max-width:980px){ .gal-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:640px){ .gal-grid{grid-template-columns:1fr} }
+@media(max-width:760px){
+  .wrap{padding:0 20px}
+  .gal-sec{margin-top:54px}
+  .gal-grid{grid-template-columns:1fr}
+  .gal-d{min-height:0}
+  .gal-run iframe{height:60vh}
+  .gal-rt{padding:20px}
+  .gal-prompt{font-size:11.5px;padding:16px;max-height:none}
+  .gal-dl{grid-template-columns:1fr}
+  .gal-dl dt{padding:12px 0 0;border-bottom:0}
+  .gal-dl dd{padding:6px 0 14px}
+  footer{flex-direction:column;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<div class="wrap gal-wrap">
 
-  <div class="top">
-    <a class="back" href="index.html">&#8592;&nbsp;Eamon McKiernan</a>
+  <div class="gal-top">
+    <a class="gal-back" href="index.html">&#8592;&nbsp;Eamon McKiernan</a>
   </div>
 
-  <h1>One-shot demo gallery</h1>
-  <p class="lede">Browser demos written by AI models running on my own hardware &mdash; one prompt each, no cloud services, no build step. Open a benchmark to read the prompt it was built from and run every build it produced.</p>
+  <h1 class="gal-h1">Model testing gallery</h1>
+  <p class="gal-lede">22 browser demos written by AI models, grouped by the model that wrote them. Most are one prompt and one self-contained HTML file; a few ran as a short session with follow-ups. Published as they came out — defects and all. Every build records the harness it ran under and what served it: my own V100s, or a cloud plan.</p>
 
-  <section class="sec">
-    <div class="sec-title">The bench</div>
-    <div class="sec-sub">One message per test &mdash; no follow-ups, no fixes. Every file was opened and checked in a browser before it earned a place here.</div>
-    <div class="grid">
-      <a class="card" href="gallery/sky-temple.html">
-        <img class="thumb" src="demos/thumbs/sky-temple.jpg" alt="Sky Temple — a floating voxel island with a pagoda in a pink dusk sky">
-        <div class="cbody">
-          <div class="ct">Sky Temple</div>
-          <div class="cm">Qwen3.8-Flash-Next + 27B &middot; 3 builds &middot; Oct 2026</div>
-          <div class="cd">A floating Japanese island in cube art — a five-tier pagoda, torii gate, waterfall, drifting petals and a 60-second day/night cycle.</div>
-          <div class="go">prompt + 3 builds &#8594;</div>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">01</span><span class="gal-sec-t">Qwen3.8 Flash-Next</span><span class="gal-sec-rule"></span><span class="gal-sec-c">6 builds</span></summary>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-sky-temple.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-sky-temple.jpg" alt="Sky Temple — Qwen3.8 Flash-Next" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Sky Temple</div>
+          <div class="gal-m">Qwen3.8 Flash-Next</div>
+          <div class="gal-chip local">Strata · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/living-city.html">
-        <img class="thumb" src="demos/thumbs/living-city.jpg" alt="Living City — a procedural city of towers and avenues">
-        <div class="cbody">
-          <div class="ct">Living City</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A city that builds itself at load — rush-hour traffic, working traffic lights, a river with bridges and a 90-second day/night cycle.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-sky-temple-agent.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-sky-temple-agent.jpg" alt="Sky Temple — agent rebuild — Qwen3.8 Flash-Next" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Sky Temple — agent rebuild</div>
+          <div class="gal-m">Qwen3.8 Flash-Next</div>
+          <div class="gal-chip local">Strata · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/neon-drift.html">
-        <img class="thumb" src="demos/thumbs/neon-drift.jpg" alt="Neon Drift — a synthwave highway with neon arches and a striped sun">
-        <div class="cbody">
-          <div class="ct">Neon Drift</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A playable synthwave racer — an endless curving highway, boost meter, near-miss bonuses and a fully synthesised soundtrack.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-living-city.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-living-city.jpg" alt="Living City — Qwen3.8 Flash-Next" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Living City</div>
+          <div class="gal-m">Qwen3.8 Flash-Next</div>
+          <div class="gal-chip local">Strata · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/pulse-engine.html">
-        <img class="thumb" src="demos/thumbs/pulse-engine.jpg" alt="Pulse Engine — glowing particle visuals over a drum machine">
-        <div class="cbody">
-          <div class="ct">Pulse Engine</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A generative instrument — a drum machine and synth that compose on their own while a particle galaxy pulses on the beat.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-neon-drift.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-neon-drift.jpg" alt="Neon Drift — Qwen3.8 Flash-Next" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Neon Drift</div>
+          <div class="gal-m">Qwen3.8 Flash-Next</div>
+          <div class="gal-chip local">Strata · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
-      <a class="card" href="gallery/cloth-lab.html">
-        <img class="thumb" src="demos/thumbs/cloth-lab.jpg" alt="Cloth Lab — a draped cloth hanging between two posts beside a sphere">
-        <div class="cbody">
-          <div class="ct">Cloth Lab</div>
-          <div class="cm">Qwen3.8-Flash-Next &middot; 1 build &middot; Oct 2026</div>
-          <div class="cd">A from-scratch cloth physics lab — drag it, tear it, switch on the wind, drop balls on it. The solver is hand-written; no physics library.</div>
-          <div class="go">prompt + build &#8594;</div>
+      <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-pulse-engine.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-pulse-engine.jpg" alt="Pulse Engine — Qwen3.8 Flash-Next" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Pulse Engine</div>
+          <div class="gal-m">Qwen3.8 Flash-Next</div>
+          <div class="gal-chip local">Strata · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen38-flash-next-cloth-lab.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-flash-next-cloth-lab.jpg" alt="Cloth Lab — Qwen3.8 Flash-Next" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Cloth Lab</div>
+          <div class="gal-m">Qwen3.8 Flash-Next</div>
+          <div class="gal-chip local">Strata · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
         </div>
       </a>
     </div>
-  </section>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">02</span><span class="gal-sec-t">Qwen3.8-27B</span><span class="gal-sec-rule"></span><span class="gal-sec-c">4 builds</span></summary>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/qwen38-27b-dflash2-pagoda.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-dflash2-pagoda.jpg" alt="The Pagoda — DFlash2 — Qwen3.8-27B" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Pagoda — DFlash2</div>
+          <div class="gal-m">Qwen3.8-27B</div>
+          <div class="gal-chip local">llama.cpp · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen38-27b-dspine-pagoda.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-dspine-pagoda.jpg" alt="The Pagoda — DSpine — Qwen3.8-27B" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Pagoda — DSpine</div>
+          <div class="gal-m">Qwen3.8-27B</div>
+          <div class="gal-chip local">llama.cpp · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen38-27b-mtp-pagoda.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-mtp-pagoda.jpg" alt="The Pagoda — MTP — Qwen3.8-27B" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Pagoda — MTP</div>
+          <div class="gal-m">Qwen3.8-27B</div>
+          <div class="gal-chip local">llama.cpp · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen38-27b-plain-pagoda.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen38-27b-plain-pagoda.jpg" alt="The Pagoda — Plain — Qwen3.8-27B" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Pagoda — Plain</div>
+          <div class="gal-m">Qwen3.8-27B</div>
+          <div class="gal-chip local">llama.cpp · .5</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">03</span><span class="gal-sec-t">Qwen 4 Preview</span><span class="gal-sec-rule"></span><span class="gal-sec-c">7 builds</span></summary>
+    <details class="gal-h" open>
+      <summary><span class="gal-h-t">DeepSeek Harness</span><span class="gal-h-c">4 builds</span></summary>
+      <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/qwen4-preview-liberty.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-liberty.jpg" alt="Liberty Island, 1886 — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Liberty Island, 1886</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen4-preview-village.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-village.jpg" alt="Alderbrook — medieval village — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Alderbrook — medieval village</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen4-preview-pagoda.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-pagoda.jpg" alt="The Pagoda — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Pagoda</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen4-preview-torchlight.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen4-preview-torchlight.jpg" alt="Torchlight Depths — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Torchlight Depths</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+    </details>
+    <details class="gal-h" open>
+      <summary><span class="gal-h-t">Qwen Code</span><span class="gal-h-c">3 builds</span></summary>
+      <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/qwen-code-sky-temple.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-sky-temple.jpg" alt="Sky Temple — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Sky Temple</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen-code-village.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-village.jpg" alt="Alderglen — medieval village — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Alderglen — medieval village</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/qwen-code-liberty.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/qwen-code-liberty.jpg" alt="Liberty Island, 1886 — Qwen 4 Preview" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Liberty Island, 1886</div>
+          <div class="gal-m">Qwen 4 Preview</div>
+          <div class="gal-chip cloud">Qwen Cloud token plan</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+    </details>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">04</span><span class="gal-sec-t">DeepSeek V4.1 Flash</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/deepseek-v41-castle.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/deepseek-v41-castle.jpg" alt="The Castle — DeepSeek V4.1 Flash" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Castle</div>
+          <div class="gal-m">DeepSeek V4.1 Flash</div>
+          <div class="gal-chip cloud">DeepSeek API</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">05</span><span class="gal-sec-t">MiniMax M3.1 Flash</span><span class="gal-sec-rule"></span><span class="gal-sec-c">2 builds</span></summary>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/minimax-m31-sky-temple.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/minimax-m31-sky-temple.jpg" alt="Sky Temple — MiniMax M3.1 Flash" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Sky Temple</div>
+          <div class="gal-m">MiniMax M3.1 Flash</div>
+          <div class="gal-chip unknown">provider unrecorded</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+      <a class="gal-card" href="gallery/model-testing/minimax-m31-dusk-cityline.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/minimax-m31-dusk-cityline.jpg" alt="Dusk Cityline — MiniMax M3.1 Flash" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Dusk Cityline</div>
+          <div class="gal-m">MiniMax M3.1 Flash</div>
+          <div class="gal-chip unknown">provider unrecorded</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">06</span><span class="gal-sec-t">HY4</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/hy4-castle.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/hy4-castle.jpg" alt="The Castle — HY4" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">The Castle</div>
+          <div class="gal-m">HY4</div>
+          <div class="gal-chip cloud">Nous Portal</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+  </details>
+  <details class="gal-sec-m" open>
+    <summary><span class="gal-sec-n">07</span><span class="gal-sec-t">LongCat 2.5</span><span class="gal-sec-rule"></span><span class="gal-sec-c">1 build</span></summary>
+    <div class="gal-grid">
+      <a class="gal-card" href="gallery/model-testing/longcat-25-sky-temple.html">
+        <span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/longcat-25-sky-temple.jpg" alt="Sky Temple — LongCat 2.5" loading="lazy"></span>
+        <div class="gal-body">
+          <div class="gal-t">Sky Temple</div>
+          <div class="gal-m">LongCat 2.5</div>
+          <div class="gal-chip cloud">Nous Portal</div>
+          <div class="gal-go">prompt + build &#8594;</div>
+        </div>
+      </a>
+    </div>
+  </details>
 
   <footer>
-    <div class="f1">&copy; 2026 Eamon McKiernan &mdash; <a href="index.html" style="color:var(--dim);text-decoration:underline">back to the portfolio</a></div>
-    <div class="f2">Demos: single-file HTML, Three.js r160 via unpkg. Prompts and sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+    <div class="gal-f1">&copy; 2026 Eamon McKiernan &mdash; <a href="index.html">back to the portfolio</a></div>
+    <div class="gal-f2">Prompts and sources: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
   </footer>
 
 </div>
+</main>
 </body>
 </html>
