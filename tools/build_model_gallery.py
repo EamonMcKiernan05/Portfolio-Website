@@ -188,7 +188,7 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 
 /* top + headings */
 .gal-top{padding:34px 0 0}
-.gal-back{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:0}
+.gal-back{font-family:var(--mono);font-size:12px;letter-spacing:0;text-transform:none;color:var(--dim);border:0}
 .gal-back:hover{color:var(--accent)}
 .gal-h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);line-height:1.02;letter-spacing:.005em;margin:30px 0 0;color:var(--accent);max-width:26ch}
 .gal-lede{font-size:15px;line-height:1.6;color:var(--dim);margin-top:14px;max-width:68ch}
