@@ -105,11 +105,49 @@ BUILDS = [
          model="LongCat 2.5", group="LongCat 2.5", variant="",
          title="Sky Temple", prompt="pagoda", session="763e2897", followups=5,
          blurb="The pagoda brief on LongCat, five follow-ups before it settled."),
+    # Qwen3.8 Flash-Next — the builds that were already on the site
+    dict(rel="Qwen3.8 Flash-Next/sky-temple.html", slug="qwen38-flash-next-sky-temple",
+         model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
+         title="Sky Temple", prompt="legacy-sky-temple", session="", followups=0,
+         date="4 Oct 2026", kb=66,
+         blurb="The original bench run — one message, the file it produced. Still the best of the set."),
+    dict(rel="Qwen3.8 Flash-Next/sky-temple-agent.html", slug="qwen38-flash-next-sky-temple-agent",
+         model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
+         title="Sky Temple — agent rebuild", prompt="legacy-sky-temple", session="", followups=None,
+         date="6 Oct 2026", kb=38,
+         blurb="The same prompt driven by an agent loop instead of one shot — smaller, tidier, less alive."),
+    dict(rel="Qwen3.8 Flash-Next/living-city.html", slug="qwen38-flash-next-living-city",
+         model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
+         title="Living City", prompt="legacy-living-city", session="", followups=0,
+         date="4 Oct 2026", kb=79,
+         blurb="A procedural city with traffic and pedestrians, generated and animated in one file."),
+    dict(rel="Qwen3.8 Flash-Next/neon-drift.html", slug="qwen38-flash-next-neon-drift",
+         model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
+         title="Neon Drift", prompt="legacy-neon-drift", session="", followups=0,
+         date="5 Oct 2026", kb=34,
+         blurb="A playable synthwave racer — the smallest file that still plays."),
+    dict(rel="Qwen3.8 Flash-Next/pulse-engine.html", slug="qwen38-flash-next-pulse-engine",
+         model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
+         title="Pulse Engine", prompt="legacy-pulse-engine", session="", followups=0,
+         date="5 Oct 2026", kb=59,
+         blurb="A generative audio-visual engine that reacts to its own soundtrack."),
+    dict(rel="Qwen3.8 Flash-Next/cloth-lab.html", slug="qwen38-flash-next-cloth-lab",
+         model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
+         title="Cloth Lab", prompt="legacy-cloth-lab", session="", followups=0,
+         date="5 Oct 2026", kb=40,
+         blurb="Cloth physics written from scratch — no library, no solver borrowed."),
+    # the October Qwen3.8-27B build that was on the site
+    dict(rel="Qwen3.8-27B/Plain/sky-temple-oct.html", slug="qwen38-27b-sky-temple-oct",
+         model="Qwen3.8-27B", group="Qwen3.8-27B", variant="", harness="DeepSeek Harness",
+         title="Sky Temple — October run", prompt="legacy-sky-temple", session="", followups=0,
+         date="6 Oct 2026", kb=41,
+         blurb="The 27B model on the Sky Temple brief a month before the pagoda runs."),
 ]
 
-GROUP_ORDER = ["Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash",
+GROUP_ORDER = ["Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash",
                "MiniMax M3.1 Flash", "HY4", "LongCat 2.5"]
 GROUP_BLURB = {
+    "Qwen3.8 Flash-Next": "The model the gallery started with — Qwen3.8 Flash-Next on Strata, one prompt per build, back in early October.",
     "Qwen3.8-27B": "27B dense model, Q8_K_XL, four serving configurations — the same brief four times to isolate the engine's effect on craft.",
     "Qwen 4 Preview": "The preview build of Qwen 4, run two ways — the DeepSeek Harness and the Qwen Code CLI. Same model, different scaffolding, so the builds are split by harness.",
     "DeepSeek V4.1 Flash": "DeepSeek's Flash tier on the same castle, sky-temple and city briefs.",
@@ -140,12 +178,12 @@ def prompt_for(key):
 CARDS = {(c["rel"].replace("\\", "/")): c for c in json.load(open(DOCS / "model-testing-cards.json"))}
 
 
-def meta(rel):
+def meta(b):
     """Size and the ORIGINAL build date — the files were copied into the repo, so mtime lies."""
-    p = DEMOS / rel
-    kb = max(1, round(p.stat().st_size / 1024))
-    c = CARDS.get(rel.replace("\\", "/"), {})
-    return kb, c.get("date", "")
+    p = DEMOS / b["rel"]
+    kb = b.get("kb") or max(1, round(p.stat().st_size / 1024))
+    c = CARDS.get(b["rel"].replace("\\", "/"), {})
+    return kb, b.get("date") or c.get("date", "")
 
 
 STYLE = """<style>
@@ -336,7 +374,7 @@ def serving_rows(b):
 
 
 def build_page(b):
-    kb, mt = meta(b["rel"])
+    kb, mt = meta(b)
     prompt = prompt_for(b["prompt"])
     demo = "../../demos/model-testing/" + b["rel"]
     src = REPO + "/" + b["rel"].replace(" ", "%20")
@@ -409,7 +447,7 @@ def build_page(b):
 
 
 def card_html(b):
-    kb, mt = meta(b["rel"])
+    kb, mt = meta(b)
     fol = ("no session log" if b["followups"] is None
            else ("one shot" if b["followups"] == 0
                  else f"{b['followups']} follow-up{'s' if b['followups'] != 1 else ''}"))
