@@ -12,73 +12,83 @@
   "provider": "Nous Portal"
  },
  "hy4-flash-blue-hour-dry-dock": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-castle": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-mangrove-after-dark": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-medieval-village": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-pagoda": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-salt-mirror": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-the-basalt-organ": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-the-glass-tide": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-the-last-light": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "hy4-flash-the-rain-cathedral": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
  "longcat-25-sky-temple": {
@@ -100,80 +110,91 @@
   "provider": "Not recorded"
  },
  "qwen-4-max-basalt-organ": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-blue-hour-dry-dock": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-glass-tide": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-mangrove-after-dark": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-medieval-village": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-rain-cathedral": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-salt-mirror": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-the-castle": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-the-last-light": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-the-pagoda": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-4-max-torchlight-depths": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "qwen4-max",
-  "note": "Session captured from DeepSeek Harness.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
  "qwen-code-liberty": {
@@ -195,7 +216,7 @@
   "provider": "Qwen Cloud token plan"
  },
  "qwen3-8-flash-next-basalt-organ": {
-  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7",
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
   "endpoint": "http://192.168.1.5:8080/v1",
   "harness": "DeepSeek Harness",
   "kind": "local",
@@ -204,7 +225,7 @@
   "provider": "Strata"
  },
  "qwen3-8-flash-next-mangrove-after-dark": {
-  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7",
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
   "endpoint": "http://192.168.1.5:8080/v1",
   "harness": "DeepSeek Harness",
   "kind": "local",
@@ -213,7 +234,7 @@
   "provider": "Strata"
  },
  "qwen3-8-flash-next-rain-cathedral": {
-  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7",
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
   "endpoint": "http://192.168.1.5:8080/v1",
   "harness": "DeepSeek Harness",
   "kind": "local",
@@ -222,7 +243,7 @@
   "provider": "Strata"
  },
  "qwen3-8-flash-next-sky-temple": {
-  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7",
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
   "endpoint": "http://192.168.1.5:8080/v1",
   "harness": "DeepSeek Harness",
   "kind": "local",
