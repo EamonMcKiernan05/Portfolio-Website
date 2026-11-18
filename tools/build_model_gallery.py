@@ -20,6 +20,13 @@ REPO = "https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Model%20
 
 # ---------------------------------------------------------------- build metadata
 # rel (under demos/model-testing) -> display data
+def thumb_ver(b):
+    """mtime+size stamp so a re-captured thumbnail gets a new URL (edge caches the old one for 4h)."""
+    f = ROOT / "demos" / "thumbs" / "model-testing" / f"{b['slug']}.jpg"
+    st = f.stat()
+    return f"?v={int(st.st_mtime)}-{st.st_size}"
+
+
 BUILDS = [
     # Qwen3.8-27B
     dict(rel="Qwen3.8-27B/DFlash2/pagoda.html", slug="qwen38-27b-dflash2-pagoda",
@@ -394,7 +401,7 @@ def build_page(b):
     thumb = ROOT / "demos" / "thumbs" / "model-testing" / f"{b['slug']}.jpg"
     hero = ""
     if thumb.exists() and thumb.stat().st_size > 15000:
-        hero = (f'<figure class="gal-hero"><img src="../../demos/thumbs/model-testing/{b["slug"]}.jpg" '
+        hero = (f'<figure class="gal-hero"><img src="../../demos/thumbs/model-testing/{b["slug"]}.jpg{thumb_ver(b)}" '
                 f'alt="{html.escape(b["title"])} — {html.escape(b["model"])}, running" width="1280" height="800">'
                 f'<figcaption>{html.escape(b["model"])} &middot; {html.escape(mt)} &middot; preview</figcaption></figure>')
     return HEAD.format(
@@ -464,7 +471,7 @@ def card_html(b):
     tag = {"local": f"{html.escape(sv.get('provider',''))} · .5",
            "cloud": html.escape(sv.get('provider',''))}.get(kind, "provider unrecorded")
     thumb = ROOT / "demos" / "thumbs" / "model-testing" / f"{b['slug']}.jpg"
-    img = (f'<span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/{b["slug"]}.jpg" '
+    img = (f'<span class="gal-thumbwrap"><img src="demos/thumbs/model-testing/{b["slug"]}.jpg{thumb_ver(b)}" '
            f'alt="{html.escape(b["title"])} — {html.escape(b["model"])}" loading="lazy"></span>'
            if thumb.exists() and thumb.stat().st_size > 15000 else
            '<span class="gal-thumbwrap empty" aria-hidden="true"></span>')
