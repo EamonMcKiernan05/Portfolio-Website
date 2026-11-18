@@ -32,7 +32,7 @@
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list. This run went through the portal's tencent/hy4-flash:free route \u2014 the same model, served on the free tier.",
   "provider": "Nous portal"
  },
  "hy4-flash-medieval-village": {
@@ -88,7 +88,7 @@
   "harness": "DeepSeek Harness",
   "kind": "cloud",
   "model": "tencent/hy4-flash",
-  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list. This run went through the portal's tencent/hy4-flash:free route \u2014 the same model, served on the free tier.",
   "provider": "Nous portal"
  },
  "longcat-25-sky-temple": {
