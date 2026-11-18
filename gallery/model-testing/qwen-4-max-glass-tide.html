@@ -78,6 +78,10 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.15;letter-spacing:.005em;color:var(--ink)}
 .gal-m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.gal-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px 24px;margin-top:22px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gal-stat{display:flex;flex-direction:column;gap:5px;min-width:0}
+.gal-stat-k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--quiet)}
+.gal-stat-v{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
 .gal-time{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .gal-go{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin-top:auto;padding-top:12px;transition:transform .2s var(--ease)}
 .gal-card:hover .gal-go{transform:translateX(3px)}
@@ -151,6 +155,7 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   <h1 class="gal-h1">The Glass Tide</h1>
   <p class="gal-lede">The Glass Tide, one prompt, no follow-ups — built in a single pass.</p>
   <p class="gal-meta">Qwen 4 Max &middot; DeepSeek Harness &middot; 52 KB &middot; 17 Nov 2026</p>
+  <div class="gal-stats"><div class="gal-stat"><span class="gal-stat-k">goal sent</span><span class="gal-stat-v">17 Nov 2026 14:27</span></div><div class="gal-stat"><span class="gal-stat-k">build finished</span><span class="gal-stat-v">17 Nov 2026 14:57</span></div><div class="gal-stat"><span class="gal-stat-k">goal &rarr; build</span><span class="gal-stat-v">30 min</span></div><div class="gal-stat"><span class="gal-stat-k">first pass</span><span class="gal-stat-v">33 min</span></div><div class="gal-stat"><span class="gal-stat-k">follow-ups</span><span class="gal-stat-v">0</span></div><div class="gal-stat"><span class="gal-stat-k">model steps</span><span class="gal-stat-v">55</span></div><div class="gal-stat"><span class="gal-stat-k">tool calls</span><span class="gal-stat-v">77</span></div></div>
   
   <figure class="gal-hero"><img src="../../demos/thumbs/model-testing/qwen-4-max-glass-tide.jpg?v=1794995838-144526" alt="The Glass Tide — Qwen 4 Max, running" width="1280" height="800"><figcaption>Qwen 4 Max &middot; 17 Nov 2026 &middot; preview</figcaption></figure>
 

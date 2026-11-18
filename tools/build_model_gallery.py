@@ -178,6 +178,7 @@ def prompt_for(key):
 
 
 CARDS = {(c["rel"].replace("\\", "/")): c for c in json.load(open(DOCS / "model-testing-cards.json"))}
+STATS = json.load(open(DOCS / "model-testing-build-stats.json"))
 
 
 def meta(b):
@@ -253,6 +254,10 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
 .gal-t{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.15;letter-spacing:.005em;color:var(--ink)}
 .gal-m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.gal-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px 24px;margin-top:22px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gal-stat{display:flex;flex-direction:column;gap:5px;min-width:0}
+.gal-stat-k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--quiet)}
+.gal-stat-v{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
 .gal-time{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .gal-go{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin-top:auto;padding-top:12px;transition:transform .2s var(--ease)}
 .gal-card:hover .gal-go{transform:translateX(3px)}
@@ -417,6 +422,7 @@ def build_page(b):
   <h1 class="gal-h1">{html.escape(b['title'])}</h1>
   <p class="gal-lede">{html.escape(b['blurb'])}</p>
   <p class="gal-meta">{html.escape(b['model'])}{(' &middot; ' + html.escape(b['harness'])) if b.get('harness') else ''}{(' &middot; ' + html.escape(b['variant'])) if b['variant'] else ''} &middot; {kb} KB &middot; {mt}</p>
+  {stats_block(b)}
   {note}
   {hero}
 
@@ -472,6 +478,31 @@ def buildtime(b):
         return ""
     label = f"{m // 60}h {m % 60:02d}m" if m >= 60 else f"{m} min"
     return f'<div class="gal-time">built in {label}</div>'
+
+
+def stat_label(m):
+    if m is None:
+        return "—"
+    return f"{m // 60} h {m % 60:02d} m" if m >= 60 else f"{m} min"
+
+
+def stats_block(b):
+    s = STATS.get(b["slug"])
+    if not s:
+        return ""
+    cells = [
+        ("goal sent", s["start"]),
+        ("build finished", s["finish"]),
+        ("goal &rarr; build", stat_label(s["minutes"])),
+    ]
+    if s.get("first_pass") is not None and s["first_pass"] != s["minutes"]:
+        cells.append(("first pass", stat_label(s["first_pass"])))
+    cells.append(("follow-ups", str(s["followups"])))
+    cells.append(("model steps", str(s["steps"])))
+    cells.append(("tool calls", str(s["tools"])))
+    rows = "".join(f'<div class="gal-stat"><span class="gal-stat-k">{k}</span>'
+                   f'<span class="gal-stat-v">{v}</span></div>' for k, v in cells)
+    return f'<div class="gal-stats">{rows}</div>'
 
 
 def card_html(b):

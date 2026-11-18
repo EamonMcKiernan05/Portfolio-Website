@@ -1,0 +1,252 @@
+{
+ "hy4-flash-blue-hour-dry-dock": {
+  "finish": "17 Nov 2026 16:37",
+  "first_pass": 35,
+  "followups": 0,
+  "minutes": 29,
+  "start": "17 Nov 2026 16:07",
+  "steps": 145,
+  "tools": 149,
+  "turns": 1
+ },
+ "hy4-flash-castle": {
+  "finish": "16 Nov 2026 21:42",
+  "first_pass": 29,
+  "followups": 0,
+  "minutes": 26,
+  "start": "16 Nov 2026 21:15",
+  "steps": 118,
+  "tools": 119,
+  "turns": 1
+ },
+ "hy4-flash-mangrove-after-dark": {
+  "finish": "17 Nov 2026 22:52",
+  "first_pass": 15,
+  "followups": 0,
+  "minutes": 14,
+  "start": "17 Nov 2026 22:38",
+  "steps": 78,
+  "tools": 77,
+  "turns": 1
+ },
+ "hy4-flash-medieval-village": {
+  "finish": "16 Nov 2026 21:28",
+  "first_pass": 16,
+  "followups": 0,
+  "minutes": 13,
+  "start": "16 Nov 2026 21:15",
+  "steps": 74,
+  "tools": 73,
+  "turns": 1
+ },
+ "hy4-flash-pagoda": {
+  "finish": "16 Nov 2026 21:59",
+  "first_pass": 4,
+  "followups": 2,
+  "minutes": 42,
+  "start": "16 Nov 2026 21:16",
+  "steps": 149,
+  "tools": 153,
+  "turns": 3
+ },
+ "hy4-flash-salt-mirror": {
+  "finish": "17 Nov 2026 18:04",
+  "first_pass": 24,
+  "followups": 0,
+  "minutes": 22,
+  "start": "17 Nov 2026 17:42",
+  "steps": 138,
+  "tools": 141,
+  "turns": 1
+ },
+ "hy4-flash-the-basalt-organ": {
+  "finish": "17 Nov 2026 15:27",
+  "first_pass": 32,
+  "followups": 0,
+  "minutes": 29,
+  "start": "17 Nov 2026 14:57",
+  "steps": 127,
+  "tools": 134,
+  "turns": 1
+ },
+ "hy4-flash-the-glass-tide": {
+  "finish": "17 Nov 2026 14:43",
+  "first_pass": 19,
+  "followups": 0,
+  "minutes": 16,
+  "start": "17 Nov 2026 14:26",
+  "steps": 105,
+  "tools": 104,
+  "turns": 1
+ },
+ "hy4-flash-the-last-light": {
+  "finish": "16 Nov 2026 21:46",
+  "first_pass": 34,
+  "followups": 0,
+  "minutes": 30,
+  "start": "16 Nov 2026 21:16",
+  "steps": 129,
+  "tools": 133,
+  "turns": 1
+ },
+ "hy4-flash-the-rain-cathedral": {
+  "finish": "17 Nov 2026 22:05",
+  "first_pass": 16,
+  "followups": 0,
+  "minutes": 12,
+  "start": "17 Nov 2026 21:52",
+  "steps": 72,
+  "tools": 71,
+  "turns": 1
+ },
+ "qwen-4-max-basalt-organ": {
+  "finish": "17 Nov 2026 16:06",
+  "first_pass": 72,
+  "followups": 0,
+  "minutes": 65,
+  "start": "17 Nov 2026 15:01",
+  "steps": 148,
+  "tools": 240,
+  "turns": 1
+ },
+ "qwen-4-max-blue-hour-dry-dock": {
+  "finish": "17 Nov 2026 17:14",
+  "first_pass": 56,
+  "followups": 0,
+  "minutes": 54,
+  "start": "17 Nov 2026 16:20",
+  "steps": 119,
+  "tools": 123,
+  "turns": 1
+ },
+ "qwen-4-max-glass-tide": {
+  "finish": "17 Nov 2026 14:57",
+  "first_pass": 33,
+  "followups": 0,
+  "minutes": 30,
+  "start": "17 Nov 2026 14:27",
+  "steps": 55,
+  "tools": 77,
+  "turns": 1
+ },
+ "qwen-4-max-mangrove-after-dark": {
+  "finish": "17 Nov 2026 23:12",
+  "first_pass": null,
+  "followups": 0,
+  "minutes": 33,
+  "start": "17 Nov 2026 22:38",
+  "steps": 27,
+  "tools": 64,
+  "turns": 1
+ },
+ "qwen-4-max-medieval-village": {
+  "finish": "16 Nov 2026 09:04",
+  "first_pass": 47,
+  "followups": 0,
+  "minutes": 44,
+  "start": "16 Nov 2026 08:20",
+  "steps": 82,
+  "tools": 125,
+  "turns": 1
+ },
+ "qwen-4-max-rain-cathedral": {
+  "finish": "17 Nov 2026 22:21",
+  "first_pass": 33,
+  "followups": 0,
+  "minutes": 28,
+  "start": "17 Nov 2026 21:53",
+  "steps": 69,
+  "tools": 107,
+  "turns": 1
+ },
+ "qwen-4-max-salt-mirror": {
+  "finish": "17 Nov 2026 18:14",
+  "first_pass": 35,
+  "followups": 0,
+  "minutes": 32,
+  "start": "17 Nov 2026 17:41",
+  "steps": 56,
+  "tools": 95,
+  "turns": 1
+ },
+ "qwen-4-max-the-castle": {
+  "finish": "16 Nov 2026 13:05",
+  "first_pass": 41,
+  "followups": 0,
+  "minutes": 36,
+  "start": "16 Nov 2026 12:29",
+  "steps": 93,
+  "tools": 121,
+  "turns": 1
+ },
+ "qwen-4-max-the-last-light": {
+  "finish": "16 Nov 2026 11:21",
+  "first_pass": 130,
+  "followups": 0,
+  "minutes": 170,
+  "start": "16 Nov 2026 08:30",
+  "steps": 349,
+  "tools": 369,
+  "turns": 2
+ },
+ "qwen-4-max-the-pagoda": {
+  "finish": "16 Nov 2026 09:17",
+  "first_pass": 65,
+  "followups": 0,
+  "minutes": 57,
+  "start": "16 Nov 2026 08:19",
+  "steps": 94,
+  "tools": 159,
+  "turns": 1
+ },
+ "qwen-4-max-torchlight-depths": {
+  "finish": "16 Nov 2026 11:50",
+  "first_pass": 61,
+  "followups": 0,
+  "minutes": 60,
+  "start": "16 Nov 2026 10:50",
+  "steps": 99,
+  "tools": 107,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-basalt-organ": {
+  "finish": "17 Nov 2026 18:19",
+  "first_pass": 42,
+  "followups": 0,
+  "minutes": 38,
+  "start": "17 Nov 2026 17:40",
+  "steps": 245,
+  "tools": 246,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-mangrove-after-dark": {
+  "finish": "17 Nov 2026 23:17",
+  "first_pass": null,
+  "followups": 0,
+  "minutes": 39,
+  "start": "17 Nov 2026 22:38",
+  "steps": 38,
+  "tools": 61,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-rain-cathedral": {
+  "finish": "17 Nov 2026 22:29",
+  "first_pass": 38,
+  "followups": 0,
+  "minutes": 36,
+  "start": "17 Nov 2026 21:53",
+  "steps": 141,
+  "tools": 174,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-sky-temple": {
+  "finish": "17 Nov 2026 17:33",
+  "first_pass": 34,
+  "followups": 0,
+  "minutes": 33,
+  "start": "17 Nov 2026 17:00",
+  "steps": 135,
+  "tools": 189,
+  "turns": 1
+ }
+}
