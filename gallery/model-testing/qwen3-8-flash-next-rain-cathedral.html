@@ -184,10 +184,12 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
 
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
-    <p class="gal-sec-s">Session captured from DeepSeek Harness.</p><dl class="gal-dl">
-      <dt>Provider</dt><dd>llama.cpp (maya)</dd>
+    <p class="gal-sec-s">Session captured from DeepSeek Harness. Serving config confirmed by bench from the Strata box.</p><dl class="gal-dl">
+      <dt>Provider</dt><dd>Strata</dd>
       <dt>Harness</dt><dd>DeepSeek Harness</dd>
-      <dt>Model</dt><dd>qwen3.8-flash-next-unsloth-ud</dd>
+      <dt>Model</dt><dd>qwen3.8-flash-next-unsloth-ud-q3_k_xl</dd>
+      <dt>Endpoint</dt><dd>http://192.168.1.5:8080/v1</dd>
+      <dt>Serving config</dt><dd>Strata v0.2.14.1 · engine 0.1.60.1<br>GGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)<br>engram BF16 · 262,144 ctx · --kv int8 · MTP on<br>sampling: temperature 0.7</dd>
     </dl>
   </section>
 
