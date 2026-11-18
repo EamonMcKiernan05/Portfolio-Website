@@ -19,6 +19,36 @@
   "tools": 119,
   "turns": 1
  },
+ "hy4-flash-cloudfall-pass": {
+  "finish": "18 Nov 2026 13:27",
+  "first_pass": 32,
+  "followups": 0,
+  "minutes": 30,
+  "start": "18 Nov 2026 12:57",
+  "steps": 124,
+  "tools": 123,
+  "turns": 1
+ },
+ "hy4-flash-glacial-heart": {
+  "finish": "18 Nov 2026 14:58",
+  "first_pass": 35,
+  "followups": 0,
+  "minutes": 33,
+  "start": "18 Nov 2026 14:25",
+  "steps": 184,
+  "tools": 183,
+  "turns": 1
+ },
+ "hy4-flash-liquid-chrome-garden": {
+  "finish": "18 Nov 2026 16:53",
+  "first_pass": 30,
+  "followups": 0,
+  "minutes": 29,
+  "start": "18 Nov 2026 16:24",
+  "steps": 122,
+  "tools": 126,
+  "turns": 1
+ },
  "hy4-flash-mangrove-after-dark": {
   "finish": "17 Nov 2026 22:52",
   "first_pass": 15,
@@ -119,6 +149,26 @@
   "tools": 123,
   "turns": 1
  },
+ "qwen-4-max-cloudfall-pass": {
+  "finish": "18 Nov 2026 13:41",
+  "first_pass": 50,
+  "followups": 0,
+  "minutes": 43,
+  "start": "18 Nov 2026 12:57",
+  "steps": 51,
+  "tools": 136,
+  "turns": 1
+ },
+ "qwen-4-max-glacial-heart": {
+  "finish": "18 Nov 2026 15:07",
+  "first_pass": 43,
+  "followups": 0,
+  "minutes": 42,
+  "start": "18 Nov 2026 14:25",
+  "steps": 103,
+  "tools": 133,
+  "turns": 1
+ },
  "qwen-4-max-glass-tide": {
   "finish": "17 Nov 2026 14:57",
   "first_pass": 33,
@@ -127,6 +177,16 @@
   "start": "17 Nov 2026 14:27",
   "steps": 55,
   "tools": 77,
+  "turns": 1
+ },
+ "qwen-4-max-liquid-chrome-garden": {
+  "finish": "18 Nov 2026 17:08",
+  "first_pass": 49,
+  "followups": 0,
+  "minutes": 44,
+  "start": "18 Nov 2026 16:24",
+  "steps": 108,
+  "tools": 172,
   "turns": 1
  },
  "qwen-4-max-mangrove-after-dark": {
@@ -217,6 +277,36 @@
   "start": "17 Nov 2026 17:40",
   "steps": 245,
   "tools": 246,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-cloudfall-pass": {
+  "finish": "18 Nov 2026 13:35",
+  "first_pass": 39,
+  "followups": 0,
+  "minutes": 38,
+  "start": "18 Nov 2026 12:57",
+  "steps": 187,
+  "tools": 293,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-glacial-heart": {
+  "finish": "18 Nov 2026 15:33",
+  "first_pass": 69,
+  "followups": 0,
+  "minutes": 68,
+  "start": "18 Nov 2026 14:25",
+  "steps": 333,
+  "tools": 392,
+  "turns": 1
+ },
+ "qwen3-8-flash-next-liquid-chrome-garden": {
+  "finish": "18 Nov 2026 17:00",
+  "first_pass": 37,
+  "followups": 0,
+  "minutes": 35,
+  "start": "18 Nov 2026 16:24",
+  "steps": 163,
+  "tools": 253,
   "turns": 1
  },
  "qwen3-8-flash-next-mangrove-after-dark": {

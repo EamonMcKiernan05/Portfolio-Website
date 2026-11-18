@@ -27,6 +27,30 @@
   "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Nous portal"
  },
+ "hy4-flash-cloudfall-pass": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "tencent/hy4-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list. This run went through the portal's tencent/hy4-flash:free route \u2014 the same model, served on the free tier.",
+  "provider": "Nous portal"
+ },
+ "hy4-flash-glacial-heart": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "tencent/hy4-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list. This run went through the portal's tencent/hy4-flash:free route \u2014 the same model, served on the free tier.",
+  "provider": "Nous portal"
+ },
+ "hy4-flash-liquid-chrome-garden": {
+  "config": "API base https://inference-api.nousresearch.com/v1",
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "tencent/hy4-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list. This run went through the portal's tencent/hy4-flash:free route \u2014 the same model, served on the free tier.",
+  "provider": "Nous portal"
+ },
  "hy4-flash-mangrove-after-dark": {
   "config": "API base https://inference-api.nousresearch.com/v1",
   "harness": "DeepSeek Harness",
@@ -125,7 +149,31 @@
   "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
   "provider": "Qwen token plan"
  },
+ "qwen-4-max-cloudfall-pass": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "qwen4-max",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "Qwen token plan"
+ },
+ "qwen-4-max-glacial-heart": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "qwen4-max",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "Qwen token plan"
+ },
  "qwen-4-max-glass-tide": {
+  "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "qwen4-max",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "Qwen token plan"
+ },
+ "qwen-4-max-liquid-chrome-garden": {
   "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",
   "kind": "cloud",
@@ -216,6 +264,33 @@
   "provider": "Qwen Cloud token plan"
  },
  "qwen3-8-flash-next-basalt-organ": {
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
+  "endpoint": "http://192.168.1.5:8080/v1",
+  "harness": "DeepSeek Harness",
+  "kind": "local",
+  "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
+  "note": "Session captured from DeepSeek Harness. Serving config confirmed by bench from the Strata box.",
+  "provider": "Strata"
+ },
+ "qwen3-8-flash-next-cloudfall-pass": {
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
+  "endpoint": "http://192.168.1.5:8080/v1",
+  "harness": "DeepSeek Harness",
+  "kind": "local",
+  "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
+  "note": "Session captured from DeepSeek Harness. Serving config confirmed by bench from the Strata box.",
+  "provider": "Strata"
+ },
+ "qwen3-8-flash-next-glacial-heart": {
+  "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
+  "endpoint": "http://192.168.1.5:8080/v1",
+  "harness": "DeepSeek Harness",
+  "kind": "local",
+  "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
+  "note": "Session captured from DeepSeek Harness. Serving config confirmed by bench from the Strata box.",
+  "provider": "Strata"
+ },
+ "qwen3-8-flash-next-liquid-chrome-garden": {
   "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
   "endpoint": "http://192.168.1.5:8080/v1",
   "harness": "DeepSeek Harness",
