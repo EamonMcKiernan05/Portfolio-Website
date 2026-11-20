@@ -1,4 +1,74 @@
 {
+ "deepseek-v41-croft-at-the-wrack-line": {
+  "finish": "20 Nov 2026 00:12",
+  "first_pass": 88,
+  "followups": 8,
+  "minutes": 167,
+  "start": "19 Nov 2026 21:25",
+  "steps": 580,
+  "tools": 866,
+  "turns": 9
+ },
+ "deepseek-v41-kettle-lake": {
+  "finish": "19 Nov 2026 22:26",
+  "first_pass": 61,
+  "followups": 0,
+  "minutes": 60,
+  "start": "19 Nov 2026 21:26",
+  "steps": 352,
+  "tools": 402,
+  "turns": 1
+ },
+ "deepseek-v41-salt-mirror": {
+  "finish": "20 Nov 2026 00:07",
+  "first_pass": 58,
+  "followups": 0,
+  "minutes": 57,
+  "start": "19 Nov 2026 23:10",
+  "steps": 407,
+  "tools": 558,
+  "turns": 1
+ },
+ "deepseek-v41-swallowtail-hayfield": {
+  "finish": "19 Nov 2026 22:23",
+  "first_pass": 61,
+  "followups": 0,
+  "minutes": 58,
+  "start": "19 Nov 2026 21:25",
+  "steps": 374,
+  "tools": 373,
+  "turns": 1
+ },
+ "deepseek-v41-the-basalt-organ": {
+  "finish": "19 Nov 2026 23:27",
+  "first_pass": 54,
+  "followups": 0,
+  "minutes": 53,
+  "start": "19 Nov 2026 22:34",
+  "steps": 218,
+  "tools": 321,
+  "turns": 1
+ },
+ "deepseek-v41-the-beavers-spare-channel": {
+  "finish": "19 Nov 2026 22:47",
+  "first_pass": 84,
+  "followups": 0,
+  "minutes": 82,
+  "start": "19 Nov 2026 21:25",
+  "steps": 286,
+  "tools": 605,
+  "turns": 1
+ },
+ "deepseek-v41-the-rain-cathedral": {
+  "finish": "19 Nov 2026 23:23",
+  "first_pass": 49,
+  "followups": 0,
+  "minutes": 48,
+  "start": "19 Nov 2026 22:34",
+  "steps": 269,
+  "tools": 441,
+  "turns": 1
+ },
  "hy4-flash-blue-hour-dry-dock": {
   "finish": "17 Nov 2026 16:37",
   "first_pass": 35,

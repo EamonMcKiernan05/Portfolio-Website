@@ -5,6 +5,55 @@
   "model": "deepseek-flash",
   "provider": "DeepSeek API"
  },
+ "deepseek-v41-croft-at-the-wrack-line": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
+ "deepseek-v41-kettle-lake": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
+ "deepseek-v41-salt-mirror": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
+ "deepseek-v41-swallowtail-hayfield": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
+ "deepseek-v41-the-basalt-organ": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
+ "deepseek-v41-the-beavers-spare-channel": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
+ "deepseek-v41-the-rain-cathedral": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from DeepSeek Harness. Model id as configured in the harness; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
  "hy4-castle": {
   "harness": "DeepSeek Harness",
   "kind": "cloud",
