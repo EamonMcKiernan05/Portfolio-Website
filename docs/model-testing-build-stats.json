@@ -10,14 +10,14 @@
   "turns": 9
  },
  "deepseek-v41-kettle-lake": {
-  "finish": "19 Nov 2026 22:26",
+  "finish": "20 Nov 2026 16:14",
   "first_pass": 61,
-  "followups": 0,
-  "minutes": 60,
+  "followups": 1,
+  "minutes": 1128,
   "start": "19 Nov 2026 21:26",
-  "steps": 352,
-  "tools": 402,
-  "turns": 1
+  "steps": 381,
+  "tools": 431,
+  "turns": 2
  },
  "deepseek-v41-salt-mirror": {
   "finish": "20 Nov 2026 00:07",
@@ -60,14 +60,14 @@
   "turns": 1
  },
  "deepseek-v41-the-rain-cathedral": {
-  "finish": "19 Nov 2026 23:23",
-  "first_pass": 49,
-  "followups": 0,
-  "minutes": 48,
+  "finish": "20 Nov 2026 16:11",
+  "first_pass": 50,
+  "followups": 2,
+  "minutes": 1057,
   "start": "19 Nov 2026 22:34",
-  "steps": 269,
-  "tools": 441,
-  "turns": 1
+  "steps": 309,
+  "tools": 490,
+  "turns": 3
  },
  "hy4-flash-blue-hour-dry-dock": {
   "finish": "17 Nov 2026 16:37",
