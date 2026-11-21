@@ -69,4 +69,6 @@ Rules for the prompt block on each build page:
 - Every one of the 19 cards opens its build page, and the build renders in a real browser with no
   console errors.
 - The five old top-level cards (Sky Temple, Living City, Neon Drift, Pulse Engine, Cloth Lab) are
-  gone entirely — they were MiniMax builds with no prompt record.
+  gone from the gallery. They are Qwen3.8-Flash-Next runs of 4–6 Oct, and their prompts are kept in
+  `docs/legacy-gallery.json`. They are not MiniMax builds — the 2026-10-20 MiniMax v2-era files that
+  share those prompt names were never in this repo.
