@@ -31,8 +31,6 @@ PENDING = [
     ("deepseek-v41-castle", "DeepSeek-V4.1-Flash-1017/THE-CASTLE.html"),
     ("deepseek-v41-sky-temple", "DeepSeek-V4.1-Flash-1017/sky-temple-DeepSeek-V4.1-Flash-1017.html"),
     ("deepseek-v41-nightfall", "DeepSeek-V4.1-Flash-1017/test1-deepseek-v4.1-flash-1017.html"),
-    ("minimax-m31-sky-temple", "MiniMax M3.1-Flash Tests/sky-temple-minimax-m3-1-flash.html"),
-    ("minimax-m31-dusk-cityline", "MiniMax M3.1-Flash Tests/dusk-cityline-minimax-m3.1-flash.html"),
     ("hy4-castle", "HY4/THE-CASTLE.html"),
     ("longcat-25-sky-temple", "LongCat-2.5/sky-temple.html"),
 ]

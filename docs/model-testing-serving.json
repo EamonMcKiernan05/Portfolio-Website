@@ -170,18 +170,6 @@
   "model": "longcat-2.5:free",
   "provider": "Nous Portal"
  },
- "minimax-m31-dusk-cityline": {
-  "harness": "",
-  "kind": "unknown",
-  "model": "",
-  "provider": "Not recorded"
- },
- "minimax-m31-sky-temple": {
-  "harness": "",
-  "kind": "unknown",
-  "model": "",
-  "provider": "Not recorded"
- },
  "qwen-4-max-basalt-organ": {
   "config": "API base https://token-plan.maas.qwencloudapi.com/compatible-mode/v1\nOpenAI Responses API (not chat-completions)",
   "harness": "DeepSeek Harness",

@@ -79,14 +79,6 @@ BUILDS = [
          model="DeepSeek V4.1 Flash", group="DeepSeek V4.1 Flash", variant="",
          title="The Castle", prompt="castle", session="23f01a1f", followups=0,
          blurb="The castle brief, one shot, the largest single render in the gallery."),
-    dict(rel="MiniMax M3.1-Flash Tests/sky-temple-minimax-m3-1-flash.html", slug="minimax-m31-sky-temple",
-         model="MiniMax M3.1 Flash", group="MiniMax M3.1 Flash", variant="",
-         title="Sky Temple", prompt="pack:sky-temple", session="", followups=None,
-         blurb="Sky Temple from the v3 pack — the rebuild that replaced the flat v2 attempt."),
-    dict(rel="MiniMax M3.1-Flash Tests/dusk-cityline-minimax-m3.1-flash.html", slug="minimax-m31-dusk-cityline",
-         model="MiniMax M3.1 Flash", group="MiniMax M3.1 Flash", variant="",
-         title="Dusk Cityline", prompt="pack:dusk-cityline", session="", followups=None,
-         blurb="CSS 3D only — no WebGL allowed — and it still reads as a city at dusk."),
     # HY4
     dict(rel="HY4/THE-CASTLE.html", slug="hy4-castle",
          model="HY4", group="HY4", variant="",
@@ -179,8 +171,7 @@ BUILDS = [
          blurb='Salt Mirror, one prompt, no follow-ups — built in a single pass.'),
 ]
 
-GROUP_ORDER = ["Qwen 4 Max", "Hy4 Flash", "Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash",
-               "MiniMax M3.1 Flash", "HY4", "LongCat 2.5"]
+GROUP_ORDER = ["Qwen 4 Max", "Hy4 Flash", "Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash", "HY4", "LongCat 2.5"]
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))
