@@ -359,6 +359,9 @@ HEAD = """<!doctype html>
 <meta property="og:site_name" content="Eamon McKiernan">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {style}
 </head>
 <body>
