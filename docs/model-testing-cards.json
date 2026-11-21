@@ -45,24 +45,6 @@
   "date_iso": "2026-11-12"
  },
  {
-  "model": "MiniMax M3.1-Flash Tests",
-  "file": "dusk-cityline-minimax-m3.1-flash.html",
-  "rel": "MiniMax M3.1-Flash Tests/dusk-cityline-minimax-m3.1-flash.html",
-  "kb": 30,
-  "title": "Dusk Cityline",
-  "date": "21 Oct 2026",
-  "date_iso": "2026-10-21"
- },
- {
-  "model": "MiniMax M3.1-Flash Tests",
-  "file": "sky-temple-minimax-m3-1-flash.html",
-  "rel": "MiniMax M3.1-Flash Tests/sky-temple-minimax-m3-1-flash.html",
-  "kb": 51,
-  "title": "Sky Temple",
-  "date": "21 Oct 2026",
-  "date_iso": "2026-10-21"
- },
- {
   "model": "Qwen 4 Preview",
   "file": "liberty-1886.html",
   "rel": "Qwen 4 Preview/liberty-1886.html",
