@@ -36,25 +36,29 @@ LOADER = """(()=>{const l=document.querySelector('#loader,#loading,.loader,.load
 if(!l)return 'gone';const s=getComputedStyle(l);return s.display+'|'+s.opacity})()"""
 RAF = """new Promise(r=>{let c=0,t0=performance.now();function f(){c++;
 if(performance.now()-t0<1000) requestAnimationFrame(f); else r(c)} requestAnimationFrame(f)})"""
-FIND = """(()=>{const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin'];
+_PICK = """const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin'];
   let b=null; for(const id of SEL){ b=document.getElementById(id); if(b) break; }
-  if(!b){ b=[...document.querySelectorAll('button,[role=switch],[role=button],.btn,.ctl')]
-    .find(e=>/cinematic/i.test((e.textContent||'')+' '+(e.id||'')+' '+(e.title||'')+' '+(e.className||'')))||null; }
-  if(!b) return 'none';
-  const ap=b.getAttribute('aria-pressed'), ac=b.getAttribute('aria-checked');
-  const parts=String(b.className||'').split(' ');
+  const boxes=[...document.querySelectorAll('input[type=checkbox]')];
+  const box=boxes.find(e=>/cine/i.test((e.id||'')+' '+(e.name||'')+' '+(e.title||'')))
+    || boxes.find(e=>{const l=e.closest('label')||(e.id?document.querySelector('label[for="'+e.id+'"]'):null);
+        return !!l && /cinematic/i.test(l.textContent||'');}) || null;
+  if(!b && !box){ const all=[...document.querySelectorAll('button,[role=switch],[role=button],.btn,.ctl,label')];
+    b=all.find(e=>/cinematic/i.test((e.textContent||'')+' '+(e.id||'')+' '+(e.title||'')+' '+(e.className||'')))||null; }"""
+FIND = """(()=>{""" + _PICK + """
+  if(!b && !box) return 'none';
+  const el = box || b;
+  const ap=el.getAttribute&&el.getAttribute('aria-pressed'), ac=el.getAttribute&&el.getAttribute('aria-checked');
+  const parts=String(el.className||'').split(' ');
   const onCls = parts.indexOf('on')>=0 || parts.indexOf('active')>=0;
   let js=null; try{ const g=window.HAY_CAMERA||window.CAMERA||window.camera;
     if(g && typeof g.cinematic!=='undefined') js=g.cinematic; }catch(e){}
   let ui=null; try{ if(typeof UI!=='undefined' && typeof UI.cinematic!=='undefined') ui=UI.cinematic; }catch(e){}
-  const on = ap==='true' || ac==='true' || onCls || js===true || ui===true;
-  return JSON.stringify({found:true,on:on,ap:ap,ac:ac,cls:b.className||''})})()"""
-TOGGLE = """(()=>{const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin'];
-  let b=null; for(const id of SEL){ b=document.getElementById(id); if(b) break; }
-  if(!b){ b=[...document.querySelectorAll('button,[role=switch],[role=button],.btn,.ctl')]
-    .find(e=>/cinematic/i.test((e.textContent||'')+' '+(e.id||'')+' '+(e.title||'')+' '+(e.className||'')))||null; }
+  const on = box ? box.checked===true : (ap==='true' || ac==='true' || onCls || js===true || ui===true);
+  return JSON.stringify({found:true,on:on,how:box?'checkbox':'control',id:el.id||'',ap:ap,ac:ac,
+                         cls:el.className||''})})()"""
+TOGGLE = """(()=>{""" + _PICK + """
+  if(box){ box.click(); return 'clicked-checkbox'; }
   if(!b) return 'none'; b.click(); return 'clicked'})()"""
-
 
 def log(msg: str) -> None:
     print(f"[rec {time.strftime('%H:%M:%S')}] {msg}", flush=True)
@@ -123,10 +127,26 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
     state["recording"] = True
     await call("Page.startScreencast", format="jpeg", quality=88, maxWidth=1920, maxHeight=1080, everyNthFrame=1)
     started = time.time()
-    while time.time() - started < DURATION:
-        await asyncio.sleep(0.5)
-    await call("Page.stopScreencast")
-    state["recording"] = False
+    await asyncio.sleep(5)
+    if len(frames) < 15:
+        # a near-static scene produces no compositor damage, so the screencast goes silent:
+        # poll screenshots instead so the clip still has a real frame rate
+        log(f"{slug}: screencast idle ({len(frames)} frames in 5s) — polling screenshots")
+        await call("Page.stopScreencast")
+        state["recording"] = False
+        frames.clear()
+        started = time.time()
+        interval = 1 / 12
+        while time.time() - started < DURATION:
+            tick = time.time()
+            shot = await call("Page.captureScreenshot", format="jpeg", quality=88)
+            frames.append(base64.b64decode(shot["data"]))
+            await asyncio.sleep(max(0.0, interval - (time.time() - tick)))
+    else:
+        while time.time() - started < DURATION:
+            await asyncio.sleep(0.5)
+        await call("Page.stopScreencast")
+        state["recording"] = False
     elapsed = time.time() - started
     log(f"{slug}: captured {len(frames)} frames in {elapsed:.1f}s = {len(frames)/elapsed:.1f} fps")
     if not frames:
@@ -185,6 +205,13 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
                 motion=motion, problems=problems, thumb=best[1] is not None)
 
 
+def _weak(res: dict) -> bool:
+    """A take that shows no movement or almost no pixels is not worth publishing."""
+    if res.get("error") or res.get("problems") and "duration" in " ".join(res["problems"]):
+        return True
+    return (res.get("motion") or 0) < 5.0 or (res.get("bytes") or 0) < 2_000_000
+
+
 async def _run(pairs, port: int, base: str, outdir: pathlib.Path) -> list[dict]:
     pages = json.load(urllib.request.urlopen(f"http://127.0.0.1:{port}/json"))
     ws_url = next(p["webSocketDebuggerUrl"] for p in pages if p["type"] == "page")
@@ -231,6 +258,13 @@ async def _run(pairs, port: int, base: str, outdir: pathlib.Path) -> list[dict]:
             url = base + urllib.parse.quote(rel)
             try:
                 res = await _record_one(call, js, slug, url, outdir / f"{slug}.mp4", state, frames)
+                if _weak(res):
+                    # a take can come out static (scene still warming, switch mis-read): retry once
+                    log(f"{slug}: weak take (motion {res.get('motion')}, "
+                        f"{(res.get('bytes') or 0)/1e6:.1f} MB) — re-taking")
+                    frames.clear()
+                    res = await _record_one(call, js, slug, url, outdir / f"{slug}.mp4",
+                                            state, frames)
             except Exception as exc:  # one bad build must not kill the batch
                 log(f"{slug}: FAILED {exc}")
                 res = dict(slug=slug, error=str(exc))
