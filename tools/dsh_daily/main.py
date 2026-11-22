@@ -130,6 +130,19 @@ def workspace_folder(rel: str) -> str:
     return rel.replace("\\", "/").split("/")[0]
 
 
+def spec_key_for_html(path: pathlib.Path) -> str | None:
+    """Name the one known prompt whose title equals this build's <title>, else None."""
+    head = path.read_text(errors="replace")[:6000]
+    m = re.search(r"<title>([^<]*)</title>", head, re.S)
+    if not m:
+        return None
+    want = ingest.norm(re.sub(r"^\s*\d+\s*[\u2014\u2013-]+\s*", "", m.group(1)))
+    prs = json.load(open(ingest.DOCS / "model-testing-prompts.json"))["spec_prompts"]
+    hits = [k for k, txt in prs.items()
+            if ingest.norm(ingest.title_of(txt, "")).strip().lower() == want.strip().lower()]
+    return hits[0] if len(hits) == 1 else None
+
+
 def attribute(build: dict, pool: list[dict]) -> dict | None:
     """Best session that names this file *and* ran in the build's own workspace."""
     rel = build["rel"].replace("\\", "/")
@@ -197,7 +210,23 @@ def main() -> int:
     for c in cands:
         s = attribute(c, pool)
         if not s:
-            log(f"   ? {c['rel']} — no session names this file, leaving it alone")
+            # no session names this file: publish it only if its own title matches a known spec,
+            # so the prompt on the page is the real one and the missing stats stay unrecorded
+            rel = c["rel"].replace("\\", "/")
+            local = STATE_DIR / "incoming" / rel
+            try:
+                win.pull("Desktop/Model Testing/" + rel, local)
+                key = spec_key_for_html(local)
+            except Exception as exc:
+                log(f"   ? {c['rel']} — could not read it: {exc}")
+                continue
+            if not key:
+                log(f"   ? {c['rel']} — no session names this file and its title matches no known "
+                    f"spec, leaving it alone")
+                continue
+            c["local"] = local
+            todo.append((c, {"unattributed": True, "prompt_key": key}))
+            log(f"   + {c['rel']} — no session; prompt '{key}', stats left unrecorded")
             continue
         todo.append((c, s))
         log(f"   + {c['rel']} <- {s['session'][:8]} "
@@ -222,9 +251,14 @@ def main() -> int:
     for c, s in todo:
         rel = c["rel"].replace("\\", "/")
         local = work / rel
-        win.pull("Desktop/Model Testing/" + rel, local)
+        if not c.get("local"):
+            win.pull("Desktop/Model Testing/" + rel, local)
         c["local"] = local
-        rec = ingest.ingest(c, s)
+        if s.get("unattributed"):
+            prs = json.load(open(ingest.DOCS / "model-testing-prompts.json"))["spec_prompts"]
+            rec = ingest.ingest_unattributed(c, s["prompt_key"], prs[s["prompt_key"]])
+        else:
+            rec = ingest.ingest(c, s)
         recs.append(rec)
         log(f"   ingested {rec['slug']} ({rec['kb']} KB, prompt '{rec['prompt']}')")
 
