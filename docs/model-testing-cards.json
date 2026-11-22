@@ -151,5 +151,77 @@
   "title": "SKY TEMPLE \u2014 a tiny world",
   "date": "12 Nov 2026",
   "date_iso": "2026-11-12"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "LINEN_ON_THE_BLEACHING_GREEN.html",
+  "rel": "Hy4 Flash/LINEN_ON_THE_BLEACHING_GREEN.html",
+  "kb": 630,
+  "title": "LINEN ON THE BLEACHING GREEN",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "Hy4 Flash Maya M",
+  "file": "linen_bleaching_green.html",
+  "rel": "Hy4 Flash Maya M/linen_bleaching_green.html",
+  "kb": 636,
+  "title": "linen_bleaching_green",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "the-bleaching-green.html",
+  "rel": "Qwen 4 Max/the-bleaching-green.html",
+  "kb": 651,
+  "title": "the-bleaching-green",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "linen-on-the-bleaching-green.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/linen-on-the-bleaching-green.html",
+  "kb": 850,
+  "title": "linen-on-the-bleaching-green",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "BREADFRUIT_CAY.html",
+  "rel": "Hy4 Flash/BREADFRUIT_CAY.html",
+  "kb": 639,
+  "title": "BREADFRUIT CAY",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "Hy4 Flash Maya M",
+  "file": "breadfruit_cay.html",
+  "rel": "Hy4 Flash Maya M/breadfruit_cay.html",
+  "kb": 637,
+  "title": "breadfruit_cay",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "breadfruit-cay.html",
+  "rel": "Qwen 4 Max/breadfruit-cay.html",
+  "kb": 670,
+  "title": "breadfruit-cay",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "breadfruit-cay.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/breadfruit-cay.html",
+  "kb": 848,
+  "title": "breadfruit-cay",
+  "date": "21 Nov 2026",
+  "date_iso": "2026-11-21"
  }
 ]
