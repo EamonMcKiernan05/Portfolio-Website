@@ -233,6 +233,10 @@ BUILDS = [
          variant='', title='The Shell Road', prompt='the-shell-road', session='72d6234d-3e86-4c96-b6b4-aa285ebf663c',
          followups=0, date='22 Nov 2026', build_min=52, kb=668,
          blurb='One pass, 52 minutes.'),
+    dict(rel='Inkling-2-Mini/THE-PAGODA.html', slug='inkling-2-mini-the-pagoda-v2', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='Maya M',
+         variant='', title='THE PAGODA — a tiny temple world', prompt='the-pagoda', session='70eec855-eab7-40d0-b280-10ef9ecd9b4a',
+         followups=0, date='22 Nov 2026', build_min=75, kb=666,
+         blurb='One pass, 75 minutes.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini']
