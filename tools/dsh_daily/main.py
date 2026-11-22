@@ -191,7 +191,16 @@ def main() -> int:
             f"({s.get('model') or 'model?'}, {s.get('first_pass')} min first pass)")
 
     if args.dry_run or not todo:
-        log("   nothing to ingest" if not todo else "   dry run: stopping before ingest")
+        if args.dry_run:
+            log("   dry run: stopping before ingest")
+        else:
+            log("   nothing to ingest")
+            state["watermark"] = dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+            state["runs"] = (state.get("runs") or [])[-20:] + [{
+                "at": dt.datetime.now().isoformat(timespec="seconds"),
+                "ingested": [], "videos": [], "publish": None,
+                "skipped": [c["rel"] for c in cands]}]
+            save_state(state)
         return 0
 
     # local copies of the html files
@@ -229,13 +238,14 @@ def main() -> int:
         for v in videos:
             if "clip" in v and v.get("workspace"):
                 win.push(pathlib.Path(v["clip"]),
-                         f"{record.DESKTOP_SUBDIR}/{v['workspace']}/{v['slug']}.mp4")
-                v["desktop"] = f"{record.DESKTOP_SUBDIR}\\{v['workspace']}\\{v['slug']}.mp4"
+                         f"Desktop/{record.DESKTOP_SUBDIR}/{v['workspace']}/{v['slug']}.mp4")
+                v["desktop"] = f"Desktop\\{record.DESKTOP_SUBDIR}\\{v['workspace']}\\{v['slug']}.mp4"
         ingest.rebuild()
 
     result = {"ingested": [r["slug"] for r in recs], "videos": videos, "publish": None}
     if not args.no_publish:
-        msg = "Gallery: " + ", ".join(r["slug"] for r in recs) + " (daily dsh run)"
+        msg = ("Gallery: " + ", ".join(r["slug"] for r in recs) if recs
+               else "dsh daily pipeline: update") + " (daily dsh run)"
         result["publish"] = publish.ship(msg)
         result["live"] = publish.live_check()
         log(f"   live: {result['live']}")

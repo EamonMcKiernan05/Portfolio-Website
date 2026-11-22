@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -19,10 +20,38 @@ def sh(cmd: str, cwd: pathlib.Path, timeout: int = 600) -> str:
     return p.stdout.strip()
 
 
+def gh_env() -> dict:
+    """gh needs a token; take GH_TOKEN from the environment or from Bitwarden at run time."""
+    env = os.environ.copy()
+    if env.get("GH_TOKEN") or env.get("GITHUB_TOKEN"):
+        return env
+    bws = pathlib.Path.home() / ".hermes/tools/bws-2.0.0-linux-x64/bws"
+    env_file = pathlib.Path.home() / ".hermes/.env"
+    bws_token = None
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            if line.startswith("BWS_ACCESS_TOKEN="):
+                bws_token = line.split("=", 1)[1].strip()
+    if not bws_token or not bws.exists():
+        raise RuntimeError("no GH_TOKEN and no Bitwarden access token available for gh")
+    # the token is an EU account; bws defaults to the US server and answers 401
+    run_env = {**env, "BWS_ACCESS_TOKEN": bws_token, "BWS_SERVER_URL": "https://vault.bitwarden.eu"}
+    out = subprocess.run([str(bws), "secret", "list", "b6e7789d-ae5c-4604-9807-b4da01052f22",
+                          "-o", "json"],
+                         capture_output=True, text=True, timeout=120, env=run_env)
+    if out.returncode != 0:
+        raise RuntimeError(f"bws secret list failed: {out.stderr[-300:]}")
+    for item in json.loads(out.stdout):
+        if item.get("key") == "GITHUB_PAT" and item.get("value"):
+            env["GH_TOKEN"] = item["value"]
+            return env
+    raise RuntimeError("GITHUB_PAT not found in the Bitwarden project")
+
+
 def _merge(branch: str, repo: str) -> str:
     out = subprocess.run(["gh", "api", "-X", "POST", f"repos/{repo}/merges",
                           "-f", "base=main", "-f", f"head={branch}", "--jq", ".sha"],
-                         capture_output=True, text=True, timeout=300)
+                         capture_output=True, text=True, timeout=300, env=gh_env())
     sha = out.stdout.strip()
     if out.returncode != 0 or not re.fullmatch(r"[0-9a-f]{40}", sha):
         raise RuntimeError(f"merge of {branch} into {repo} failed: {(out.stderr or out.stdout)[-400:]}")
@@ -74,5 +103,5 @@ def live_check() -> dict:
 
     gallery = fetch("https://eamonmckiernan.im/gallery.html")
     cards = len(re.findall(r'class="gal-card"', gallery))
-    imgs = len(re.findall(r'class="gal-thumb"', gallery))
+    imgs = len(re.findall(r'<img[^>]+demos/thumbs/model-testing/', gallery))
     return {"cards": cards, "thumbs": imgs}
