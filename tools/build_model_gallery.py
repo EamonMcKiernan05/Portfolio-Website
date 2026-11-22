@@ -221,6 +221,18 @@ BUILDS = [
          variant='', title='The Croft at the Wrack Line', prompt='croft-at-the-wrack-line', session='',
          followups=None, date='20 Nov 2026', build_min=None, kb=631,
          blurb='Session log for this build is not in the harness store, so its timings, step counts and follow-ups are not recorded.'),
+    dict(rel='Qwen 4 Max/blossom-frost-pocket.html', slug='qwen-4-max-blossom-frost-pocket', model='Qwen 4 Max', group='Qwen 4 Max', harness='DeepSeek Harness',
+         variant='', title='The Blossom Frost Pocket', prompt='the-blossom-frost-pocket', session='e5f4828b-d984-4fdf-9179-39c8443f13d0',
+         followups=0, date='22 Nov 2026', build_min=54, kb=666,
+         blurb='One pass, 54 minutes.'),
+    dict(rel='Qwen 4 Max/skylark-hollow.html', slug='qwen-4-max-skylark-hollow', model='Qwen 4 Max', group='Qwen 4 Max', harness='DeepSeek Harness',
+         variant='', title='The Skylark Hollow', prompt='the-skylark-hollow', session='0dee7897-6d6e-4474-9997-8c17377d650d',
+         followups=0, date='22 Nov 2026', build_min=33, kb=653,
+         blurb='One pass, 33 minutes.'),
+    dict(rel='Qwen 4 Max/the-shell-road.html', slug='qwen-4-max-the-shell-road', model='Qwen 4 Max', group='Qwen 4 Max', harness='DeepSeek Harness',
+         variant='', title='The Shell Road', prompt='the-shell-road', session='72d6234d-3e86-4c96-b6b4-aa285ebf663c',
+         followups=0, date='22 Nov 2026', build_min=52, kb=668,
+         blurb='One pass, 52 minutes.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini']

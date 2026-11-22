@@ -268,5 +268,32 @@
   "title": "CROFT_AT_THE_WRACK_LINE",
   "date": "20 Nov 2026",
   "date_iso": "2026-11-20"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "blossom-frost-pocket.html",
+  "rel": "Qwen 4 Max/blossom-frost-pocket.html",
+  "kb": 666,
+  "title": "blossom-frost-pocket",
+  "date": "22 Nov 2026",
+  "date_iso": "2026-11-22"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "skylark-hollow.html",
+  "rel": "Qwen 4 Max/skylark-hollow.html",
+  "kb": 653,
+  "title": "skylark-hollow",
+  "date": "22 Nov 2026",
+  "date_iso": "2026-11-22"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "the-shell-road.html",
+  "rel": "Qwen 4 Max/the-shell-road.html",
+  "kb": 668,
+  "title": "the-shell-road",
+  "date": "22 Nov 2026",
+  "date_iso": "2026-11-22"
  }
 ]

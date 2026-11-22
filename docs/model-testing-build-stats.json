@@ -309,6 +309,16 @@
   "tools": 240,
   "turns": 1
  },
+ "qwen-4-max-blossom-frost-pocket": {
+  "finish": "22 Nov 2026 03:32",
+  "first_pass": 54,
+  "followups": 0,
+  "minutes": 54,
+  "start": "22 Nov 2026 02:37",
+  "steps": 140,
+  "tools": 149,
+  "turns": 1
+ },
  "qwen-4-max-blue-hour-dry-dock": {
   "finish": "17 Nov 2026 17:14",
   "first_pass": 56,
@@ -429,6 +439,16 @@
   "tools": 95,
   "turns": 1
  },
+ "qwen-4-max-skylark-hollow": {
+  "finish": "22 Nov 2026 03:10",
+  "first_pass": 33,
+  "followups": 0,
+  "minutes": 33,
+  "start": "22 Nov 2026 02:36",
+  "steps": 50,
+  "tools": 74,
+  "turns": 1
+ },
  "qwen-4-max-the-castle": {
   "finish": "16 Nov 2026 13:05",
   "first_pass": 41,
@@ -457,6 +477,16 @@
   "start": "16 Nov 2026 08:19",
   "steps": 94,
   "tools": 159,
+  "turns": 1
+ },
+ "qwen-4-max-the-shell-road": {
+  "finish": "22 Nov 2026 03:30",
+  "first_pass": 52,
+  "followups": 0,
+  "minutes": 52,
+  "start": "22 Nov 2026 02:37",
+  "steps": 107,
+  "tools": 137,
   "turns": 1
  },
  "qwen-4-max-torchlight-depths": {
