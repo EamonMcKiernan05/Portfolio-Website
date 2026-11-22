@@ -1,4 +1,14 @@
 {
+ "deepseek-v41-breadfruit-cay": {
+  "finish": "21 Nov 2026 22:13",
+  "first_pass": 58,
+  "followups": 2,
+  "minutes": 706,
+  "start": "21 Nov 2026 10:27",
+  "steps": 352,
+  "tools": 491,
+  "turns": 3
+ },
  "deepseek-v41-croft-at-the-wrack-line": {
   "finish": "20 Nov 2026 00:12",
   "first_pass": 88,
@@ -17,6 +27,16 @@
   "start": "19 Nov 2026 21:26",
   "steps": 381,
   "tools": 431,
+  "turns": 2
+ },
+ "deepseek-v41-linen-on-the-bleaching-green": {
+  "finish": "21 Nov 2026 09:56",
+  "first_pass": 43,
+  "followups": 1,
+  "minutes": 92,
+  "start": "21 Nov 2026 08:24",
+  "steps": 350,
+  "tools": 415,
   "turns": 2
  },
  "deepseek-v41-salt-mirror": {
@@ -79,6 +99,16 @@
   "tools": 149,
   "turns": 1
  },
+ "hy4-flash-breadfruit-cay": {
+  "finish": "21 Nov 2026 21:57",
+  "first_pass": 35,
+  "followups": 2,
+  "minutes": 691,
+  "start": "21 Nov 2026 10:26",
+  "steps": 233,
+  "tools": 233,
+  "turns": 3
+ },
  "hy4-flash-castle": {
   "finish": "16 Nov 2026 21:42",
   "first_pass": 29,
@@ -109,6 +139,16 @@
   "tools": 183,
   "turns": 1
  },
+ "hy4-flash-linen-on-the-bleaching-green": {
+  "finish": "21 Nov 2026 08:51",
+  "first_pass": 28,
+  "followups": 0,
+  "minutes": 28,
+  "start": "21 Nov 2026 08:23",
+  "steps": 158,
+  "tools": 160,
+  "turns": 1
+ },
  "hy4-flash-liquid-chrome-garden": {
   "finish": "18 Nov 2026 16:53",
   "first_pass": 30,
@@ -127,6 +167,26 @@
   "start": "17 Nov 2026 22:38",
   "steps": 78,
   "tools": 77,
+  "turns": 1
+ },
+ "hy4-flash-maya-m-breadfruit-cay": {
+  "finish": "21 Nov 2026 13:07",
+  "first_pass": 160,
+  "followups": 0,
+  "minutes": 160,
+  "start": "21 Nov 2026 10:27",
+  "steps": 129,
+  "tools": 129,
+  "turns": 1
+ },
+ "hy4-flash-maya-m-linen-on-the-bleaching-green": {
+  "finish": "21 Nov 2026 09:47",
+  "first_pass": 84,
+  "followups": 0,
+  "minutes": 84,
+  "start": "21 Nov 2026 08:23",
+  "steps": 74,
+  "tools": 82,
   "turns": 1
  },
  "hy4-flash-medieval-village": {
@@ -219,6 +279,16 @@
   "tools": 123,
   "turns": 1
  },
+ "qwen-4-max-breadfruit-cay": {
+  "finish": "21 Nov 2026 11:07",
+  "first_pass": 40,
+  "followups": 0,
+  "minutes": 40,
+  "start": "21 Nov 2026 10:27",
+  "steps": 72,
+  "tools": 113,
+  "turns": 1
+ },
  "qwen-4-max-cloudfall-pass": {
   "finish": "18 Nov 2026 13:41",
   "first_pass": 50,
@@ -247,6 +317,16 @@
   "start": "17 Nov 2026 14:27",
   "steps": 55,
   "tools": 77,
+  "turns": 1
+ },
+ "qwen-4-max-linen-on-the-bleaching-green": {
+  "finish": "21 Nov 2026 09:00",
+  "first_pass": 37,
+  "followups": 0,
+  "minutes": 37,
+  "start": "21 Nov 2026 08:23",
+  "steps": 91,
+  "tools": 96,
   "turns": 1
  },
  "qwen-4-max-liquid-chrome-garden": {
