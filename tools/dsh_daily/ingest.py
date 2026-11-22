@@ -140,6 +140,55 @@ def blurb_for(stats: dict) -> str:
 
 # ---------------------------------------------------------------- ingestion
 
+def ingest_unattributed(build: dict, key: str, prompt_text: str, *,
+                        copy_demo: bool = True) -> dict:
+    """Publish a finished build whose session log is not in the store.
+
+    Nothing is guessed: the prompt comes from the named spec key, the model from the
+    workspace folder it sits in, and every timing or count stays honestly unrecorded.
+    """
+    rel = build["rel"].replace("\\", "/")
+    workspace, file_name = rel.split("/", 1)
+    stem = pathlib.Path(file_name).stem
+    group, variant, harness = name_parts(workspace, None)
+    slug = "-".join(filter(None, [slugify(group), slugify(variant), slugify(stem)]))
+    kb = max(1, round(build["bytes"] / 1024))
+    date = dt.datetime.fromisoformat(build["mtime"]).strftime("%d %b %Y")
+    stats = dict(start=None, finish=None, minutes=None, first_pass=None, followups=None,
+                 steps=None, tools=None, turns=None)
+    rec = dict(rel=rel, slug=slug, model=group, group=group, harness=harness, variant=variant,
+               title=title_of(prompt_text, stem), prompt=key, session="",
+               followups=None, date=date, build_min=None, kb=kb,
+               blurb=("Session log for this build is not in the harness store, so its timings, "
+                      "step counts and follow-ups are not recorded."),
+               bytes=build["bytes"], workspace=workspace, file_name=file_name)
+    if copy_demo:
+        dst = DEMOS / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(build["local"], dst)
+
+    text = ensure_group(append_records(read_text(), [rec]), group)
+    GEN.write_text(text)
+    ast.parse(text)
+
+    sj = DOCS / "model-testing-build-stats.json"
+    st = json.load(open(sj)); st[slug] = stats
+    sj.write_text(json.dumps(st, indent=1, sort_keys=True) + "\n")
+
+    vp = DOCS / "model-testing-serving.json"
+    sv = json.load(open(vp))
+    sv[slug] = dict(provider="Not recorded", kind="cloud", model="not recorded",
+                    harness=harness, note="No session log for this build in the harness store.")
+    vp.write_text(json.dumps(sv, indent=1, sort_keys=True) + "\n")
+
+    cp = DOCS / "model-testing-cards.json"
+    cards = json.load(open(cp))
+    cards.append(dict(model=workspace, file=file_name, rel=rel, kb=kb, title=stem,
+                      date=date, date_iso=build["mtime"][:10]))
+    cp.write_text(json.dumps(cards, indent=1) + "\n")
+    return rec
+
+
 def ingest(build: dict, session: dict, *, copy_demo: bool = True) -> dict:
     """Add one build: demo file, records, data files. Returns the record."""
     rel = build["rel"].replace("\\", "/")

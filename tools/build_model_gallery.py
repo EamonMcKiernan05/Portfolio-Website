@@ -217,6 +217,10 @@ BUILDS = [
          variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='ed6b24e2-0b46-4550-8140-cc18a441a318',
          followups=0, date='20 Nov 2026', build_min=73, kb=663,
          blurb='One pass, 73 minutes.'),
+    dict(rel='Hy4 Flash/CROFT_AT_THE_WRACK_LINE.html', slug='hy4-flash-croft-at-the-wrack-line', model='Hy4 Flash', group='Hy4 Flash', harness='DeepSeek Harness',
+         variant='', title='The Croft at the Wrack Line', prompt='croft-at-the-wrack-line', session='',
+         followups=None, date='20 Nov 2026', build_min=None, kb=631,
+         blurb='Session log for this build is not in the harness store, so its timings, step counts and follow-ups are not recorded.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini']
@@ -556,16 +560,17 @@ def stats_block(b):
     s = STATS.get(b["slug"])
     if not s:
         return ""
+    val = lambda x: "not recorded" if x is None else x
     cells = [
-        ("goal sent", s["start"]),
-        ("build finished", s["finish"]),
-        ("goal &rarr; build", stat_label(s["minutes"])),
+        ("goal sent", val(s.get("start"))),
+        ("build finished", val(s.get("finish"))),
+        ("goal &rarr; build", "not recorded" if s.get("minutes") is None else stat_label(s["minutes"])),
     ]
     if s.get("first_pass") is not None and s["first_pass"] != s["minutes"]:
         cells.append(("first pass", stat_label(s["first_pass"])))
-    cells.append(("follow-ups", str(s["followups"])))
-    cells.append(("model steps", str(s["steps"])))
-    cells.append(("tool calls", str(s["tools"])))
+    cells.append(("follow-ups", val(s.get("followups"))))
+    cells.append(("model steps", val(s.get("steps"))))
+    cells.append(("tool calls", val(s.get("tools"))))
     rows = "".join(f'<div class="gal-stat"><span class="gal-stat-k">{k}</span>'
                    f'<span class="gal-stat-v">{v}</span></div>' for k, v in cells)
     return f'<div class="gal-stats">{rows}</div>'
