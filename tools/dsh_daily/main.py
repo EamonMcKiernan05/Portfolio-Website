@@ -50,9 +50,22 @@ def save_state(state: dict) -> None:
     STATE_FILE.write_text(json.dumps(state, indent=1))
 
 
+class _QuietHandler(http.server.SimpleHTTPRequestHandler):
+    """The capture browser hangs up mid-request; that is not an error worth printing."""
+
+    def handle_one_request(self):
+        try:
+            super().handle_one_request()
+        except (ConnectionResetError, BrokenPipeError):
+            self.close_connection = True
+
+    def log_message(self, *args):
+        pass
+
+
 def serve_repo(port: int = 8099):
     """Serve the site repo on all interfaces so the Windows browser can load it."""
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler,
+    handler = functools.partial(_QuietHandler,
                                 directory=str(pathlib.Path.home() / "portfolio-website"))
     srv = http.server.ThreadingHTTPServer(("0.0.0.0", port), handler)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
