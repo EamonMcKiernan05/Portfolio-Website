@@ -189,7 +189,8 @@ def ingest_unattributed(build: dict, key: str, prompt_text: str, *,
     return rec
 
 
-def ingest(build: dict, session: dict, *, copy_demo: bool = True) -> dict:
+def ingest(build: dict, session: dict, *, copy_demo: bool = True,
+           title: str | None = None, slug: str | None = None) -> dict:
     """Add one build: demo file, records, data files. Returns the record."""
     rel = build["rel"].replace("\\", "/")
     workspace, file_name = rel.split("/", 1)
@@ -197,7 +198,7 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True) -> dict:
 
     group, variant, harness = name_parts(workspace, session.get("provider"))
     model_slug = slugify(group)
-    slug = "-".join(filter(None, [model_slug, slugify(variant), slugify(stem)]))
+    slug = slug or "-".join(filter(None, [model_slug, slugify(variant), slugify(stem)]))
 
     key, key_is_new = prompt_key(session["goal"], stem, model_slug)
     kb = max(1, round(build["bytes"] / 1024))
@@ -216,7 +217,7 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True) -> dict:
         "tools": session.get("tools"), "turns": (session.get("followups") or 0) + 1,
     }
     rec = dict(rel=f"{workspace}/{file_name}", slug=slug, model=group, group=group,
-               harness=harness, variant=variant, title=title_of(session["goal"], stem),
+               harness=harness, variant=variant, title=title or title_of(session["goal"], stem),
                prompt=key, session=session["session"], followups=stats["followups"],
                date=date, build_min=stats["minutes"], kb=kb, blurb=blurb_for(stats),
                bytes=build["bytes"], workspace=workspace, file_name=file_name)

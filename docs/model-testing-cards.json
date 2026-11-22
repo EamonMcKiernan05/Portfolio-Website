@@ -295,5 +295,14 @@
   "title": "the-shell-road",
   "date": "22 Nov 2026",
   "date_iso": "2026-11-22"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-PAGODA.html",
+  "rel": "Inkling-2-Mini/THE-PAGODA.html",
+  "kb": 666,
+  "title": "THE-PAGODA",
+  "date": "22 Nov 2026",
+  "date_iso": "2026-11-22"
  }
 ]
