@@ -259,6 +259,16 @@
   "tools": 71,
   "turns": 1
  },
+ "hy4-flash-two-shores-of-kettle-lake": {
+  "finish": "21 Nov 2026 21:13",
+  "first_pass": 27,
+  "followups": 1,
+  "minutes": 1447,
+  "start": "20 Nov 2026 21:06",
+  "steps": 195,
+  "tools": 197,
+  "turns": 2
+ },
  "qwen-4-max-basalt-organ": {
   "finish": "17 Nov 2026 16:06",
   "first_pass": 72,

@@ -201,6 +201,10 @@ BUILDS = [
          variant='', title='Breadfruit Cay', prompt='breadfruit-cay', session='db8fc874-b32b-454d-a6d5-8c6ee8f6598a',
          followups=2, date='21 Nov 2026', build_min=706, kb=848,
          blurb='First pass 58 minutes, then two follow-ups in the evening: water sides joined, wave-tracking marks stripped out.'),
+    dict(rel='Hy4 Flash/TWO_SHORES.html', slug='hy4-flash-two-shores-of-kettle-lake', model='Hy4 Flash', group='Hy4 Flash', harness='DeepSeek Harness',
+         variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='c28e08f2-211c-4093-a30c-80d889bd139d',
+         followups=1, date='21 Nov 2026', build_min=1447, kb=645,
+         blurb='A 27 minute first pass on 20 Nov, then one follow-up a day later: the moving water was hiding the shadows on it, and the boat was filling with water as the level rose.'),
 ]
 
 GROUP_ORDER = ["Qwen 4 Max", "Hy4 Flash", "Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash", "HY4", "LongCat 2.5"]
