@@ -182,6 +182,12 @@ def main() -> int:
     gen_text = ingest.read_text()
     published = ingest.existing_slugs(gen_text)
     cands = candidate_builds(inv, published)
+    ignored = {r.replace("\\", "/") for r in (state.get("ignored") or [])}
+    if ignored:
+        held = [c for c in cands if c["rel"].replace("\\", "/") in ignored]
+        cands = [c for c in cands if c["rel"].replace("\\", "/") not in ignored]
+        for c in held:
+            log(f"   - {c['rel']} — on the ignore list, waiting for the build to be finished")
     if args.only:
         want = {o.replace("\\", "/") for o in args.only}
         cands = [c for c in cands if c["rel"].replace("\\", "/") in want]

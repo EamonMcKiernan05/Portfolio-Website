@@ -299,16 +299,6 @@
   "tools": 66,
   "turns": 1
  },
- "inkling-2-mini-the-pagoda-v2": {
-  "finish": "22 Nov 2026 10:52",
-  "first_pass": 75,
-  "followups": 0,
-  "minutes": 75,
-  "start": "22 Nov 2026 09:37",
-  "steps": 101,
-  "tools": 104,
-  "turns": 1
- },
  "qwen-4-max-basalt-organ": {
   "finish": "17 Nov 2026 16:06",
   "first_pass": 72,
