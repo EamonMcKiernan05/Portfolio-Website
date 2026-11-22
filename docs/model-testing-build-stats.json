@@ -179,6 +179,16 @@
   "tools": 129,
   "turns": 1
  },
+ "hy4-flash-maya-m-kettle-lake": {
+  "finish": "20 Nov 2026 22:54",
+  "first_pass": 65,
+  "followups": 0,
+  "minutes": 65,
+  "start": "20 Nov 2026 21:48",
+  "steps": 65,
+  "tools": 64,
+  "turns": 1
+ },
  "hy4-flash-maya-m-linen-on-the-bleaching-green": {
   "finish": "21 Nov 2026 09:47",
   "first_pass": 84,
@@ -269,6 +279,16 @@
   "tools": 197,
   "turns": 2
  },
+ "inkling-2-mini-the-pagoda": {
+  "finish": "22 Nov 2026 00:49",
+  "first_pass": 102,
+  "followups": 0,
+  "minutes": 102,
+  "start": "21 Nov 2026 23:06",
+  "steps": 55,
+  "tools": 66,
+  "turns": 1
+ },
  "qwen-4-max-basalt-organ": {
   "finish": "17 Nov 2026 16:06",
   "first_pass": 72,
@@ -327,6 +347,16 @@
   "start": "17 Nov 2026 14:27",
   "steps": 55,
   "tools": 77,
+  "turns": 1
+ },
+ "qwen-4-max-kettle-lake": {
+  "finish": "20 Nov 2026 22:19",
+  "first_pass": 73,
+  "followups": 0,
+  "minutes": 73,
+  "start": "20 Nov 2026 21:05",
+  "steps": 89,
+  "tools": 154,
   "turns": 1
  },
  "qwen-4-max-linen-on-the-bleaching-green": {

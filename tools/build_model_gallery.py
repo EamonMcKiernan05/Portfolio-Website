@@ -205,9 +205,21 @@ BUILDS = [
          variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='c28e08f2-211c-4093-a30c-80d889bd139d',
          followups=1, date='21 Nov 2026', build_min=1447, kb=645,
          blurb='A 27 minute first pass on 20 Nov, then one follow-up a day later: the moving water was hiding the shadows on it, and the boat was filling with water as the level rose.'),
+    dict(rel='Hy4 Flash Maya M/kettle_lake.html', slug='hy4-flash-maya-m-kettle-lake', model='Hy4 Flash', group='Hy4 Flash', harness='Maya M',
+         variant='Maya M', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='b5b16974-ab69-4592-a28f-7935155f0d21',
+         followups=0, date='20 Nov 2026', build_min=65, kb=630,
+         blurb='One pass, 65 minutes.'),
+    dict(rel='Inkling-2-Mini/the-pagoda.html', slug='inkling-2-mini-the-pagoda', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='Maya M',
+         variant='', title='THE PAGODA', prompt='the-pagoda', session='28112d00-0e33-4e01-9d86-b8316f3d0c88',
+         followups=0, date='22 Nov 2026', build_min=102, kb=1329,
+         blurb='One pass, 102 minutes.'),
+    dict(rel='Qwen 4 Max/kettle-lake.html', slug='qwen-4-max-kettle-lake', model='Qwen 4 Max', group='Qwen 4 Max', harness='DeepSeek Harness',
+         variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='ed6b24e2-0b46-4550-8140-cc18a441a318',
+         followups=0, date='20 Nov 2026', build_min=73, kb=663,
+         blurb='One pass, 73 minutes.'),
 ]
 
-GROUP_ORDER = ["Qwen 4 Max", "Hy4 Flash", "Qwen3.8 Flash-Next", "Qwen3.8-27B", "Qwen 4 Preview", "DeepSeek V4.1 Flash", "HY4", "LongCat 2.5"]
+GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini']
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))

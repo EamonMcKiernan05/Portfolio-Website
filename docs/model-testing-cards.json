@@ -232,5 +232,32 @@
   "title": "TWO_SHORES",
   "date": "21 Nov 2026",
   "date_iso": "2026-11-21"
+ },
+ {
+  "model": "Hy4 Flash Maya M",
+  "file": "kettle_lake.html",
+  "rel": "Hy4 Flash Maya M/kettle_lake.html",
+  "kb": 630,
+  "title": "kettle_lake",
+  "date": "20 Nov 2026",
+  "date_iso": "2026-11-20"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "the-pagoda.html",
+  "rel": "Inkling-2-Mini/the-pagoda.html",
+  "kb": 1329,
+  "title": "the-pagoda",
+  "date": "22 Nov 2026",
+  "date_iso": "2026-11-22"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "kettle-lake.html",
+  "rel": "Qwen 4 Max/kettle-lake.html",
+  "kb": 663,
+  "title": "kettle-lake",
+  "date": "20 Nov 2026",
+  "date_iso": "2026-11-20"
  }
 ]
