@@ -138,6 +138,11 @@ def prompt_key(prompt: str, stem: str, model_slug: str) -> tuple[str, bool]:
 
 # ---------------------------------------------------------------- naming rules
 
+# Models that ran both through the cloud API and on the local maya engine are listed
+# as two separate models, so the two serving paths never share a group (owner, 23 Nov).
+MODEL_SPLIT = {"Hy4 Flash": {"api": "Hy4 Flash - API", "maya": "Hy4 Flash - Maya"}}
+
+
 def name_parts(workspace: str, provider: str | None) -> tuple[str, str, str]:
     """(group, variant, harness) from a workspace folder name and provider."""
     group = workspace.strip()
@@ -148,6 +153,10 @@ def name_parts(workspace: str, provider: str | None) -> tuple[str, str, str]:
     m = re.match(r"^(.*?)\s+Maya\s+(.+)$", group)
     if m:
         group, variant = m.group(1).strip(), "Maya " + m.group(2).strip()
+    split = MODEL_SPLIT.get(group)
+    if split:
+        group = split["maya" if (provider or "").lower() == "maya" else "api"]
+        variant = ""
     return group, variant, harness
 
 
