@@ -158,6 +158,20 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
     return best[1] if best else None
 
 
+def is_held(rel: str, ignored: set[str]) -> bool:
+    """True when a build is on the ignore list. `Workspace/*` holds every build in that workspace,
+    including ones that do not exist yet — an early-access model must stay out of the gallery."""
+    rel = rel.replace("\\", "/")
+    for i in ignored:
+        if rel == i:
+            return True
+        if i.endswith("/*") and rel.startswith(i[:-1]):
+            return True
+        if i.endswith("/") and rel.startswith(i):
+            return True
+    return False
+
+
 def refresh_shared(run: dict) -> None:
     """Keep Desktop\\Model Testing - Shared Builds in step with what the gallery now holds."""
     try:
@@ -197,10 +211,10 @@ def main() -> int:
     cands = candidate_builds(inv, published)
     ignored = {r.replace("\\", "/") for r in (state.get("ignored") or [])}
     if ignored:
-        held = [c for c in cands if c["rel"].replace("\\", "/") in ignored]
-        cands = [c for c in cands if c["rel"].replace("\\", "/") not in ignored]
+        held = [c for c in cands if is_held(c["rel"], ignored)]
+        cands = [c for c in cands if not is_held(c["rel"], ignored)]
         for c in held:
-            log(f"   - {c['rel']} — on the ignore list, waiting for the build to be finished")
+            log(f"   - {c['rel']} — held by the ignore list, not published")
     if args.only:
         want = {o.replace("\\", "/") for o in args.only}
         cands = [c for c in cands if c["rel"].replace("\\", "/") in want]
