@@ -148,7 +148,8 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
         await call("Page.stopScreencast")
         state["recording"] = False
     elapsed = time.time() - started
-    log(f"{slug}: captured {len(frames)} frames in {elapsed:.1f}s = {len(frames)/elapsed:.1f} fps")
+    log(f"{slug}: captured {len(frames)} frames in {elapsed:.1f}s = {len(frames)/elapsed:.1f} fps"
+        f" (muxed at 30 fps)")
     if not frames:
         raise RuntimeError("no frames captured")
 
@@ -175,12 +176,15 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
         Image.open(io.BytesIO(best[1])).convert("RGB").save(THUMBS / f"{slug}.jpg", quality=88)
 
     probe = json.loads(subprocess.run([FFPROBE, "-v", "error", "-show_entries",
-        "stream=width,height,codec_name,duration:format=size", "-of", "json", str(out_mp4)],
+        "stream=width,height,codec_name,duration,r_frame_rate:format=size", "-of", "json", str(out_mp4)],
         capture_output=True, text=True).stdout)
     st = probe["streams"][0]
     size = int(probe["format"]["size"])
     dur = float(st["duration"])
-    log(f"{slug}: {st['width']}x{st['height']} {st['codec_name']} {dur:.1f}s {size/1e6:.1f} MB")
+    num, _, den = (st.get("r_frame_rate") or "30/1").partition("/")
+    out_fps = round(float(num) / float(den or 1), 1)
+    log(f"{slug}: {st['width']}x{st['height']} {st['codec_name']} {dur:.1f}s {size/1e6:.1f} MB"
+        f" (captured {len(frames)/elapsed:.1f} fps, file {out_fps} fps)")
     problems = []
     if not 57 <= dur <= 63:
         problems.append(f"duration {dur:.1f}s")
@@ -200,7 +204,8 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
     motion = round(_diff(samples[2], samples[58]), 1)
 
     return dict(slug=slug, clip=str(out_mp4), bytes=size, seconds=round(dur, 1),
-                fps=round(fps, 1), frames=len(frames), cinematic=cinematic,
+                capture_fps=round(fps, 1), frames=len(frames),
+                fps=out_fps, cinematic=cinematic,
                 cinematic_clicked=clicked, pre_motion=round(pre_motion, 1),
                 motion=motion, problems=problems, thumb=best[1] is not None)
 
