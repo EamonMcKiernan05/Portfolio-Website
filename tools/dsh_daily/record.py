@@ -194,10 +194,13 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
         problems.append(st["codec_name"])
 
     # motion measured from the encoded file, not from the live page
+    # a take that came out short (throttled tab, aborted mux) must still report, not crash:
+    # sample inside the clip's real length instead of assuming 60 s
     samples = {}
     for t in (2, 30, 58):
+        at = min(float(t), max(1.0, dur - 1.0))
         p = SCRATCH / f"{slug}-t{t}.jpg"
-        subprocess.run([FFMPEG, "-loglevel", "error", "-y", "-ss", str(t), "-i", str(out_mp4),
+        subprocess.run([FFMPEG, "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(out_mp4),
                         "-frames:v", "1", str(p)], check=True)
         samples[t] = p.read_bytes()
         p.unlink()
