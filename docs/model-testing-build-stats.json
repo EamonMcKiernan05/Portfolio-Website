@@ -130,14 +130,14 @@
   "turns": 1
  },
  "hy4-flash-croft-at-the-wrack-line": {
-  "finish": null,
-  "first_pass": null,
-  "followups": null,
-  "minutes": null,
-  "start": null,
-  "steps": null,
-  "tools": null,
-  "turns": null
+  "finish": "20 Nov 2026 22:06",
+  "first_pass": 17,
+  "followups": 0,
+  "minutes": 17,
+  "start": "20 Nov 2026 21:49",
+  "steps": 114,
+  "tools": 118,
+  "turns": 1
  },
  "hy4-flash-glacial-heart": {
   "finish": "18 Nov 2026 14:58",

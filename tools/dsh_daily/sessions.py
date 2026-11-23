@@ -26,6 +26,19 @@ def load_zstd(path: pathlib.Path) -> list[dict]:
     return out
 
 
+def user_text(data: dict) -> str | None:
+    """Plain text of a user/message event (its content is a list of parts)."""
+    content = data.get("content")
+    if isinstance(content, str):
+        return content.strip() or None
+    parts = []
+    for part in content or []:
+        if isinstance(part, dict) and part.get("type") == "text":
+            parts.append(part.get("text") or "")
+    text = "\n".join(p for p in parts if p).strip()
+    return text or None
+
+
 def parse(path: pathlib.Path) -> dict | None:
     """Return the session summary, or None when it carries no goal."""
     events = load_zstd(path)
@@ -35,6 +48,9 @@ def parse(path: pathlib.Path) -> dict | None:
     sel = None
     files: dict[str, int] = {}
     cwd = None
+    session_created = None
+    first_user = None
+    goal_source = None
 
     for ev in events:
         ty = ev.get("type")
@@ -42,11 +58,19 @@ def parse(path: pathlib.Path) -> dict | None:
         t = ev.get("time")
         if ty == "model/selection" and sel is None:
             sel = (data.get("provider"), data.get("model"))
-        if cwd is None and isinstance(data.get("cwd"), str):
-            cwd = data["cwd"]
+        if cwd is None and isinstance(ev.get("cwd") or data.get("cwd"), str):
+            cwd = ev.get("cwd") or data.get("cwd")
+        if session_created is None and ty == "session":
+            # the session event carries createdAt/cwd at the top level, not in data
+            session_created = ev.get("createdAt") or data.get("createdAt") or t
+        if first_user is None and ty == "user/message":
+            text = user_text(data)
+            if text and not text.lstrip().startswith("<"):
+                first_user = text
         if ty == "goal/change" and data.get("operation") == "create" and goal is None:
             goal = (data.get("goal") or {}).get("objective")
             t_goal = t
+            goal_source = "goal/change"
         elif ty == "turn/start":
             turns += 1
         elif ty == "turn/end":
@@ -62,6 +86,14 @@ def parse(path: pathlib.Path) -> dict | None:
                 name = m.group(1).split("\\")[-1].split("/")[-1]
                 if BUILD_ROOT_MARK in blob or name.lower().endswith(".html"):
                     files[name] = files.get(name, 0) + 1
+
+    if goal is None and first_user:
+        # Not every harness session logs a goal/change event (done this way since
+        # 20 Nov builds have none); the first user message IS the spec, and the
+        # session's own creation time is when it was sent.
+        goal = first_user
+        t_goal = session_created
+        goal_source = "first-user-message"
 
     if not goal or not t_goal:
         return None
@@ -81,6 +113,7 @@ def parse(path: pathlib.Path) -> dict | None:
         "steps": steps,
         "tools": tools,
         "files": files,
+        "goal_source": goal_source,
         "t_goal": t_goal, "t_first_end": t_first_end, "t_end": t_end,
         "mtime": path.stat().st_mtime,
         "file": str(path),
