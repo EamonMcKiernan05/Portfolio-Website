@@ -156,11 +156,11 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   </div>
 
   <h1 class="gal-h1">The Pagoda — MTP</h1>
-  <p class="gal-lede">MTP serving config, one follow-up, the pagoda landing as a sky temple.</p>
-  <p class="gal-meta">Qwen3.8-27B &middot; DeepSeek Harness &middot; MTP config &middot; 78 KB &middot; 12 Nov 2026</p>
+  <p class="gal-lede">3 h 37 m first pass, then 1 follow-up — 5 h 38 m of working time.</p>
+  <p class="gal-meta">Qwen3.8-27B &middot; DeepSeek Harness &middot; MTP config &middot; 78 KB &middot; 09 Nov 2026</p>
+  <div class="gal-stats"><div class="gal-stat"><span class="gal-stat-k">goal sent</span><span class="gal-stat-v">09 Nov 2026 16:32</span></div><div class="gal-stat"><span class="gal-stat-k">build finished</span><span class="gal-stat-v">11 Nov 2026 10:34</span></div><div class="gal-stat"><span class="gal-stat-k">goal &rarr; build</span><span class="gal-stat-v">5 h 38 m</span></div><div class="gal-stat"><span class="gal-stat-k">first pass</span><span class="gal-stat-v">3 h 37 m</span></div><div class="gal-stat"><span class="gal-stat-k">follow-ups</span><span class="gal-stat-v">1</span></div><div class="gal-stat"><span class="gal-stat-k">model steps</span><span class="gal-stat-v">233</span></div><div class="gal-stat"><span class="gal-stat-k">tool calls</span><span class="gal-stat-v">232</span></div></div>
   
-  
-  <figure class="gal-hero"><img src="../../demos/thumbs/model-testing/qwen38-27b-mtp-pagoda.jpg?v=1794783517-111320" alt="The Pagoda — MTP — Qwen3.8-27B, running" width="1280" height="800"><figcaption>Qwen3.8-27B &middot; 12 Nov 2026 &middot; preview</figcaption></figure>
+  <figure class="gal-hero"><img src="../../demos/thumbs/model-testing/qwen38-27b-mtp-pagoda.jpg?v=1794783517-111320" alt="The Pagoda — MTP — Qwen3.8-27B, running" width="1280" height="800"><figcaption>Qwen3.8-27B &middot; 09 Nov 2026 &middot; preview</figcaption></figure>
 
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">The build</div><span class="gal-sec-rule"></span></div>
@@ -169,8 +169,8 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
       <div class="gal-rt">
         <div class="gal-rb">
           <div class="gal-rt-t">The Pagoda — MTP</div>
-          <div class="gal-rm">Qwen3.8-27B &middot; 78 KB &middot; 12 Nov 2026</div>
-          <div class="gal-rd">MTP serving config, one follow-up, the pagoda landing as a sky temple.</div>
+          <div class="gal-rm">Qwen3.8-27B &middot; 78 KB &middot; 09 Nov 2026</div>
+          <div class="gal-rd">3 h 37 m first pass, then 1 follow-up — 5 h 38 m of working time.</div>
           <div class="gal-ra">
             <button class="gal-btn" type="button" data-run>run in this page</button>
             <a class="gal-btn go" href="../../demos/model-testing/Qwen3.8-27B/MTP/sky-temple.html" target="_blank" rel="noopener">open in new tab &#8599;</a>
@@ -187,13 +187,10 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
 
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
-    <dl class="gal-dl">
-      <dt>Provider</dt><dd>llama.cpp</dd>
+    <p class="gal-sec-s">Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor&#x27;s own list.</p><dl class="gal-dl">
+      <dt>Provider</dt><dd>Maya M (llama.cpp engine)</dd>
       <dt>Harness</dt><dd>DeepSeek Harness</dd>
-      <dt>Model</dt><dd>Qwen3.8-27B-UD-Q8_K_XL.gguf (Q8_K_XL, 31.5 GB)</dd>
-      <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB) :8080</dd>
-      <dt>Serving config</dt><dd>~/llama-dspine @ d493f84 · -ngl 99 · --split-mode layer · -t 24 · port 8080 · Qwen3.8-27B-UD-Q8_K_XL.gguf + BF16 mmproj, --image-min-tokens 1024<br>~/launch-qwen-mtp-q8-1slot.sh: --spec-type draft-mtp --spec-draft-n-max 5 --spec-draft-p-min 0.5 -c 393216 -np 1 --rope-scaling yarn --rope-scale 1.5 --yarn-orig-ctx 262144 --cache-type-k q8_0 --cache-type-v q8_0 -fa on (no -md; the model&#x27;s own nextn head)</dd>
-      <dt>Measured</dt><dd>838.4 tok/s prefill / 32.5 tok/s decode, 63.5% draft acceptance</dd>
+      <dt>Model</dt><dd>/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf</dd>
     </dl>
   </section>
 

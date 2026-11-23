@@ -51,6 +51,8 @@ def parse(path: pathlib.Path) -> dict | None:
     session_created = None
     first_user = None
     goal_source = None
+    turn_open = None
+    spans: list[int] = []
 
     for ev in events:
         ty = ev.get("type")
@@ -58,6 +60,12 @@ def parse(path: pathlib.Path) -> dict | None:
         t = ev.get("time")
         if ty == "model/selection" and sel is None:
             sel = (data.get("provider"), data.get("model"))
+        if sel is None and ty == "request/header":
+            cfg = ((data.get("header") or {}).get("config") or {})
+            if cfg.get("model"):
+                sel = (cfg.get("provider"), cfg.get("model"))
+        if sel is None and isinstance(data.get("model"), str) and data.get("provider"):
+            sel = (data["provider"], data["model"])
         if cwd is None and isinstance(ev.get("cwd") or data.get("cwd"), str):
             cwd = ev.get("cwd") or data.get("cwd")
         if session_created is None and ty == "session":
@@ -73,7 +81,11 @@ def parse(path: pathlib.Path) -> dict | None:
             goal_source = "goal/change"
         elif ty == "turn/start":
             turns += 1
+            turn_open = t
         elif ty == "turn/end":
+            if turn_open is not None:
+                spans.append(max(0, t - turn_open))
+                turn_open = None
             if turns == 1:
                 t_first_end = t
             t_end = t
@@ -99,6 +111,11 @@ def parse(path: pathlib.Path) -> dict | None:
         return None
     fmt = lambda ms: dt.datetime.fromtimestamp(ms / 1000).strftime("%d %b %Y %H:%M") if ms else None
     minutes = lambda a, b: int((b - a) // 60000) if a and b else None
+    # Time the agent was actually working: the sum of each turn's own span. The gap
+    # between a turn ending and the next prompt arriving is the owner being away, not
+    # build time, so it is excluded (owner rule, 2026-11-23).
+    active_ms = sum(spans)
+    first_span_ms = spans[0] if spans else None
     return {
         "session": path.stem.replace("session-", "") if path.stem.startswith("session-") else path.stem,
         "goal": goal,
@@ -107,8 +124,11 @@ def parse(path: pathlib.Path) -> dict | None:
         "cwd": cwd,
         "start": fmt(t_goal),
         "finish": fmt(t_end),
-        "minutes": minutes(t_goal, t_end),
-        "first_pass": minutes(t_goal, t_first_end),
+        "minutes": int(active_ms // 60000) if spans else minutes(t_goal, t_end),
+        "wall_minutes": minutes(t_goal, t_end),
+        "first_pass": int(first_span_ms // 60000) if first_span_ms is not None
+                      else minutes(t_goal, t_first_end),
+        "turn_minutes": [int(s // 60000) for s in spans],
         "followups": max(0, turns - 1),
         "steps": steps,
         "tools": tools,
