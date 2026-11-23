@@ -289,6 +289,16 @@
   "tools": 197,
   "turns": 2
  },
+ "inkling-2-mini-the-croft": {
+  "finish": "23 Nov 2026 00:16",
+  "first_pass": 29,
+  "followups": 4,
+  "minutes": 527,
+  "start": "22 Nov 2026 15:28",
+  "steps": 472,
+  "tools": 478,
+  "turns": 5
+ },
  "inkling-2-mini-the-pagoda": {
   "finish": "22 Nov 2026 00:49",
   "first_pass": 102,

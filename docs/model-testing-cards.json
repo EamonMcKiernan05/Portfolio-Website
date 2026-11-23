@@ -304,5 +304,14 @@
   "title": "THE-PAGODA",
   "date": "22 Nov 2026",
   "date_iso": "2026-11-22"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-CROFT.html",
+  "rel": "Inkling-2-Mini/THE-CROFT.html",
+  "kb": 661,
+  "title": "THE-CROFT",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
  }
 ]
