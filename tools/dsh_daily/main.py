@@ -25,7 +25,7 @@ import http.server
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 
-from dsh_daily import ingest, publish, record, sessions, win  # noqa: E402
+from dsh_daily import ingest, publish, record, sessions, shared, win  # noqa: E402
 
 STATE_DIR = pathlib.Path.home() / ".hermes/profiles/dev/cache/dsh_daily"
 STATE_FILE = STATE_DIR / "state.json"
@@ -158,6 +158,19 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
     return best[1] if best else None
 
 
+def refresh_shared(run: dict) -> None:
+    """Keep Desktop\\Model Testing - Shared Builds in step with what the gallery now holds."""
+    try:
+        sh = shared.build()
+        log(f"   shared builds: {sh['builds_kept']} builds, {sh['html']} html, {sh['mp4']} clips "
+            f"({sh['copied']} copied, {sh['pruned']} pruned) -> {sh['dest']}")
+        run["shared"] = {k: sh.get(k) for k in
+                         ("builds_kept", "html", "mp4", "copied", "pruned", "missing")}
+    except Exception as exc:
+        log(f"   shared builds FAILED: {exc}")
+        run["shared"] = {"error": str(exc)}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -244,10 +257,11 @@ def main() -> int:
         else:
             log("   nothing to ingest")
             state["watermark"] = dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-            state["runs"] = (state.get("runs") or [])[-20:] + [{
-                "at": dt.datetime.now().isoformat(timespec="seconds"),
-                "ingested": [], "videos": [], "publish": None,
-                "skipped": [c["rel"] for c in cands]}]
+            run = {"at": dt.datetime.now().isoformat(timespec="seconds"),
+                   "ingested": [], "videos": [], "publish": None,
+                   "skipped": [c["rel"] for c in cands]}
+            refresh_shared(run)
+            state["runs"] = (state.get("runs") or [])[-20:] + [run]
             save_state(state)
         return 0
 
@@ -302,6 +316,8 @@ def main() -> int:
         result["publish"] = publish.ship(msg)
         result["live"] = publish.live_check()
         log(f"   live: {result['live']}")
+
+    refresh_shared(result)
 
     state["watermark"] = dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     for r in recs:
