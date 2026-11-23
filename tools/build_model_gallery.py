@@ -237,6 +237,10 @@ BUILDS = [
          variant='', title='THE PAGODA — a tiny temple world', prompt='the-pagoda', session='70eec855-eab7-40d0-b280-10ef9ecd9b4a',
          followups=1, date='22 Nov 2026', build_min=114, kb=668,
          blurb='108 minute first pass, then 1 follow-up — 114 minutes from goal to finish.'),
+    dict(rel='Inkling-2-Mini/THE-CROFT.html', slug='inkling-2-mini-the-croft', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='DeepSeek Harness',
+         variant='', title='The Croft at the Wrack Line', prompt='croft-at-the-wrack-line', session='dd52d142-03b0-43a0-aee4-0c176d9dbca4',
+         followups=4, date='23 Nov 2026', build_min=527, kb=661,
+         blurb='29 minute first pass, then 4 follow-ups — 527 minutes from goal to finish.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini']
