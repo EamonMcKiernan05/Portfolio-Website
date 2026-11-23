@@ -634,7 +634,7 @@ def stats_block(b):
     cells = [
         ("goal sent", val(s.get("start"))),
         ("build finished", val(s.get("finish"))),
-        ("goal &rarr; build", "not recorded" if s.get("minutes") is None else stat_label(s["minutes"])),
+        ("time working", "not recorded" if s.get("minutes") is None else stat_label(s["minutes"])),
     ]
     if s.get("first_pass") is not None and s["first_pass"] != s["minutes"]:
         cells.append(("first pass", stat_label(s["first_pass"])))
