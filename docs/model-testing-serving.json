@@ -237,13 +237,6 @@
   "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
   "provider": "Not recorded"
  },
- "inkling-2-mini-the-pagoda": {
-  "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "Inkling-2-Mini",
-  "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
- },
  "inkling-2-mini-the-pagoda-v2": {
   "harness": "DeepSeek Harness",
   "kind": "cloud",

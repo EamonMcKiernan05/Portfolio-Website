@@ -299,16 +299,6 @@
   "tools": 478,
   "turns": 5
  },
- "inkling-2-mini-the-pagoda": {
-  "finish": "22 Nov 2026 00:49",
-  "first_pass": 102,
-  "followups": 0,
-  "minutes": 102,
-  "start": "21 Nov 2026 23:06",
-  "steps": 55,
-  "tools": 66,
-  "turns": 1
- },
  "inkling-2-mini-the-pagoda-v2": {
   "finish": "22 Nov 2026 11:32",
   "first_pass": 108,
