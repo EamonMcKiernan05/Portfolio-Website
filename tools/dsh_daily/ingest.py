@@ -155,12 +155,24 @@ def _floor(x):
     return int(x) if x is not None else None
 
 
+def human_minutes(mins: int | None) -> str:
+    """17 minutes / 1 h 54 m — never a bare 700."""
+    if mins is None:
+        return "unrecorded"
+    if mins < 60:
+        return f"{mins} minutes"
+    h, m = divmod(int(mins), 60)
+    return f"{h} h {m} m" if m else f"{h} h"
+
+
 def blurb_for(stats: dict) -> str:
+    """Build time is the time the agent was actually working: idle gaps between a
+    finished turn and the next prompt are excluded (owner rule, 2026-11-23)."""
     fp, mins, fu = stats.get("first_pass"), stats.get("minutes"), stats.get("followups") or 0
     if not fu:
-        return f"One pass, {fp} minutes."
-    return (f"{fp} minute first pass, then {fu} follow-up{'s' if fu > 1 else ''} — "
-            f"{mins} minutes from goal to finish.")
+        return f"One pass, {human_minutes(fp)}."
+    return (f"{human_minutes(fp)} first pass, then {fu} follow-up{'s' if fu > 1 else ''} — "
+            f"{human_minutes(mins)} of working time.")
 
 
 # ---------------------------------------------------------------- ingestion
