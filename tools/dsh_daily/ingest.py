@@ -21,7 +21,7 @@ PROVIDER_LABEL = {
     "deepseek-account": "DeepSeek API",
     "qwen-token-plan-custom": "Qwen token plan",
     "qwen-token-plan": "Qwen token plan",
-    "maya": "Maya M",
+    "maya": "Maya M (llama.cpp engine)",
     "llama.cpp (maya)": "Maya M",
     "openrouter": "OpenRouter",
 }
@@ -64,6 +64,31 @@ def record_block(rec: dict) -> str:
             f"         followups={rec['followups']}, date={q(rec['date'])}, "
             f"build_min={rec['build_min']}, kb={rec['kb']},\n"
             f"         blurb={q(rec['blurb'])}),\n")
+
+
+def replace_records(text: str, rec: dict) -> str:
+    """Rewrite the record whose rel matches rec, keeping every other record as-is."""
+    parts = re.split(r"(?m)^(?=\s{4}dict\(rel=)", text)
+    hit = False
+    for i, part in enumerate(parts):
+        m_rel = re.search(r"rel=(['\"])(.+?)\1", part)
+        if not m_rel or m_rel.group(2) != rec["rel"]:
+            continue
+        start = part.index("dict(rel=")
+        # the record ends at the ")," that is followed by another record or the list close
+        for m in re.finditer(r"\),\n", part):
+            tail = part[m.end():]
+            if not tail.strip() or re.match(r"\s{4}dict\(rel=", tail):
+                end = m.end()
+                break
+        else:
+            raise RuntimeError(f"cannot find the end of the record for {rec['rel']}")
+        parts[i] = part[:start] + record_block(rec).lstrip() + tail
+        hit = True
+        break
+    if not hit:
+        raise RuntimeError(f"no existing record for {rec['rel']}")
+    return "".join(parts)
 
 
 def append_records(text: str, recs: list[dict]) -> str:
@@ -117,12 +142,12 @@ def name_parts(workspace: str, provider: str | None) -> tuple[str, str, str]:
     """(group, variant, harness) from a workspace folder name and provider."""
     group = workspace.strip()
     variant = ""
+    # Every build here was driven by the DeepSeek harness. "maya" is the llama.cpp
+    # engine serving the model, never a harness — it belongs in the provider line.
     harness = "DeepSeek Harness"
-    if provider == "maya":
-        harness = "Maya M"
-        m = re.match(r"^(.*?)\s+Maya\s+(.+)$", group)
-        if m:
-            group, variant = m.group(1).strip(), "Maya " + m.group(2).strip()
+    m = re.match(r"^(.*?)\s+Maya\s+(.+)$", group)
+    if m:
+        group, variant = m.group(1).strip(), "Maya " + m.group(2).strip()
     return group, variant, harness
 
 
@@ -190,7 +215,8 @@ def ingest_unattributed(build: dict, key: str, prompt_text: str, *,
 
 
 def ingest(build: dict, session: dict, *, copy_demo: bool = True,
-           title: str | None = None, slug: str | None = None) -> dict:
+           title: str | None = None, slug: str | None = None,
+           replace: bool = False) -> dict:
     """Add one build: demo file, records, data files. Returns the record."""
     rel = build["rel"].replace("\\", "/")
     workspace, file_name = rel.split("/", 1)
@@ -200,6 +226,10 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True,
     model_slug = slugify(group)
     slug = slug or "-".join(filter(None, [model_slug, slugify(variant), slugify(stem)]))
 
+    if replace:
+        existing = existing_slugs(read_text())
+        if rel in existing:
+            slug = existing[rel]
     key, key_is_new = prompt_key(session["goal"], stem, model_slug)
     kb = max(1, round(build["bytes"] / 1024))
     built = dt.datetime.fromisoformat(build["mtime"])
@@ -233,7 +263,7 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True,
 
     # generator
     text = read_text()
-    text = ensure_group(append_records(text, [rec]), group)
+    text = ensure_group(replace_records(text, rec) if replace else append_records(text, [rec]), group)
     GEN.write_text(text)
     ast.parse(text)
 
@@ -262,8 +292,10 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True,
     # cards
     cp = DOCS / "model-testing-cards.json"
     cards = json.load(open(cp))
-    cards.append(dict(model=workspace, file=file_name, rel=f"{workspace}/{file_name}", kb=kb,
-                      title=stem, date=date, date_iso=build["mtime"][:10]))
+    entry = dict(model=workspace, file=file_name, rel=f"{workspace}/{file_name}", kb=kb,
+                 title=stem, date=date, date_iso=build["mtime"][:10])
+    cards = [c for c in cards if c.get("rel") != entry["rel"]] if replace else cards
+    cards.append(entry)
     cp.write_text(json.dumps(cards, indent=1) + "\n")
 
     return rec

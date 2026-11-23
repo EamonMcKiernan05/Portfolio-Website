@@ -261,15 +261,6 @@
   "date_iso": "2026-11-20"
  },
  {
-  "model": "Hy4 Flash",
-  "file": "CROFT_AT_THE_WRACK_LINE.html",
-  "rel": "Hy4 Flash/CROFT_AT_THE_WRACK_LINE.html",
-  "kb": 631,
-  "title": "CROFT_AT_THE_WRACK_LINE",
-  "date": "20 Nov 2026",
-  "date_iso": "2026-11-20"
- },
- {
   "model": "Qwen 4 Max",
   "file": "blossom-frost-pocket.html",
   "rel": "Qwen 4 Max/blossom-frost-pocket.html",
@@ -313,5 +304,14 @@
   "title": "THE-CROFT",
   "date": "23 Nov 2026",
   "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "CROFT_AT_THE_WRACK_LINE.html",
+  "rel": "Hy4 Flash/CROFT_AT_THE_WRACK_LINE.html",
+  "kb": 631,
+  "title": "CROFT_AT_THE_WRACK_LINE",
+  "date": "20 Nov 2026",
+  "date_iso": "2026-11-20"
  }
 ]
