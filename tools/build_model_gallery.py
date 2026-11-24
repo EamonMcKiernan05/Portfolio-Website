@@ -85,10 +85,6 @@ BUILDS = [
          followups=0, date='05 Nov 2026', build_min=46, kb=655,
          blurb='One pass, 46 minutes.'),
     # LongCat 2.5
-    dict(rel='LongCat-2.5/sky-temple.html', slug='longcat-25-sky-temple', model='LongCat 2.5', group='LongCat 2.5', harness='DeepSeek Harness',
-         variant='', title='Sky Temple', prompt='pagoda', session='763e2897',
-         followups=4, date='12 Nov 2026', build_min=174, kb=754,
-         blurb='1 h 27 m first pass, then 4 follow-ups — 2 h 54 m of working time.'),
     # Qwen3.8 Flash-Next — the builds that were already on the site
     dict(rel="Qwen3.8 Flash-Next/sky-temple.html", slug="qwen38-flash-next-sky-temple",
          model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
@@ -353,7 +349,7 @@ BUILDS = [
          blurb='One pass, 20 minutes.'),
 ]
 
-GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini', 'DeepSeek-V4.1-Flash-1017', 'GLM-5.4']
+GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4']
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))
@@ -440,7 +436,7 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-h .gal-grid{margin-top:22px}
 
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:18px}
 .gal-card{display:flex;flex-direction:column;min-width:0;background:transparent;border:1px solid var(--line);color:inherit;transition:border-color .18s ease}
 .gal-card:hover{border-color:var(--accent)}
 .gal-card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
@@ -760,7 +756,7 @@ def index_page():
             body = "\n".join(harness_block(h, [b for b in items if b["harness"] == h]) for h in order)
         else:
             body = "    " + grid(items)
-        sections.append(f"""  <details class="gal-sec-m" open>
+        sections.append(f"""  <details class="gal-sec-m">
     <summary><span class="gal-sec-n">{n:02d}</span><span class="gal-sec-t">{html.escape(g)}</span><span class="gal-sec-rule"></span><span class="gal-sec-c">{len(items)} build{'s' if len(items) != 1 else ''}</span></summary>
 {body}
   </details>""")
