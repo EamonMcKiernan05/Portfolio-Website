@@ -457,5 +457,41 @@
   "title": "THE-PAGODA",
   "date": "24 Nov 2026",
   "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "breadfruit-cay.html",
+  "rel": "HungerG/breadfruit-cay.html",
+  "kb": 696,
+  "title": "breadfruit-cay",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "croft.html",
+  "rel": "HungerG/croft.html",
+  "kb": 705,
+  "title": "croft",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "index.html",
+  "rel": "HungerG/index.html",
+  "kb": 711,
+  "title": "index",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "sky-temple.html",
+  "rel": "HungerG/sky-temple.html",
+  "kb": 789,
+  "title": "sky-temple",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
  }
 ]
