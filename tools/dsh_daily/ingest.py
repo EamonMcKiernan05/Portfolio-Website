@@ -143,6 +143,11 @@ def prompt_key(prompt: str, stem: str, model_slug: str) -> tuple[str, bool]:
 MODEL_SPLIT = {"Hy4 Flash": {"api": "Hy4 Flash - API", "maya": "Hy4 Flash - Maya"}}
 
 
+# a workspace folder is not a model title: the engine/build suffix belongs in `variant`, not in
+# the name that groups the cards (the 24 Nov run put DeepSeek's four new builds in a second group)
+MODEL_ALIASES = {"DeepSeek-V4.1-Flash-1017": "DeepSeek V4.1 Flash"}
+
+
 def name_parts(workspace: str, provider: str | None) -> tuple[str, str, str]:
     """(group, variant, harness) from a workspace folder name and provider."""
     group = workspace.strip()
@@ -153,6 +158,7 @@ def name_parts(workspace: str, provider: str | None) -> tuple[str, str, str]:
     m = re.match(r"^(.*?)\s+Maya\s+(.+)$", group)
     if m:
         group, variant = m.group(1).strip(), "Maya " + m.group(2).strip()
+    group = MODEL_ALIASES.get(group, group)
     split = MODEL_SPLIT.get(group)
     if split:
         group = split["maya" if (provider or "").lower() == "maya" else "api"]
