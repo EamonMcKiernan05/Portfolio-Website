@@ -100,9 +100,9 @@
  "glm-5-4-pagoda": {
   "harness": "DeepSeek Harness",
   "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
-  "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "model": "GLM-5.4",
+  "note": "Provider and model are the subscription and model the build ran on. The harness session header named a stale local-engine config, which is not used here.",
+  "provider": "GLM Coding Plan"
  },
  "hy4-castle": {
   "harness": "DeepSeek Harness",
@@ -209,21 +209,21 @@
  },
  "hy4-flash-maya-m-breadfruit-cay": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "hy4-flash",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "hy4-flash-maya-m-kettle-lake": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "hy4-flash",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "hy4-flash-maya-m-linen-on-the-bleaching-green": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "hy4-flash",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
@@ -289,28 +289,28 @@
  },
  "inkling-2-mini-the-croft": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "inkling-2-mini-the-kettle-lake": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "inkling-2-mini-the-pagoda-v2": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "inkling-2-mini-the-salmon-stair": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
   "provider": "Maya M (llama.cpp engine)"
@@ -514,7 +514,7 @@
  },
  "qwen3-8-flash-next-basalt-organ": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
@@ -548,50 +548,54 @@
  },
  "qwen3-8-flash-next-mangrove-after-dark": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "qwen3-8-flash-next-rain-cathedral": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "qwen3-8-flash-next-sky-temple": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "qwen38-27b-dflash2-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "qwen38-27b-dspine-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "qwen38-27b-mtp-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
  "qwen38-27b-plain-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Maya M (llama.cpp engine)"
  },
