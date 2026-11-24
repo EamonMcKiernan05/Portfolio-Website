@@ -347,6 +347,10 @@ BUILDS = [
          variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='4aacad3e-9212-46a3-a3d5-4db93609d35a',
          followups=0, date='23 Nov 2026', build_min=20, kb=671,
          blurb='One pass, 20 minutes.'),
+    dict(rel='DeepSeek-V4.1-Flash-1017/THE-PAGODA.html', slug='deepseek-v4-1-flash-the-pagoda', model='DeepSeek V4.1 Flash', group='DeepSeek V4.1 Flash', harness='DeepSeek Harness',
+         variant='', title='THE PAGODA', prompt='the-pagoda', session='07742d3c-f5de-4a4b-b4a6-3df69a68e38a',
+         followups=1, date='24 Nov 2026', build_min=109, kb=915,
+         blurb='53 minutes first pass, then 1 follow-up — 1 h 49 m of working time.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4']
