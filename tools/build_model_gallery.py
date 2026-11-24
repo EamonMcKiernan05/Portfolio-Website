@@ -352,7 +352,7 @@ BUILDS = [
          followups=1, date='24 Nov 2026', build_min=109, kb=915,
          blurb='53 minutes first pass, then 1 follow-up — 1 h 49 m of working time.'),
     dict(rel='HungerG/breadfruit-cay.html', slug='hungerg-breadfruit-cay', model='HungerG', group='HungerG', harness='DeepSeek Harness',
-         variant='', title='breadfruit-cay', prompt='breadfruit-cay-hungerg', session='60ed77df-364a-4b85-aa52-d9190ad2e74d',
+         variant='', title='Breadfruit Cay', prompt='breadfruit-cay-hungerg', session='60ed77df-364a-4b85-aa52-d9190ad2e74d',
          followups=1, date='24 Nov 2026', build_min=20, kb=696,
          blurb='6 minutes first pass, then 1 follow-up — 20 minutes of working time.'),
     dict(rel='HungerG/croft.html', slug='hungerg-croft', model='HungerG', group='HungerG', harness='DeepSeek Harness',
@@ -360,13 +360,9 @@ BUILDS = [
          followups=0, date='24 Nov 2026', build_min=192, kb=705,
          blurb='One pass, 3 h 12 m.'),
     dict(rel='HungerG/index.html', slug='hungerg-index', model='HungerG', group='HungerG', harness='DeepSeek Harness',
-         variant='', title='index', prompt='index', session='30e297ff-8272-4a90-8e19-0646d480528b',
+         variant='', title='The Brook Beneath the Fold', prompt='index', session='30e297ff-8272-4a90-8e19-0646d480528b',
          followups=1, date='24 Nov 2026', build_min=9, kb=711,
          blurb='8 minutes first pass, then 1 follow-up — 9 minutes of working time.'),
-    dict(rel='HungerG/sky-temple.html', slug='hungerg-sky-temple', model='HungerG', group='HungerG', harness='DeepSeek Harness',
-         variant='', title='sky-temple', prompt='sky-temple', session='08d98153-175f-445f-80cf-57984e29c622',
-         followups=22, date='24 Nov 2026', build_min=1075, kb=789,
-         blurb='35 minutes first pass, then 22 follow-ups — 17 h 55 m of working time.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']

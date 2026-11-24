@@ -24,6 +24,8 @@ PROVIDER_LABEL = {
     "maya": "Maya",
     "llama.cpp (maya)": "Maya",
     "openrouter": "OpenRouter",
+    "opencode-go": "OpenCode Go",
+    "hungerg-free": "OpenCode Go",
 }
 MODEL_NOTE = ("Session captured from the harness. Model id as configured there; "
               "not checked against the vendor's own model list.")
@@ -39,6 +41,7 @@ SERVING_BY_WORKSPACE = {
     "Inkling-2-Mini": ("Maya", "inkling-2-mini"),
     "Qwen3.8-Flash-Next": ("Strata", "qwen3.8-flash-next"),
     "Qwen3.8 Flash-Next": ("Strata", "qwen3.8-flash-next"),
+    "HungerG": ("OpenCode Go", "HungerG"),
 }
 
 

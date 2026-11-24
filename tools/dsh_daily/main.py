@@ -16,6 +16,7 @@ import json
 import pathlib
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import threading
@@ -61,6 +62,14 @@ class _QuietHandler(http.server.SimpleHTTPRequestHandler):
 
     def log_message(self, *args):
         pass
+
+
+def free_port() -> int:
+    s = socket.socket()
+    s.bind(("127.0.0.1", 0))
+    port = s.getsockname()[1]
+    s.close()
+    return port
 
 
 def serve_repo(port: int = 8099):
@@ -303,10 +312,12 @@ def main() -> int:
 
     videos = []
     if not args.no_video:
-        srv = serve_repo(8099)
+        # never assume a port: 8099 is somebody else's keyproxy on this host
+        serve_port = free_port()
+        srv = serve_repo(serve_port)
         pairs = [(r["slug"], r["rel"]) for r in recs]
         try:
-            videos = record.record_builds(pairs, copy_to_desktop=False)
+            videos = record.record_builds(pairs, copy_to_desktop=False, serve_port=serve_port)
         finally:
             srv.shutdown()
         for v in videos:
