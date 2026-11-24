@@ -21,8 +21,8 @@ PROVIDER_LABEL = {
     "deepseek-account": "DeepSeek API",
     "qwen-token-plan-custom": "Qwen token plan",
     "qwen-token-plan": "Qwen token plan",
-    "maya": "Maya M (llama.cpp engine)",
-    "llama.cpp (maya)": "Maya M",
+    "maya": "Maya",
+    "llama.cpp (maya)": "Maya",
     "openrouter": "OpenRouter",
 }
 MODEL_NOTE = ("Session captured from the harness. Model id as configured there; "
@@ -31,9 +31,14 @@ MODEL_NOTE = ("Session captured from the harness. Model id as configured there; 
 # Every build on this gallery is driven by the DeepSeek harness (owner, 24 Nov 2026).
 # The session header is NOT the source of truth for provider/model: one GLM-5.4 session
 # recorded a stale `maya` + Qwen gguf path, which published GLM as a Qwen build.
+# Maya and Strata are the engines; the model is the model (owner, 24 Nov 2026).
 SERVING_BY_WORKSPACE = {
     "GLM-5.4": ("GLM Coding Plan", "GLM-5.4"),
-    "Qwen3.8-27B": ("Maya M (llama.cpp engine)", "qwen3.8-27b-ud-q8_k_xl"),
+    "Qwen3.8-27B": ("Maya", "qwen3.8-27b-ud-q8_k_xl"),
+    "Hy4 Flash Maya M": ("Maya", "hy4-flash-maya-m"),
+    "Inkling-2-Mini": ("Maya", "inkling-2-mini"),
+    "Qwen3.8-Flash-Next": ("Strata", "qwen3.8-flash-next"),
+    "Qwen3.8 Flash-Next": ("Strata", "qwen3.8-flash-next"),
 }
 
 
