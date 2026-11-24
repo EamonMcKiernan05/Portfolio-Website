@@ -313,5 +313,140 @@
   "title": "CROFT_AT_THE_WRACK_LINE",
   "date": "20 Nov 2026",
   "date_iso": "2026-11-20"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "first-hooves-at-the-ford.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/first-hooves-at-the-ford.html",
+  "kb": 818,
+  "title": "first-hooves-at-the-ford",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "honeycomb-water-meadow.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/honeycomb-water-meadow.html",
+  "kb": 860,
+  "title": "honeycomb-water-meadow",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "the-floating-classroom.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/the-floating-classroom.html",
+  "kb": 883,
+  "title": "the-floating-classroom",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "the-salmon-stair.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/the-salmon-stair.html",
+  "kb": 925,
+  "title": "the-salmon-stair",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "pagoda.html",
+  "rel": "GLM-5.4/pagoda.html",
+  "kb": 776,
+  "title": "pagoda",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "FIRST_HOOVES_AT_THE_FORD.html",
+  "rel": "Hy4 Flash/FIRST_HOOVES_AT_THE_FORD.html",
+  "kb": 648,
+  "title": "FIRST_HOOVES_AT_THE_FORD",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "THE_FLOATING_CLASSROOM.html",
+  "rel": "Hy4 Flash/THE_FLOATING_CLASSROOM.html",
+  "kb": 647,
+  "title": "THE_FLOATING_CLASSROOM",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "THE_HONEYCOMB_WATER_MEADOW.html",
+  "rel": "Hy4 Flash/THE_HONEYCOMB_WATER_MEADOW.html",
+  "kb": 636,
+  "title": "THE_HONEYCOMB_WATER_MEADOW",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "THE_SALMON_STAIR.html",
+  "rel": "Hy4 Flash/THE_SALMON_STAIR.html",
+  "kb": 642,
+  "title": "THE_SALMON_STAIR",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-KETTLE-LAKE.html",
+  "rel": "Inkling-2-Mini/THE-KETTLE-LAKE.html",
+  "kb": 655,
+  "title": "THE-KETTLE-LAKE",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-SALMON-STAIR.html",
+  "rel": "Inkling-2-Mini/THE-SALMON-STAIR.html",
+  "kb": 658,
+  "title": "THE-SALMON-STAIR",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "029-floating-classroom.html",
+  "rel": "Qwen 4 Max/029-floating-classroom.html",
+  "kb": 663,
+  "title": "029-floating-classroom",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "first-hooves-at-the-ford.html",
+  "rel": "Qwen 4 Max/first-hooves-at-the-ford.html",
+  "kb": 674,
+  "title": "first-hooves-at-the-ford",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "honeycomb-water-meadow.html",
+  "rel": "Qwen 4 Max/honeycomb-water-meadow.html",
+  "kb": 656,
+  "title": "honeycomb-water-meadow",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "the-salmon-stair.html",
+  "rel": "Qwen 4 Max/the-salmon-stair.html",
+  "kb": 671,
+  "title": "the-salmon-stair",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
  }
 ]

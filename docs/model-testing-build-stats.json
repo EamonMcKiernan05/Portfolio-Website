@@ -1,4 +1,44 @@
 {
+ "deepseek-v4-1-flash-1017-first-hooves-at-the-ford": {
+  "finish": "23 Nov 2026 20:02",
+  "first_pass": 62,
+  "followups": 0,
+  "minutes": 62,
+  "start": "23 Nov 2026 18:59",
+  "steps": 329,
+  "tools": 480,
+  "turns": 1
+ },
+ "deepseek-v4-1-flash-1017-honeycomb-water-meadow": {
+  "finish": "23 Nov 2026 17:49",
+  "first_pass": 78,
+  "followups": 0,
+  "minutes": 78,
+  "start": "23 Nov 2026 16:30",
+  "steps": 374,
+  "tools": 391,
+  "turns": 1
+ },
+ "deepseek-v4-1-flash-1017-the-floating-classroom": {
+  "finish": "23 Nov 2026 21:31",
+  "first_pass": 45,
+  "followups": 5,
+  "minutes": 83,
+  "start": "23 Nov 2026 20:08",
+  "steps": 292,
+  "tools": 422,
+  "turns": 6
+ },
+ "deepseek-v4-1-flash-1017-the-salmon-stair": {
+  "finish": "23 Nov 2026 18:25",
+  "first_pass": 85,
+  "followups": 1,
+  "minutes": 86,
+  "start": "23 Nov 2026 16:58",
+  "steps": 416,
+  "tools": 580,
+  "turns": 2
+ },
  "deepseek-v41-breadfruit-cay": {
   "finish": "21 Nov 2026 22:13",
   "first_pass": 57,
@@ -99,6 +139,16 @@
   "tools": 490,
   "turns": 3
  },
+ "glm-5-4-pagoda": {
+  "finish": "12 Nov 2026 23:38",
+  "first_pass": 4746,
+  "followups": 0,
+  "minutes": 4746,
+  "start": "09 Nov 2026 16:32",
+  "steps": 162,
+  "tools": 188,
+  "turns": 1
+ },
  "hy4-castle": {
   "finish": "05 Nov 2026 17:29",
   "first_pass": 46,
@@ -107,6 +157,46 @@
   "start": "05 Nov 2026 16:12",
   "steps": 147,
   "tools": 148,
+  "turns": 1
+ },
+ "hy4-flash-api-first-hooves-at-the-ford": {
+  "finish": "23 Nov 2026 19:28",
+  "first_pass": 28,
+  "followups": 0,
+  "minutes": 28,
+  "start": "23 Nov 2026 18:59",
+  "steps": 122,
+  "tools": 121,
+  "turns": 1
+ },
+ "hy4-flash-api-the-floating-classroom": {
+  "finish": "23 Nov 2026 21:30",
+  "first_pass": 16,
+  "followups": 3,
+  "minutes": 81,
+  "start": "23 Nov 2026 20:08",
+  "steps": 178,
+  "tools": 174,
+  "turns": 4
+ },
+ "hy4-flash-api-the-honeycomb-water-meadow": {
+  "finish": "23 Nov 2026 16:51",
+  "first_pass": 20,
+  "followups": 0,
+  "minutes": 20,
+  "start": "23 Nov 2026 16:31",
+  "steps": 106,
+  "tools": 105,
+  "turns": 1
+ },
+ "hy4-flash-api-the-salmon-stair": {
+  "finish": "23 Nov 2026 17:19",
+  "first_pass": 21,
+  "followups": 0,
+  "minutes": 21,
+  "start": "23 Nov 2026 16:58",
+  "steps": 116,
+  "tools": 117,
   "turns": 1
  },
  "hy4-flash-blue-hour-dry-dock": {
@@ -319,6 +409,16 @@
   "tools": 478,
   "turns": 5
  },
+ "inkling-2-mini-the-kettle-lake": {
+  "finish": "23 Nov 2026 11:51",
+  "first_pass": 131,
+  "followups": 1,
+  "minutes": 138,
+  "start": "23 Nov 2026 09:33",
+  "steps": 363,
+  "tools": 364,
+  "turns": 2
+ },
  "inkling-2-mini-the-pagoda-v2": {
   "finish": "22 Nov 2026 11:32",
   "first_pass": 108,
@@ -327,6 +427,16 @@
   "start": "22 Nov 2026 09:37",
   "steps": 201,
   "tools": 209,
+  "turns": 2
+ },
+ "inkling-2-mini-the-salmon-stair": {
+  "finish": "23 Nov 2026 21:42",
+  "first_pass": 95,
+  "followups": 1,
+  "minutes": 95,
+  "start": "23 Nov 2026 20:07",
+  "steps": 115,
+  "tools": 118,
   "turns": 2
  },
  "longcat-25-sky-temple": {
@@ -338,6 +448,16 @@
   "steps": 340,
   "tools": 340,
   "turns": 5
+ },
+ "qwen-4-max-029-floating-classroom": {
+  "finish": "23 Nov 2026 20:58",
+  "first_pass": 19,
+  "followups": 1,
+  "minutes": 50,
+  "start": "23 Nov 2026 20:08",
+  "steps": 86,
+  "tools": 128,
+  "turns": 2
  },
  "qwen-4-max-basalt-organ": {
   "finish": "17 Nov 2026 16:13",
@@ -389,6 +509,16 @@
   "tools": 136,
   "turns": 1
  },
+ "qwen-4-max-first-hooves-at-the-ford": {
+  "finish": "23 Nov 2026 19:33",
+  "first_pass": 34,
+  "followups": 0,
+  "minutes": 34,
+  "start": "23 Nov 2026 18:59",
+  "steps": 86,
+  "tools": 104,
+  "turns": 1
+ },
  "qwen-4-max-glacial-heart": {
   "finish": "18 Nov 2026 15:08",
   "first_pass": 42,
@@ -407,6 +537,16 @@
   "start": "17 Nov 2026 14:27",
   "steps": 55,
   "tools": 77,
+  "turns": 1
+ },
+ "qwen-4-max-honeycomb-water-meadow": {
+  "finish": "23 Nov 2026 17:07",
+  "first_pass": 37,
+  "followups": 0,
+  "minutes": 37,
+  "start": "23 Nov 2026 16:29",
+  "steps": 120,
+  "tools": 160,
   "turns": 1
  },
  "qwen-4-max-kettle-lake": {
@@ -517,6 +657,16 @@
   "start": "16 Nov 2026 08:19",
   "steps": 94,
   "tools": 159,
+  "turns": 1
+ },
+ "qwen-4-max-the-salmon-stair": {
+  "finish": "23 Nov 2026 18:03",
+  "first_pass": 20,
+  "followups": 0,
+  "minutes": 20,
+  "start": "23 Nov 2026 17:42",
+  "steps": 70,
+  "tools": 101,
   "turns": 1
  },
  "qwen-4-max-the-shell-road": {

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE PAGODA &middot; GLM-5.4 &middot; Model testing gallery — Eamon McKiernan</title>
+<meta name="description" content="THE PAGODA — GLM-5.4. The one-shot prompt, verbatim, and the build it produced.">
+<meta name="author" content="Eamon McKiernan">
+<meta name="theme-color" content="#15130F">
+<meta property="og:title" content="THE PAGODA — GLM-5.4">
+<meta property="og:description" content="THE PAGODA — GLM-5.4. The one-shot prompt, verbatim, and the build it produced.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eamon McKiernan">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#15130F; --ink:#EDE5D8; --dim:#9A9184; --quiet:#585147; --line:#332E27; --line-strong:#4a4132; --accent:#D8A73C;
+  --display:'Franklin Gothic Demi Cond','Franklin Gothic Medium Cond','Franklin Gothic Medium','Franklin Gothic','Arial Narrow',Arial,sans-serif;
+  --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(216,167,60,.25)}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(216,167,60,.32);transition:border-color .2s,color .2s}
+a:hover{border-color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;color:var(--ink)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:9;background:var(--bg);border:1px solid var(--accent);padding:8px 14px;font-family:var(--mono);font-size:12px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+/* top + headings */
+.gal-top{padding:34px 0 0}
+.gal-back{font-family:var(--mono);font-size:12px;letter-spacing:0;text-transform:none;color:var(--dim);border:0}
+.gal-back:hover{color:var(--accent)}
+.gal-h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,6.2vw,58px);line-height:1.02;letter-spacing:.005em;margin:30px 0 0;color:var(--accent);max-width:26ch}
+.gal-lede{font-size:15px;line-height:1.6;color:var(--dim);margin-top:14px;max-width:68ch}
+.gal-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);margin-top:18px;line-height:1.8}
+
+/* sections + subsections (collapsible) */
+.gal-sec{margin-top:76px}
+.gal-sec-m{margin-top:76px}
+.gal-sec-m>summary{display:flex;align-items:baseline;gap:16px;cursor:pointer;list-style:none;padding:2px 0}
+.gal-sec-m>summary::-webkit-details-marker{display:none}
+.gal-sec-m>summary:hover .gal-sec-t{color:#fff}
+.gal-sec-n{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent);flex-shrink:0}
+.gal-sec-t{font-family:var(--display);font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.005em;transition:color .2s}
+.gal-sec-rule{flex:1;height:1px;background:var(--line);align-self:center;min-width:24px}
+.gal-sec-c{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);flex-shrink:0}
+.gal-sec-m>summary::after{content:"+";font-family:var(--sans);font-size:19px;font-weight:400;line-height:1;color:var(--accent);flex-shrink:0;width:16px;text-align:center}
+.gal-sec-m[open]>summary::after{content:"–"}
+.gal-sec-s{font-size:14.5px;color:var(--quiet);margin:12px 0 26px;max-width:74ch}
+
+/* harness subsection */
+.gal-h{margin:30px 0 0}
+.gal-h>summary{display:flex;align-items:baseline;gap:12px;cursor:pointer;list-style:none;padding:0 0 11px;border-bottom:1px solid var(--line)}
+.gal-h>summary::-webkit-details-marker{display:none}
+.gal-h-t{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);transition:color .2s}
+.gal-h[open]>summary .gal-h-t,.gal-h>summary:hover .gal-h-t{color:var(--ink)}
+.gal-h-c{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-left:auto}
+.gal-h>summary::after{content:"+";font-family:var(--sans);font-size:15px;line-height:1;color:var(--dim);width:13px;text-align:center}
+.gal-h[open]>summary::after{content:"–";color:var(--accent)}
+.gal-h .gal-grid{margin-top:22px}
+
+/* cards (index) */
+.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.gal-card{display:flex;flex-direction:column;min-width:0;background:transparent;border:1px solid var(--line);color:inherit;transition:border-color .18s ease}
+.gal-card:hover{border-color:var(--accent)}
+.gal-card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
+.gal-thumbwrap{display:block;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--line);background:#0c0b08}
+.gal-thumbwrap img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.96) brightness(.94);transition:filter .25s var(--ease)}
+.gal-card:hover .gal-thumbwrap img{filter:saturate(1.04) brightness(1)}
+.gal-thumbwrap.empty{background:#12100c}
+.gal-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.gal-t{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.15;letter-spacing:.005em;color:var(--ink)}
+.gal-m{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.gal-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px 24px;margin-top:22px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gal-stat{display:flex;flex-direction:column;gap:5px;min-width:0}
+.gal-stat-k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--quiet)}
+.gal-stat-v{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+.gal-time{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.gal-go{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--accent);margin-top:auto;padding-top:12px;transition:transform .2s var(--ease)}
+.gal-card:hover .gal-go{transform:translateX(3px)}
+
+/* build page */
+.gal-res{border:1px solid var(--line)}
+.gal-rt{padding:26px}
+.gal-rt-t{font-family:var(--display);font-size:22px;font-weight:600}
+.gal-rm{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);margin-top:8px}
+.gal-rd{font-size:14.5px;color:var(--dim);margin-top:14px;max-width:70ch}
+.gal-ra{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.gal-btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line-strong);padding:10px 16px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.gal-btn:hover{color:var(--ink);border-color:var(--accent)}
+.gal-btn.on{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+.gal-btn.go{color:var(--ink);border-color:var(--line-strong)}
+a.gal-btn{border-bottom:1px solid var(--line-strong)}
+a.gal-btn:hover{border-bottom-color:var(--accent)}
+.gal-run{border-top:1px solid var(--line);background:#0f0d0a}
+.gal-run iframe{display:block;width:100%;height:min(78vh,720px);border:0;background:#000}
+.gal-runhint{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);padding:10px 16px;border-top:1px solid var(--line)}
+
+/* prompt */
+.gal-prompt{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:#d6cdbd;background:#1b1812;border:1px solid var(--line);padding:22px;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow:auto}
+.gal-prompt::selection{background:rgba(216,167,60,.3)}
+
+/* serving chips + description list */
+.gal-chip{align-self:flex-start;display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-strong);color:var(--dim);margin-top:2px}
+.gal-chip.local{color:var(--accent);border-color:rgba(216,167,60,.45)}
+.gal-chip.cloud{color:var(--quiet)}
+.gal-chip.unknown{color:var(--quiet);border-style:dashed}
+.gal-hero{margin:38px 0 6px;border:1px solid var(--line);background:#0c0b08}
+.gal-hero img{display:block;width:100%;height:auto}
+.gal-hero figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);padding:11px 16px;border-top:1px solid var(--line)}
+.gal-dl{display:grid;grid-template-columns:170px 1fr;column-gap:0;margin-top:24px;border-top:1px solid var(--line)}
+.gal-dl dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet);padding:15px 18px 15px 0;border-bottom:1px solid var(--line)}
+.gal-dl dd{font-size:14px;color:var(--dim);padding:15px 0;border-bottom:1px solid var(--line);line-height:1.62}
+
+/* footer */
+footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.gal-f1,.gal-f2{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--quiet)}
+.gal-f2 a{color:var(--quiet);border-bottom-color:var(--line-strong)}
+.gal-f2 a:hover{color:var(--accent)}
+
+@media(max-width:980px){ .gal-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:640px){ .gal-grid{grid-template-columns:1fr} }
+@media(max-width:760px){
+  .wrap{padding:0 20px}
+  .gal-sec{margin-top:54px}
+  .gal-grid{grid-template-columns:1fr}
+  .gal-d{min-height:0}
+  .gal-run iframe{height:60vh}
+  .gal-rt{padding:20px}
+  .gal-prompt{font-size:11.5px;padding:16px;max-height:none}
+  .gal-dl{grid-template-columns:1fr}
+  .gal-dl dt{padding:12px 0 0;border-bottom:0}
+  .gal-dl dd{padding:6px 0 14px}
+  footer{flex-direction:column;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<div class="wrap gal-wrap">
+
+  <div class="gal-top">
+    <a class="gal-back" href="../../gallery.html">&#8592;&nbsp;model testing gallery</a>
+  </div>
+
+  <h1 class="gal-h1">THE PAGODA</h1>
+  <p class="gal-lede">One pass, 79 h 6 m.</p>
+  <p class="gal-meta">GLM-5.4 &middot; DeepSeek Harness &middot; 776 KB &middot; 23 Nov 2026</p>
+  <div class="gal-stats"><div class="gal-stat"><span class="gal-stat-k">goal sent</span><span class="gal-stat-v">09 Nov 2026 16:32</span></div><div class="gal-stat"><span class="gal-stat-k">build finished</span><span class="gal-stat-v">12 Nov 2026 23:38</span></div><div class="gal-stat"><span class="gal-stat-k">time working</span><span class="gal-stat-v">79 h 06 m</span></div><div class="gal-stat"><span class="gal-stat-k">follow-ups</span><span class="gal-stat-v">0</span></div><div class="gal-stat"><span class="gal-stat-k">model steps</span><span class="gal-stat-v">162</span></div><div class="gal-stat"><span class="gal-stat-k">tool calls</span><span class="gal-stat-v">188</span></div></div>
+  
+  <figure class="gal-hero"><img src="../../demos/thumbs/model-testing/glm-5-4-pagoda.jpg?v=1795493952-327156" alt="THE PAGODA — GLM-5.4, running" width="1280" height="800"><figcaption>GLM-5.4 &middot; 23 Nov 2026 &middot; preview</figcaption></figure>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">01</span><div class="gal-sec-t">The build</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-s">One-shot output, unedited. Run it here or open it full size.</div>
+    <article class="gal-res">
+      <div class="gal-rt">
+        <div class="gal-rb">
+          <div class="gal-rt-t">THE PAGODA</div>
+          <div class="gal-rm">GLM-5.4 &middot; 776 KB &middot; 23 Nov 2026</div>
+          <div class="gal-rd">One pass, 79 h 6 m.</div>
+          <div class="gal-ra">
+            <button class="gal-btn" type="button" data-run>run in this page</button>
+            <a class="gal-btn go" href="../../demos/model-testing/GLM-5.4/pagoda.html" target="_blank" rel="noopener">open in new tab &#8599;</a>
+            <a class="gal-btn" href="https://github.com/EamonMcKiernan05/Local-LLM-Testing/tree/main/Model%20Testing%20Gallery/GLM-5.4/pagoda.html" target="_blank" rel="noopener">source &#8599;</a>
+          </div>
+        </div>
+      </div>
+      <div class="gal-run" hidden>
+        <iframe src="about:blank" data-src="../../demos/model-testing/GLM-5.4/pagoda.html" title="THE PAGODA — live demo" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allowfullscreen></iframe>
+        <div class="gal-runhint">Runs sandboxed in this page — click inside to interact.</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
+    <p class="gal-sec-s">Session captured from the harness. Model id as configured there; not checked against the vendor&#x27;s own model list.</p><dl class="gal-dl">
+      <dt>Provider</dt><dd>Maya M (llama.cpp engine)</dd>
+      <dt>Harness</dt><dd>DeepSeek Harness</dd>
+      <dt>Model</dt><dd>/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf</dd>
+    </dl>
+  </section>
+
+  <section class="gal-sec">
+    <div class="gal-sec-h"><span class="gal-sec-n">03</span><div class="gal-sec-t">The prompt</div><span class="gal-sec-rule"></span></div>
+    <div class="gal-sec-s">Prompt captured from DeepSeek Harness session <code>004a6560-ca6b-4827-bf55-33ff55fcc0e8</code>, one shot, no follow-ups.</div>
+    <pre class="gal-prompt"> Create one complete, self-contained HTML file for THE PAGODA, a photorealistic real-time 3D TINY WORLD in three.js: a Japanese-stye pagoda tower, with smaller and its courtyard on a chunk of land floating in a clear blue sky, in warm late-afternoon sun, as a self-running scene with no interaction, only camera movements.
+
+THE FRAMING, the tiny world:
+- One irregular, organic Island floats in the clear blue sky, **no clouds**, spanning about 75 percent of the frame width.
+- A jagged underside with visible depth, not a flat disc or a smooth blob.
+- A top surface that reads as a Japanese garden: grass, moss, soil, stone paths, stone steps, planted areas, rocks, and a small courtyard/plaza.
+- The island itself is a single solid object. Top surface and sides are a single connected object - not two separate meshes.
+- The island bobs very gently, as if floating.
+- The default camera view is a FIXED ORTHOGRAPHIC ISOMETRIC view, about 30 degrees down and 45 degrees around.
+- Orbit by dragging, zoom by scrolling. Smooth easing.
+- Cinematic mode button: a slow, elegant orbit around the island.
+- Reset view button: returns to the FIXED ORTHOGRAPHIC ISOMETRIC view.
+
+THE LOOK: PHOTOREALISTIC, at full resolution.
+- No pixelation and no dithering: realism changes the rendering, never the framing.
+- Physically based wood, glass, mortar, slate and timber roofs, weathered oak, grass, soil and water.
+- One low warm sun from the side with real soft shadows and contact shadows, and a soft sky fill so no shadow is ever black.
+- No low-poly, flat shading, plastic surfaces or stained-glass look.
+
+THE PAGODA is a real, convincing Japanese-style pagoda tower filling the island:
+- One dominant Japanese-style pagoda or tower, multi-tiered, with eaves, railings, brackets, and a finial. It is the architectural hero.
+- Warm interior lantern light, readable roof silhouettes, and believable tier stacking.
+- A few smaller Japanese-style houses or huts around the garden, with pitched roofs, wooden walls, lit windows, and small verandas or porches.
+- They must feel like part of the same village/temple complex, not random.
+- A red/vermilion torii gate at the approach to the temple, with a plaque, ropes, and paper streamers.
+- A stone path from the torii through the garden to the pagoda, with steps and a plaza.
+- Stone lanterns and/or hanging paper lanterns along the path, with warm glow at night.
+- A large cherry blossom tree on the island with a **detailed branching structure**: thick trunk, main limbs, forked branches, visible twigs.
+- Petals drift all around the island and beyond it, originating from the tree, with variation in speed, height, and rotation.
+- A pond with a stone rim/collar, lily pads, lotus flowers, reeds, and a few boulders.
+- The pond surface must use **real-time reflections** of the island, sky, and lantern light. Not a flat sky tint.
+- The reflective surface must cover the pond all the way to the stone rim. **No dark border, no uncovered strip of old water, no ring where the reflection stops.**
+- Every part is physically connected and supported.
+
+THE ISLAND AND ITS LIFE:
+- Tiny PEOPLE go about their day: traditional Japanese-dressed women walking up and down the paths, a two Samurai guards pacing the plaza perimeter a child sat by the pond.
+- A few chickens peck in the plaza, and ducks swim around the pond
+- All people and animals move forwards, never sideways or backwards. facing the direction they are moving at all times.
+
+THE LOOP: one seamless loop of about 24 seconds. Every motion is built from the loop time, so the last frame flows straight into the first with no jump.
+- The people walk their routes and return to where they began.
+- The pond water ripples, the ducks circle.
+- Shadows agree with the sun.
+- Nothing floats off the island except the falling crumbs and leaves.
+
+Make it fill the window, resize cleanly, run smoothly at 15-30 fps and start with zero console errors. Draw everything in code; never fetch or hotlink an image, texture or model. Deliver it as a single self-contained HTML file; any libraries are allowed.
+
+Add sound: a gentle original music track that suits the scene plus ambient sound and sound effects for the action, all synthesized in code, with a small &#x27;click for sound&#x27; hint, starting on the first click. Log audio events to the console to confirm they fire, since you can&#x27;t hear them.
+
+UI
+- Title in the **lower-left**: a large, elegant serif title, e.g. `SKY TEMPLE` (or your own evocative name), with a smaller subtitle/hint below it.
+- Controls in the **lower-right**: CINEMATIC and RESET VIEW buttons. Keep them small, legible, and consistent.
+- Hint: “Drag to orbit · Scroll to zoom”.
+- UI fades out after ~10 seconds of inactivity and wakes on pointer movement. It must not block camera input.
+
+TESTING PROTOCOL
+
+You must test the actual rendered output in a **local headed Chromium**, using the browser MCP/Playwright tools. Do not rely on code inspection or unit tests. Do not claim a feature works unless you have seen it.
+
+</pre>
+  </section>
+
+  <footer>
+    <div class="gal-f1">&copy; 2026 Eamon McKiernan &mdash; <a href="../../gallery.html">model testing gallery</a></div>
+    <div class="gal-f2">Sources and prompts: <a href="https://github.com/EamonMcKiernan05/Local-LLM-Testing" target="_blank" rel="noopener">github.com/EamonMcKiernan05/Local-LLM-Testing</a>. No tracking.</div>
+  </footer>
+
+</div>
+<script>
+document.querySelectorAll('[data-run]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var art = btn.closest('.gal-res');
+    var box = art.querySelector('.gal-run');
+    var fr = box.querySelector('iframe');
+    if (box.hidden) {
+      fr.src = fr.getAttribute('data-src');
+      box.hidden = false;
+      btn.textContent = 'stop';
+      btn.classList.add('on');
+    } else {
+      fr.src = 'about:blank';
+      box.hidden = true;
+      btn.textContent = 'run in this page';
+      btn.classList.remove('on');
+    }
+  });
+});
+</script>
+</main>
+</body>
+</html>
