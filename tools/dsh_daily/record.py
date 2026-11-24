@@ -42,8 +42,14 @@ _PICK = """const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin
   const box=boxes.find(e=>/cine/i.test((e.id||'')+' '+(e.name||'')+' '+(e.title||'')))
     || boxes.find(e=>{const l=e.closest('label')||(e.id?document.querySelector('label[for="'+e.id+'"]'):null);
         return !!l && /cinematic/i.test(l.textContent||'');}) || null;
-  if(!b && !box){ const all=[...document.querySelectorAll('button,[role=switch],[role=button],.btn,.ctl,label')];
-    b=all.find(e=>/cinematic/i.test((e.textContent||'')+' '+(e.id||'')+' '+(e.title||'')+' '+(e.className||'')))||null; }"""
+  if(!b && !box){
+    // builds render their own UI: match any short, clickable label that says cinematic
+    const txt=e=>(e.textContent||'').replace(/\\s+/g,' ').trim();
+    const all=[...document.querySelectorAll('button,[role=switch],[role=button],input[type=button],.btn,.ctl,label,a,div,span')]
+      .filter(e=>/cinematic/i.test(txt(e)) && txt(e).length<=40);
+    all.sort((x,y)=>txt(x).length-txt(y).length);
+    b=all[0]||null;
+  }"""
 FIND = """(()=>{""" + _PICK + """
   if(!b && !box) return 'none';
   const el = box || b;
@@ -95,7 +101,13 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
         await asyncio.sleep(3)
     log(f"{slug}: warm rAF {rate}/s")
 
-    cstate = await js(FIND) or "none"
+    # UI is often built a moment after the scene starts, so give it a few seconds
+    cstate = "none"
+    for _ in range(8):
+        cstate = await js(FIND) or "none"
+        if cstate != "none":
+            break
+        await asyncio.sleep(1.5)
     log(f"{slug}: cinematic {cstate}")
     clicked = False
     if '"on":true' not in cstate and cstate != "none":
@@ -282,7 +294,8 @@ async def _run(pairs, port: int, base: str, outdir: pathlib.Path) -> list[dict]:
 
 
 def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
-                  outdir: pathlib.Path = LOCAL_VIDEOS, copy_to_desktop: bool = True) -> list[dict]:
+                  outdir: pathlib.Path = LOCAL_VIDEOS, copy_to_desktop: bool = True,
+                  serve_port: int = 8099) -> list[dict]:
     """Launch the box's Edge, tunnel CDP, record each build, deliver the mp4s."""
     outdir.mkdir(parents=True, exist_ok=True)
     SCRATCH.mkdir(parents=True, exist_ok=True)
@@ -291,7 +304,7 @@ def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
     try:
         if not win.cdp_ready(port, 30):
             raise RuntimeError("the box's CDP port never answered over the tunnel")
-        base = f"http://{local_ip()}:8099/demos/model-testing/"
+        base = f"http://{local_ip()}:{serve_port}/demos/model-testing/"
         results = asyncio.run(_run(pairs, port, base, outdir))
     finally:
         tunnel.terminate()
