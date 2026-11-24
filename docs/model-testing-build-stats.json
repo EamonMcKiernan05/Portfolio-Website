@@ -159,6 +159,46 @@
   "tools": 188,
   "turns": 1
  },
+ "hungerg-breadfruit-cay": {
+  "finish": "24 Nov 2026 13:41",
+  "first_pass": 6,
+  "followups": 1,
+  "minutes": 20,
+  "start": "24 Nov 2026 13:20",
+  "steps": 30,
+  "tools": 32,
+  "turns": 2
+ },
+ "hungerg-croft": {
+  "finish": "24 Nov 2026 16:11",
+  "first_pass": 192,
+  "followups": 0,
+  "minutes": 192,
+  "start": "24 Nov 2026 12:59",
+  "steps": 24,
+  "tools": 36,
+  "turns": 1
+ },
+ "hungerg-index": {
+  "finish": "24 Nov 2026 13:52",
+  "first_pass": 8,
+  "followups": 1,
+  "minutes": 9,
+  "start": "24 Nov 2026 13:43",
+  "steps": 26,
+  "tools": 29,
+  "turns": 2
+ },
+ "hungerg-sky-temple": {
+  "finish": "23 Oct 2026 11:02",
+  "first_pass": 35,
+  "followups": 22,
+  "minutes": 1075,
+  "start": "22 Oct 2026 17:06",
+  "steps": 928,
+  "tools": 1033,
+  "turns": 23
+ },
  "hy4-castle": {
   "finish": "05 Nov 2026 17:29",
   "first_pass": 46,
