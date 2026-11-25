@@ -16,7 +16,10 @@ import zipfile
 from . import ingest, win
 
 MIN_MODELS = 3
-FOLD_INTO = {"hungerg-sky-temple": "the-pagoda"}   # sky temple and pagoda are one brief
+FOLD_INTO = {                                     # one brief stored under two prompt keys
+    "hungerg-sky-temple": "the-pagoda",           # Eamon: "sky temple and pagoda are the same thing"
+    "glm-5-4-floating-classroom": "the-floating-classroom",
+}
 STAGE = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily/shared"
 REMOTE_DIR = "C:/Users/Eamon/dsh"
 DEST = "C:\\Users\\eamon\\Desktop\\Model Testing - Shared Builds"
