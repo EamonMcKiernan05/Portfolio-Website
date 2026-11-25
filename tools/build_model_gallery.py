@@ -400,9 +400,9 @@ BUILDS = [
          followups=5, date='24 Nov 2026', build_min=2, kb=789,
          blurb='No first pass recorded, then 5 follow-ups — 2 minutes of working time.'),
     dict(rel='GLM-5.4/floating-classroom.html', slug='glm-5-4-floating-classroom', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
-         variant='', title='The Floating Classroom', prompt='the-floating-classroom-glm-5-4', session='f4630af4-f5cf-4b7a-a5e2-c864c77013ce',
-         followups=2, date='24 Nov 2026', build_min=238, kb=806,
-         blurb='36 minutes first pass, then 2 follow-ups — 3 h 58 m of working time.'),
+         variant='', title='The Floating Classroom', prompt='the-floating-classroom', session='f4630af4-f5cf-4b7a-a5e2-c864c77013ce',
+         followups=2, date='24 Nov 2026', build_min=66, kb=806,
+         blurb='36 minutes first pass, then 2 follow-ups — 1 h 06 m of working time.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']
