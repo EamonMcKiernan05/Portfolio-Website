@@ -168,28 +168,43 @@ def _fname(key: str) -> str:
     return pathlib.Path(last).name.lower()
 
 
+_STOP = {"the", "a", "and", "of", "in", "on", "at", "for", "to", "with", "one", "self",
+         "contained", "html", "file", "create", "build", "complete", "new", "make", "its"}
+
+
+def _words(text: str | None) -> set[str]:
+    text = re.sub(r"[^a-z0-9 ]+", " ", (text or "").lower().replace("_", " ").replace("-", " "))
+    return {w for w in text.split() if len(w) > 2 and w not in _STOP and not w.isdigit()}
+
+
 def attribute(build: dict, pool: list[dict]) -> dict | None:
-    """Best session that names this file *and* ran in the build's own workspace."""
+    """The session that produced this build.
+
+    A dsh session stores its own workspace, provider, model, goal text and timings, so the build's
+    workspace folder decides the model and the session's own goal decides which run it was. A write
+    to the file name is corroboration, never the gate: several models log writes to "sky-temple.html".
+    """
     rel = build["rel"].replace("\\", "/")
     name = pathlib.Path(rel).name.lower()
     workspace = rel.split("/")[0]
-    # the session that finished closest to the file's mtime is the one that produced it: two
-    # models can both log a write to "sky-temple.html", and only the timing tells them apart
+    want = _words(pathlib.Path(name).stem) | _words(build.get("title") or "")
     build_ms = 0.0
     if build.get("mtime"):
         build_ms = dt.datetime.fromisoformat(build["mtime"]).timestamp() * 1000
     best = None
     for s in pool:
-        if s.get("workspace") and s["workspace"] != workspace:
+        if s.get("workspace") != workspace:
             continue
-        # only a path argument means the session wrote the file; a name that merely appears
-        # in tool output (an `ls`, a build log) is evidence of nothing — that mis-credited
-        # the honeycomb session with a floating-classroom build it only listed
+        overlap = len(want & _words(s.get("goal")))
         hits = sum(v for k, v in s["files"].items() if _fname(k) == name)
-        if not hits:
+        # a session that logged a write to this file only needs the goal to not contradict it;
+        # a goal-only match must share at least two meaningful words, or the whole name when the
+        # name is a single word — otherwise "create one complete, self-contained html" wins
+        if not hits and overlap < min(2, len(want)):
             continue
         gap = (build_ms - (s.get("t_end") or 0)) if build_ms else 0.0
-        score = gap if gap >= 0 else 4e12 - gap      # a session that ended after the file is suspect
+        gap = gap if gap >= 0 else 4e12 - gap        # a session that ended after the file is suspect
+        score = (-overlap, -hits, gap)
         if best is None or score < best[0]:
             best = (score, s)
     return best[1] if best else None
