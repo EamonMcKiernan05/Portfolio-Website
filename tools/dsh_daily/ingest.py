@@ -159,13 +159,20 @@ def title_of(prompt: str, stem: str) -> str:
 
 
 def prompt_key(prompt: str, stem: str, model_slug: str) -> tuple[str, bool]:
-    """(key, is_new). Reuse an identical text's key; suffix when the text differs."""
+    """(key, is_new). Same text reuses its key, and so does the same *title*: the body of a brief
+    drifts a line or two between sessions, and minting "<key>-<model>" put a second copy of
+    The Floating Classroom on the site under a private name."""
     prompts = json.load(open(DOCS / "model-testing-prompts.json"))["spec_prompts"]
     for key, text in prompts.items():
         if norm(text) == norm(prompt):
             return key, False
+    want = norm(title_of(prompt, stem)).strip().lower()
+    if want:
+        for key, text in prompts.items():
+            if norm(title_of(text, "")).strip().lower() == want:
+                return key, False          # same brief, slightly different body: keep the text
     key = slugify(title_of(prompt, stem)) or slugify(stem)
-    if key in prompts and norm(prompts[key]) != norm(prompt):
+    if key in prompts:
         key = f"{key}-{model_slug}"
     return key, True
 
