@@ -64,6 +64,9 @@ class _QuietHandler(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+RECORD_PORT = 8098
+
+
 def free_port() -> int:
     s = socket.socket()
     s.bind(("127.0.0.1", 0))
@@ -171,7 +174,7 @@ def is_held(rel: str, ignored: set[str]) -> bool:
     """True when a build is on the ignore list. `Workspace/*` holds every build in that workspace,
     including ones that do not exist yet — an early-access model must stay out of the gallery."""
     rel = rel.replace("\\", "/")
-    for i in ignored:
+    for i in (x.replace("\\", "/") for x in ignored):
         if rel == i:
             return True
         if i.endswith("/*") and rel.startswith(i[:-1]):
@@ -312,8 +315,9 @@ def main() -> int:
 
     videos = []
     if not args.no_video:
-        # never assume a port: 8099 is somebody else's keyproxy on this host
-        serve_port = free_port()
+        # A fixed port, opened for the LAN in ufw: the box captures over the network and can
+        # only reach ports that are allowed through. 8099 is another profile's keyproxy.
+        serve_port = RECORD_PORT
         srv = serve_repo(serve_port)
         pairs = [(r["slug"], r["rel"]) for r in recs]
         try:
