@@ -148,10 +148,15 @@ def spec_key_for_html(path: pathlib.Path) -> str | None:
     m = re.search(r"<title>([^<]*)</title>", head, re.S)
     if not m:
         return None
-    want = ingest.norm(re.sub(r"^\s*\d+\s*[\u2014\u2013-]+\s*", "", m.group(1)))
+    def core(text: str) -> str:
+        """'THE FLOATING CLASSROOM — a lake village school' -> 'the floating classroom'"""
+        head = re.split(r"\s+[\u2014\u2013]\s+", text, maxsplit=1)[0]
+        head = re.sub(r"^\s*\d+\s*[\u2014\u2013-]+\s*", "", head)
+        return ingest.norm(head).strip().lower()
+
+    want = core(m.group(1))
     prs = json.load(open(ingest.DOCS / "model-testing-prompts.json"))["spec_prompts"]
-    hits = [k for k, txt in prs.items()
-            if ingest.norm(ingest.title_of(txt, "")).strip().lower() == want.strip().lower()]
+    hits = [k for k, txt in prs.items() if core(ingest.title_of(txt, "")) == want]
     return hits[0] if len(hits) == 1 else None
 
 
@@ -172,10 +177,10 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
     for s in pool:
         if s.get("workspace") and s["workspace"] != workspace:
             continue
+        # only a path argument means the session wrote the file; a name that merely appears
+        # in tool output (an `ls`, a build log) is evidence of nothing — that mis-credited
+        # the honeycomb session with a floating-classroom build it only listed
         hits = sum(v for k, v in s["files"].items() if _fname(k) == name)
-        if not hits:
-            # fall back to any mention: builds driven by a script never log a path argument
-            hits = sum(v for k, v in (s.get("mentions") or {}).items() if _fname(k) == name)
         if hits and (best is None or hits > best[0]):
             best = (hits, s)
     return best[1] if best else None
