@@ -29,7 +29,7 @@ FFPROBE = "/home/eamon/.hermes/tools/ffmpeg-9.0.1-linux-x64/bin/ffprobe"
 SCRATCH = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily"
 THUMBS = pathlib.Path.home() / "portfolio-website/demos/thumbs/model-testing"
 LOCAL_VIDEOS = pathlib.Path.home() / "video-demos/dsh-daily"
-DESKTOP_SUBDIR = "Model Testing Videos"
+DESKTOP_SUBDIR = "Desktop/Model Testing Videos"
 DURATION = 60.0
 
 LOADER = """(()=>{const l=document.querySelector('#loader,#loading,.loader,.loading,.preloader');
@@ -295,7 +295,7 @@ async def _run(pairs, port: int, base: str, outdir: pathlib.Path) -> list[dict]:
 
 def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
                   outdir: pathlib.Path = LOCAL_VIDEOS, copy_to_desktop: bool = True,
-                  serve_port: int = 8099) -> list[dict]:
+                  serve_port: int = 8098) -> list[dict]:
     """Launch the box's Edge, tunnel CDP, record each build, deliver the mp4s."""
     outdir.mkdir(parents=True, exist_ok=True)
     SCRATCH.mkdir(parents=True, exist_ok=True)
@@ -305,6 +305,12 @@ def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
         if not win.cdp_ready(port, 30):
             raise RuntimeError("the box's CDP port never answered over the tunnel")
         base = f"http://{local_ip()}:{serve_port}/demos/model-testing/"
+        # The box does the capturing, so prove it can reach every page from over there first:
+        # an unreachable page records the browser's error screen and reads as a black clip.
+        for slug, rel in pairs:
+            got = win.ps("http_probe.ps1", base + rel, timeout=120).strip().splitlines()[-1]
+            if not got.startswith("200|"):
+                raise RuntimeError(f"the box cannot load {rel}: {got}")
         results = asyncio.run(_run(pairs, port, base, outdir))
     finally:
         tunnel.terminate()
@@ -313,11 +319,14 @@ def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
         except Exception:
             pass
     if copy_to_desktop:
+        rel_of = {slug: rel for slug, rel in pairs}
         for r in results:
             if "clip" not in r:
                 continue
             local = pathlib.Path(r["clip"])
-            workspace = r.get("workspace") or ""
+            # the rel is "<workspace>/<file>.html"; the desktop clip belongs in that workspace
+            rel = rel_of.get(r["slug"], r.get("rel") or "")
+            workspace = r.get("workspace") or rel.replace("\\", "/").split("/")[0]
             remote_rel = f"{DESKTOP_SUBDIR}/{workspace}/{local.name}"
             win.push(local, remote_rel)
             r["desktop"] = remote_rel
