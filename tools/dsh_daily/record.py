@@ -10,6 +10,7 @@ import asyncio
 import base64
 import io
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -29,8 +30,8 @@ FFPROBE = "/home/eamon/.hermes/tools/ffmpeg-9.0.1-linux-x64/bin/ffprobe"
 SCRATCH = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily"
 THUMBS = pathlib.Path.home() / "portfolio-website/demos/thumbs/model-testing"
 LOCAL_VIDEOS = pathlib.Path.home() / "video-demos/dsh-daily"
-DESKTOP_SUBDIR = "Model Testing Videos"
-DURATION = 60.0
+DESKTOP_SUBDIR = "Desktop/Model Testing Videos"
+DURATION = float(os.environ.get("DSH_DURATION", "60.0"))
 
 LOADER = """(()=>{const l=document.querySelector('#loader,#loading,.loader,.loading,.preloader');
 if(!l)return 'gone';const s=getComputedStyle(l);return s.display+'|'+s.opacity})()"""
@@ -42,8 +43,14 @@ _PICK = """const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin
   const box=boxes.find(e=>/cine/i.test((e.id||'')+' '+(e.name||'')+' '+(e.title||'')))
     || boxes.find(e=>{const l=e.closest('label')||(e.id?document.querySelector('label[for="'+e.id+'"]'):null);
         return !!l && /cinematic/i.test(l.textContent||'');}) || null;
-  if(!b && !box){ const all=[...document.querySelectorAll('button,[role=switch],[role=button],.btn,.ctl,label')];
-    b=all.find(e=>/cinematic/i.test((e.textContent||'')+' '+(e.id||'')+' '+(e.title||'')+' '+(e.className||'')))||null; }"""
+  if(!b && !box){
+    // builds render their own UI: match any short, clickable label that says cinematic
+    const txt=e=>(e.textContent||'').replace(/\\s+/g,' ').trim();
+    const all=[...document.querySelectorAll('button,[role=switch],[role=button],input[type=button],.btn,.ctl,label,a,div,span')]
+      .filter(e=>/cinematic/i.test(txt(e)) && txt(e).length<=40);
+    all.sort((x,y)=>txt(x).length-txt(y).length);
+    b=all[0]||null;
+  }"""
 FIND = """(()=>{""" + _PICK + """
   if(!b && !box) return 'none';
   const el = box || b;
@@ -95,7 +102,13 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
         await asyncio.sleep(3)
     log(f"{slug}: warm rAF {rate}/s")
 
-    cstate = await js(FIND) or "none"
+    # UI is often built a moment after the scene starts, so give it a few seconds
+    cstate = "none"
+    for _ in range(8):
+        cstate = await js(FIND) or "none"
+        if cstate != "none":
+            break
+        await asyncio.sleep(1.5)
     log(f"{slug}: cinematic {cstate}")
     clicked = False
     if '"on":true' not in cstate and cstate != "none":
@@ -186,7 +199,7 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
     log(f"{slug}: {st['width']}x{st['height']} {st['codec_name']} {dur:.1f}s {size/1e6:.1f} MB"
         f" (captured {len(frames)/elapsed:.1f} fps, file {out_fps} fps)")
     problems = []
-    if not 57 <= dur <= 63:
+    if not DURATION - 3 <= dur <= DURATION + 3:
         problems.append(f"duration {dur:.1f}s")
     if (st["width"], st["height"]) != (1920, 1080):
         problems.append(f"{st['width']}x{st['height']}")
@@ -197,14 +210,14 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
     # a take that came out short (throttled tab, aborted mux) must still report, not crash:
     # sample inside the clip's real length instead of assuming 60 s
     samples = {}
-    for t in (2, 30, 58):
+    for t in (2, round(DURATION / 2), round(DURATION) - 2):
         at = min(float(t), max(1.0, dur - 1.0))
         p = SCRATCH / f"{slug}-t{t}.jpg"
         subprocess.run([FFMPEG, "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(out_mp4),
                         "-frames:v", "1", str(p)], check=True)
         samples[t] = p.read_bytes()
         p.unlink()
-    motion = round(_diff(samples[2], samples[58]), 1)
+    motion = round(_diff(samples[2], samples[round(DURATION) - 2]), 1)
 
     return dict(slug=slug, clip=str(out_mp4), bytes=size, seconds=round(dur, 1),
                 capture_fps=round(fps, 1), frames=len(frames),
@@ -282,7 +295,8 @@ async def _run(pairs, port: int, base: str, outdir: pathlib.Path) -> list[dict]:
 
 
 def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
-                  outdir: pathlib.Path = LOCAL_VIDEOS, copy_to_desktop: bool = True) -> list[dict]:
+                  outdir: pathlib.Path = LOCAL_VIDEOS, copy_to_desktop: bool = True,
+                  serve_port: int = 8098) -> list[dict]:
     """Launch the box's Edge, tunnel CDP, record each build, deliver the mp4s."""
     outdir.mkdir(parents=True, exist_ok=True)
     SCRATCH.mkdir(parents=True, exist_ok=True)
@@ -291,7 +305,13 @@ def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
     try:
         if not win.cdp_ready(port, 30):
             raise RuntimeError("the box's CDP port never answered over the tunnel")
-        base = f"http://{local_ip()}:8099/demos/model-testing/"
+        base = f"http://{local_ip()}:{serve_port}/demos/model-testing/"
+        # The box does the capturing, so prove it can reach every page from over there first:
+        # an unreachable page records the browser's error screen and reads as a black clip.
+        for slug, rel in pairs:
+            got = win.ps("http_probe.ps1", base + rel, timeout=120).strip().splitlines()[-1]
+            if not got.startswith("200|"):
+                raise RuntimeError(f"the box cannot load {rel}: {got}")
         results = asyncio.run(_run(pairs, port, base, outdir))
     finally:
         tunnel.terminate()
@@ -300,11 +320,14 @@ def record_builds(pairs: list[tuple[str, str]], *, port: int = 9223,
         except Exception:
             pass
     if copy_to_desktop:
+        rel_of = {slug: rel for slug, rel in pairs}
         for r in results:
             if "clip" not in r:
                 continue
             local = pathlib.Path(r["clip"])
-            workspace = r.get("workspace") or ""
+            # the rel is "<workspace>/<file>.html"; the desktop clip belongs in that workspace
+            rel = rel_of.get(r["slug"], r.get("rel") or "")
+            workspace = r.get("workspace") or rel.replace("\\", "/").split("/")[0]
             remote_rel = f"{DESKTOP_SUBDIR}/{workspace}/{local.name}"
             win.push(local, remote_rel)
             r["desktop"] = remote_rel

@@ -16,6 +16,7 @@ import json
 import pathlib
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import threading
@@ -61,6 +62,17 @@ class _QuietHandler(http.server.SimpleHTTPRequestHandler):
 
     def log_message(self, *args):
         pass
+
+
+RECORD_PORT = 8098
+
+
+def free_port() -> int:
+    s = socket.socket()
+    s.bind(("127.0.0.1", 0))
+    port = s.getsockname()[1]
+    s.close()
+    return port
 
 
 def serve_repo(port: int = 8099):
@@ -136,25 +148,65 @@ def spec_key_for_html(path: pathlib.Path) -> str | None:
     m = re.search(r"<title>([^<]*)</title>", head, re.S)
     if not m:
         return None
-    want = ingest.norm(re.sub(r"^\s*\d+\s*[\u2014\u2013-]+\s*", "", m.group(1)))
+    def core(text: str) -> str:
+        """'THE FLOATING CLASSROOM — a lake village school' -> 'the floating classroom'"""
+        head = re.split(r"\s+[\u2014\u2013]\s+", text, maxsplit=1)[0]
+        head = re.sub(r"^\s*\d+\s*[\u2014\u2013-]+\s*", "", head)
+        return ingest.norm(head).strip().lower()
+
+    want = core(m.group(1))
     prs = json.load(open(ingest.DOCS / "model-testing-prompts.json"))["spec_prompts"]
-    hits = [k for k, txt in prs.items()
-            if ingest.norm(ingest.title_of(txt, "")).strip().lower() == want.strip().lower()]
+    hits = [k for k, txt in prs.items() if core(ingest.title_of(txt, "")) == want]
     return hits[0] if len(hits) == 1 else None
 
 
+def _fname(key: str) -> str:
+    """A session's file key can carry build-log noise ("n-a--- 825006 x.html") or a full path,
+    so compare on the last path-ish token, never on the raw key."""
+    k = key.strip().strip("'\"").replace("\\", "/")
+    last = re.split(r"[\s|>]+", k)[-1] if (" " in k or "|" in k) else k
+    return pathlib.Path(last).name.lower()
+
+
+_STOP = {"the", "a", "and", "of", "in", "on", "at", "for", "to", "with", "one", "self",
+         "contained", "html", "file", "create", "build", "complete", "new", "make", "its"}
+
+
+def _words(text: str | None) -> set[str]:
+    text = re.sub(r"[^a-z0-9 ]+", " ", (text or "").lower().replace("_", " ").replace("-", " "))
+    return {w for w in text.split() if len(w) > 2 and w not in _STOP and not w.isdigit()}
+
+
 def attribute(build: dict, pool: list[dict]) -> dict | None:
-    """Best session that names this file *and* ran in the build's own workspace."""
+    """The session that produced this build.
+
+    A dsh session stores its own workspace, provider, model, goal text and timings, so the build's
+    workspace folder decides the model and the session's own goal decides which run it was. A write
+    to the file name is corroboration, never the gate: several models log writes to "sky-temple.html".
+    """
     rel = build["rel"].replace("\\", "/")
     name = pathlib.Path(rel).name.lower()
     workspace = rel.split("/")[0]
+    want = _words(pathlib.Path(name).stem) | _words(build.get("title") or "")
+    build_ms = 0.0
+    if build.get("mtime"):
+        build_ms = dt.datetime.fromisoformat(build["mtime"]).timestamp() * 1000
     best = None
     for s in pool:
-        if s.get("workspace") and s["workspace"] != workspace:
+        if s.get("workspace") != workspace:
             continue
-        hits = sum(v for k, v in s["files"].items() if k.lower() == name)
-        if hits and (best is None or hits > best[0]):
-            best = (hits, s)
+        overlap = len(want & _words(s.get("goal")))
+        hits = sum(v for k, v in s["files"].items() if _fname(k) == name)
+        # a session that logged a write to this file only needs the goal to not contradict it;
+        # a goal-only match must share at least two meaningful words, or the whole name when the
+        # name is a single word — otherwise "create one complete, self-contained html" wins
+        if not hits and overlap < min(2, len(want)):
+            continue
+        gap = (build_ms - (s.get("t_end") or 0)) if build_ms else 0.0
+        gap = gap if gap >= 0 else 4e12 - gap        # a session that ended after the file is suspect
+        score = (-overlap, -hits, gap)
+        if best is None or score < best[0]:
+            best = (score, s)
     return best[1] if best else None
 
 
@@ -162,7 +214,7 @@ def is_held(rel: str, ignored: set[str]) -> bool:
     """True when a build is on the ignore list. `Workspace/*` holds every build in that workspace,
     including ones that do not exist yet — an early-access model must stay out of the gallery."""
     rel = rel.replace("\\", "/")
-    for i in ignored:
+    for i in (x.replace("\\", "/") for x in ignored):
         if rel == i:
             return True
         if i.endswith("/*") and rel.startswith(i[:-1]):
@@ -303,10 +355,13 @@ def main() -> int:
 
     videos = []
     if not args.no_video:
-        srv = serve_repo(8099)
+        # A fixed port, opened for the LAN in ufw: the box captures over the network and can
+        # only reach ports that are allowed through. 8099 is another profile's keyproxy.
+        serve_port = RECORD_PORT
+        srv = serve_repo(serve_port)
         pairs = [(r["slug"], r["rel"]) for r in recs]
         try:
-            videos = record.record_builds(pairs, copy_to_desktop=False)
+            videos = record.record_builds(pairs, copy_to_desktop=False, serve_port=serve_port)
         finally:
             srv.shutdown()
         for v in videos:

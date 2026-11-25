@@ -70,7 +70,7 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-h .gal-grid{margin-top:22px}
 
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:18px}
 .gal-card{display:flex;flex-direction:column;min-width:0;background:transparent;border:1px solid var(--line);color:inherit;transition:border-color .18s ease}
 .gal-card:hover{border-color:var(--accent)}
 .gal-card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
@@ -190,9 +190,9 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
     <p class="gal-sec-s">Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.</p><dl class="gal-dl">
       <dt>Provider</dt><dd>Strata</dd>
       <dt>Harness</dt><dd>DeepSeek Harness</dd>
-      <dt>Model</dt><dd>Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)</dd>
+      <dt>Model</dt><dd>qwen3.8-flash-next</dd>
       <dt>Endpoint</dt><dd>.5 (eamon-ai, 2× V100 32GB) :8080</dd>
-      <dt>Serving config</dt><dd>--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt</dd>
+      <dt>Serving config</dt><dd>Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)</dd>
     </dl>
   </section>
 

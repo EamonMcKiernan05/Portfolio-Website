@@ -85,10 +85,6 @@ BUILDS = [
          followups=0, date='05 Nov 2026', build_min=46, kb=655,
          blurb='One pass, 46 minutes.'),
     # LongCat 2.5
-    dict(rel='LongCat-2.5/sky-temple.html', slug='longcat-25-sky-temple', model='LongCat 2.5', group='LongCat 2.5', harness='DeepSeek Harness',
-         variant='', title='Sky Temple', prompt='pagoda', session='763e2897',
-         followups=4, date='12 Nov 2026', build_min=174, kb=754,
-         blurb='1 h 27 m first pass, then 4 follow-ups — 2 h 54 m of working time.'),
     # Qwen3.8 Flash-Next — the builds that were already on the site
     dict(rel="Qwen3.8 Flash-Next/sky-temple.html", slug="qwen38-flash-next-sky-temple",
          model="Qwen3.8 Flash-Next", group="Qwen3.8 Flash-Next", variant="", harness="DeepSeek Harness",
@@ -305,7 +301,7 @@ BUILDS = [
          blurb='45 minutes first pass, then 5 follow-ups — 1 h 23 m of working time.'),
     dict(rel='DeepSeek-V4.1-Flash-1017/the-salmon-stair.html', slug='deepseek-v4-1-flash-1017-the-salmon-stair', model='DeepSeek V4.1 Flash', group='DeepSeek V4.1 Flash', harness='DeepSeek Harness',
          variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='8c382a28-48c1-43e1-96cf-bf819c409314',
-         followups=1, date='23 Nov 2026', build_min=86, kb=925,
+         followups=1, date='23 Nov 2026', build_min=86, kb=946,
          blurb='1 h 25 m first pass, then 1 follow-up — 1 h 26 m of working time.'),
     dict(rel='GLM-5.4/pagoda.html', slug='glm-5-4-pagoda', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
          variant='', title='THE PAGODA', prompt='the-pagoda', session='004a6560-ca6b-4827-bf55-33ff55fcc0e8',
@@ -325,7 +321,7 @@ BUILDS = [
          blurb='One pass, 20 minutes.'),
     dict(rel='Hy4 Flash/THE_SALMON_STAIR.html', slug='hy4-flash-api-the-salmon-stair', model='Hy4 Flash - API', group='Hy4 Flash - API', harness='DeepSeek Harness',
          variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='b73f0f9b-0204-4918-8e67-41c0a5c701fe',
-         followups=0, date='23 Nov 2026', build_min=21, kb=642,
+         followups=0, date='23 Nov 2026', build_min=21, kb=658,
          blurb='One pass, 21 minutes.'),
     dict(rel='Inkling-2-Mini/THE-KETTLE-LAKE.html', slug='inkling-2-mini-the-kettle-lake', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='DeepSeek Harness',
          variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='b460e2c6-11f3-4bd7-99bc-9f8897ef92c2',
@@ -333,7 +329,7 @@ BUILDS = [
          blurb='2 h 11 m first pass, then 1 follow-up — 2 h 18 m of working time.'),
     dict(rel='Inkling-2-Mini/THE-SALMON-STAIR.html', slug='inkling-2-mini-the-salmon-stair', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='DeepSeek Harness',
          variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='c68d4e29-b244-45f7-a5f3-19ab652e37b3',
-         followups=1, date='24 Nov 2026', build_min=95, kb=658,
+         followups=1, date='24 Nov 2026', build_min=95, kb=676,
          blurb='1 h 35 m first pass, then 1 follow-up — 1 h 35 m of working time.'),
     dict(rel='Qwen 4 Max/029-floating-classroom.html', slug='qwen-4-max-029-floating-classroom', model='Qwen 4 Max', group='Qwen 4 Max', harness='DeepSeek Harness',
          variant='', title='The Floating Classroom', prompt='the-floating-classroom', session='83515113-dd10-44d2-b093-2801b26fbc11',
@@ -349,11 +345,67 @@ BUILDS = [
          blurb='One pass, 37 minutes.'),
     dict(rel='Qwen 4 Max/the-salmon-stair.html', slug='qwen-4-max-the-salmon-stair', model='Qwen 4 Max', group='Qwen 4 Max', harness='DeepSeek Harness',
          variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='4aacad3e-9212-46a3-a3d5-4db93609d35a',
-         followups=0, date='23 Nov 2026', build_min=20, kb=671,
+         followups=0, date='23 Nov 2026', build_min=20, kb=689,
          blurb='One pass, 20 minutes.'),
+    dict(rel='DeepSeek-V4.1-Flash-1017/THE-PAGODA.html', slug='deepseek-v4-1-flash-the-pagoda', model='DeepSeek V4.1 Flash', group='DeepSeek V4.1 Flash', harness='DeepSeek Harness',
+         variant='', title='THE PAGODA', prompt='the-pagoda', session='07742d3c-f5de-4a4b-b4a6-3df69a68e38a',
+         followups=1, date='24 Nov 2026', build_min=109, kb=915,
+         blurb='53 minutes first pass, then 1 follow-up — 1 h 49 m of working time.'),
+    dict(rel='HungerG/breadfruit-cay.html', slug='hungerg-breadfruit-cay', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='Breadfruit Cay', prompt='breadfruit-cay-hungerg', session='60ed77df-364a-4b85-aa52-d9190ad2e74d',
+         followups=1, date='24 Nov 2026', build_min=20, kb=696,
+         blurb='6 minutes first pass, then 1 follow-up — 20 minutes of working time.'),
+    dict(rel='HungerG/croft.html', slug='hungerg-croft', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='The Croft at the Wrack Line', prompt='croft-at-the-wrack-line', session='6822f6b7-fb1a-4e77-9b9d-6e17669d9014',
+         followups=0, date='24 Nov 2026', build_min=192, kb=705,
+         blurb='One pass, 3 h 12 m.'),
+    dict(rel='HungerG/index.html', slug='hungerg-index', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='The Brook Beneath the Fold', prompt='index', session='30e297ff-8272-4a90-8e19-0646d480528b',
+         followups=1, date='24 Nov 2026', build_min=9, kb=711,
+         blurb='8 minutes first pass, then 1 follow-up — 9 minutes of working time.'),
+    dict(rel='GLM-5.4/kettle-lake.html', slug='glm-5-4-kettle-lake', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
+         variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='54fc7cd4-c86a-47eb-b958-e71438824a70',
+         followups=1, date='24 Nov 2026', build_min=74, kb=771,
+         blurb='42 minutes first pass, then 1 follow-up — 1 h 14 m of working time.'),
+    dict(rel='GLM-5.4/salmon-stair.html', slug='glm-5-4-salmon-stair', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
+         variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='9717f6a5-e452-4fb4-a3ad-6d2fb5bbe9c7',
+         followups=2, date='24 Nov 2026', build_min=109, kb=826,
+         blurb='45 minutes first pass, then 2 follow-ups — 1 h 49 m of working time.'),
+    dict(rel='HungerG/029-floating-classroom.html', slug='hungerg-029-floating-classroom', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='The Floating Classroom', prompt='the-floating-classroom', session='1ccea414-7735-4060-aa42-fd35d76d5803',
+         followups=0, date='24 Nov 2026', build_min=23, kb=718,
+         blurb='One pass, 23 minutes.'),
+    dict(rel='HungerG/kettle-lake.html', slug='hungerg-kettle-lake', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='The Two Shores of Kettle Lake', prompt='the-two-shores-of-kettle-lake', session='',
+         followups=None, date='24 Nov 2026', build_min=None, kb=717,
+         blurb='Session log for this build is not in the harness store, so its timings, step counts and follow-ups are not recorded.'),
+    dict(rel='HungerG/kites-over-jute-bank.html', slug='hungerg-kites-over-jute-bank', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='Kites over the Jute Bank', prompt='kites-over-the-jute-bank', session='c547a37b-de3c-4803-9b13-f190b3ce2848',
+         followups=0, date='24 Nov 2026', build_min=36, kb=723,
+         blurb='One pass, 36 minutes.'),
+    dict(rel='HungerG/salmon-stair.html', slug='hungerg-salmon-stair', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='The Salmon Stair', prompt='the-salmon-stair', session='bdcc4029-383e-470c-813e-4bfa8f4840ce',
+         followups=0, date='24 Nov 2026', build_min=24, kb=724,
+         blurb='One pass, 24 minutes.'),
+    dict(rel='Inkling-2-Mini/THE-BLOSSOM-FROST-POCKET.html', slug='inkling-2-mini-the-blossom-frost-pocket', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='DeepSeek Harness',
+         variant='', title='The Blossom Frost Pocket', prompt='the-blossom-frost-pocket', session='d3daf038-8d12-46e2-8d5b-50ea0aab8d62',
+         followups=0, date='24 Nov 2026', build_min=58, kb=665,
+         blurb='One pass, 58 minutes.'),
+    dict(rel='Inkling-2-Mini/THE-WATERCRESS-AT-PENNY-SPRING.html', slug='inkling-2-mini-the-watercress-at-penny-spring', model='Inkling-2-Mini', group='Inkling-2-Mini', harness='DeepSeek Harness',
+         variant='', title='The Blossom Frost Pocket', prompt='the-blossom-frost-pocket', session='d3daf038-8d12-46e2-8d5b-50ea0aab8d62',
+         followups=0, date='24 Nov 2026', build_min=58, kb=668,
+         blurb='One pass, 58 minutes.'),
+    dict(rel='GLM-5.4/floating-classroom.html', slug='glm-5-4-floating-classroom', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
+         variant='', title='The Floating Classroom', prompt='the-floating-classroom', session='',
+         followups=None, date='24 Nov 2026', build_min=None, kb=806,
+         blurb='Session log for this build is not in the harness store, so its timings, step counts and follow-ups are not recorded.'),
+    dict(rel='HungerG/sky-temple.html', slug='hungerg-sky-temple', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='sky-temple', prompt='sky-temple', session='1b76403b-596e-4720-9417-f9bedd74f375',
+         followups=5, date='24 Nov 2026', build_min=2, kb=789,
+         blurb='No first pass recorded, then 5 follow-ups — 2 minutes of working time.'),
 ]
 
-GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'LongCat 2.5', 'Inkling-2-Mini', 'DeepSeek-V4.1-Flash-1017', 'GLM-5.4']
+GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))
@@ -440,7 +492,7 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-h .gal-grid{margin-top:22px}
 
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:18px}
 .gal-card{display:flex;flex-direction:column;min-width:0;background:transparent;border:1px solid var(--line);color:inherit;transition:border-color .18s ease}
 .gal-card:hover{border-color:var(--accent)}
 .gal-card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
@@ -760,7 +812,7 @@ def index_page():
             body = "\n".join(harness_block(h, [b for b in items if b["harness"] == h]) for h in order)
         else:
             body = "    " + grid(items)
-        sections.append(f"""  <details class="gal-sec-m" open>
+        sections.append(f"""  <details class="gal-sec-m">
     <summary><span class="gal-sec-n">{n:02d}</span><span class="gal-sec-t">{html.escape(g)}</span><span class="gal-sec-rule"></span><span class="gal-sec-c">{len(items)} build{'s' if len(items) != 1 else ''}</span></summary>
 {body}
   </details>""")

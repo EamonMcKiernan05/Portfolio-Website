@@ -47,6 +47,7 @@ def parse(path: pathlib.Path) -> dict | None:
     turns = steps = tools = 0
     sel = None
     files: dict[str, int] = {}
+    mentions: dict[str, int] = {}   # any .html named anywhere, incl. build-script output
     cwd = None
     session_created = None
     first_user = None
@@ -91,12 +92,16 @@ def parse(path: pathlib.Path) -> dict | None:
             t_end = t
         elif ty == "assistant/message":
             steps += 1
-        elif ty == "tool/call":
-            tools += 1
-            blob = json.dumps(data.get("arguments") or {})
+        elif ty and ty.startswith("tool/"):
+            if ty == "tool/call":
+                tools += 1
+            # a build script writes the html, so the file name often appears only in the
+            # tool's output ("n-a--- 825006 floating-classroom.html"), never in a path arg
+            blob = json.dumps(data)
             for m in HTML_RE.finditer(blob):
-                name = m.group(1).split("\\")[-1].split("/")[-1]
-                if BUILD_ROOT_MARK in blob or name.lower().endswith(".html"):
+                name = m.group(1).split("\\")[-1].split("/")[-1].strip()
+                mentions[name] = mentions.get(name, 0) + 1
+                if ty == "tool/call" and (BUILD_ROOT_MARK in blob or name.lower().endswith(".html")):
                     files[name] = files.get(name, 0) + 1
 
     if goal is None and first_user:
@@ -133,6 +138,7 @@ def parse(path: pathlib.Path) -> dict | None:
         "steps": steps,
         "tools": tools,
         "files": files,
+        "mentions": mentions,
         "goal_source": goal_source,
         "t_goal": t_goal, "t_first_end": t_first_end, "t_end": t_end,
         "mtime": path.stat().st_mtime,

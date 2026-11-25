@@ -27,6 +27,13 @@
   "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
   "provider": "DeepSeek API"
  },
+ "deepseek-v4-1-flash-the-pagoda": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "deepseek-flash",
+  "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
+  "provider": "DeepSeek API"
+ },
  "deepseek-v41-breadfruit-cay": {
   "harness": "DeepSeek Harness",
   "kind": "cloud",
@@ -97,12 +104,89 @@
   "note": "Session captured from the harness. The model id is as configured there and is not checked against the vendor's own list.",
   "provider": "DeepSeek API"
  },
+ "glm-5-4-floating-classroom": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "not recorded",
+  "note": "No session log for this build in the harness store.",
+  "provider": "Not recorded"
+ },
+ "glm-5-4-kettle-lake": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "GLM-5.4",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "GLM Coding Plan"
+ },
  "glm-5-4-pagoda": {
   "harness": "DeepSeek Harness",
   "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
-  "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "model": "GLM-5.4",
+  "note": "Provider and model are the subscription and model the build ran on. The harness session header named a stale local-engine config, which is not used here.",
+  "provider": "GLM Coding Plan"
+ },
+ "glm-5-4-salmon-stair": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "GLM-5.4",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "GLM Coding Plan"
+ },
+ "hungerg-029-floating-classroom": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
+ },
+ "hungerg-breadfruit-cay": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model the build ran on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
+ },
+ "hungerg-croft": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model the build ran on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
+ },
+ "hungerg-index": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model the build ran on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
+ },
+ "hungerg-kettle-lake": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "not recorded",
+  "note": "No session log for this build in the harness store.",
+  "provider": "Not recorded"
+ },
+ "hungerg-kites-over-jute-bank": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
+ },
+ "hungerg-salmon-stair": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
+ },
+ "hungerg-sky-temple": {
+  "harness": "DeepSeek Harness",
+  "kind": "cloud",
+  "model": "HungerG",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "OpenCode Go"
  },
  "hy4-castle": {
   "harness": "DeepSeek Harness",
@@ -209,24 +293,24 @@
  },
  "hy4-flash-maya-m-breadfruit-cay": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "hy4-flash",
+  "kind": "local",
+  "model": "hy4-flash-maya-m",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "hy4-flash-maya-m-kettle-lake": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "hy4-flash",
+  "kind": "local",
+  "model": "hy4-flash-maya-m",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "hy4-flash-maya-m-linen-on-the-bleaching-green": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "hy4-flash",
+  "kind": "local",
+  "model": "hy4-flash-maya-m",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "hy4-flash-medieval-village": {
   "harness": "DeepSeek Harness",
@@ -287,40 +371,47 @@
   "note": "Session captured from the harness. The model id is as configured there and is not checked against the vendor's own list.",
   "provider": "Nous portal"
  },
+ "inkling-2-mini-the-blossom-frost-pocket": {
+  "harness": "DeepSeek Harness",
+  "kind": "local",
+  "model": "inkling-2-mini",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "Maya"
+ },
  "inkling-2-mini-the-croft": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "inkling-2-mini-the-kettle-lake": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "inkling-2-mini-the-pagoda-v2": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "inkling-2-mini-the-salmon-stair": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "inkling-2-mini",
   "note": "Session captured from the harness. Model id as configured there; not checked against the vendor's own model list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
- "longcat-25-sky-temple": {
+ "inkling-2-mini-the-watercress-at-penny-spring": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "meituan/longcat-2.5:free",
-  "note": "Session captured from the harness. The model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Nous portal"
+  "kind": "local",
+  "model": "inkling-2-mini",
+  "note": "Provider and model are the subscription and model Eamon ran the build on; the harness session header is not used for them.",
+  "provider": "Maya"
  },
  "qwen-4-max-029-floating-classroom": {
   "harness": "DeepSeek Harness",
@@ -514,10 +605,10 @@
  },
  "qwen3-8-flash-next-basalt-organ": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Strata"
  },
  "qwen3-8-flash-next-cloudfall-pass": {
   "config": "Strata v0.2.14.1 \u00b7 engine 0.1.60.1\nGGUF Qwen3.8-Flash-Next-UD-Q3_K_XL (UD-Q3_K_XL, 4 shards, 60.66 GB)\nengram BF16 \u00b7 262,144 ctx \u00b7 --kv int8 \u00b7 MTP on\nsampling: temperature 0.7 (server default, set 16:50Z 17 Nov)",
@@ -548,104 +639,108 @@
  },
  "qwen3-8-flash-next-mangrove-after-dark": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Strata"
  },
  "qwen3-8-flash-next-rain-cathedral": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Strata"
  },
  "qwen3-8-flash-next-sky-temple": {
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
+  "kind": "local",
   "model": "qwen3.8-flash-next-unsloth-ud-q3_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Strata"
  },
  "qwen38-27b-dflash2-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "qwen38-27b-dspine-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "qwen38-27b-mtp-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "qwen38-27b-plain-pagoda": {
+  "config": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
   "harness": "DeepSeek Harness",
-  "kind": "cloud",
-  "model": "/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf",
+  "kind": "local",
+  "model": "qwen3.8-27b-ud-q8_k_xl",
   "note": "Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor's own list.",
-  "provider": "Maya M (llama.cpp engine)"
+  "provider": "Maya"
  },
  "qwen38-flash-next-cloth-lab": {
-  "config": "--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt",
+  "config": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
   "endpoint": ".5 (eamon-ai, 2\u00d7 V100 32GB) :8080",
   "harness": "DeepSeek Harness",
   "kind": "local",
-  "model": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
+  "model": "qwen3.8-flash-next",
   "note": "Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.",
   "provider": "Strata"
  },
  "qwen38-flash-next-living-city": {
-  "config": "--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt",
+  "config": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
   "endpoint": ".5 (eamon-ai, 2\u00d7 V100 32GB) :8080",
   "harness": "DeepSeek Harness",
   "kind": "local",
-  "model": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
+  "model": "qwen3.8-flash-next",
   "note": "Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.",
   "provider": "Strata"
  },
  "qwen38-flash-next-neon-drift": {
-  "config": "--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt",
+  "config": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
   "endpoint": ".5 (eamon-ai, 2\u00d7 V100 32GB) :8080",
   "harness": "DeepSeek Harness",
   "kind": "local",
-  "model": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
+  "model": "qwen3.8-flash-next",
   "note": "Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.",
   "provider": "Strata"
  },
  "qwen38-flash-next-pulse-engine": {
-  "config": "--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt",
+  "config": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
   "endpoint": ".5 (eamon-ai, 2\u00d7 V100 32GB) :8080",
   "harness": "DeepSeek Harness",
   "kind": "local",
-  "model": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
+  "model": "qwen3.8-flash-next",
   "note": "Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.",
   "provider": "Strata"
  },
  "qwen38-flash-next-sky-temple": {
-  "config": "--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt",
+  "config": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
   "endpoint": ".5 (eamon-ai, 2\u00d7 V100 32GB) :8080",
   "harness": "DeepSeek Harness",
   "kind": "local",
-  "model": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
+  "model": "qwen3.8-flash-next",
   "note": "Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.",
   "provider": "Strata"
  },
  "qwen38-flash-next-sky-temple-agent": {
-  "config": "--native .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf .../Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /mnt/models/Strata-data/mtp/rt --max-context 262144 --kv int8 --mmap-experts --vision --vram-reserve-mib 700 --remote-expert-opt",
+  "config": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
   "endpoint": ".5 (eamon-ai, 2\u00d7 V100 32GB) :8080",
   "harness": "DeepSeek Harness",
   "kind": "local",
-  "model": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S (2 shards + BF16 mmproj)",
+  "model": "qwen3.8-flash-next",
   "note": "Config as it sits in ~/Strata/strata-iq3_s.json now; these builds are from early October, so an earlier shape of the same config is possible.",
   "provider": "Strata"
  },

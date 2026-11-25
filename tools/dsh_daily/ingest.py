@@ -21,12 +21,46 @@ PROVIDER_LABEL = {
     "deepseek-account": "DeepSeek API",
     "qwen-token-plan-custom": "Qwen token plan",
     "qwen-token-plan": "Qwen token plan",
-    "maya": "Maya M (llama.cpp engine)",
-    "llama.cpp (maya)": "Maya M",
+    "maya": "Maya",
+    "llama.cpp (maya)": "Maya",
     "openrouter": "OpenRouter",
+    "opencode-go": "OpenCode Go",
+    "hungerg-free": "OpenCode Go",
 }
 MODEL_NOTE = ("Session captured from the harness. Model id as configured there; "
               "not checked against the vendor's own model list.")
+
+# Every build on this gallery is driven by the DeepSeek harness (owner, 24 Nov 2026).
+# The session header is NOT the source of truth for provider/model: one GLM-5.4 session
+# recorded a stale `maya` + Qwen gguf path, which published GLM as a Qwen build.
+# Maya and Strata are the engines; the model is the model (owner, 24 Nov 2026).
+SERVING_BY_WORKSPACE = {
+    "GLM-5.4": ("GLM Coding Plan", "GLM-5.4"),
+    "Qwen3.8-27B": ("Maya", "qwen3.8-27b-ud-q8_k_xl"),
+    "Hy4 Flash Maya M": ("Maya", "hy4-flash-maya-m"),
+    "Inkling-2-Mini": ("Maya", "inkling-2-mini"),
+    "Qwen3.8-Flash-Next": ("Strata", "qwen3.8-flash-next"),
+    "Qwen3.8 Flash-Next": ("Strata", "qwen3.8-flash-next"),
+    "HungerG": ("OpenCode Go", "HungerG"),
+}
+
+
+def serving_for(workspace: str, provider: str | None,
+                model: str | None) -> tuple[str, str, str]:
+    """(provider label, model id, kind) for a build's serving panel."""
+    alias = SERVING_BY_WORKSPACE.get(workspace)
+    if alias:
+        prov, mid = alias
+        return prov, mid, "local" if prov.startswith("Maya") else "cloud"
+    label = PROVIDER_LABEL.get(provider or "", provider or "Not recorded")
+    mid = model or "not recorded"
+    if mid.startswith("/") or mid.lower().endswith(".gguf"):
+        # a filesystem path is a serving detail, never a model id
+        name = pathlib.Path(mid).name
+        mid = (name[:-5] if name.lower().endswith(".gguf") else name).lower()
+        label = "Maya M (llama.cpp engine)"
+    kind = "local" if label.startswith("Maya") or label == "Strata" else "cloud"
+    return label, mid, kind
 
 
 def slugify(text: str) -> str:
@@ -308,12 +342,14 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True,
     sj.write_text(json.dumps(st, indent=1, sort_keys=True) + "\n")
 
     # serving
-    provider = session.get("provider") or "Not recorded"
-    label = PROVIDER_LABEL.get(provider, provider)
+    label, mid, kind = serving_for(workspace, session.get("provider"), session.get("model"))
     vp = DOCS / "model-testing-serving.json"
     sv = json.load(open(vp))
-    sv[slug] = dict(provider=label, kind="cloud", model=session.get("model") or "not recorded",
-                    harness=harness, note=MODEL_NOTE)
+    entry = dict(provider=label, kind=kind, model=mid, harness=harness, note=MODEL_NOTE)
+    if workspace in SERVING_BY_WORKSPACE:
+        entry["note"] = ("Provider and model are the subscription and model Eamon ran the build on; "
+                         "the harness session header is not used for them.")
+    sv[slug] = entry
     vp.write_text(json.dumps(sv, indent=1, sort_keys=True) + "\n")
 
     # cards

@@ -448,5 +448,167 @@
   "title": "the-salmon-stair",
   "date": "23 Nov 2026",
   "date_iso": "2026-11-23"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "THE-PAGODA.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/THE-PAGODA.html",
+  "kb": 915,
+  "title": "THE-PAGODA",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "breadfruit-cay.html",
+  "rel": "HungerG/breadfruit-cay.html",
+  "kb": 696,
+  "title": "breadfruit-cay",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "croft.html",
+  "rel": "HungerG/croft.html",
+  "kb": 705,
+  "title": "croft",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "index.html",
+  "rel": "HungerG/index.html",
+  "kb": 711,
+  "title": "index",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "sky-temple.html",
+  "rel": "HungerG/sky-temple.html",
+  "kb": 789,
+  "title": "sky-temple",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "kettle-lake.html",
+  "rel": "GLM-5.4/kettle-lake.html",
+  "kb": 771,
+  "title": "kettle-lake",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "salmon-stair.html",
+  "rel": "GLM-5.4/salmon-stair.html",
+  "kb": 803,
+  "title": "salmon-stair",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "029-floating-classroom.html",
+  "rel": "HungerG/029-floating-classroom.html",
+  "kb": 718,
+  "title": "029-floating-classroom",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "kettle-lake.html",
+  "rel": "HungerG/kettle-lake.html",
+  "kb": 717,
+  "title": "kettle-lake",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "kites-over-jute-bank.html",
+  "rel": "HungerG/kites-over-jute-bank.html",
+  "kb": 723,
+  "title": "kites-over-jute-bank",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "salmon-stair.html",
+  "rel": "HungerG/salmon-stair.html",
+  "kb": 705,
+  "title": "salmon-stair",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "sky-temple.html",
+  "rel": "HungerG/sky-temple.html",
+  "kb": 789,
+  "title": "sky-temple",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-BLOSSOM-FROST-POCKET.html",
+  "rel": "Inkling-2-Mini/THE-BLOSSOM-FROST-POCKET.html",
+  "kb": 665,
+  "title": "THE-BLOSSOM-FROST-POCKET",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-WATERCRESS-AT-PENNY-SPRING.html",
+  "rel": "Inkling-2-Mini/THE-WATERCRESS-AT-PENNY-SPRING.html",
+  "kb": 668,
+  "title": "THE-WATERCRESS-AT-PENNY-SPRING",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "floating-classroom.html",
+  "rel": "GLM-5.4/floating-classroom.html",
+  "kb": 806,
+  "title": "floating-classroom",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "floating-classroom.html",
+  "rel": "GLM-5.4/floating-classroom.html",
+  "kb": 806,
+  "title": "floating-classroom",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "sky-temple.html",
+  "rel": "HungerG/sky-temple.html",
+  "kb": 789,
+  "title": "sky-temple",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "sky-temple.html",
+  "rel": "HungerG/sky-temple.html",
+  "kb": 789,
+  "title": "sky-temple",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
  }
 ]

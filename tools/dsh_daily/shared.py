@@ -16,6 +16,7 @@ import zipfile
 from . import ingest, win
 
 MIN_MODELS = 3
+FOLD_INTO = {"hungerg-sky-temple": "the-pagoda"}   # sky temple and pagoda are one brief
 STAGE = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily/shared"
 REMOTE_DIR = "C:/Users/Eamon/dsh"
 DEST = "C:\\Users\\eamon\\Desktop\\Model Testing - Shared Builds"
@@ -162,7 +163,9 @@ def build(*, deploy: bool = True) -> dict:
     specs = json.loads((ingest.DOCS / "model-testing-prompts.json").read_text())["spec_prompts"]
     rows = [r for r in records(text) if _spec_of(r, set(specs))]
     for r in rows:
-        r["spec"] = _spec_of(r, set(specs))
+        # a handful of briefs are one build under two names — Eamon: "sky temple and pagoda
+        # are the same thing" — so file those under the prompt the group already uses
+        r["spec"] = FOLD_INTO.get(r["slug"], _spec_of(r, set(specs)))
 
     groups: dict[str, list[dict]] = {}
     for r in rows:

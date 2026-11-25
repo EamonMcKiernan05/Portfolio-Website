@@ -70,7 +70,7 @@ code{font-family:var(--mono);font-size:.9em;background:#1d1a14;padding:1px 5px;c
 .gal-h .gal-grid{margin-top:22px}
 
 /* cards (index) */
-.gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:18px}
 .gal-card{display:flex;flex-direction:column;min-width:0;background:transparent;border:1px solid var(--line);color:inherit;transition:border-color .18s ease}
 .gal-card:hover{border-color:var(--accent)}
 .gal-card:focus-visible{border-color:var(--accent);outline:1px solid var(--accent);outline-offset:2px}
@@ -188,9 +188,10 @@ footer{border-top:1px solid var(--line);margin:84px 0 0;padding:26px 0 60px;disp
   <section class="gal-sec">
     <div class="gal-sec-h"><span class="gal-sec-n">02</span><div class="gal-sec-t">How it was served</div><span class="gal-sec-rule"></span></div>
     <p class="gal-sec-s">Session captured from the harness. Maya M is the local llama.cpp engine serving this model, not a harness; the model id is as configured there and is not checked against the vendor&#x27;s own list.</p><dl class="gal-dl">
-      <dt>Provider</dt><dd>Maya M (llama.cpp engine)</dd>
+      <dt>Provider</dt><dd>Maya</dd>
       <dt>Harness</dt><dd>DeepSeek Harness</dd>
-      <dt>Model</dt><dd>/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf</dd>
+      <dt>Model</dt><dd>qwen3.8-27b-ud-q8_k_xl</dd>
+      <dt>Serving config</dt><dd>/mnt/nvme/Qwen3.8-27B/Qwen3.8-27B-UD-Q8_K_XL.gguf</dd>
     </dl>
   </section>
 
