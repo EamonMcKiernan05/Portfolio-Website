@@ -209,9 +209,10 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
         # name is a single word — otherwise "create one complete, self-contained html" wins
         if not hits and overlap < min(2, len(want)):
             continue
-        gap = (build_ms - (s.get("t_end") or 0)) if build_ms else 0.0
-        gap = gap if gap >= 0 else 4e12 - gap        # a session that ended after the file is suspect
-        score = (-overlap, -hits, gap)
+        # a session normally ends a few minutes after its last file write, so compare the two
+        # times symmetrically — penalising "ended after the file" picked the wrong pagoda run
+        gap = abs(build_ms - (s.get("t_end") or 0)) if build_ms else 0.0
+        score = (-overlap, gap, -hits)   # timing beats write counts: greps inflate those
         if best is None or score < best[0]:
             best = (score, s)
     return best[1] if best else None
