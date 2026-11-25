@@ -381,9 +381,11 @@ def main() -> int:
         # copy after the workspace is known
         for v in videos:
             if "clip" in v and v.get("workspace"):
+                # DESKTOP_SUBDIR already starts with "Desktop/" — prefixing it again put five
+                # clips in C:\Users\eamon\Desktop\Desktop\Model Testing Videos
                 win.push(pathlib.Path(v["clip"]),
-                         f"Desktop/{record.DESKTOP_SUBDIR}/{v['workspace']}/{v['slug']}.mp4")
-                v["desktop"] = f"Desktop\\{record.DESKTOP_SUBDIR}\\{v['workspace']}\\{v['slug']}.mp4"
+                         f"{record.DESKTOP_SUBDIR}/{v['workspace']}/{v['slug']}.mp4")
+                v["desktop"] = f"{record.DESKTOP_SUBDIR}\\{v['workspace']}\\{v['slug']}.mp4"
         ingest.rebuild()
 
     result = {"ingested": [r["slug"] for r in recs], "videos": videos, "publish": None}
