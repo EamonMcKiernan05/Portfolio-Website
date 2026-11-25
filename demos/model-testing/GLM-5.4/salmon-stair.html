@@ -63,7 +63,7 @@
   <div class="title">
     <h1>THE SALMON STAIR</h1>
     <div class="sub">Three basalt steps · a sockeye leaps the low lip</div>
-    <div class="hint">Drag to orbit · Scroll to zoom · a salmon holds in the rest pocket, then leaps</div>
+    <div class="hint">Drag to orbit · Scroll to zoom · two sockeye climb the stair, turn below the culvert and leap back down</div>
   </div>
   <div class="controls">
     <button class="btn on" id="btnCine" type="button" aria-pressed="true">Cinematic</button>
@@ -73,7 +73,7 @@
   <div id="panel">
     <h2>Counting station</h2>
     <div id="rows"></div>
-    <div id="check"><div id="verdict">A sockeye holds behind the upstanding rock, waiting for the lip.</div></div>
+    <div id="check"><div id="verdict">Two sockeye hold in the tail pool on the bottom step, waiting to climb the stair.</div></div>
   </div>
 </div>
 <script type="module">
@@ -573,10 +573,10 @@ const SHELTER = { x0: -0.6, x1: 1.1, z0: -1.35, z1: -0.28, floor: 0.56, eave: 1.
 const BOARD = { x0: -0.55, x1: 0.0, y0: -0.02, y1: 0.92, z: -0.16 };
 const GATE = { x: 0.445, z0: -0.27, z1: -0.07, lift: 0.30, panelH: 0.42 };
 const CULV = { dn: { x: -2.62, y: 0.02, r: 0.19 }, up: { x: 2.66, y: 0.64, r: 0.19 } };
-const LEAPS = {
-  B: { from: [0.08, 0.05, 0.62], v: [1.3, 3.6, 0], waypoints: [[-0.34, 0.03, 0.80]] },
-  A: { from: [1.0, 0.31, 0.5], v: [1.25, 3.0, 0], waypoints: [] },
-  C: { from: [-1.6, -0.12, 0.5], v: [1.35, 2.9, 0], waypoints: [] },
+const LEAPS = {                                                   // upstream leaps: z is relative to the stream centreline (ZC)
+  B: { from: [0.08, 0.05, 0.30], v: [1.3, 3.6, 0], waypoints: [[-0.34, 0.03, 0.34]] },
+  A: { from: [1.0, 0.31, 0.18], v: [1.25, 3.0, 0], waypoints: [] },
+  C: { from: [-1.6, -0.05, 0.16], v: [1.35, 2.9, 0], waypoints: [] },
 };
 const ALDERS = [                                                      // [x, z, height, lean toward the stream]
   { x: 1.5, z: 1.4, h: 1.85, lean: 0.42, leanX: -0.4 },
@@ -1480,7 +1480,7 @@ function leafSway(mat, amp, flutter) {
 }
 
 // ------------------------------------------------------------------- sockeye
-const FISH = [], NF = 9;
+const FISH = [];
 let fishMesh, fishGeo; const FISH_ATTR = {};
 let leapCount = 0;
 const _c = new THREE.Color();
@@ -1575,71 +1575,100 @@ function buildFish() {
   for (let i = 0; i < NF; i++) FISH.push(makeFish(i));
   layoutInitial();
 }
-function makeFish(i) {
-  return { i, len: rr(0.56, 0.68), pos: new THREE.Vector3(0, -30, 0), vel: new THREE.Vector3(), yaw: 0, pitch: 0, roll: 0, state: 'idle', t: 0, holdT: 0, target: new THREE.Vector3(),
-    waypoints: [], launchFrom: new THREE.Vector3(), leap: null, leapName: null, air: false, pref: 0.14 + 0.05 * (i % 4), lane: rr(-0.12, 0.12), phase: rr(0, TAU), amp: 0.5, freq: 2, retarget: 0, after: null, leaps: 0, spawnDelay: 0 };
-}
+// ------------------------------------------------------------------ fish loop
+// Two sockeye run a closed loop: tail pool (bottom step) -> hold in the rest
+// pocket -> leap C, B, A -> hold in the top pool -> turn around -> leap back
+// down A, B, C -> return to the exact start spot in the tail pool. Each fish
+// rides its own lane (near / far bank) and its own clock so they never meet.
+const NF = 2;
+const LANES = [0.22, -0.22];                        // lateral offset from the stream centreline
+const START = [[-1.95, -0.10, ZC + 0.18], [-2.15, -0.12, ZC - 0.18]];   // the two start/finish stations in the tail pool
 const HOLD_AFTER = { 0: 'holdTail', 1: 'holdTake', 2: 'holdLand', 3: 'holdUpper' };
+function makeFish(i) {
+  return { i, len: 0.60 + 0.05 * i, pos: new THREE.Vector3(), vel: new THREE.Vector3(), yaw: 0, pitch: 0, roll: 0, state: 'idle', t: 0, holdT: 0, target: new THREE.Vector3(),
+    waypoints: [], launchFrom: new THREE.Vector3(), leap: null, leapName: null, air: false, lane: LANES[i], phase: rr(0, TAU), amp: 0.5, freq: 2, after: null, leaps: 0, dir: 1, lap: 0, start: new THREE.Vector3(...START[i]), clock: 0, waitT: 0 };
+}
 function layoutInitial() {
-  const set = (f, st, x, y, z, holdT) => { f.state = st; f.pos.set(x, y, z); f.vel.set(0, 0, 0); f.t = 0; f.holdT = holdT; f.yaw = rr(-0.15, 0.15); f.retarget = 0; computeHoldTarget(f); };
-  set(FISH[0], 'holdTake', -0.36, 0.06, 0.44, 2.4);
-  set(FISH[1], 'holdTake', -0.52, 0.05, 0.62, 9.5);
-  set(FISH[2], 'holdTake', -0.30, 0.04, 0.56, 17);
-  set(FISH[3], 'holdTail', -1.9, -0.1, 0.25, 1.5);
-  set(FISH[4], 'holdTail', -2.05, -0.12, 0.4, 6.5);
-  set(FISH[5], 'holdLand', 0.92, 0.3, 0.55, 5.5);
-  set(FISH[6], 'holdUpper', 1.9, 0.5, 0.3, 3.5);
-  for (const f of [FISH[7], FISH[8]]) { f.state = 'enter'; f.pos.set(-2.5 + 0.2 * (f.i - 7), -0.1, ZC + rr(-0.08, 0.08)); f.vel.set(0.6, 0, 0); f.yaw = 0; f.t = 0; }
+  FISH.forEach((f, i) => { f.pos.copy(f.start); f.vel.set(0, 0, 0); f.yaw = 0; f.state = 'holdTail'; f.t = 0; f.holdT = i === 0 ? 9.0 : 1.5; f.retarget = 0; f.dir = 1; computeHoldTarget(f); });
 }
 // the holding spot: the most lipward point in the pool where the local speed matches the fish's preference, near its lane
 function computeHoldTarget(f) {
   if (f.state !== 'holdTake') {
     const base = { holdTail: [-1.85, -0.1, 0.3], holdLand: [0.95, 0.3, 0.5], holdUpper: [1.9, 0.5, 0.3] }[f.state] || [0, 0, 0];
-    f.target.set(base[0] + f.lane * 0.5, base[1] - f.lane * 0.15, base[2] + f.lane); return;
+    f.target.set(base[0], base[1] - Math.abs(f.lane) * 0.15, base[2] + f.lane); return;
   }
   let bx = -0.4, bz = 0.5, bc = 1e9;
   for (let x = -1.0; x <= -0.08; x += 0.04) for (let z = 0.05; z <= 0.88; z += 0.04) {
     if (Math.abs(z - ZC) > halfWidth(x) * 0.92 - 0.06) continue;
     if (LEVELS[1] - terrainH(x, z) < 0.2) continue;
     const [vx, vz] = flowVel(x, z), sp = Math.hypot(vx, vz);
-    const cost = Math.abs(sp - f.pref) * 6 + Math.pow((0.1 - x) / 0.9, 2) * 0.35 + Math.pow((z - (0.5 + f.lane)) / 0.22, 2) * 0.6 + Math.max(0, sp - 0.5) * 8;
+    const cost = Math.abs(sp - 0.17) * 6 + Math.pow((0.1 - x) / 0.9, 2) * 0.35 + Math.pow((z - (ZC + f.lane)) / 0.22, 2) * 0.6 + Math.max(0, sp - 0.5) * 8;
     if (cost < bc) { bc = cost; bx = x; bz = z; }
   }
-  f.target.set(bx, LEVELS[1] - 0.09 - f.lane * 0.15, bz);
+  f.target.set(bx, LEVELS[1] - 0.09 - Math.abs(f.lane) * 0.15, bz);
 }
 function lipFree() { return !FISH.some(f => (f.state === 'approach' && f.leapName === 'B') || (f.state === 'leap' && f.leap && f.leap.name === 'B') || (f.state === 'settle' && f.leap && f.leap.name === 'B')); }
+// the leap tables: upstream (dir 1) and downstream (dir -1). z is relative to the stream centreline; the fish's lane is added and clamped into the water.
+const LEAPS_DOWN = {
+  A: { from: [1.46, 0.56, 0.0], v: [-1.2, 1.6, 0], waypoints: [] },
+  B: { from: [0.52, 0.34, 0.26], v: [-1.25, 1.5, 0], waypoints: [[0.7, 0.34, 0.26]] },
+  C: { from: [-1.18, 0.12, 0.0], v: [-1.3, 1.4, 0], waypoints: [[-0.9, 0.10, 0.0]] },
+};
+function inLane(f, p) {                       // p = [x, y, zRel] -> a point in the fish's lane, clamped inside the wetted channel
+  const hw = halfWidth(p[0]), z = clamp(ZC + p[2] + f.lane, ZC - hw + 0.14, ZC + hw - 0.14);
+  return new THREE.Vector3(p[0], p[1], z);
+}
 function startApproach(f, name) {
-  const L = LEAPS[name]; f.state = 'approach'; f.t = 0; f.leapName = name;
-  f.waypoints = L.waypoints.map(w => new THREE.Vector3(...w));
-  f.launchFrom.set(...L.from); f.launchFrom.z += f.lane * 0.15;
+  const L = f.dir > 0 ? LEAPS[name] : LEAPS_DOWN[name]; f.state = 'approach'; f.t = 0; f.leapName = name;
+  f.waypoints = L.waypoints.map(w => inLane(f, w));
+  f.launchFrom.copy(inLane(f, L.from));
 }
 function startLeap(f) {
-  const name = f.leapName, L = LEAPS[name], step = STEPS.find(s => s.name === name);
+  const name = f.leapName, L = f.dir > 0 ? LEAPS[name] : LEAPS_DOWN[name], step = STEPS.find(s => s.name === name);
   f.state = 'leap'; f.t = 0; f.air = false;
-  f.leap = { name, up: step.up, dn: step.dn, crestX: step.x, crest: step.crest, clear: -1 };
-  f.vel.set(L.v[0] * rr(0.97, 1.03), L.v[1] * rr(0.98, 1.02), L.v[2]);
+  // going up: dn is the pool below the crest, up the pool above; going down the fish leaves `up` and lands in `dn`
+  f.leap = { name, up: step.up, dn: step.dn, crestX: step.x, crest: step.crest, clear: -1, dir: f.dir };
+  const j = f.dir > 0 ? rr(0.98, 1.02) : rr(0.97, 1.03);
+  f.vel.set(L.v[0] * j, L.v[1] * (f.dir > 0 ? rr(0.99, 1.01) : rr(0.97, 1.03)), L.v[2]);
+  f.pos.copy(inLane(f, L.from));                                  // the arc starts exactly at the launch station
   if (name === 'B') { leapCount++; f.leaps++; }
 }
 function landFish(f, t) {
-  const L = LEVELS[f.leap.up];
+  const L = LEVELS[f.leap.dir > 0 ? f.leap.up : f.leap.dn];
   splash(f.pos.x, L, f.pos.z, 1.0, 70); spawnRing(f.pos.x, f.pos.z, 0.05, t);
   f.state = 'settle'; f.t = 0; f.air = false; f.vel.multiplyScalar(0.35); f.vel.y = -0.3;
-  f.after = HOLD_AFTER[f.leap.up];
-  if (f.leap.name === 'B') CHECK.note(`<span class="fish">salmon ${f.i + 1} clears the lip by ${(Math.max(f.leap.clear, 0) * 100).toFixed(0)} cm</span> and lands in the pool that supplies the water`);
+  f.after = f.leap.dir > 0 ? HOLD_AFTER[f.leap.up] : HOLD_AFTER[f.leap.dn];
+  if (f.leap.name === 'B') CHECK.note(`<span class="fish">salmon ${f.i + 1} ${f.leap.dir > 0 ? 'clears the lip by ' + (Math.max(f.leap.clear, 0) * 100).toFixed(0) + ' cm and lands in the pool that supplies the water' : 'turns back down the stair'}</span>`);
 }
 function steer(f, tgt, h, k, c, fx, fz, drift) {
   f.vel.x += (k * (tgt.x - f.pos.x) - c * f.vel.x) * h;
   f.vel.y += (k * (tgt.y - f.pos.y) - c * f.vel.y) * h;
   f.vel.z += (k * (tgt.z - f.pos.z) - c * f.vel.z) * h;
   f.pos.x += (f.vel.x + fx * drift) * h; f.pos.y += f.vel.y * h; f.pos.z += (f.vel.z + fz * drift) * h;
+  // a swimming fish never leaves the water: keep it inside the wetted channel and below the surface
+  const hw = halfWidth(f.pos.x), zLim = Math.max(hw - 0.12, 0.05);
+  if (f.pos.z > ZC + zLim) { f.pos.z = ZC + zLim; if (f.vel.z > 0) f.vel.z = 0; }
+  if (f.pos.z < ZC - zLim) { f.pos.z = ZC - zLim; if (f.vel.z < 0) f.vel.z = 0; }
   const L = LEVELS[poolIndexAt(f.pos.x)], bed = terrainH(f.pos.x, f.pos.z);
   if (f.pos.y > L - 0.06) f.pos.y = L - 0.06;
   if (f.pos.y < bed + 0.09) f.pos.y = bed + 0.09;
 }
+// soft separation: two fish never overlap. Only the fish that is holding (not on a path) yields, so an
+// approaching fish always reaches its launch station; a leaping fish is above the water and is ignored.
+function separate(h) {
+  const [a, b] = FISH; if (!b) return;
+  const dx = b.pos.x - a.pos.x, dz = b.pos.z - a.pos.z, d = Math.hypot(dx, dz), min = 0.46;
+  if (d < min && d > 1e-4) {
+    const moving = f => f.state !== 'leap' && !(f.state.startsWith('hold'));
+    let ka = !moving(a) ? 1 : 0, kb = !moving(b) ? 1 : 0; if (!ka && !kb) { ka = 1; kb = 1; }
+    const s = ka + kb;
+    const push = (min - d) * 6 * h / d;
+    a.pos.x -= dx * push * ka / s; a.pos.z -= dz * push * ka / s; b.pos.x += dx * push * kb / s; b.pos.z += dz * push * kb / s;
+  }
+}
 function stepFish(h, t) {
   for (const f of FISH) {
-    if (f.state === 'idle') { f.spawnDelay -= h; if (f.spawnDelay <= 0) { f.state = 'enter'; f.pos.set(-2.5, -0.1, ZC + rr(-0.08, 0.08)); f.vel.set(0.6, 0, 0); f.yaw = 0; f.t = 0; } continue; }
-    f.t += h;
+    f.t += h; f.clock += h;
     const [fx, fz] = flowVel(f.pos.x, f.pos.z), fsp = Math.hypot(fx, fz);
     let pitchT = 0, rollT = 0, moving = false, yawT;
     switch (f.state) {
@@ -1648,28 +1677,38 @@ function stepFish(h, t) {
         steer(f, f.target, h, 2.5, 2.2, fx, fz, 0.12);
         f.amp = 0.3 + 0.9 * fsp; f.freq = 1.6 + 2.5 * fsp;
         if (f.t > f.holdT) {
-          if (f.state === 'holdTail') startApproach(f, 'C');
-          else if (f.state === 'holdTake') { if (lipFree()) startApproach(f, 'B'); else f.holdT = f.t + rr(1, 3); }
-          else if (f.state === 'holdLand') startApproach(f, 'A');
-          else if (f.state === 'holdUpper') { f.state = 'exit'; f.t = 0; }
+          if (f.dir > 0) {
+            if (f.state === 'holdTail') startApproach(f, 'C');
+            else if (f.state === 'holdTake') { if (lipFree()) startApproach(f, 'B'); else f.holdT = f.t + rr(1, 3); }
+            else if (f.state === 'holdLand') startApproach(f, 'A');
+            else if (f.state === 'holdUpper') { f.dir = -1; f.holdT = f.t + 1.2; CHECK.note(`salmon ${f.i + 1} reaches the top pool, turns below the culvert and heads back down`); }
+          } else {
+            if (f.state === 'holdUpper') startApproach(f, 'A');
+            else if (f.state === 'holdLand') startApproach(f, 'B');
+            else if (f.state === 'holdTake') startApproach(f, 'C');
+            else if (f.state === 'holdTail') { f.state = 'return'; f.t = 0; }
+          }
         }
         break;
       }
       case 'approach': {
         const tgt = f.waypoints.length ? f.waypoints[0] : f.launchFrom;
         steer(f, tgt, h, 6, 3.2, fx, fz, 0.05); moving = true; f.amp = 0.95; f.freq = 4.5;
-        if (f.pos.distanceTo(tgt) < 0.07) { if (f.waypoints.length) f.waypoints.shift(); else startLeap(f); }
+        // arrive when the horizontal station is reached; depth is whatever the bed allows (the launch sets the rest)
+        const dx = tgt.x - f.pos.x, dz = tgt.z - f.pos.z, hd = Math.hypot(dx, dz);
+        if (hd < 0.06 && (!f.waypoints.length || Math.abs(tgt.y - f.pos.y) < 0.12)) { if (f.waypoints.length) f.waypoints.shift(); else startLeap(f); }
         break;
       }
       case 'leap': {
         f.vel.y -= 9.81 * h; f.pos.addScaledVector(f.vel, h);
         f.amp = 0.06; f.freq = 1.2; moving = true;
-        const L = LEVELS[f.leap.dn];
-        if (!f.air && f.pos.y > L) { f.air = true; splash(f.pos.x, L, f.pos.z, 0.45, 18); spawnRing(f.pos.x, f.pos.z, 0.02, t); }
-        if (f.leap.clear < 0 && f.pos.x >= f.leap.crestX) f.leap.clear = f.pos.y - f.leap.crest;
-        if (f.air && f.vel.y < 0 && f.pos.y <= LEVELS[f.leap.up] && f.pos.x > f.leap.crestX) { f.pos.y = LEVELS[f.leap.up] - 0.01; landFish(f, t); }
-        else if (f.air && f.vel.y < 0 && f.pos.y <= L - 0.02 && f.pos.x < f.leap.crestX) {
-          f.pos.y = LEVELS[f.leap.dn] - 0.01; splash(f.pos.x, LEVELS[f.leap.dn], f.pos.z, 0.8, 40); spawnRing(f.pos.x, f.pos.z, 0.045, t);
+        const up = f.leap.dir > 0, Lland = LEVELS[up ? f.leap.up : f.leap.dn], Lfrom = LEVELS[up ? f.leap.dn : f.leap.up];
+        if (!f.air && (up ? f.pos.y > Lfrom : f.pos.y > Lfrom - 0.02 || f.pos.x < f.leap.crestX)) { f.air = true; splash(f.pos.x, Lfrom, f.pos.z, 0.45, 18); spawnRing(f.pos.x, f.pos.z, 0.02, t); }
+        if (f.leap.clear < 0 && up && f.pos.x >= f.leap.crestX) f.leap.clear = f.pos.y - f.leap.crest;
+        const pastCrest = up ? f.pos.x > f.leap.crestX : f.pos.x < f.leap.crestX - 0.05;
+        if (f.air && f.vel.y < 0 && f.pos.y <= Lland && pastCrest) { f.pos.y = Lland - 0.01; landFish(f, t); }
+        else if (up && f.air && f.vel.y < 0 && f.pos.y <= Lland - 0.02 && !pastCrest) {
+          f.pos.y = Lland - 0.01; splash(f.pos.x, Lland, f.pos.z, 0.8, 40); spawnRing(f.pos.x, f.pos.z, 0.045, t);
           f.state = 'settle'; f.t = 0; f.air = false; f.vel.multiplyScalar(0.3); f.vel.y = -0.2; f.after = HOLD_AFTER[f.leap.dn];
           CHECK.note(`salmon ${f.i + 1} falls short at step ${f.leap.name} and drops back into the pocket`);
         }
@@ -1680,14 +1719,21 @@ function stepFish(h, t) {
         f.amp = 0.85; f.freq = 3; moving = true;
         const bed = terrainH(f.pos.x, f.pos.z); if (f.pos.y < bed + 0.09) f.pos.y = bed + 0.09;
         if (f.pos.y > LEVELS[poolIndexAt(f.pos.x)] - 0.06) f.pos.y = LEVELS[poolIndexAt(f.pos.x)] - 0.06;
-        if (f.t > 0.7) { f.state = f.after; f.t = 0; f.holdT = f.after === 'holdTake' ? rr(11, 22) : f.after === 'holdTail' ? rr(2, 5) : f.after === 'holdLand' ? rr(6, 12) : rr(4, 8); f.retarget = 0; }
+        if (f.t > 0.7) {
+          f.state = f.after; f.t = 0; f.retarget = 0;
+          if (f.dir > 0) { const m = f.i === 0 ? 1.6 : 1.0; f.holdT = (f.after === 'holdTake' ? rr(9, 14) : f.after === 'holdTail' ? rr(2, 5) : f.after === 'holdLand' ? rr(5, 9) : rr(4, 7)) * m; }
+          else { const m = f.i === 0 ? 1.5 : 1.0; f.holdT = (f.after === 'holdLand' ? rr(3, 5) : f.after === 'holdTake' ? rr(6, 10) : rr(2, 4)) * m; }
+        }
         break;
       }
-      case 'enter': case 'exit': {
-        const tgt = f._t || (f._t = new THREE.Vector3());
-        if (f.state === 'enter') tgt.set(-1.85, -0.1, 0.3 + f.lane); else tgt.set(2.56, 0.52, ZC);
-        steer(f, tgt, h, 4, 2.6, fx, fz, 0.05); moving = true; f.amp = 0.8; f.freq = 3.2;
-        if (f.pos.distanceTo(tgt) < 0.12) { if (f.state === 'enter') { f.state = 'holdTail'; f.t = 0; f.holdT = rr(1.5, 5); f.retarget = 0; } else { f.state = 'idle'; f.pos.y = -30; f.spawnDelay = rr(5, 14); } }
+      case 'return': {
+        // swim back to the exact start/finish station, settle there, then begin the next lap upstream
+        steer(f, f.start, h, 5, 3, fx, fz, 0.02); moving = true; f.amp = 0.8; f.freq = 3.2;
+        if (f.pos.distanceTo(f.start) < 0.03) {
+          f.pos.copy(f.start); f.vel.set(0, 0, 0); f.state = 'holdTail'; f.t = 0; f.dir = 1; f.lap++; f.leaps = 0;
+          f.holdT = f.i === 0 ? 4.0 : 2.5; f.waitT = 0;
+          if (f.i === 0) CHECK.note(`salmon ${f.i + 1} is back on the bottom step where it started — lap ${f.lap + 1} begins`);
+        }
         break;
       }
     }
@@ -1700,7 +1746,9 @@ function stepFish(h, t) {
     f.yaw += angDiff(yawT, f.yaw) * k; f.pitch += (pitchT - f.pitch) * k; f.roll += (rollT - f.roll) * k * 0.7;
     f.phase += f.freq * TAU * h;
   }
+  separate(h);
 }
+
 const _m4 = new THREE.Matrix4(), _qp = new THREE.Quaternion(), _qr = new THREE.Quaternion(), _p = new THREE.Vector3(), _s = new THREE.Vector3();
 const _X = new THREE.Vector3(1, 0, 0), _Y = new THREE.Vector3(0, 1, 0), _Z = new THREE.Vector3(0, 0, 1);
 function updateFishVisual() {
@@ -1972,9 +2020,9 @@ function updatePanel() {
     `<div class="row"><span>leaps</span><span class="bar">${bar((leapCount % 10) / 10)}</span><b>${leapCount}</b></div>` +
     `<div class="row"><span>wind</span><span class="bar">${bar(wind / 0.9)}</span><b>${wind.toFixed(2)}</b></div>` +
     `<div class="cap">discharge split · gate ${BYPASS.open ? 'open' : 'closed'} · pocket speed behind the upstanding rock</div>`;
-  const holding = FISH.filter(f => f.state === 'holdTake').length, lane = FISH.filter(f => f.state === 'enter' || f.state === 'holdTail').length, above = FISH.filter(f => f.state === 'holdLand' || f.state === 'holdUpper' || f.state === 'exit').length;
-  let s = CHECK.log.length ? CHECK.log[CHECK.log.length - 1] : 'A sockeye holds behind the upstanding rock, waiting for the lip.';
-  s += `<br><span class="wet">holding in the pocket ${holding} · in the approach lane ${lane} · above the lip ${above}</span>`;
+  const holding = FISH.filter(f => f.state === 'holdTake').length, lane = FISH.filter(f => f.state === 'enter' || f.state === 'holdTail' || f.state === 'return').length, above = FISH.filter(f => f.state === 'holdLand' || f.state === 'holdUpper' || f.state === 'exit').length, leaping = FISH.filter(f => f.state === 'leap' || f.state === 'approach' || f.state === 'settle').length;
+  let s = CHECK.log.length ? CHECK.log[CHECK.log.length - 1] : 'Two sockeye hold in the tail pool, waiting to climb the stair.';
+  s += `<br><span class="wet">tail pool ${lane} · rest pocket ${holding} · above the lip ${above} · on the move ${leaping}</span>`;
   checkVerdict.innerHTML = s;
 }
 

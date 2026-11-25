@@ -149,6 +149,16 @@
   "tools": 490,
   "turns": 3
  },
+ "glm-5-4-floating-classroom": {
+  "finish": "24 Nov 2026 15:58",
+  "first_pass": 17,
+  "followups": 0,
+  "minutes": 17,
+  "start": "24 Nov 2026 15:41",
+  "steps": 31,
+  "tools": 31,
+  "turns": 1
+ },
  "glm-5-4-kettle-lake": {
   "finish": "24 Nov 2026 11:00",
   "first_pass": 42,

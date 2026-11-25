@@ -1171,6 +1171,7 @@ function buildSkyBackdrop() {
 let SUN_LIGHT = null;
 let HEMI_LIGHT = null;
 let SKY_FILL = null;
+let BACK_FILL = null;
 
 function buildSkyAndLights() {
   makeSkyTextures();
@@ -1205,6 +1206,14 @@ function buildSkyAndLights() {
   SKY_FILL.target.position.set(0, 0.5, -0.4);
   SCENE.add(SKY_FILL);
   SCENE.add(SKY_FILL.target);
+
+  /* A soft, cool bounce from the open sky behind the chunk keeps the sawn
+     back face legible instead of reading as a black void. No shadows. */
+  BACK_FILL = new THREE.DirectionalLight(0x9fbac8, 1.65);
+  BACK_FILL.position.set(4.0, 8.5, -22.0);
+  BACK_FILL.target.position.set(0.0, -0.2, -1.0);
+  SCENE.add(BACK_FILL);
+  SCENE.add(BACK_FILL.target);
 }
 
 /* ---------------------------------------------------------------- camera */
@@ -3445,18 +3454,19 @@ function buildCutWall(ring, lips) {
       nor[vi * 3] = 0; nor[vi * 3 + 1] = 0; nor[vi * 3 + 2] = -1;
       uv[vi * 2] = (x - xMin) / Math.max(0.001, xMax - xMin);
       uv[vi * 2 + 1] = 1 - fr;
-      const shade = clamp(0.66 + 0.34 * smoothstep(BASE_Y - 0.4, yTop, y), 0.5, 1);
-      const damp = smoothstep(-0.4, -1.3, y) * 0.22;
-      col[vi * 3] = shade * (1 - damp * 0.45) * 0.94;
-      col[vi * 3 + 1] = shade * (1 - damp * 0.42) * 0.93;
-      col[vi * 3 + 2] = shade * (1 - damp * 0.52) * 0.90;
+      const shade = clamp(0.82 + 0.22 * smoothstep(BASE_Y - 0.4, yTop, y), 0.74, 1.04);
+      const damp = smoothstep(-0.4, -1.3, y) * 0.12;
+      col[vi * 3] = shade * (1 - damp * 0.30) * 0.98;
+      col[vi * 3 + 1] = shade * (1 - damp * 0.28) * 0.96;
+      col[vi * 3 + 2] = shade * (1 - damp * 0.36) * 0.92;
     }
   }
   for (let c = 0; c < cols.length - 1; c++) {
     for (let rr = 0; rr < rows - 1; rr++) {
       const a = c * rows + rr, b = (c + 1) * rows + rr;
       const cc = c * rows + rr + 1, d = (c + 1) * rows + rr + 1;
-      idx.push(a, b, cc, b, d, cc);
+      /* wound so the flat back face is front-facing from behind the sawn cut */
+      idx.push(a, cc, b, b, cc, d);
     }
   }
   const g = new THREE.BufferGeometry();
@@ -3465,7 +3475,13 @@ function buildCutWall(ring, lips) {
   g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
   g.setAttribute('color', new THREE.BufferAttribute(col, 3));
   g.setIndex(idx);
-  const mesh = new THREE.Mesh(g, MAT.strata);
+  /* The sawn face is permanently in shade; a faint texture-bearing emissive
+     term keeps its strata readable instead of collapsing into a black void. */
+  const cutMat = MAT.strata.clone();
+  cutMat.emissive = new THREE.Color(0xc9a77c);
+  cutMat.emissiveMap = TEX.strata.albedo;
+  cutMat.emissiveIntensity = 0.85;
+  const mesh = new THREE.Mesh(g, cutMat);
   mesh.castShadow = true;
   mesh.receiveShadow = true;
   mesh.layers.set(0);
@@ -5792,10 +5808,11 @@ function buildFishMeshes(count) {
 /* ======================= 08-sim.js ======================= */
 /* ==========================================================================
    08 — the run. A fixed-step, seeded hydraulic and behavioural model:
-        fish enter the current, hold in the rock's slower wake by facing into
-        it, run to the low lip, commit to a gravity arc and land in the pool
-        that supplied the fall. The side-bypass narrows the lip jet and the
-        fish re-set their holding line before the next jump.
+        one sockeye rests at the low lip, leaps upstream into the pool that
+        fed the fall, turns in that pool, and leaps back down to the same
+        takeoff pocket. The other two fish sit out the loop in the lower step.
+        The side-bypass narrows the lip jet and the resting pair trim their
+        holding line before the next hop.
    ========================================================================== */
 
 const SIM = {
@@ -5805,32 +5822,41 @@ const SIM = {
   bypassBlend: 0,
   bypassChangedAt: -100,
   jetWidth: 1.08,
-  status: 'a sockeye is entering the current',
+  status: 'one sockeye rests below the lip; two hold the lower step',
   statusHold: 0,
   jumps: 0,
   lastLeap: null,
   airCount: 0,
   runners: [],
-  cooldown: 0,
   gust: { t: 99, amp: 0 },
   gustSchedule: [],
   manualBypass: false,
-  autoBypass: false,
-  autoLeapDone: false,
   frame: 0
 };
 
 const G = 9.81;
-const HOLD_SLOTS_CLOSED = [
-  { x: 1.95, z: 0.55 }, { x: 2.70, z: 0.45 }, { x: 3.30, z: 0.62 }
+
+/* The single closed-circuit leap. A is the takeoff pocket below the low lip;
+   B is the pool above that supplied the fall. */
+const LOOP = {
+  low: { x: 0.05, z: 0.48 },
+  high: { x: -1.50, z: 0.38 },
+  lowY: WATER_LO - 0.085,
+  highY: WATER_MID - 0.020,
+  upFlight: 1.12,
+  downFlight: 1.00,
+  rest: 2.25,
+  turnDelay: 0.95
+};
+
+/* The two non-jumping salmon are parked in the bottom step, wide enough
+   apart that their bodies never touch. The bypass lets them trim in slightly. */
+const SIT_SLOTS_CLOSED = [
+  { x: 2.25, z: 0.85 }, { x: 3.25, z: 0.55 }
 ];
-const HOLD_SLOTS_OPEN = [
-  { x: 1.78, z: 0.32 }, { x: 2.45, z: 0.62 }, { x: 3.02, z: 0.40 }
+const SIT_SLOTS_OPEN = [
+  { x: 2.05, z: 0.68 }, { x: 3.08, z: 0.38 }
 ];
-const FISH_START = [
-  { x: 3.18, z: 0.78 }, { x: 3.60, z: 0.95 }, { x: 3.92, z: 1.07 }
-];
-const SALMON_SCALE = 0.64;
 
 function currentAt(x, z, out) {
   const s = riverSample(x, z);
@@ -5879,319 +5905,251 @@ function flowHeading(x, z) {
   return Math.atan2(-dz, dx);
 }
 
-function slotTarget(index) {
-  const b = SIM.bypassBlend;
-  const a = HOLD_SLOTS_CLOSED[index], c = HOLD_SLOTS_OPEN[index];
-  return {
-    x: lerp(a.x, c.x, b),
-    z: lerp(a.z, c.z, b)
-  };
+function sitterSlot(index) {
+  const i = Math.max(0, Math.min(1, index - 1));
+  const a = SIT_SLOTS_CLOSED[i], b = SIT_SLOTS_OPEN[i];
+  const t = SIM.bypassBlend;
+  return { x: lerp(a.x, b.x, t), z: lerp(a.z, b.z, t) };
 }
 
 function makeRunner(index) {
   const mesh = FISH_MESH.groups[index];
-  const cfg = FISH_START[index];
+  const jumper = index === 0;
+  const p = jumper ? LOOP.low : sitterSlot(index);
   const runner = {
     index,
     mesh,
-    state: 'enter',
+    state: jumper ? 'restLow' : 'sit',
     stateT: 0,
-    pos: new THREE.Vector3(cfg.x, WATER_LO - 0.085, cfg.z),
+    pos: new THREE.Vector3(p.x, jumper ? LOOP.lowY : WATER_LO - 0.085, p.z),
     vel: new THREE.Vector3(),
     dir: new THREE.Vector3(-1, 0, 0),
     yaw: PI,
     pitch: 0,
     roll: 0,
     speed: 0,
-    holdX: cfg.x,
-    holdZ: cfg.z,
-    enterStep: 0,
-    approachStep: 0,
-    nextJump: [3.2, 15.2, 24.5][index] || 30,
-    respawnAt: 0,
     phase: index * 2.1 + 0.7,
     tailAmp: 0.018,
-    tailRate: 2.2,
+    tailRate: 1.6,
     surfaceY: WATER_LO,
-    wet: 0,
+    wet: 0.12,
     splashDone: false,
     leapData: null,
-    exitedAt: 0,
-    visible: true
+    visible: true,
+    holdYaw: PI,
+    turnTo: PI,
+    turnDelay: 0
   };
   mesh.group.position.copy(runner.pos);
   mesh.group.visible = true;
   return runner;
 }
 
-function setFishVisible(r, on) {
-  r.visible = on;
-  r.mesh.group.visible = on;
-}
-
 function setStatus(text, hold) {
   SIM.status = text;
-  SIM.statusHold = hold || 2.6;
+  SIM.statusHold = hold || 2.4;
 }
 
-/* --------------------------------------------------------------- the leap */
-function beginLeap(r) {
-  const launch = LAYOUT.launch;
-  const landing = LAYOUT.landing;
-  const jitter = (Math.sin((r.index + 1) * 7.13 + SIM.t * 0.31) * 0.5 + 0.5) * 0.07 - 0.035;
-  const targetX = landing.x + jitter;
-  const targetZ = landing.z + jitter * 0.6;
-  const startX = launch.x;
-  const startZ = launch.z + (r.index - 1) * 0.035;
-  const startY = WATER_LO - 0.015;
-  const flightT = 1.12 + Math.abs(jitter) * 0.4;
-  const vx = (targetX - startX) / flightT;
-  const vz = (targetZ - startZ) / flightT;
-  const landY = WATER_MID + 0.012;
-  const vy = (landY - startY + 0.5 * G * flightT * flightT) / flightT;
-  r.pos.set(startX, startY, startZ);
+/* ------------------------------------------------------------ the leap pair */
+function beginLoopUp(r) {
+  const A = LOOP.low, B = LOOP.high, T = LOOP.upFlight;
+  const startY = LOOP.lowY, endY = LOOP.highY;
+  const vx = (B.x - A.x) / T;
+  const vz = (B.z - A.z) / T;
+  const vy = (endY - startY + 0.5 * G * T * T) / T;
+  r.pos.set(A.x, startY, A.z);
   r.vel.set(vx, vy, vz);
-  r.state = 'air';
+  r.state = 'airUp';
   r.stateT = 0;
+  r.yaw = PI;
+  r.pitch = 0;
+  r.roll = 0;
   r.splashDone = false;
+  r.surfaceY = WATER_LO;
+  r.wet = 1;
+  r.tailAmp = 0.030;
+  r.tailRate = 4.6;
+  SIM.jumps++;
   r.leapData = {
-    start: { x: startX, y: startY, z: startZ },
-    end: { x: targetX, y: landY, z: targetZ },
+    kind: 'up',
+    start: { x: A.x, y: startY, z: A.z },
+    end: { x: B.x, y: endY, z: B.z },
     velocity: { x: vx, y: vy, z: vz },
-    flightT,
+    flightT: T,
     peak: startY + vy * vy / (2 * G),
-    jump: SIM.jumps + 1,
+    jump: SIM.jumps,
     t0: SIM.t
   };
-  SIM.jumps++;
   SIM.lastLeap = r.leapData;
-  SIM.cooldown = 1.15;
-  setStatus('airborne — a whole leap against the dark boards', 2.4);
-  if (typeof FX !== 'undefined' && FX.burst) FX.burst(startX, WATER_LO + 0.02, startZ, 0.55, 0);
-  if (typeof queueRipple === 'function') queueRipple(startX, startZ, 0.28);
+  if (typeof FX !== 'undefined' && FX.burst) FX.burst(A.x, WATER_LO + 0.02, A.z, 0.55, 0);
+  if (typeof queueRipple === 'function') queueRipple(A.x, A.z, 0.32);
+  setStatus('upstream over the low lip — into the pool that fed it', 1.8);
 }
 
-function landFish(r) {
-  if (r.splashDone) return;
-  r.splashDone = true;
-  const x = r.pos.x, z = r.pos.z;
-  if (typeof FX !== 'undefined' && FX.landingSplash) FX.landingSplash(x, WATER_MID, z, 1.0);
-  if (typeof queueRipple === 'function') queueRipple(x, z, 1.0);
-  setStatus('landed in the narrow pool that supplied the fall', 2.8);
-  SIM.lastLeap.landedAt = SIM.t;
+function beginLoopDown(r) {
+  const B = LOOP.high, A = LOOP.low, T = LOOP.downFlight;
+  const startY = LOOP.highY, endY = LOOP.lowY;
+  const vx = (A.x - B.x) / T;
+  const vz = (A.z - B.z) / T;
+  const vy = (endY - startY + 0.5 * G * T * T) / T;
+  r.pos.set(B.x, startY, B.z);
+  r.vel.set(vx, vy, vz);
+  r.state = 'airDown';
+  r.stateT = 0;
+  r.yaw = 0;
+  r.pitch = 0;
+  r.roll = 0;
+  r.splashDone = false;
+  r.surfaceY = WATER_MID;
+  r.wet = 1;
+  r.tailAmp = 0.030;
+  r.tailRate = 4.6;
+  SIM.jumps++;
+  r.leapData = {
+    kind: 'down',
+    start: { x: B.x, y: startY, z: B.z },
+    end: { x: A.x, y: endY, z: A.z },
+    velocity: { x: vx, y: vy, z: vz },
+    flightT: T,
+    peak: startY + vy * vy / (2 * G),
+    jump: SIM.jumps,
+    t0: SIM.t
+  };
+  SIM.lastLeap = r.leapData;
+  if (typeof FX !== 'undefined' && FX.burst) FX.burst(B.x, WATER_MID + 0.02, B.z, 0.45, 1);
+  if (typeof queueRipple === 'function') queueRipple(B.x, B.z, 0.28);
+  setStatus('turned around — back downstream over the low lip', 1.8);
+}
+
+function landHigh(r) {
+  const B = LOOP.high;
+  r.pos.set(B.x, LOOP.highY, B.z);
+  r.vel.set(0, 0, 0);
+  r.state = 'restHigh';
+  r.stateT = 0;
+  r.yaw = PI;
+  r.pitch = 0;
+  r.roll = 0;
+  r.surfaceY = WATER_MID;
+  r.wet = 0.16;
+  r.holdYaw = PI;
+  r.turnTo = 0;
+  r.turnDelay = LOOP.turnDelay;
+  if (!r.splashDone) {
+    r.splashDone = true;
+    if (typeof FX !== 'undefined' && FX.landingSplash) {
+      FX.landingSplash(B.x, WATER_MID, B.z, 0.82, WATER_MID, true, 0.42);
+    }
+    if (typeof queueRipple === 'function') queueRipple(B.x, B.z, 1.0);
+    if (r.leapData) r.leapData.landedAt = SIM.t;
+  }
+  setStatus('landed in the pool above — turning back downstream', 2.1);
+}
+
+function landLow(r) {
+  const A = LOOP.low;
+  r.pos.set(A.x, LOOP.lowY, A.z);
+  r.vel.set(0, 0, 0);
+  r.state = 'restLow';
+  r.stateT = 0;
+  r.yaw = 0;
+  r.pitch = 0;
+  r.roll = 0;
+  r.surfaceY = WATER_LO;
+  r.wet = 0.16;
+  r.holdYaw = 0;
+  r.turnTo = PI;
+  r.turnDelay = LOOP.turnDelay;
+  if (!r.splashDone) {
+    r.splashDone = true;
+    if (typeof FX !== 'undefined' && FX.landingSplash) {
+      FX.landingSplash(A.x, WATER_LO, A.z, 1.0, WATER_LO, false);
+    }
+    if (typeof queueRipple === 'function') queueRipple(A.x, A.z, 1.0);
+    if (r.leapData) r.leapData.landedAt = SIM.t;
+  }
+  setStatus('home in the takeoff pocket — turning upstream again', 2.1);
 }
 
 /* --------------------------------------------------------------- movement */
-function steerTo(r, tx, tz, dt, speed, yLevel) {
-  const dx = tx - r.pos.x, dz = tz - r.pos.z;
-  const d = Math.hypot(dx, dz);
-  const maxStep = speed * dt;
-  if (d > 1e-4) {
-    const step = Math.min(maxStep, d);
-    r.pos.x += dx / d * step;
-    r.pos.z += dz / d * step;
-    r.dir.set(dx / d, 0, dz / d);
-  }
-  r.pos.y = damp(r.pos.y, yLevel, 4.0, dt);
-  return d;
-}
-
 function updateRunner(r, dt) {
   r.stateT += dt;
   r.phase += r.tailRate * dt;
-  const slot = slotTarget(r.index);
-  const lowY = WATER_LO - 0.085 - 0.012 * Math.sin(SIM.t * 0.9 + r.index);
   const bob = 0.010 * Math.sin(SIM.t * 1.7 + r.index * 2.0);
-  const f = currentAt(r.pos.x, r.pos.z, { x: 0, z: 0 });
 
-  if (r.state === 'enter') {
-    const route = [
-      { x: 3.05, z: 0.98 + (r.index - 1) * 0.10 },
-      { x: 2.30, z: 0.86 + (r.index - 1) * 0.05 },
-      { x: slot.x, z: slot.z }
-    ];
-    const wp = route[Math.min(r.enterStep, route.length - 1)];
-    const d = steerTo(r, wp.x, wp.z, dt, 0.82 + r.index * 0.05, lowY + bob);
-    if (d < 0.14) {
-      if (r.enterStep < route.length - 1) r.enterStep++;
-      else {
-        r.state = 'hold';
-        r.stateT = 0;
-        setStatus('holding in the slack behind the standing rock', 2.2);
-      }
-    }
-    const local = currentAt(r.pos.x, r.pos.z, { x: 0, z: 0 });
-    const targetYaw = Math.atan2(-(-local.z), -local.x);
-    r.yaw = dampAngle(r.yaw, targetYaw, 4.0, dt);
-    r.tailAmp = 0.022;
-    r.tailRate = 2.8;
-    r.speed = Math.hypot(local.x, local.z);
-    r.surfaceY = WATER_LO;
-    r.wet = 0.12;
-    return;
-  }
-
-  if (r.state === 'hold') {
-    /* tail into the current: the drift is balanced by small corrections */
-    const local = currentAt(r.pos.x, r.pos.z, f);
-    const flowMag = Math.hypot(local.x, local.z);
-    const sway = Math.sin(SIM.t * 0.68 + r.index * 1.9) * 0.026;
-    const target = {
-      x: slot.x + sway + local.x * 0.085,
-      z: slot.z - Math.cos(SIM.t * 0.57 + r.index) * 0.022 + local.z * 0.085
-    };
-    r.pos.x = damp(r.pos.x, target.x, 2.1, dt);
-    r.pos.z = damp(r.pos.z, target.z, 2.1, dt);
-    r.pos.y = damp(r.pos.y, lowY + bob, 3.4, dt);
-    const targetYaw = Math.atan2(-(-local.z), -local.x) + Math.sin(SIM.t * 0.48 + r.index) * 0.075;
-    r.yaw = dampAngle(r.yaw, targetYaw, 3.0, dt);
-    r.pitch = damp(r.pitch, Math.sin(SIM.t * 0.8 + r.index) * 0.015, 3.0, dt);
-    r.roll = damp(r.roll, Math.sin(SIM.t * 0.72 + r.index * 1.4) * 0.026, 2.4, dt);
-    r.tailAmp = 0.024 + flowMag * 0.055;
-    r.tailRate = 2.4 + flowMag * 3.0;
-    r.speed = flowMag;
-    r.surfaceY = WATER_LO;
-    r.wet = 0.16;
-    SIM.airCount = SIM.runners.filter(q => q.state === 'air').length;
-    /* queue only one fish at a time, and never within the adaptation window */
-    const afterBypass = SIM.t - SIM.bypassChangedAt;
-    if (SIM.t >= r.nextJump && SIM.cooldown <= 0 && afterBypass > 2.8 && SIM.airCount === 0) {
-      r.state = 'approach';
-      r.stateT = 0;
-      r.approachStep = 0;
-      setStatus('a sockeye turns out of the slack and into the jet', 2.5);
-    }
-    return;
-  }
-
-  if (r.state === 'approach') {
-    const route = [
-      { x: 1.52, z: -0.08 },
-      { x: 0.92, z: 0.16 },
-      { x: 0.24, z: 0.34 },
-      { x: LAYOUT.launch.x, z: LAYOUT.launch.z }
-    ];
-    const wp = route[Math.min(r.approachStep, route.length - 1)];
-    const d = steerTo(r, wp.x, wp.z, dt, 0.96, WATER_LO - 0.075 + bob);
-    if (d < 0.12) {
-      if (r.approachStep < route.length - 1) {
-        r.approachStep++;
-      } else {
-        beginLeap(r);
-        return;
-      }
-    }
-    const local = currentAt(r.pos.x, r.pos.z, { x: 0, z: 0 });
-    const targetYaw = Math.atan2(-(-local.z), -local.x);
-    r.yaw = dampAngle(r.yaw, targetYaw, 6.0, dt);
-    r.pitch = damp(r.pitch, -0.03, 4.0, dt);
-    r.roll = damp(r.roll, 0, 4.0, dt);
-    r.tailAmp = 0.032 + Math.hypot(local.x, local.z) * 0.05;
-    r.tailRate = 3.3;
-    r.speed = Math.hypot(local.x, local.z);
-    r.surfaceY = WATER_LO;
-    r.wet = 0.2;
-    return;
-  }
-
-  if (r.state === 'air') {
+  if (r.state === 'airUp' || r.state === 'airDown') {
     r.vel.y -= G * dt;
     r.pos.x += r.vel.x * dt;
     r.pos.y += r.vel.y * dt;
     r.pos.z += r.vel.z * dt;
     const horiz = Math.hypot(r.vel.x, r.vel.z);
-    r.yaw = dampAngle(r.yaw, Math.atan2(-r.vel.z, r.vel.x), 14.0, dt);
+    r.yaw = dampAngle(r.yaw, Math.atan2(-r.vel.z, r.vel.x), 12.0, dt);
     r.pitch = clamp(Math.atan2(r.vel.y, horiz), -1.3, 1.2);
     r.roll = Math.sin(SIM.t * 8.0 + r.index) * 0.08;
     r.tailAmp = 0.028;
     r.tailRate = 4.8;
-    r.surfaceY = WATER_MID;
+    r.surfaceY = r.state === 'airUp' ? WATER_LO : WATER_MID;
     r.wet = 1;
-    if (!r.splashDone && r.pos.x < LAYOUT.lipX + 0.02 && r.pos.y <= WATER_MID + 0.02) {
-      landFish(r);
-      r.state = 'land';
-      r.stateT = 0;
-      r.vel.multiplyScalar(0.22);
-      r.pos.y = WATER_MID - 0.008;
-      r.pitch = -0.30;
-    }
+    r.speed = Math.hypot(r.vel.x, r.vel.z);
+    if (r.state === 'airUp' && r.stateT >= LOOP.upFlight) landHigh(r);
+    else if (r.state === 'airDown' && r.stateT >= LOOP.downFlight) landLow(r);
     return;
   }
 
-  if (r.state === 'land') {
-    const targetX = LAYOUT.landing.x;
-    const targetZ = LAYOUT.landing.z;
-    steerTo(r, targetX, targetZ, dt, 0.34, WATER_MID - 0.09);
-    r.vel.multiplyScalar(Math.exp(-5.0 * dt));
-    r.yaw = dampAngle(r.yaw, PI, 5.0, dt);
-    r.pitch = damp(r.pitch, -0.08, 4.0, dt);
-    r.roll = damp(r.roll, 0, 4.0, dt);
-    r.tailAmp = 0.020;
-    r.tailRate = 2.0;
+  if (r.state === 'restHigh') {
+    const B = LOOP.high;
+    r.pos.x = damp(r.pos.x, B.x, 2.2, dt);
+    r.pos.z = damp(r.pos.z, B.z, 2.2, dt);
+    r.pos.y = damp(r.pos.y, LOOP.highY + bob * 0.55, 3.0, dt);
+    const targetYaw = (r.stateT > r.turnDelay ? r.turnTo : r.holdYaw) +
+      Math.sin(SIM.t * 0.45 + r.index) * 0.035;
+    r.yaw = dampAngle(r.yaw, targetYaw, r.stateT > r.turnDelay ? 1.65 : 2.0, dt);
+    r.pitch = damp(r.pitch, Math.sin(SIM.t * 0.8 + r.index) * 0.012, 2.4, dt);
+    r.roll = damp(r.roll, Math.sin(SIM.t * 0.66 + r.index) * 0.020, 2.0, dt);
+    r.tailAmp = 0.018;
+    r.tailRate = 1.45;
+    r.speed = 0.12;
     r.surfaceY = WATER_MID;
-    r.wet = 0;
-    if (r.stateT > 0.85) {
-      r.state = 'rest';
-      r.stateT = 0;
-    }
+    r.wet = 0.16;
+    const afterBypass = SIM.t - SIM.bypassChangedAt;
+    if (r.stateT > LOOP.rest && afterBypass > 2.8) beginLoopDown(r);
     return;
   }
 
-  if (r.state === 'rest') {
-    r.pos.x = damp(r.pos.x, LAYOUT.landing.x + 0.10 * Math.sin(SIM.t * 0.3 + r.index), 1.4, dt);
-    r.pos.z = damp(r.pos.z, LAYOUT.landing.z + 0.06 * Math.cos(SIM.t * 0.26 + r.index), 1.4, dt);
-    r.pos.y = damp(r.pos.y, WATER_MID - 0.095 + bob * 0.7, 2.6, dt);
-    const holdYaw = PI + Math.sin(SIM.t * 0.55 + r.index) * 0.06;
-    r.yaw = dampAngle(r.yaw, holdYaw, 1.8, dt);
-    r.pitch = damp(r.pitch, 0, 2.0, dt);
-    r.roll = damp(r.roll, Math.sin(SIM.t * 0.8 + r.index) * 0.018, 2.0, dt);
+  if (r.state === 'restLow') {
+    const A = LOOP.low;
+    r.pos.x = damp(r.pos.x, A.x, 2.4, dt);
+    r.pos.z = damp(r.pos.z, A.z, 2.4, dt);
+    r.pos.y = damp(r.pos.y, LOOP.lowY + bob, 3.2, dt);
+    const targetYaw = (r.stateT > r.turnDelay ? r.turnTo : r.holdYaw) +
+      Math.sin(SIM.t * 0.42 + r.index) * 0.045;
+    r.yaw = dampAngle(r.yaw, targetYaw, r.stateT > r.turnDelay ? 1.65 : 2.0, dt);
+    r.pitch = damp(r.pitch, Math.sin(SIM.t * 0.8 + r.index) * 0.014, 2.4, dt);
+    r.roll = damp(r.roll, Math.sin(SIM.t * 0.7 + r.index * 1.4) * 0.024, 2.0, dt);
+    r.tailAmp = 0.018;
+    r.tailRate = 1.45;
+    r.speed = 0.16;
+    r.surfaceY = WATER_LO;
+    r.wet = 0.16;
+    const afterBypass = SIM.t - SIM.bypassChangedAt;
+    if (r.stateT > LOOP.rest && afterBypass > 2.8) beginLoopUp(r);
+    return;
+  }
+
+  if (r.state === 'sit') {
+    const slot = sitterSlot(r.index);
+    r.pos.x = damp(r.pos.x, slot.x, 1.15, dt);
+    r.pos.z = damp(r.pos.z, slot.z, 1.15, dt);
+    r.pos.y = damp(r.pos.y, WATER_LO - 0.085 + bob * 0.65, 3.2, dt);
+    const face = flowHeading(slot.x, slot.z) + (r.index === 2 ? -0.055 : 0.045);
+    r.yaw = dampAngle(r.yaw, face, 1.0, dt);
+    r.pitch = damp(r.pitch, Math.sin(SIM.t * 0.55 + r.index) * 0.014, 2.0, dt);
+    r.roll = damp(r.roll, Math.sin(SIM.t * 0.62 + r.index * 1.3) * 0.022, 1.8, dt);
     r.tailAmp = 0.016;
-    r.tailRate = 1.5;
-    r.surfaceY = WATER_MID;
-    r.wet = 0;
-    if (r.stateT > 4.2 + r.index * 0.7) {
-      r.state = 'exit';
-      r.stateT = 0;
-    }
-    return;
-  }
-
-  if (r.state === 'exit') {
-    const d = steerTo(r, -2.55, 0.52, dt, 0.62, WATER_MID - 0.08);
-    const targetYaw = Math.atan2(-0, -1);
-    r.yaw = dampAngle(r.yaw, targetYaw + Math.sin(SIM.t * 0.5) * 0.05, 3.0, dt);
-    r.tailAmp = 0.021;
-    r.tailRate = 2.2;
-    r.surfaceY = WATER_MID;
-    r.wet = 0;
-    if (r.pos.x < -2.48 || d < 0.1) {
-      setFishVisible(r, false);
-      r.state = 'gone';
-      r.stateT = 0;
-      r.exitedAt = SIM.t;
-      r.respawnAt = SIM.t + 3.6 + r.index * 0.8;
-      setStatus('the spent fish slips upstream under the alders', 2.0);
-    }
-    return;
-  }
-
-  if (r.state === 'gone') {
-    if (SIM.t >= r.respawnAt) {
-      const spawn = FISH_START[r.index];
-      r.pos.set(spawn.x, WATER_LO - 0.085, spawn.z);
-      r.vel.set(0, 0, 0);
-      r.yaw = PI;
-      r.pitch = 0;
-      r.roll = 0;
-      r.state = 'enter';
-      r.stateT = 0;
-      r.enterStep = 0;
-      r.nextJump = SIM.t + 7.0 + r.index * 1.8;
-      r.splashDone = false;
-      r.wet = 0.1;
-      setFishVisible(r, true);
-      setStatus('another sockeye enters the current from downstream', 2.6);
-    }
+    r.tailRate = 1.25;
+    r.speed = Math.hypot(currentAt(slot.x, slot.z, { x: 0, z: 0 }).x, currentAt(slot.x, slot.z, { x: 0, z: 0 }).z);
+    r.surfaceY = WATER_LO;
+    r.wet = 0.16;
     return;
   }
 }
@@ -6216,7 +6174,7 @@ function syncFishVisuals() {
     U.uAmp.value = r.tailAmp;
     U.uSurfaceY.value = r.surfaceY;
     U.uWet.value = r.wet;
-    U.uBodyWave.value = r.state === 'land' ? 0.4 : 1.0;
+    U.uBodyWave.value = (r.state === 'airUp' || r.state === 'airDown') ? 1.0 : 0.30;
   }
 }
 
@@ -6227,17 +6185,8 @@ function setBypass(open, manual = true) {
   SIM.bypassOpen = open;
   SIM.manualBypass = manual;
   SIM.bypassChangedAt = SIM.t;
-  for (const r of SIM.runners) {
-    if (r.state === 'approach') {
-      r.state = 'hold';
-      r.stateT = 0;
-      r.nextJump = Math.max(r.nextJump, SIM.t + 3.4);
-    } else if (r.state === 'hold' || r.state === 'enter') {
-      r.nextJump = Math.max(r.nextJump, SIM.t + 3.4);
-    }
-  }
   setStatus(open
-    ? 'side bypass open — the low route takes part of the discharge'
+    ? 'side bypass open — the resting pair trims its hold'
     : 'side bypass closed — the full discharge returns to the low lip', 4.2);
   if (typeof UI !== 'undefined' && UI.sync) UI.sync();
   return SIM.bypassOpen;
@@ -6281,21 +6230,28 @@ function updateGusts(dt) {
 /* ---------------------------------------------------------------- stepping */
 function stepSim(dt) {
   SIM.t += dt;
-  SIM.cooldown = Math.max(0, SIM.cooldown - dt);
   SIM.bypassBlend = damp(SIM.bypassBlend, SIM.bypassOpen ? 1 : 0, 2.7, dt);
   SIM.jetWidth = 1.08 * (1 - 0.31 * SIM.bypassBlend);
   updateGusts(dt);
 
   if (SIM.statusHold > 0) SIM.statusHold -= dt;
   if (SIM.statusHold <= 0) {
-    if (SIM.bypassOpen) SIM.status = 'bypass open — the lip jet is narrowed and the salmon have re-set';
-    else if (SIM.runners.some(r => r.state === 'air')) SIM.status = 'airborne over the low lip';
-    else if (SIM.runners.some(r => r.state === 'hold')) SIM.status = 'holding in the rock’s slow wake, facing the current';
-    else SIM.status = 'a sockeye is entering the current';
+    const jumper = SIM.runners[0];
+    if (SIM.bypassOpen) {
+      SIM.status = 'bypass open — the lip jet is narrowed and the resting pair has re-set';
+    } else if (jumper && jumper.state === 'airUp') {
+      SIM.status = 'one sockeye climbs the low lip';
+    } else if (jumper && jumper.state === 'airDown') {
+      SIM.status = 'the sockeye turns and drops back down the lip';
+    } else if (jumper && jumper.state === 'restHigh') {
+      SIM.status = 'one sockeye rests in the pool above; two wait below';
+    } else {
+      SIM.status = 'one sockeye rests below the lip; two hold the lower step';
+    }
   }
 
   for (const r of SIM.runners) updateRunner(r, dt);
-  SIM.airCount = SIM.runners.filter(r => r.state === 'air').length;
+  SIM.airCount = SIM.runners.filter(r => r.state === 'airUp' || r.state === 'airDown').length;
   syncFishVisuals();
 }
 
@@ -6305,13 +6261,13 @@ function initSim() {
   SIM.bypassOpen = false;
   SIM.bypassBlend = 0;
   SIM.bypassChangedAt = -100;
-  SIM.cooldown = 0;
+  SIM.jetWidth = 1.08;
   SIM.jumps = 0;
   SIM.lastLeap = null;
+  SIM.airCount = 0;
   SIM.manualBypass = false;
-  SIM.autoLeapDone = false;
   SIM.statusHold = 0;
-  SIM.status = 'a sockeye enters the current from downstream';
+  SIM.status = 'one sockeye rests below the lip; two hold the lower step';
   SIM.runners = [0, 1, 2].map(i => makeRunner(i));
   syncFishVisuals();
   initGusts();
@@ -6471,7 +6427,7 @@ FX.burst = function (x, y, z, strength, kind) {
   }
 };
 
-FX.landingSplash = function (x, y, z, strength) {
+FX.landingSplash = function (x, y, z, strength, level = WATER_MID, sideRing = true, ringScale = 1) {
   const r = FX.seed;
   const n = Math.round(52 * strength);
   for (let i = 0; i < n; i++) {
@@ -6483,7 +6439,7 @@ FX.landingSplash = function (x, y, z, strength) {
       vy: 0.65 + r() * 1.8,
       vz: Math.cos(a) * sp * (0.55 + r() * 0.7),
       life: 0.65 + r() * 1.15, size: 0.025 + r() * 0.075,
-      type: 0, surface: WATER_MID,
+      type: 0, surface: level,
       r: 0.93, g: 0.99, b: 0.99
     });
   }
@@ -6492,7 +6448,7 @@ FX.landingSplash = function (x, y, z, strength) {
       x: x + (r() * 2 - 1) * 0.30, y: y + 0.035 + r() * 0.10, z: z + (r() * 2 - 1) * 0.30,
       vx: (r() * 2 - 1) * 0.22, vy: 0.06 + r() * 0.24, vz: (r() * 2 - 1) * 0.22,
       life: 1.2 + r() * 1.6, size: 0.12 + r() * 0.25,
-      type: 1, surface: WATER_MID,
+      type: 1, surface: level,
       r: 0.81, g: 0.89, b: 0.90
     });
   }
@@ -6506,18 +6462,18 @@ FX.landingSplash = function (x, y, z, strength) {
       vy: 0.02 + r() * 0.18,
       vz: Math.cos(a) * (1.1 + r() * 1.2),
       life: 0.75 + r() * 0.65, size: 0.055 + r() * 0.13,
-      type: 2, surface: WATER_MID,
+      type: 2, surface: level,
       r: 0.95, g: 0.99, b: 0.98
     });
   }
   splashPuff(x, y + 0.15, z, 0.55, 0.75, 0.8);
   splashPuff(x - 0.22, y + 0.08, z + 0.15, 0.36, 0.55, 0.5);
   splashPuff(x + 0.18, y + 0.30, z - 0.08, 0.62, 0.95, 0.35);
-  splashRing(x, y, z, 0.92);
-  splashRing(x, y, z, 0.94, 0.20);
-  splashRing(x - 0.08, y, z + 0.12, 0.55, 0.46);
+  splashRing(x, y, z, 0.92 * ringScale);
+  splashRing(x, y, z, 0.94 * ringScale, 0.20);
+  splashRing(x - 0.08, y, z + 0.12, 0.55 * ringScale, 0.46);
   /* a fainter ring arrives in the adjacent pool once the wave crosses the sill */
-  if (typeof POOLS !== 'undefined' && POOLS.side) {
+  if (sideRing && typeof POOLS !== 'undefined' && POOLS.side) {
     splashRing(POOLS.side.cx, WATER_MID, POOLS.side.cz, 0.42, 0.62);
   }
 };
@@ -6804,12 +6760,12 @@ UI.sync = function () {
   if (UI.jetBar) UI.jetBar.style.width = (SIM.jetWidth / 1.08 * 100).toFixed(1) + '%';
   if (UI.leapCount) UI.leapCount.textContent = String(SIM.jumps).padStart(2, '0');
   if (UI.holdingCount) {
-    const holding = SIM.runners.filter(r => r.state === 'hold' || r.state === 'enter' || r.state === 'approach').length;
+    const holding = SIM.runners.filter(r => r.state !== 'airUp' && r.state !== 'airDown').length;
     UI.holdingCount.textContent = holding + (holding === 1 ? ' fish' : ' fish');
   }
   if (UI.dockNote) {
-    if (on) UI.dockNote.textContent = 'the low route carries part of the discharge. the lip jet narrows; watch the next salmon trim its holding line before it jumps.';
-    else UI.dockNote.textContent = 'the whole discharge crosses the low lip. open the side gate and the next salmon must re-set its hold before it jumps.';
+    if (on) UI.dockNote.textContent = 'the low route carries part of the discharge. the lip jet narrows and the resting pair trims its holding line.';
+    else UI.dockNote.textContent = 'one sockeye climbs the low lip, turns in the upper pool and drops back down. open the side gate and the resting pair re-sets its hold before the next hop.';
   }
   if (UI.statusText && UI.lastStatus !== SIM.status) {
     UI.lastStatus = SIM.status;
@@ -6874,7 +6830,7 @@ const APP = {
   fpsAcc: 0,
   perfAcc: 0,
   perfN: 0,
-  perfScale: 1,
+  perfScale: PROBE_LOW ? 0.90 : 1.0,
   t0: 0,
   renderCount: 0
 };
@@ -6890,6 +6846,12 @@ function resize() {
   if (CAMERA) CAM.resize(w, h);
   if (typeof resizeWater === 'function' && WATER.refl.rt) {
     resizeWater(RENDERER.domElement.width, RENDERER.domElement.height);
+  }
+  /* A resized WebGL canvas is cleared until the next frame. Draw immediately
+     so an adaptive-resolution change can never expose an empty canvas. */
+  if (APP.booted && SCENE && CAMERA) {
+    if (typeof updateWaterVisuals === 'function') updateWaterVisuals(0);
+    RENDERER.render(SCENE, CAMERA);
   }
 }
 
@@ -6982,20 +6944,8 @@ function frame(now) {
     if (APP.renderCount % reflEvery === 0) renderReflections();
     RENDERER.render(SCENE, CAMERA);
     APP.renderCount++;
-    /* adaptive resolution: protect the frame rate without flattening the image */
-    APP.perfAcc += dtMs;
-    APP.perfN++;
-    if (APP.perfN >= 80) {
-      const avg = APP.perfAcc / APP.perfN;
-      APP.perfAcc = 0; APP.perfN = 0;
-      if (avg > 34 && APP.perfScale > 0.80) {
-        APP.perfScale = Math.max(0.80, APP.perfScale - 0.05);
-        applyDPR(); resize();
-      } else if (avg < 19 && APP.perfScale < 1) {
-        APP.perfScale = Math.min(1, APP.perfScale + 0.04);
-        applyDPR(); resize();
-      }
-    }
+    /* Resolution stays fixed after boot: a stable canvas avoids the transient
+       repaint seams that adaptive scale changes can expose. */
   } catch (err) {
     if (!frameErrorShown) { frameErrorShown = true; showError(err); }
   }
@@ -7049,7 +6999,7 @@ const api = {
         index: r.index, state: r.state,
         x: r.pos.x, y: r.pos.y, z: r.pos.z,
         yaw: r.yaw, pitch: r.pitch, wet: r.wet,
-        visible: r.visible, nextJump: r.nextJump
+        visible: r.visible
       })),
       camera: {
         bearing: CAM.bearing, cineAngle: CAM.cineAngle,
@@ -7094,9 +7044,11 @@ const api = {
   toggleBypass() { const r = toggleBypass(); UI.sync(); return r; },
   forceLeap(index) {
     const r = SIM.runners[index || 0];
-    if (!r) return null;
-    if (r.state === 'gone') { setFishVisible(r, true); r.state = 'hold'; }
-    beginLeap(r);
+    if (!r || r.index !== 0) return this.getState();
+    r.pos.set(LOOP.low.x, LOOP.lowY, LOOP.low.z);
+    r.state = 'restLow';
+    r.stateT = 0;
+    beginLoopUp(r);
     syncFishVisuals();
     return this.getState();
   },
