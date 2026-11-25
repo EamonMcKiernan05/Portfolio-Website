@@ -395,6 +395,10 @@ BUILDS = [
          variant='', title='The Blossom Frost Pocket', prompt='the-blossom-frost-pocket', session='d3daf038-8d12-46e2-8d5b-50ea0aab8d62',
          followups=0, date='24 Nov 2026', build_min=58, kb=668,
          blurb='One pass, 58 minutes.'),
+    dict(rel='GLM-5.4/floating-classroom.html', slug='glm-5-4-floating-classroom', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
+         variant='', title='The Honeycomb Water Meadow', prompt='the-honeycomb-water-meadow', session='764e8737-5944-498b-97fb-a935b2a6d39f',
+         followups=0, date='24 Nov 2026', build_min=17, kb=806,
+         blurb='One pass, 17 minutes.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']

@@ -10,6 +10,7 @@ import asyncio
 import base64
 import io
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -30,7 +31,7 @@ SCRATCH = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily"
 THUMBS = pathlib.Path.home() / "portfolio-website/demos/thumbs/model-testing"
 LOCAL_VIDEOS = pathlib.Path.home() / "video-demos/dsh-daily"
 DESKTOP_SUBDIR = "Desktop/Model Testing Videos"
-DURATION = 60.0
+DURATION = float(os.environ.get("DSH_DURATION", "60.0"))
 
 LOADER = """(()=>{const l=document.querySelector('#loader,#loading,.loader,.loading,.preloader');
 if(!l)return 'gone';const s=getComputedStyle(l);return s.display+'|'+s.opacity})()"""
@@ -198,7 +199,7 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
     log(f"{slug}: {st['width']}x{st['height']} {st['codec_name']} {dur:.1f}s {size/1e6:.1f} MB"
         f" (captured {len(frames)/elapsed:.1f} fps, file {out_fps} fps)")
     problems = []
-    if not 57 <= dur <= 63:
+    if not DURATION - 3 <= dur <= DURATION + 3:
         problems.append(f"duration {dur:.1f}s")
     if (st["width"], st["height"]) != (1920, 1080):
         problems.append(f"{st['width']}x{st['height']}")
@@ -209,14 +210,14 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
     # a take that came out short (throttled tab, aborted mux) must still report, not crash:
     # sample inside the clip's real length instead of assuming 60 s
     samples = {}
-    for t in (2, 30, 58):
+    for t in (2, round(DURATION / 2), round(DURATION) - 2):
         at = min(float(t), max(1.0, dur - 1.0))
         p = SCRATCH / f"{slug}-t{t}.jpg"
         subprocess.run([FFMPEG, "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(out_mp4),
                         "-frames:v", "1", str(p)], check=True)
         samples[t] = p.read_bytes()
         p.unlink()
-    motion = round(_diff(samples[2], samples[58]), 1)
+    motion = round(_diff(samples[2], samples[round(DURATION) - 2]), 1)
 
     return dict(slug=slug, clip=str(out_mp4), bytes=size, seconds=round(dur, 1),
                 capture_fps=round(fps, 1), frames=len(frames),

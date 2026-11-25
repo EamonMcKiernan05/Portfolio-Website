@@ -155,6 +155,14 @@ def spec_key_for_html(path: pathlib.Path) -> str | None:
     return hits[0] if len(hits) == 1 else None
 
 
+def _fname(key: str) -> str:
+    """A session's file key can carry build-log noise ("n-a--- 825006 x.html") or a full path,
+    so compare on the last path-ish token, never on the raw key."""
+    k = key.strip().strip("'\"").replace("\\", "/")
+    last = re.split(r"[\s|>]+", k)[-1] if (" " in k or "|" in k) else k
+    return pathlib.Path(last).name.lower()
+
+
 def attribute(build: dict, pool: list[dict]) -> dict | None:
     """Best session that names this file *and* ran in the build's own workspace."""
     rel = build["rel"].replace("\\", "/")
@@ -164,7 +172,10 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
     for s in pool:
         if s.get("workspace") and s["workspace"] != workspace:
             continue
-        hits = sum(v for k, v in s["files"].items() if k.lower() == name)
+        hits = sum(v for k, v in s["files"].items() if _fname(k) == name)
+        if not hits:
+            # fall back to any mention: builds driven by a script never log a path argument
+            hits = sum(v for k, v in (s.get("mentions") or {}).items() if _fname(k) == name)
         if hits and (best is None or hits > best[0]):
             best = (hits, s)
     return best[1] if best else None

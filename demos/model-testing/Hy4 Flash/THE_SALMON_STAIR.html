@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>025 — The Salmon Stair</title>
+<title>025 â€” The Salmon Stair</title>
 <link rel="icon" href="data:," />
 <style>
   :root{
@@ -60,13 +60,13 @@
 <div id="grain"></div>
 <div id="ui">
   <div class="titleblock">
-    <div class="kicker">Field study 025 · sockeye run</div>
+    <div class="kicker">Field study 025 Â· sockeye run</div>
     <h1 class="title">The Salmon Stair</h1>
     <div class="subtitle">Three steps of basalt, one low lip, and a counting shelter holding its breath.</div>
     <div class="rule"></div>
   </div>
   <div class="foot">
-    <div class="hint"><b>Drag</b> to orbit &nbsp;·&nbsp; <b>Wheel / pinch</b> to zoom<br />Cinematic orbit — one revolution in 90 seconds</div>
+    <div class="hint"><b>Drag</b> to orbit &nbsp;Â·&nbsp; <b>Wheel / pinch</b> to zoom<br />Cinematic orbit â€” one revolution in 90 seconds</div>
   </div>
   <div class="controls">
     <div id="status">Run state<b>APPROACH</b></div>
@@ -75,7 +75,7 @@
     <button id="btnCine" class="btn active" title="Toggle the automatic cinematic orbit"><span class="dot"></span>Cinematic</button>
   </div>
 </div>
-<div id="load">Raising the stair…</div>
+<div id="load">Raising the stairâ€¦</div>
 <div id="err"></div>
 <script>/**
  * @license
@@ -348,13 +348,15 @@ function mesh(geo,mat,x,y,z,parent){
 
 /* ================= counting shelter, nestled in the moraine ================= */
 var dm=new THREE.Object3D();
-var cx=0.10,cz=-2.12,cy=landHeight(cx,cz);
+var cx=-0.39,cz=-2.06,cy=landHeight(cx,cz);
 var matWood=new THREE.MeshStandardMaterial({map:woodTex,color:0x9a8d7a,roughness:0.93});
 var matWoodDark=new THREE.MeshStandardMaterial({map:woodTex,color:0x6d6558,roughness:0.96});
-var matRoof=new THREE.MeshStandardMaterial({map:roofTex,color:0x8b918c,roughness:0.86,metalness:0.16,side:THREE.DoubleSide});
+var matRoof=new THREE.MeshStandardMaterial({map:roofTex,color:0x9aa39b,roughness:0.84,metalness:0.14,side:THREE.DoubleSide});
 var matIron=new THREE.MeshStandardMaterial({color:0x333a39,roughness:0.72,metalness:0.32});
 var matBoard=new THREE.MeshStandardMaterial({map:boardTex,color:0xffffff,roughness:0.82,side:THREE.DoubleSide});
-var shelter=new THREE.Group();shelter.position.set(cx,cy,cz);shelter.rotation.y=-0.10;scene.add(shelter);
+var shelter=new THREE.Group();shelter.position.set(cx,cy,cz);shelter.rotation.y=-0.10;
+shelter.scale.setScalar(0.64); // fits the middle step instead of overhanging the lip
+scene.add(shelter);
 var HW=0.98,HD=0.70,WH=1.48;
 mesh(new THREE.BoxGeometry(2.12,0.14,1.52),matWoodDark,0,0.06,0,shelter);           // sill
 mesh(new THREE.BoxGeometry(HW*2,WH,0.09),matWood,0,WH/2+0.12,-HD,shelter);          // back boards
@@ -366,13 +368,22 @@ mesh(new THREE.BoxGeometry(HW*2,0.36,0.09),matWood,0,1.44,HD,shelter);
 mesh(new THREE.BoxGeometry(0.20,0.78,0.09),matWoodDark,-0.80,0.90,HD,shelter);
 mesh(new THREE.BoxGeometry(0.20,0.78,0.09),matWoodDark, 0.80,0.90,HD,shelter);
 mesh(new THREE.BoxGeometry(1.42,0.68,0.05),new THREE.MeshStandardMaterial({color:0x171d1d,roughness:1}),0,0.90,HD-0.10,shelter);
-// roof: two weathered slopes
+// roof: two weathered slopes + gable ends + ridge cap
 var slope=Math.sqrt(HD*HD+0.46*0.46),ang=Math.atan2(0.46,HD);
 [-1,1].forEach(function(s){
-  var b=mesh(new THREE.BoxGeometry(HW*2+0.20,0.06,slope+0.14),matRoof,0,WH+0.37,s*HD/2,shelter);
+  var b=mesh(new THREE.BoxGeometry(HW*2+0.24,0.10,slope+0.18),matRoof,0,WH+0.37,s*HD/2,shelter);
   b.rotation.x=s*ang;
 });
-mesh(new THREE.BoxGeometry(HW*2+0.26,0.07,0.12),matIron,0,WH+0.60,0,shelter);
+// gable-end triangles filling the ends of the ridge
+var gableShape=new THREE.Shape();
+gableShape.moveTo(-HD,WH-0.02);gableShape.lineTo(HD,WH-0.02);gableShape.lineTo(0,WH+0.58);gableShape.closePath();
+var gableGeo=new THREE.ShapeGeometry(gableShape);gableGeo.rotateY(Math.PI/2);
+var matGable=new THREE.MeshStandardMaterial({map:woodTex,color:0x6d6558,roughness:0.95,side:THREE.DoubleSide});
+[-1,1].forEach(function(s){
+  var g=new THREE.Mesh(gableGeo,matGable);g.position.set(s*(HW+0.02),0,0);
+  g.castShadow=true;g.receiveShadow=true;shelter.add(g);
+});
+mesh(new THREE.BoxGeometry(HW*2+0.30,0.09,0.14),matIron,0,WH+0.60,0,shelter);
 // corner posts & braces
 [[-HW,-HD],[HW,-HD],[-HW,HD],[HW,HD]].forEach(function(p){
   mesh(new THREE.BoxGeometry(0.11,WH+0.16,0.11),matWoodDark,p[0],(WH+0.16)/2+0.06,p[1],shelter);
@@ -384,31 +395,20 @@ mesh(new THREE.BoxGeometry(0.40,0.05,0.10),matWoodDark,0.62,1.77,HD+0.09,shelter
 // small painted identification plate
 var signTex=(function(){var c=document.createElement('canvas');c.width=256;c.height=64;var x=c.getContext('2d');
   x.fillStyle='#26312f';x.fillRect(0,0,256,64);x.strokeStyle='#c9b98f';x.lineWidth=3;x.strokeRect(3,3,250,58);
-  x.font='bold 26px Arial';x.fillStyle='#d9cfb2';x.textAlign='center';x.fillText('COUNTING STATION',128,41);
+  x.font='bold 22px Arial';x.fillStyle='#d9cfb2';x.textAlign='center';x.fillText('COUNTING STATION',128,41);
   var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return t;})();
 mesh(new THREE.BoxGeometry(1.02,0.24,0.04),new THREE.MeshStandardMaterial({map:signTex,roughness:0.9}),-0.04,WH+0.16,HD+0.055,shelter);
 // boardwalk stanchions down toward the water
 for(var st=0;st<3;st++){
-  var sx=cx+0.78,sz=cz+0.85+st*0.32;
-  mesh(new THREE.CylinderGeometry(0.045,0.05,0.72,7),matWoodDark,sx,landHeight(sx,sz)+0.34,sz);
+  var sx=cx+0.55,sz=cz+0.62+st*0.22;
+  mesh(new THREE.CylinderGeometry(0.045,0.05,0.60,7),matWoodDark,sx,landHeight(sx,sz)+0.28,sz);
 }
-addContact(cx,cz,3.2,0.36);
+addContact(cx,cz,2.4,0.36);
 
 /* ================= basalt rock, banks, sill ================= */
 var rockMat=new THREE.MeshStandardMaterial({map:basaltTex,color:0x8a9196,roughness:0.96,flatShading:true});
 var pebbleMat=new THREE.MeshStandardMaterial({map:gravelTex,color:0xb0a994,roughness:0.97,flatShading:true});
-// the upstanding rock that splits the jet
-var rockGeo=new THREE.IcosahedronGeometry(0.42,1),rp=rockGeo.attributes.position;
-for(var i=0;i<rp.count;i++){
-  var vx=rp.getX(i),vy=rp.getY(i),vz=rp.getZ(i),n=1+0.16*Math.sin(vx*7.3+vz*4.1)*Math.cos(vy*6.2);
-  rp.setXYZ(i,vx*n,vy*n,vz*n);
-}
-rockGeo.computeVertexNormals();
-var rockX=1.16,rockZ=chanZ(1.16)+0.50,rockY=landHeight(rockX,rockZ)-0.14;
-var upRock=mesh(rockGeo,rockMat,rockX,rockY+0.36,rockZ);
-upRock.scale.set(1.05,1.52,0.92);upRock.rotation.set(0.06,0.5,-0.07);
-addContact(rockX,rockZ,1.5,0.40);
-// scattered bank boulders
+// scattered bank boulders (the channel itself is left clear)
 var NB=110,boulders=new THREE.InstancedMesh(new THREE.DodecahedronGeometry(0.25,0),rockMat,NB);
 boulders.castShadow=true;boulders.receiveShadow=true;var bn=0;
 for(var i=0;i<4000&&bn<NB;i++){
@@ -421,14 +421,20 @@ for(var i=0;i<4000&&bn<NB;i++){
   var s=rr(.38,1.15);dm.scale.set(s*rr(.9,1.5),s*rr(.4,.85),s);dm.updateMatrix();boulders.setMatrixAt(bn++,dm.matrix);
 }
 boulders.count=bn;scene.add(boulders);
-// gravel sill ridge across the upper pool
-var NS=240,sill=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(0.075,0),pebbleMat,NS);
+// gravel sill ridge across the upper pool â€” neat, evenly-spaced pebble rows
+var NS=110,sill=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(0.075,0),pebbleMat,NS);
 sill.castShadow=true;sill.receiveShadow=true;
-for(var i=0;i<NS;i++){
-  var x=-2.62+rr(-0.30,0.30),z=chanZ(x)+rr(-1.05,1.05),y=landHeight(x,z);
-  dm.position.set(x,y+rr(.02,.10),z);dm.rotation.set(rr(0,3),rr(0,6.28),rr(0,3));
-  var s=rr(.55,1.5);dm.scale.set(s*1.3,s*.7,s);dm.updateMatrix();sill.setMatrixAt(i,dm.matrix);
+var si=0;
+for(var row=0;row<2;row++){
+  for(var k=0;k<55;k++){
+    var x=-2.62+(row?0.10:-0.10)+rr(-0.025,0.025);
+    var z=chanZ(x)+(-0.96+k*(1.92/54))+(row?0.07:0)+rr(-0.025,0.025);
+    var y=landHeight(x,z);
+    dm.position.set(x,y+rr(.04,.09),z);dm.rotation.set(rr(0,3),rr(0,6.28),rr(0,3));
+    var s=rr(.72,1.02);dm.scale.set(s*1.25,s*.60,s);dm.updateMatrix();sill.setMatrixAt(si++,dm.matrix);
+  }
 }
+sill.count=si;
 scene.add(sill);
 // a few flat stepping stones by the lip
 for(var i=0;i<5;i++){
@@ -485,17 +491,18 @@ var grassMat=new THREE.ShaderMaterial({
     '}'
   ].join('\n')
 });
-var GN=4200,gGeo=BG.clone(),ph=new Float32Array(GN),stf=new Float32Array(GN),sc=new Float32Array(GN),tint=new Float32Array(GN*3);
+var GN=7800,gGeo=BG.clone(),ph=new Float32Array(GN),stf=new Float32Array(GN),sc=new Float32Array(GN),tint=new Float32Array(GN*3);
 var grass=new THREE.InstancedMesh(gGeo,grassMat,GN);grass.frustumCulled=false;var grown=0;
-for(var i=0;i<24000&&grown<GN;i++){
+for(var i=0;i<36000&&grown<GN;i++){
   var x=rr(XMIN+.18,XMAX-.18),z=rr(ZMIN+.18,ZMAX-.18),y=landHeight(x,z);
   var dz=Math.abs(z-chanZ(x));
   if(dz<0.86||dz>2.7)continue;
   if(y<0.72||y>2.65)continue;
   if(Math.abs(x-cx)<1.25&&Math.abs(z-cz)<1.02)continue;
   if(slopeAt(x,z)>1.5)continue;
-  if(R()>0.24+0.62*(0.5+0.5*Math.sin(x*1.3+z*.7)*Math.sin(z*1.4-x*.5)))continue;
-  ph[grown]=rr(0,6.283);stf[grown]=dz>1.7?rr(.14,.42):rr(.55,.94);sc[grown]=rr(.14,.34);
+  if(R()>0.26+0.64*(0.5+0.5*Math.sin(x*1.3+z*.7)*Math.sin(z*1.4-x*.5)))continue;
+  ph[grown]=rr(0,6.283);stf[grown]=dz>1.7?rr(.14,.42):rr(.55,.94);
+  sc[grown]=R()<0.34?rr(.46,.78):rr(.24,.50);
   var v=rr(.76,1.18);tint[grown*3]=v*rr(.86,1.12);tint[grown*3+1]=v;tint[grown*3+2]=v*rr(.66,1.02);
   dm.position.set(x,y,z);dm.rotation.set(rr(-.16,.16),rr(0,6.28),rr(-.16,.16));dm.scale.set(1,1,1);dm.updateMatrix();
   grass.setMatrixAt(grown++,dm.matrix);
@@ -510,7 +517,8 @@ scene.add(grass);
 var alderLeafMat=new THREE.MeshStandardMaterial({color:0x1b3b18,roughness:1.0,side:THREE.DoubleSide,flatShading:true,envMapIntensity:0.15});
 var flutterMat=new THREE.MeshStandardMaterial({color:0x24471f,roughness:1.0,side:THREE.DoubleSide,envMapIntensity:0.15});
 var twigMat=new THREE.MeshStandardMaterial({color:0x4a3c30,roughness:0.96});
-var alderSpots=[[1.72,-1.62],[-1.48,-1.86],[1.78,1.78]];
+var alderSpots=[[1.72,-1.62],[-1.48,-1.86],[1.78,1.78],
+  [-3.40,1.95],[-3.55,-1.85],[2.95,-1.72],[3.55,1.85]];
 alderSpots.forEach(function(sp){
   var ax=sp[0],az=sp[1],ay=landHeight(ax,az);
   mesh(new THREE.CylinderGeometry(0.045,0.075,1.12,7),twigMat,ax,ay+0.56,az);
@@ -555,7 +563,7 @@ var waterMat=new THREE.ShaderMaterial({
     ' float w=.011*sin(p.x*7.3+p.y*4.1-uTime*3.1)+.008*sin(p.x*11.0-p.y*6.7-uTime*4.4);',
     ' for(int i=0;i<8;i++){vec4 r=uRipples[i];float age=uTime-r.z;',
     '  if(age>0.0&&age<3.2){float d=length(p-r.xy);',
-    '   w+=.045*exp(-pow((d-age*.52)/.085,2.0))*exp(-age*.85)*r.w;}}',
+    '   w+=.058*exp(-pow((d-age*.52)/.11,2.0))*exp(-age*.85)*r.w;}}',
     ' return w;}',
     'void main(){',
     ' vec3 p=position;p.y+=wave(p.xz);',
@@ -581,8 +589,8 @@ var waterMat=new THREE.ShaderMaterial({
     ' col+=vec3(1.0,.90,.72)*spec*.40;',
     ' float rt=0.0;for(int i=0;i<8;i++){vec4 r=uRipples[i];float age=uTime-r.z;',
     '  if(age>0.0&&age<3.2){float d=length(vW.xz-r.xy);',
-    '   rt+=exp(-pow((d-age*.52)/.075,2.0))*exp(-age*.9)*r.w;}}',
-    ' col=mix(col,vec3(.86,.92,.86),clamp(vFoam+rt*.62,0.0,.92));',
+    '   rt+=exp(-pow((d-age*.52)/.11,2.0))*exp(-age*.9)*r.w;}}',
+    ' col=mix(col,vec3(.86,.92,.86),clamp(vFoam+rt*.85,0.0,.92));',
     ' float alpha=(0.57+0.20*fres+0.16*clamp(rt+vFoam,0.0,1.0))*smoothstep(0.0,0.65,vEdge);',
     ' gl_FragColor=vec4(col,alpha);',
     '}'
@@ -733,27 +741,32 @@ function makeFish(i){
   });
   g.scale.setScalar(rr(.86,1.10));scene.add(g);
   var f={mesh:g,mat:mat,phase:'hold',timer:rr(0.5,6.5),pos:new THREE.Vector3(),vel:new THREE.Vector3(),
-    dir:new THREE.Vector3(-1,0,0),lateral:rr(-.34,.34),holdX:0,holdZ:0,target:new THREE.Vector3(),
+    dir:new THREE.Vector3(-1,0,0),lateral:rr(-.62,.62),holdX:0,holdZ:0,target:new THREE.Vector3(),
     v0:new THREE.Vector3(),leapZ:0,turn:0};
-  f.holdX=1.62+f.lateral*.22;f.holdZ=chanZ(1.4)+0.50+f.lateral*.55;
+  var stations=[[1.62,chanZ(1.4)+0.50],   // jumper: deep takeoff pocket
+                [2.30,chanZ(2.30)-0.42],  // three station-holders, well separated
+                [3.45,chanZ(3.45)+0.55],
+                [2.05,chanZ(2.05)+0.85]];
+  var st=stations[i%stations.length];
+  f.stationX=st[0]+(i===0?f.lateral*0.12:0);
+  f.stationZ=st[1]+(i===0?f.lateral*0.28:0);
+  f.holdX=f.stationX;f.holdZ=f.stationZ;
   f.pos.set(f.holdX,0.36,f.holdZ);
   fish.push(f);return f;
 }
-for(var i=0;i<7;i++)makeFish(i);
+for(var i=0;i<4;i++)makeFish(i);
 
 
 /* ================= flow field, fish behaviour, forcing ================= */
 var FIXED=1/120,acc=0,simTime=0,last=performance.now();
 var LEVEL_LOW=0.58,LEVEL_MID=1.08,LEVEL_UP=1.60,GRAV=4.6;
 var bypass=false,bypassTarget=0,bypassAmt=0;
-var leapCount=0,landCount=0,pendingRipples=[];
+var leapCount=0,landCount=0;
 var tmpV=new THREE.Vector3(),tmpQ=new THREE.Quaternion(),FWD=new THREE.Vector3(0,0,1);
 function surfaceAt(x){return x<-1.33?LEVEL_UP:(x<0.55?LEVEL_MID:LEVEL_LOW);}
 function flowAt(x,z,out){
   var ch=gauss((z-chanZ(x))/0.92);
   var speed=(0.44+0.25*gauss((x-0.45)/0.62))*ch;
-  var lee=gauss((x-1.58)/0.52)*gauss((z-(chanZ(1.16)+0.50))/0.52);
-  speed*=1-0.68*lee;
   if(bypassAmt>0.01)speed*=1-0.34*bypassAmt*smooth(-1.6,0.1,x);
   out.set(speed,0,0.04*Math.sin(x*1.4+z*0.7));
   return out;
@@ -785,14 +798,15 @@ function land(f){
   f.phase='land';f.timer=0;landCount++;
   emitSplash(f.pos.x,LEVEL_MID+0.02,f.pos.z,24,1.0);
   addRipple(f.pos.x,f.pos.z,1.0);
-  pendingRipples.push({t:simTime+0.48,x:-3.18,z:chanZ(-3.18),s:.72});
   emitFoam(f.pos.x-0.16,LEVEL_MID+0.01,f.pos.z,6);
 }
 function stepFish(f,h){
   f.timer-=h;
   var flow=flowAt(f.pos.x,f.pos.z,new THREE.Vector3());
   if(f.phase==='hold'){
-    var wx=1.62-0.30*bypassAmt, wz=chanZ(1.4)+0.50+f.lateral*0.55-0.22*bypassAmt;
+    var wx,wz;
+    if(f===fish[0]){wx=1.62-0.30*bypassAmt;wz=chanZ(1.4)+0.50+f.lateral*0.28-0.22*bypassAmt;}
+    else{wx=f.stationX-0.18*bypassAmt;wz=f.stationZ-0.12*bypassAmt;}
     f.holdX+=(wx-f.holdX)*Math.min(1,h*0.85);
     f.holdZ+=(wz-f.holdZ)*Math.min(1,h*0.85);
     var want=new THREE.Vector3(-flow.x*1.05,0,-flow.z*1.05);
@@ -800,7 +814,7 @@ function stepFish(f,h){
     want.y=(LEVEL_LOW-0.20-f.pos.y)*2.0+0.02*Math.sin(simTime*1.7+f.lateral*5);
     f.vel.lerp(want,Math.min(1,h*3.0));f.pos.addScaledVector(f.vel,h);
     f.dir.set(-flow.x,0,-flow.z).normalize();
-    if(f.timer<=0){f.phase='approach';f.timer=1.9;}
+    if(f.timer<=0&&f===fish[0]){f.phase='approach';f.timer=1.9;}
   }else if(f.phase==='approach'){
     var ax=0.72,ay=LEVEL_LOW-0.16,az=0.26+f.lateral*0.14;
     var want2=new THREE.Vector3(-flow.x*0.45,0,0);
@@ -899,9 +913,7 @@ function step(h){
   foamClock-=h;mistClock-=h;
   if(foamClock<=0){foamClock=0.13;emitFoam(0.78,LEVEL_LOW+0.01,chanZ(0.55)+0.12,2);}
   if(mistClock<=0){mistClock=0.22;emitSplash(0.62,LEVEL_LOW+0.02,chanZ(0.55)+0.12,2,.36);}
-  for(var p=pendingRipples.length-1;p>=0;p--){
-    if(simTime>=pendingRipples[p].t){var q=pendingRipples[p];addRipple(q.x,q.z,q.s);pendingRipples.splice(p,1);}
-  }
+  // ripples stay anchored at the fish landing point
 }
 
 /* ================= cinematic camera & manual takeover ================= */
@@ -993,7 +1005,7 @@ window.addEventListener('keydown',function(e){
 var statusEl=document.querySelector('#status b'),hudClock=0;
 function updateHUD(){
   var inAir=0;for(var i=0;i<fish.length;i++)if(fish[i].phase==='leap')inAir++;
-  statusEl.textContent=inAir?'SALMON BREAKING THE LIP':(bypass?'BYPASS OPEN · JET NARROWED':'HOLDING IN THE REST POCKET');
+  statusEl.textContent=inAir?'SALMON BREAKING THE LIP':(bypass?'BYPASS OPEN Â· JET NARROWED':'HOLDING IN THE REST POCKET');
 }
 stepLeaves(0);for(var i=0;i<fish.length;i++)stepFish(fish[i],0);
 
