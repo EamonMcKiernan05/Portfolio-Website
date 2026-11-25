@@ -1521,6 +1521,19 @@ function landFish(f) {
   f.state = 'recover'; f.t = 0;
   f.restX = -17.2 - f.seed % 3; f.restZ = streamC(f.restX) + rr(-0.6, 0.6);
 }
+/* downstream hop back over the lip — closes the loop without any respawn */
+function beginDrop(f) {
+  const p0x = LIP1 - 0.2 + rr(-0.1, 0.1), p0z = f.z;
+  const p1x = LIP1 + 2.3 + rr(-0.3, 0.4), p1z = streamC(p1x) + rr(-0.5, 0.5);
+  const p0y = WL[0] + 0.02, p1y = WL[1];
+  const T = 0.75;
+  f.x = p0x; f.z = p0z; f.y = p0y;
+  f.vx = (p1x - p0x) / T; f.vz = (p1z - p0z) / T;
+  f.vy = (p1y - p0y) / T + 0.5 * GRAV * T + 0.6;
+  f.state = 'dropJump'; f.t = 0;
+  splashBurst(p0x, WL[0], p0z, 8, 2.0);
+  SIM.lastEvent = 'drop';
+}
 function steer(f, tx, tz, ty, speed, dt, avoidRock) {
   let dx = tx - f.x, dz = tz - f.z;
   const dist = Math.sqrt(dx * dx + dz * dz) || 1;
@@ -1606,7 +1619,7 @@ function stepFish(dt) {
         let ty = WL[0] - 0.5;
         if (Math.abs(f.x - SILL_X) < 1.3) ty = WL[0] - 0.16;   // slip over the gravel sill
         const d = steer(f, f.restX, f.restZ, ty, 1.5, dt, false);
-        if (d < 0.5) { f.state = 'rest'; f.t = 0; f.holdTime = 5 + (f.seed % 4); }
+        if (d < 0.5) { f.state = 'rest'; f.t = 0; f.holdTime = 3.0; }   // wait 3 s, then head home
         break;
       }
       case 'rest': {
@@ -1615,25 +1628,52 @@ function stepFish(dt) {
         f.y += (WL[0] - 0.45 - f.y) * Math.min(1, dt * 2);
         setFishDir(f, -v.x, 0, -v.z);
         f.uni.uFreq.value = 2.4; f.uni.uAmp.value = 0.06;
-        if (f.t > f.holdTime) { f.state = 'drop'; f.t = 0; }
+        if (f.t > f.holdTime) { f.state = 'turn'; f.t = 0; }
         break;
       }
-      case 'drop': {
-        f.y -= 0.55 * dt;
-        f.fade = Math.max(0, 1 - f.t / 0.9);
-        f.mesh.scale.setScalar(f.scale * f.fade);
-        if (f.t > 0.95) {
-          f.state = 'approach'; f.t = 0; f.fade = 0;
-          f.x = 5.3; f.z = streamC(5.3) + rr(-0.8, 0.8);
-          f.y = WL[1] - 0.55;
-          f.holdTime = 5 + rng() * 5;
-        }
+      case 'turn': {
+        // swing 180° to face downstream, arcing through one side
+        const p = clamp(f.t / 0.6, 0, 1);
+        setFishDir(f, Math.cos(Math.PI * p), 0, Math.sin(Math.PI * p) * 0.6);
+        f.uni.uFreq.value = 3.2; f.uni.uAmp.value = 0.08;
+        f.y += (WL[0] - 0.4 - f.y) * Math.min(1, dt * 2);
+        if (p >= 1) { f.state = 'returnUp'; f.t = 0; }
         break;
       }
-    }
-    if (f.state === 'approach' && f.fade < 1) {
-      f.fade = Math.min(1, f.fade + dt * 1.4);
-      f.mesh.scale.setScalar(f.scale * f.fade);
+      case 'returnUp': {
+        let ty = WL[0] - 0.35;
+        if (Math.abs(f.x - SILL_X) < 1.3) ty = WL[0] - 0.16;   // slip back over the gravel sill
+        const edgeX = LIP1 - 0.35, edgeZ = streamC(edgeX);
+        const d = steer(f, edgeX, edgeZ, ty, 1.7, dt, false);
+        if (d < 0.3) { f.state = 'dropCoil'; f.t = 0; }
+        break;
+      }
+      case 'dropCoil': {
+        f.uni.uFreq.value = 7; f.uni.uAmp.value = 0.11;
+        f.y += (WL[0] - 0.3 - f.y) * Math.min(1, dt * 3);
+        setFishDir(f, 0.9, 0.3, (streamC(LIP1) - f.z) * 0.4);
+        if (f.t > 0.3) beginDrop(f);
+        break;
+      }
+      case 'dropJump': {
+        f.vy -= GRAV * dt;
+        f.x += f.vx * dt; f.y += f.vy * dt; f.z += f.vz * dt;
+        setFishDir(f, f.vx, f.vy, f.vz);
+        f.uni.uFreq.value = 8; f.uni.uAmp.value = f.vy > 0 ? 0.09 : 0.04;
+        if (f.vy < 0 && f.x > LIP1 && f.y <= WL[1]) {
+          splashBurst(f.x, WL[1], f.z, 22, 3.0);
+          addRipple(1, f.x, f.z, 0.12);
+          f.y = WL[1] - 0.12;
+          f.state = 'returnMid'; f.t = 0;
+        } else if (f.y < WL[1] - 0.6) { f.y = WL[1] - 0.2; f.state = 'returnMid'; f.t = 0; }
+        break;
+      }
+      case 'returnMid': {
+        // swim downstream past the rock to the start of the run
+        const d = steer(f, 5.3, streamC(5.3), WL[1] - 0.5, 2.0, dt, true);
+        if (d < 0.5) { f.state = 'approach'; f.t = 0; f.holdTime = 5 + rng() * 5; }
+        break;
+      }
     }
     // submersion: backs darken underwater, brighten above
     const sub = clamp((wl + 0.06 - f.y) / 0.22, 0, 1);
@@ -1820,6 +1860,7 @@ function updateCaptions(dt) {
   } else if (SIM.lastEvent !== lastEventSeen) {
     lastEventSeen = SIM.lastEvent;
     if (SIM.lastEvent === 'launch') setCaption('A sockeye launches from the deep pocket — a gravity arc over the low lip');
+    else if (SIM.lastEvent === 'drop') setCaption('Rested three seconds, she turns and hops back down — one closed loop');
     else if (SIM.lastEvent === 'hold' && captionTimer <= 0) setCaption('Nose into the current, holding in the rock’s slow water');
   }
   ambientT += dt;
