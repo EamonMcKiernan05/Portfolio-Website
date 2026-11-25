@@ -302,7 +302,10 @@ def ingest(build: dict, session: dict, *, copy_demo: bool = True,
     first_ms = session.get("t_first_end") or finish_ms
     stats = {
         "start": session.get("start") or fmt(t_goal), "finish": fmt(finish_ms),
-        "minutes": int((finish_ms - t_goal) // 60000),
+        # working time = the turns themselves; the gap between an answer and Eamon's next prompt
+        # is not the model working, so the wall clock is only a fallback
+        "minutes": session.get("minutes") if session.get("minutes") is not None
+        else int((finish_ms - t_goal) // 60000),
         "first_pass": int((first_ms - t_goal) // 60000),
         "followups": session.get("followups") or 0, "steps": session.get("steps"),
         "tools": session.get("tools"), "turns": (session.get("followups") or 0) + 1,

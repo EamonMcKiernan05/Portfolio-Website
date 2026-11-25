@@ -18,7 +18,6 @@ from . import ingest, win
 MIN_MODELS = 3
 FOLD_INTO = {                                     # one brief stored under two prompt keys
     "hungerg-sky-temple": "the-pagoda",           # Eamon: "sky temple and pagoda are the same thing"
-    "glm-5-4-floating-classroom": "the-floating-classroom",
 }
 STAGE = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily/shared"
 REMOTE_DIR = "C:/Users/Eamon/dsh"
