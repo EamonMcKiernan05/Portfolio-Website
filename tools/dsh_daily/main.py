@@ -173,6 +173,11 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
     rel = build["rel"].replace("\\", "/")
     name = pathlib.Path(rel).name.lower()
     workspace = rel.split("/")[0]
+    # the session that finished closest to the file's mtime is the one that produced it: two
+    # models can both log a write to "sky-temple.html", and only the timing tells them apart
+    build_ms = 0.0
+    if build.get("mtime"):
+        build_ms = dt.datetime.fromisoformat(build["mtime"]).timestamp() * 1000
     best = None
     for s in pool:
         if s.get("workspace") and s["workspace"] != workspace:
@@ -181,8 +186,12 @@ def attribute(build: dict, pool: list[dict]) -> dict | None:
         # in tool output (an `ls`, a build log) is evidence of nothing — that mis-credited
         # the honeycomb session with a floating-classroom build it only listed
         hits = sum(v for k, v in s["files"].items() if _fname(k) == name)
-        if hits and (best is None or hits > best[0]):
-            best = (hits, s)
+        if not hits:
+            continue
+        gap = (build_ms - (s.get("t_end") or 0)) if build_ms else 0.0
+        score = gap if gap >= 0 else 4e12 - gap      # a session that ended after the file is suspect
+        if best is None or score < best[0]:
+            best = (score, s)
     return best[1] if best else None
 
 
