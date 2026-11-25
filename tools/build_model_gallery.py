@@ -395,14 +395,14 @@ BUILDS = [
          variant='', title='The Blossom Frost Pocket', prompt='the-blossom-frost-pocket', session='d3daf038-8d12-46e2-8d5b-50ea0aab8d62',
          followups=0, date='24 Nov 2026', build_min=58, kb=668,
          blurb='One pass, 58 minutes.'),
-    dict(rel='GLM-5.4/floating-classroom.html', slug='glm-5-4-floating-classroom', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
-         variant='', title='The Floating Classroom', prompt='the-floating-classroom', session='',
-         followups=None, date='24 Nov 2026', build_min=None, kb=806,
-         blurb='Session log for this build is not in the harness store, so its timings, step counts and follow-ups are not recorded.'),
     dict(rel='HungerG/sky-temple.html', slug='hungerg-sky-temple', model='HungerG', group='HungerG', harness='DeepSeek Harness',
          variant='', title='sky-temple', prompt='sky-temple', session='1b76403b-596e-4720-9417-f9bedd74f375',
          followups=5, date='24 Nov 2026', build_min=2, kb=789,
          blurb='No first pass recorded, then 5 follow-ups — 2 minutes of working time.'),
+    dict(rel='GLM-5.4/floating-classroom.html', slug='glm-5-4-floating-classroom', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
+         variant='', title='The Floating Classroom', prompt='the-floating-classroom-glm-5-4', session='f4630af4-f5cf-4b7a-a5e2-c864c77013ce',
+         followups=2, date='24 Nov 2026', build_min=238, kb=806,
+         blurb='36 minutes first pass, then 2 follow-ups — 3 h 58 m of working time.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']

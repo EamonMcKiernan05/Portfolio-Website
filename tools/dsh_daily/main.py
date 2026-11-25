@@ -103,18 +103,25 @@ def fetch_sessions(inv: dict) -> dict[str, str]:
     SESS_CACHE.mkdir(parents=True, exist_ok=True)
     index_path = SESS_CACHE / "index.json"
     index = json.loads(index_path.read_text()) if index_path.exists() else {}
+    # remember each session's box mtime: a pull that lands while the box is still writing the log
+    # leaves a stub of five setup events, and "file exists" alone would cache that stub for ever
+    pulled_path = SESS_CACHE / "pulled.json"
+    pulled = json.loads(pulled_path.read_text()) if pulled_path.exists() else {}
     paths = {}
     for s in inv["sessions"]:
         index[s["uuid"]] = win.decode_workspace(s["ws"])
         dest = SESS_CACHE / f"{s['uuid']}.zstd"
-        if not dest.exists():
+        stale = pulled.get(s["uuid"]) != s.get("mtime")
+        if stale or not dest.exists():
             try:
                 win.pull(".dsh/sessions/" + s["rel"].replace("\\", "/"), dest)
+                pulled[s["uuid"]] = s.get("mtime")
             except Exception as exc:
                 log(f"  ! could not pull session {s['uuid']}: {exc}")
                 continue
         paths[s["uuid"]] = index.get(s["uuid"], "")
     index_path.write_text(json.dumps(index, indent=1))
+    pulled_path.write_text(json.dumps(pulled, indent=1))
     return paths
 
 

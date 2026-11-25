@@ -610,5 +610,14 @@
   "title": "sky-temple",
   "date": "24 Nov 2026",
   "date_iso": "2026-11-24"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "floating-classroom.html",
+  "rel": "GLM-5.4/floating-classroom.html",
+  "kb": 806,
+  "title": "floating-classroom",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
  }
 ]
