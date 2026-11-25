@@ -619,5 +619,50 @@
   "title": "floating-classroom",
   "date": "24 Nov 2026",
   "date_iso": "2026-11-24"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "honeycomb-meadow.html",
+  "rel": "GLM-5.4/honeycomb-meadow.html",
+  "kb": 772,
+  "title": "honeycomb-meadow",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-ACORN-HARBOUR.html",
+  "rel": "Inkling-2-Mini/THE-ACORN-HARBOUR.html",
+  "kb": 665,
+  "title": "THE-ACORN-HARBOUR",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-BEAVER-SPARE-CHANNEL.html",
+  "rel": "Inkling-2-Mini/THE-BEAVER-SPARE-CHANNEL.html",
+  "kb": 677,
+  "title": "THE-BEAVER-SPARE-CHANNEL",
+  "date": "23 Nov 2026",
+  "date_iso": "2026-11-23"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-BROOK-BENEATH-THE-FOLD.html",
+  "rel": "Inkling-2-Mini/THE-BROOK-BENEATH-THE-FOLD.html",
+  "kb": 665,
+  "title": "THE-BROOK-BENEATH-THE-FOLD",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-FORD.html",
+  "rel": "Inkling-2-Mini/THE-FORD.html",
+  "kb": 653,
+  "title": "THE-FORD",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
  }
 ]
