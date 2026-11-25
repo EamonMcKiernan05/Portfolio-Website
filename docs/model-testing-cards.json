@@ -601,5 +601,14 @@
   "title": "sky-temple",
   "date": "24 Nov 2026",
   "date_iso": "2026-11-24"
+ },
+ {
+  "model": "HungerG",
+  "file": "sky-temple.html",
+  "rel": "HungerG/sky-temple.html",
+  "kb": 789,
+  "title": "sky-temple",
+  "date": "24 Nov 2026",
+  "date_iso": "2026-11-24"
  }
 ]
