@@ -149,6 +149,16 @@
   "tools": 490,
   "turns": 3
  },
+ "glm-5-4-kettle-lake": {
+  "finish": "24 Nov 2026 11:00",
+  "first_pass": 42,
+  "followups": 1,
+  "minutes": 74,
+  "start": "24 Nov 2026 09:45",
+  "steps": 235,
+  "tools": 234,
+  "turns": 2
+ },
  "glm-5-4-pagoda": {
   "finish": "12 Nov 2026 23:38",
   "first_pass": 4746,
@@ -157,6 +167,26 @@
   "start": "09 Nov 2026 16:32",
   "steps": 162,
   "tools": 188,
+  "turns": 1
+ },
+ "glm-5-4-salmon-stair": {
+  "finish": "24 Nov 2026 22:48",
+  "first_pass": 45,
+  "followups": 2,
+  "minutes": 109,
+  "start": "24 Nov 2026 20:58",
+  "steps": 162,
+  "tools": 203,
+  "turns": 3
+ },
+ "hungerg-029-floating-classroom": {
+  "finish": "24 Nov 2026 21:17",
+  "first_pass": 23,
+  "followups": 0,
+  "minutes": 23,
+  "start": "24 Nov 2026 20:53",
+  "steps": 86,
+  "tools": 143,
   "turns": 1
  },
  "hungerg-breadfruit-cay": {
@@ -188,6 +218,36 @@
   "steps": 26,
   "tools": 29,
   "turns": 2
+ },
+ "hungerg-kettle-lake": {
+  "finish": null,
+  "first_pass": null,
+  "followups": null,
+  "minutes": null,
+  "start": null,
+  "steps": null,
+  "tools": null,
+  "turns": null
+ },
+ "hungerg-kites-over-jute-bank": {
+  "finish": "24 Nov 2026 21:30",
+  "first_pass": 36,
+  "followups": 0,
+  "minutes": 36,
+  "start": "24 Nov 2026 20:54",
+  "steps": 136,
+  "tools": 152,
+  "turns": 1
+ },
+ "hungerg-salmon-stair": {
+  "finish": "24 Nov 2026 21:18",
+  "first_pass": 24,
+  "followups": 0,
+  "minutes": 24,
+  "start": "24 Nov 2026 20:53",
+  "steps": 89,
+  "tools": 166,
+  "turns": 1
  },
  "hungerg-sky-temple": {
   "finish": "23 Oct 2026 11:02",
@@ -449,6 +509,16 @@
   "tools": 197,
   "turns": 2
  },
+ "inkling-2-mini-the-blossom-frost-pocket": {
+  "finish": "24 Nov 2026 21:55",
+  "first_pass": 58,
+  "followups": 0,
+  "minutes": 58,
+  "start": "24 Nov 2026 20:57",
+  "steps": 109,
+  "tools": 111,
+  "turns": 1
+ },
  "inkling-2-mini-the-croft": {
   "finish": "23 Nov 2026 00:16",
   "first_pass": 29,
@@ -488,6 +558,16 @@
   "steps": 115,
   "tools": 118,
   "turns": 2
+ },
+ "inkling-2-mini-the-watercress-at-penny-spring": {
+  "finish": "24 Nov 2026 21:55",
+  "first_pass": 58,
+  "followups": 0,
+  "minutes": 58,
+  "start": "24 Nov 2026 20:57",
+  "steps": 109,
+  "tools": 111,
+  "turns": 1
  },
  "longcat-25-sky-temple": {
   "finish": "13 Nov 2026 11:14",
