@@ -399,6 +399,10 @@ BUILDS = [
          variant='', title='The Floating Classroom', prompt='the-floating-classroom', session='',
          followups=None, date='24 Nov 2026', build_min=None, kb=806,
          blurb='Session log for this build is not in the harness store, so its timings, step counts and follow-ups are not recorded.'),
+    dict(rel='HungerG/sky-temple.html', slug='hungerg-sky-temple', model='HungerG', group='HungerG', harness='DeepSeek Harness',
+         variant='', title='sky-temple', prompt='sky-temple', session='08d98153-175f-445f-80cf-57984e29c622',
+         followups=22, date='24 Nov 2026', build_min=1075, kb=789,
+         blurb='35 minutes first pass, then 22 follow-ups — 17 h 55 m of working time.'),
 ]
 
 GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']
