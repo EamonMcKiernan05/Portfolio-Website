@@ -425,7 +425,11 @@ BUILDS = [
          blurb='One pass, 3 h.'),
 ]
 
-GROUP_ORDER = ['Qwen 4 Max', 'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B', 'Qwen 4 Preview', 'DeepSeek V4.1 Flash', 'HY4', 'Inkling-2-Mini', 'GLM-5.4', 'HungerG']
+# owner-set reading order (26 Nov): most-used models first. Groups not named here fall to the end,
+# so a new model still appears without editing this list.
+GROUP_ORDER = ['DeepSeek V4.1 Flash', 'Qwen 4 Max', 'GLM-5.4', 'HungerG', 'Inkling-2-Mini',
+               'Hy4 Flash - API', 'Hy4 Flash - Maya', 'Qwen3.8 Flash-Next', 'Qwen3.8-27B',
+               'Qwen 4 Preview', 'HY4']
 
 sess = json.load(open(DOCS / "model-testing-prompts.json"))
 pack = json.load(open(DOCS / "pack-prompts.json"))
