@@ -126,11 +126,35 @@ def replace_records(text: str, rec: dict) -> str:
 
 
 def append_records(text: str, recs: list[dict]) -> str:
-    marker = "]\n\nGROUP_ORDER"
-    if text.count(marker) != 1:
+    """Insert before the closing bracket of BUILDS, found by bracket matching.
+
+    A literal "]\n\nGROUP_ORDER" marker breaks the moment anything is written between the list and
+    GROUP_ORDER (a comment block did exactly that and aborted a whole nightly run)."""
+    start = text.find("BUILDS = [")
+    if start < 0:
+        raise RuntimeError("no BUILDS list in the generator")
+    i, depth, quote = text.index("[", start), 0, None
+    while i < len(text):
+        ch = text[i]
+        if quote:
+            if ch == "\\":
+                i += 1
+            elif ch == quote:
+                quote = None
+        elif ch in "'\"":
+            quote = ch
+        elif ch == "[":
+            depth += 1
+        elif ch == "]":
+            depth -= 1
+            if depth == 0:
+                break
+        i += 1
+    else:
         raise RuntimeError("cannot find the BUILDS terminator in the generator")
     body = "".join(record_block(r) for r in recs)
-    return text.replace(marker, body + marker)
+    line_start = text.rfind("\n", 0, i) + 1
+    return text[:line_start] + body + text[line_start:]
 
 
 def ensure_group(text: str, group: str) -> str:
