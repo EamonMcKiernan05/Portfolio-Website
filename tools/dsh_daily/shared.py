@@ -18,6 +18,9 @@ from . import ingest, win
 MIN_MODELS = 3
 FOLD_INTO = {                                     # one brief stored under two prompt keys
     "hungerg-sky-temple": "the-pagoda",           # Eamon: "sky temple and pagoda are the same thing"
+    # HungerG's first turn said "read ...\breadfruit-cay.template.html", so its card got its own
+    # prompt key and never joined the shared build even though it is the same #006 brief
+    "hungerg-breadfruit-cay": "breadfruit-cay",
 }
 STAGE = pathlib.Path.home() / ".hermes/profiles/dev/cache/scratch/dsh_daily/shared"
 REMOTE_DIR = "C:/Users/Eamon/dsh"
