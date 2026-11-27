@@ -664,5 +664,113 @@
   "title": "THE-FORD",
   "date": "24 Nov 2026",
   "date_iso": "2026-11-24"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "bronze-grass-at-crane-lake.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/bronze-grass-at-crane-lake.html",
+  "kb": 909,
+  "title": "bronze-grass-at-crane-lake",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "cable-cars-of-the-cloud-forest.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/cable-cars-of-the-cloud-forest.html",
+  "kb": 950,
+  "title": "cable-cars-of-the-cloud-forest",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "cable-forest.html",
+  "rel": "GLM-5.4/cable-forest.html",
+  "kb": 849,
+  "title": "cable-forest",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "crane-lake.html",
+  "rel": "GLM-5.4/crane-lake.html",
+  "kb": 772,
+  "title": "crane-lake",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "HungerG",
+  "file": "bronze-grass-at-crane-lake.html",
+  "rel": "HungerG/bronze-grass-at-crane-lake.html",
+  "kb": 738,
+  "title": "bronze-grass-at-crane-lake",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "HungerG",
+  "file": "cable-cars.html",
+  "rel": "HungerG/cable-cars.html",
+  "kb": 800,
+  "title": "cable-cars",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "BRONZE_GRASS_AT_CRANE_LAKE.html",
+  "rel": "Hy4 Flash/BRONZE_GRASS_AT_CRANE_LAKE.html",
+  "kb": 659,
+  "title": "BRONZE_GRASS_AT_CRANE_LAKE",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "CABLE_CARS_OF_THE_CLOUD_FOREST.html",
+  "rel": "Hy4 Flash/CABLE_CARS_OF_THE_CLOUD_FOREST.html",
+  "kb": 641,
+  "title": "CABLE_CARS_OF_THE_CLOUD_FOREST",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-BRONZE-GRASS-AT-CRANE-LAKE.html",
+  "rel": "Inkling-2-Mini/THE-BRONZE-GRASS-AT-CRANE-LAKE.html",
+  "kb": 671,
+  "title": "THE-BRONZE-GRASS-AT-CRANE-LAKE",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-CABLE-CARS-OF-THE-CLOUD-FOREST.html",
+  "rel": "Inkling-2-Mini/THE-CABLE-CARS-OF-THE-CLOUD-FOREST.html",
+  "kb": 666,
+  "title": "THE-CABLE-CARS-OF-THE-CLOUD-FOREST",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "bronze-grass-crane-lake.html",
+  "rel": "Qwen 4 Max/bronze-grass-crane-lake.html",
+  "kb": 679,
+  "title": "bronze-grass-crane-lake",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "cloud-forest-cableway.html",
+  "rel": "Qwen 4 Max/cloud-forest-cableway.html",
+  "kb": 700,
+  "title": "cloud-forest-cableway",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
  }
 ]

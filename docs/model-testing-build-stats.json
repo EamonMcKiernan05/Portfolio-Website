@@ -39,6 +39,26 @@
   "tools": 740,
   "turns": 4
  },
+ "deepseek-v4-1-flash-bronze-grass-at-crane-lake": {
+  "finish": "26 Nov 2026 15:50",
+  "first_pass": 56,
+  "followups": 7,
+  "minutes": 114,
+  "start": "26 Nov 2026 12:10",
+  "steps": 506,
+  "tools": 718,
+  "turns": 8
+ },
+ "deepseek-v4-1-flash-cable-cars-of-the-cloud-forest": {
+  "finish": "26 Nov 2026 22:11",
+  "first_pass": 48,
+  "followups": 15,
+  "minutes": 172,
+  "start": "26 Nov 2026 16:28",
+  "steps": 662,
+  "tools": 799,
+  "turns": 16
+ },
  "deepseek-v4-1-flash-the-pagoda": {
   "finish": "25 Nov 2026 11:23",
   "first_pass": 53,
@@ -149,6 +169,26 @@
   "tools": 490,
   "turns": 3
  },
+ "glm-5-4-cable-forest": {
+  "finish": "26 Nov 2026 22:21",
+  "first_pass": 117,
+  "followups": 0,
+  "minutes": 117,
+  "start": "26 Nov 2026 20:24",
+  "steps": 461,
+  "tools": 466,
+  "turns": 1
+ },
+ "glm-5-4-crane-lake": {
+  "finish": "26 Nov 2026 22:21",
+  "first_pass": 83,
+  "followups": 2,
+  "minutes": 107,
+  "start": "26 Nov 2026 12:10",
+  "steps": 140,
+  "tools": 194,
+  "turns": 3
+ },
  "glm-5-4-floating-classroom": {
   "finish": "24 Nov 2026 15:36",
   "first_pass": 36,
@@ -219,6 +259,26 @@
   "tools": 190,
   "turns": 2
  },
+ "hungerg-bronze-grass-at-crane-lake": {
+  "finish": "26 Nov 2026 16:23",
+  "first_pass": 49,
+  "followups": 4,
+  "minutes": 171,
+  "start": "26 Nov 2026 12:09",
+  "steps": 325,
+  "tools": 518,
+  "turns": 5
+ },
+ "hungerg-cable-cars": {
+  "finish": "26 Nov 2026 22:35",
+  "first_pass": 77,
+  "followups": 2,
+  "minutes": 126,
+  "start": "26 Nov 2026 16:29",
+  "steps": 418,
+  "tools": 435,
+  "turns": 3
+ },
  "hungerg-croft": {
   "finish": "24 Nov 2026 16:15",
   "first_pass": 48,
@@ -288,6 +348,26 @@
   "steps": 147,
   "tools": 148,
   "turns": 1
+ },
+ "hy4-flash-api-bronze-grass-at-crane-lake": {
+  "finish": "26 Nov 2026 15:51",
+  "first_pass": 30,
+  "followups": 5,
+  "minutes": 97,
+  "start": "26 Nov 2026 12:10",
+  "steps": 348,
+  "tools": 342,
+  "turns": 6
+ },
+ "hy4-flash-api-cable-cars-of-the-cloud-forest": {
+  "finish": "26 Nov 2026 22:30",
+  "first_pass": 25,
+  "followups": 2,
+  "minutes": 52,
+  "start": "26 Nov 2026 16:28",
+  "steps": 227,
+  "tools": 223,
+  "turns": 3
  },
  "hy4-flash-api-first-hooves-at-the-ford": {
   "finish": "23 Nov 2026 19:28",
@@ -559,6 +639,16 @@
   "tools": 111,
   "turns": 1
  },
+ "inkling-2-mini-the-bronze-grass-at-crane-lake": {
+  "finish": "26 Nov 2026 15:51",
+  "first_pass": 116,
+  "followups": 2,
+  "minutes": 212,
+  "start": "26 Nov 2026 12:11",
+  "steps": 584,
+  "tools": 584,
+  "turns": 3
+ },
  "inkling-2-mini-the-brook-beneath-the-fold": {
   "finish": "24 Nov 2026 14:23",
   "first_pass": 79,
@@ -568,6 +658,16 @@
   "steps": 177,
   "tools": 177,
   "turns": 2
+ },
+ "inkling-2-mini-the-cable-cars-of-the-cloud-forest": {
+  "finish": "26 Nov 2026 23:01",
+  "first_pass": 393,
+  "followups": 0,
+  "minutes": 393,
+  "start": "26 Nov 2026 16:28",
+  "steps": 842,
+  "tools": 850,
+  "turns": 1
  },
  "inkling-2-mini-the-croft": {
   "finish": "23 Nov 2026 00:16",
@@ -688,6 +788,26 @@
   "steps": 72,
   "tools": 113,
   "turns": 1
+ },
+ "qwen-4-max-bronze-grass-crane-lake": {
+  "finish": "26 Nov 2026 15:22",
+  "first_pass": 65,
+  "followups": 4,
+  "minutes": 100,
+  "start": "26 Nov 2026 12:10",
+  "steps": 180,
+  "tools": 243,
+  "turns": 5
+ },
+ "qwen-4-max-cloud-forest-cableway": {
+  "finish": "26 Nov 2026 22:27",
+  "first_pass": 56,
+  "followups": 4,
+  "minutes": 100,
+  "start": "26 Nov 2026 16:29",
+  "steps": 225,
+  "tools": 229,
+  "turns": 5
  },
  "qwen-4-max-cloudfall-pass": {
   "finish": "18 Nov 2026 13:47",
