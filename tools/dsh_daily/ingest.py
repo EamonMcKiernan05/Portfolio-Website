@@ -39,6 +39,7 @@ SERVING_BY_WORKSPACE = {
     "Qwen3.8-27B": ("Maya", "qwen3.8-27b-ud-q8_k_xl"),
     "Hy4 Flash Maya M": ("Maya", "hy4-flash-maya-m"),
     "Inkling-2-Mini": ("Maya", "inkling-2-mini"),
+    "Ling-3.2-Air Maya L": ("Maya", "ling-3.2-air"),
     "Qwen3.8-Flash-Next": ("Strata", "qwen3.8-flash-next"),
     "Qwen3.8 Flash-Next": ("Strata", "qwen3.8-flash-next"),
     "HungerG": ("OpenCode Go", "HungerG"),
