@@ -37,7 +37,7 @@ LOADER = """(()=>{const l=document.querySelector('#loader,#loading,.loader,.load
 if(!l)return 'gone';const s=getComputedStyle(l);return s.display+'|'+s.opacity})()"""
 RAF = """new Promise(r=>{let c=0,t0=performance.now();function f(){c++;
 if(performance.now()-t0<1000) requestAnimationFrame(f); else r(c)} requestAnimationFrame(f)})"""
-_PICK = """const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin'];
+_PICK = """const SEL=['cinematicBtn','btnCinematic','cinematicbtn','cinematic','btn-cinematic','btn-cine','toggleCinematic','cin'];
   let b=null; for(const id of SEL){ b=document.getElementById(id); if(b) break; }
   const boxes=[...document.querySelectorAll('input[type=checkbox]')];
   const box=boxes.find(e=>/cine/i.test((e.id||'')+' '+(e.name||'')+' '+(e.title||'')))
@@ -50,6 +50,15 @@ _PICK = """const SEL=['btnCinematic','cinematic','btn-cinematic','btn-cine','cin
       .filter(e=>/cinematic/i.test(txt(e)) && txt(e).length<=40);
     all.sort((x,y)=>txt(x).length-txt(y).length);
     b=all[0]||null;
+  }
+  // the label (or an inner span) is often nested inside the switch that owns the state, so climb
+  // until we hit the element carrying aria-checked/aria-pressed. Without this the state reads empty,
+  // the recorder clicks, and a switch that ships ON gets switched OFF.
+  if(b){
+    let e=b;
+    for(let i=0;i<4 && e;i++,e=e.parentElement){
+      if(e.getAttribute && (e.hasAttribute('aria-checked')||e.hasAttribute('aria-pressed'))){ b=e; break; }
+    }
   }"""
 FIND = """(()=>{""" + _PICK + """
   if(!b && !box) return 'none';
