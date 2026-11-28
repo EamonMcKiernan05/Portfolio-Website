@@ -6,6 +6,7 @@ import os
 import pathlib
 import re
 import subprocess
+import sys
 
 SITE = pathlib.Path.home() / "portfolio-website"
 MIRROR = pathlib.Path.home() / "Local-LLM-Testing"
@@ -59,6 +60,10 @@ def _merge(branch: str, repo: str) -> str:
 
 
 def ship(commit_msg: str, *, deploy: bool = True) -> dict:
+    # regenerate first: thumb URLs carry a ?v=<mtime>-<bytes> cache-buster, so replacing a thumb
+    # without rebuilding leaves the old stamp in gallery.html and Cloudflare serves the old image
+    subprocess.run([sys.executable, str(SITE / "tools/build_model_gallery.py")],
+                   check=True, capture_output=True)
     branch = "dsh-daily/" + subprocess.run(
         ["date", "+%Y-%m-%d"], capture_output=True, text=True).stdout.strip()
     out = {}
