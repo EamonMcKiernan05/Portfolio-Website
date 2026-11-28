@@ -50,14 +50,14 @@
   "turns": 8
  },
  "deepseek-v4-1-flash-cable-cars-of-the-cloud-forest": {
-  "finish": "27 Nov 2026 23:49",
+  "finish": "28 Nov 2026 14:56",
   "first_pass": 48,
-  "followups": 18,
-  "minutes": 204,
+  "followups": 28,
+  "minutes": 269,
   "start": "26 Nov 2026 16:28",
-  "steps": 748,
-  "tools": 885,
-  "turns": 19
+  "steps": 973,
+  "tools": 1108,
+  "turns": 29
  },
  "deepseek-v4-1-flash-the-pagoda": {
   "finish": "25 Nov 2026 11:23",
