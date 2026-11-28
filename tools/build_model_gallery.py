@@ -471,6 +471,14 @@ BUILDS = [
          variant='', title='cable-cars-of-the-cloud-forest', prompt='cable-cars-of-the-cloud-forest', session='e0eeb4f9-de48-43b0-b70f-2783c67e2df5',
          followups=28, date='28 Nov 2026', build_min=269, kb=952,
          blurb='48 minutes first pass, then 28 follow-ups — 4 h 29 m of working time.'),
+    dict(rel='Ling-3.2-Air Maya L/herons.html', slug='ling-3-2-air-maya-l-herons', model='Ling-3.2-Air', group='Ling-3.2-Air', harness='DeepSeek Harness',
+         variant='Maya L', title='herons', prompt='herons', session='2abb258d-2811-42af-8dc8-365aea1e01f0',
+         followups=0, date='28 Nov 2026', build_min=141, kb=1347,
+         blurb='One pass, 2 h 23 m.'),
+    dict(rel='Ling-3.2-Air Maya L/pagoda.html', slug='ling-3-2-air-maya-l-pagoda', model='Ling-3.2-Air', group='Ling-3.2-Air', harness='DeepSeek Harness',
+         variant='Maya L', title='THE PAGODA', prompt='the-pagoda', session='89f45eea-6ddb-413d-b689-beca230287b1',
+         followups=0, date='28 Nov 2026', build_min=175, kb=1349,
+         blurb='One pass, 2 h 55 m.'),
     ]
 
 # owner-set reading order (26 Nov): most-used models first. Groups not named here fall to the end,

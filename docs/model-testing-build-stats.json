@@ -729,6 +729,16 @@
   "tools": 202,
   "turns": 1
  },
+ "ling-3-2-air-maya-l-herons": {
+  "finish": "28 Nov 2026 18:41",
+  "first_pass": 143,
+  "followups": 0,
+  "minutes": 141,
+  "start": "28 Nov 2026 16:18",
+  "steps": 240,
+  "tools": 332,
+  "turns": 1
+ },
  "ling-3-2-air-maya-l-index": {
   "finish": "28 Nov 2026 03:40",
   "first_pass": 235,
@@ -738,6 +748,16 @@
   "steps": 832,
   "tools": 904,
   "turns": 4
+ },
+ "ling-3-2-air-maya-l-pagoda": {
+  "finish": "28 Nov 2026 15:56",
+  "first_pass": 175,
+  "followups": 0,
+  "minutes": 175,
+  "start": "28 Nov 2026 13:00",
+  "steps": 277,
+  "tools": 359,
+  "turns": 1
  },
  "longcat-25-sky-temple": {
   "finish": "13 Nov 2026 11:14",
