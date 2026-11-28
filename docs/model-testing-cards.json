@@ -880,5 +880,23 @@
   "title": "cable-cars-of-the-cloud-forest",
   "date": "28 Nov 2026",
   "date_iso": "2026-11-28"
+ },
+ {
+  "model": "Ling-3.2-Air Maya L",
+  "file": "herons.html",
+  "rel": "Ling-3.2-Air Maya L/herons.html",
+  "kb": 1347,
+  "title": "herons",
+  "date": "28 Nov 2026",
+  "date_iso": "2026-11-28"
+ },
+ {
+  "model": "Ling-3.2-Air Maya L",
+  "file": "pagoda.html",
+  "rel": "Ling-3.2-Air Maya L/pagoda.html",
+  "kb": 1349,
+  "title": "pagoda",
+  "date": "28 Nov 2026",
+  "date_iso": "2026-11-28"
  }
 ]
