@@ -69,8 +69,16 @@ FIND = """(()=>{""" + _PICK + """
   let js=null; try{ const g=window.HAY_CAMERA||window.CAMERA||window.camera;
     if(g && typeof g.cinematic!=='undefined') js=g.cinematic; }catch(e){}
   let ui=null; try{ if(typeof UI!=='undefined' && typeof UI.cinematic!=='undefined') ui=UI.cinematic; }catch(e){}
-  const on = box ? box.checked===true : (ap==='true' || ac==='true' || onCls || js===true || ui===true);
-  return JSON.stringify({found:true,on:on,how:box?'checkbox':'control',id:el.id||'',ap:ap,ac:ac,
+  let on = box ? box.checked===true : (ap==='true' || ac==='true' || onCls || js===true || ui===true);
+  let how = box ? 'checkbox' : 'control';
+  // many builds open straight into cinematic mode and only paint the button state on interaction,
+  // so an unadorned button is not proof that cinematic is off — read the page's own status line too
+  if(!on){
+    const status=[...document.querySelectorAll('#mode,#status,#modeEl,[id*=mode],[class*=status]')];
+    if(status.some(e=>/cinematic/i.test(e.textContent||''))){ on=true; how='status'; }
+  }
+  const known = how==='checkbox' || ap!==null || ac!==null || onCls || js!==null || ui!==null || how==='status';
+  return JSON.stringify({found:true,on:on,known:known,how:how,id:el.id||'',ap:ap,ac:ac,
                          cls:el.className||''})})()"""
 TOGGLE = """(()=>{""" + _PICK + """
   if(box){ box.click(); return 'clicked-checkbox'; }
@@ -120,20 +128,29 @@ async def _record_one(call, js, slug: str, url: str, out_mp4: pathlib.Path, stat
         await asyncio.sleep(1.5)
     log(f"{slug}: cinematic {cstate}")
     clicked = False
-    if '"on":true' not in cstate and cstate != "none":
+
+    def _state(raw: str) -> dict:
+        try:
+            return json.loads(raw)
+        except Exception:
+            return {}
+
+    st = _state(cstate)
+    if st.get("found") and st.get("known") and not st.get("on"):
         await js(TOGGLE)
         clicked = True
         await asyncio.sleep(1.5)
         cstate = await js(FIND) or "none"
-    if '"on":true' not in cstate:
+        st = _state(cstate)
+    if st.get("found") and st.get("known") and not st.get("on"):
         for key in ("c", "C"):
             await call("Input.dispatchKeyEvent", type="keyDown", key=key, text=key)
             await call("Input.dispatchKeyEvent", type="keyUp", key=key)
             await asyncio.sleep(1)
             cstate = await js(FIND) or "none"
-            if '"on":true' in cstate:
+            if _state(cstate).get("on"):
                 break
-    cinematic = '"on":true' in cstate
+    cinematic = bool(_state(cstate).get("on"))
     if cstate == "none":
         log(f"{slug}: no cinematic control — recording as the build opens")
     elif not cinematic:
