@@ -81,7 +81,9 @@ def read_text() -> str:
 def existing_slugs(text: str) -> dict[str, str]:
     """rel -> slug for every record, parsed by record boundary (multi-line safe)."""
     out = {}
-    for block in re.split(r"\n(?=\s{4}dict\(rel=)", text):
+    # any indentation: a record written with 13 spaces was invisible to this scan, so the next run
+    # ingested the same build a second time and the gallery grew duplicate cards
+    for block in re.split(r"\n(?=\s*dict\(rel=)", text):
         m_rel = re.search(r"rel=(['\"])(.+?)\1", block)
         m_slug = re.search(r"slug=(['\"])(.+?)\1", block)
         if m_rel and m_slug:
