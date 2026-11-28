@@ -772,5 +772,104 @@
   "title": "cloud-forest-cableway",
   "date": "26 Nov 2026",
   "date_iso": "2026-11-26"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "cable-cars-of-the-cloud-forest.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/cable-cars-of-the-cloud-forest.html",
+  "kb": 950,
+  "title": "cable-cars-of-the-cloud-forest",
+  "date": "27 Nov 2026",
+  "date_iso": "2026-11-27"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "cable-forest.html",
+  "rel": "GLM-5.4/cable-forest.html",
+  "kb": 855,
+  "title": "cable-forest",
+  "date": "27 Nov 2026",
+  "date_iso": "2026-11-27"
+ },
+ {
+  "model": "GLM-5.4",
+  "file": "crane-lake.html",
+  "rel": "GLM-5.4/crane-lake.html",
+  "kb": 772,
+  "title": "crane-lake",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "HungerG",
+  "file": "cable-cars.html",
+  "rel": "HungerG/cable-cars.html",
+  "kb": 802,
+  "title": "cable-cars",
+  "date": "27 Nov 2026",
+  "date_iso": "2026-11-27"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "BRONZE_GRASS_AT_CRANE_LAKE.html",
+  "rel": "Hy4 Flash/BRONZE_GRASS_AT_CRANE_LAKE.html",
+  "kb": 659,
+  "title": "BRONZE_GRASS_AT_CRANE_LAKE",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Hy4 Flash",
+  "file": "CABLE_CARS_OF_THE_CLOUD_FOREST.html",
+  "rel": "Hy4 Flash/CABLE_CARS_OF_THE_CLOUD_FOREST.html",
+  "kb": 641,
+  "title": "CABLE_CARS_OF_THE_CLOUD_FOREST",
+  "date": "27 Nov 2026",
+  "date_iso": "2026-11-27"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-BRONZE-GRASS-AT-CRANE-LAKE.html",
+  "rel": "Inkling-2-Mini/THE-BRONZE-GRASS-AT-CRANE-LAKE.html",
+  "kb": 671,
+  "title": "THE-BRONZE-GRASS-AT-CRANE-LAKE",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Inkling-2-Mini",
+  "file": "THE-CABLE-CARS-OF-THE-CLOUD-FOREST.html",
+  "rel": "Inkling-2-Mini/THE-CABLE-CARS-OF-THE-CLOUD-FOREST.html",
+  "kb": 665,
+  "title": "THE-CABLE-CARS-OF-THE-CLOUD-FOREST",
+  "date": "27 Nov 2026",
+  "date_iso": "2026-11-27"
+ },
+ {
+  "model": "Ling-3.2-Air Maya L",
+  "file": "index.html",
+  "rel": "Ling-3.2-Air Maya L/index.html",
+  "kb": 722,
+  "title": "index",
+  "date": "28 Nov 2026",
+  "date_iso": "2026-11-28"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "bronze-grass-crane-lake.html",
+  "rel": "Qwen 4 Max/bronze-grass-crane-lake.html",
+  "kb": 679,
+  "title": "bronze-grass-crane-lake",
+  "date": "26 Nov 2026",
+  "date_iso": "2026-11-26"
+ },
+ {
+  "model": "Qwen 4 Max",
+  "file": "cloud-forest-cableway.html",
+  "rel": "Qwen 4 Max/cloud-forest-cableway.html",
+  "kb": 697,
+  "title": "cloud-forest-cableway",
+  "date": "27 Nov 2026",
+  "date_iso": "2026-11-27"
  }
 ]

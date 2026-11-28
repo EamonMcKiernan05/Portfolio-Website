@@ -50,14 +50,14 @@
   "turns": 8
  },
  "deepseek-v4-1-flash-cable-cars-of-the-cloud-forest": {
-  "finish": "26 Nov 2026 22:11",
+  "finish": "27 Nov 2026 23:49",
   "first_pass": 48,
-  "followups": 15,
-  "minutes": 172,
+  "followups": 18,
+  "minutes": 204,
   "start": "26 Nov 2026 16:28",
-  "steps": 662,
-  "tools": 799,
-  "turns": 16
+  "steps": 748,
+  "tools": 885,
+  "turns": 19
  },
  "deepseek-v4-1-flash-the-pagoda": {
   "finish": "25 Nov 2026 11:23",
@@ -170,14 +170,14 @@
   "turns": 3
  },
  "glm-5-4-cable-forest": {
-  "finish": "26 Nov 2026 22:21",
+  "finish": "27 Nov 2026 14:46",
   "first_pass": 117,
-  "followups": 0,
-  "minutes": 117,
+  "followups": 3,
+  "minutes": 198,
   "start": "26 Nov 2026 20:24",
-  "steps": 461,
-  "tools": 466,
-  "turns": 1
+  "steps": 687,
+  "tools": 689,
+  "turns": 4
  },
  "glm-5-4-crane-lake": {
   "finish": "26 Nov 2026 22:21",
@@ -270,14 +270,14 @@
   "turns": 5
  },
  "hungerg-cable-cars": {
-  "finish": "26 Nov 2026 22:35",
+  "finish": "27 Nov 2026 14:39",
   "first_pass": 77,
-  "followups": 2,
-  "minutes": 126,
+  "followups": 5,
+  "minutes": 152,
   "start": "26 Nov 2026 16:29",
-  "steps": 418,
-  "tools": 435,
-  "turns": 3
+  "steps": 466,
+  "tools": 483,
+  "turns": 6
  },
  "hungerg-croft": {
   "finish": "24 Nov 2026 16:15",
@@ -360,14 +360,14 @@
   "turns": 6
  },
  "hy4-flash-api-cable-cars-of-the-cloud-forest": {
-  "finish": "26 Nov 2026 22:30",
+  "finish": "27 Nov 2026 14:28",
   "first_pass": 25,
-  "followups": 2,
-  "minutes": 52,
+  "followups": 6,
+  "minutes": 86,
   "start": "26 Nov 2026 16:28",
-  "steps": 227,
-  "tools": 223,
-  "turns": 3
+  "steps": 330,
+  "tools": 322,
+  "turns": 7
  },
  "hy4-flash-api-first-hooves-at-the-ford": {
   "finish": "23 Nov 2026 19:28",
@@ -660,14 +660,14 @@
   "turns": 2
  },
  "inkling-2-mini-the-cable-cars-of-the-cloud-forest": {
-  "finish": "26 Nov 2026 23:01",
+  "finish": "27 Nov 2026 14:45",
   "first_pass": 393,
-  "followups": 0,
-  "minutes": 393,
+  "followups": 1,
+  "minutes": 484,
   "start": "26 Nov 2026 16:28",
-  "steps": 842,
-  "tools": 850,
-  "turns": 1
+  "steps": 1080,
+  "tools": 1111,
+  "turns": 2
  },
  "inkling-2-mini-the-croft": {
   "finish": "23 Nov 2026 00:16",
@@ -728,6 +728,16 @@
   "steps": 201,
   "tools": 202,
   "turns": 1
+ },
+ "ling-3-2-air-maya-l-index": {
+  "finish": "28 Nov 2026 03:40",
+  "first_pass": 235,
+  "followups": 3,
+  "minutes": 487,
+  "start": "27 Nov 2026 16:54",
+  "steps": 832,
+  "tools": 904,
+  "turns": 4
  },
  "longcat-25-sky-temple": {
   "finish": "13 Nov 2026 11:14",
@@ -800,14 +810,14 @@
   "turns": 5
  },
  "qwen-4-max-cloud-forest-cableway": {
-  "finish": "26 Nov 2026 22:27",
+  "finish": "27 Nov 2026 13:23",
   "first_pass": 56,
-  "followups": 4,
-  "minutes": 100,
+  "followups": 5,
+  "minutes": 106,
   "start": "26 Nov 2026 16:29",
-  "steps": 225,
-  "tools": 229,
-  "turns": 5
+  "steps": 240,
+  "tools": 243,
+  "turns": 6
  },
  "qwen-4-max-cloudfall-pass": {
   "finish": "18 Nov 2026 13:47",
