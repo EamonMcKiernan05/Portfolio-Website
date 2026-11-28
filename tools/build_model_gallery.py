@@ -447,10 +447,6 @@ BUILDS = [
          variant='', title='bronze-grass-crane-lake', prompt='bronze-grass-at-crane-lake', session='8f1229ff-2be4-433c-bea4-199c693ef3b9',
          followups=4, date='26 Nov 2026', build_min=100, kb=679,
          blurb='1 h 5 m first pass, then 4 follow-ups — 1 h 40 m of working time.'),
-    dict(rel='DeepSeek-V4.1-Flash-1017/cable-cars-of-the-cloud-forest.html', slug='deepseek-v4-1-flash-cable-cars-of-the-cloud-forest', model='DeepSeek V4.1 Flash', group='DeepSeek V4.1 Flash', harness='DeepSeek Harness',
-         variant='', title='cable-cars-of-the-cloud-forest', prompt='cable-cars-of-the-cloud-forest', session='e0eeb4f9-de48-43b0-b70f-2783c67e2df5',
-         followups=18, date='27 Nov 2026', build_min=204, kb=950,
-         blurb='48 minutes first pass, then 18 follow-ups — 3 h 24 m of working time.'),
     dict(rel='GLM-5.4/cable-forest.html', slug='glm-5-4-cable-forest', model='GLM-5.4', group='GLM-5.4', harness='DeepSeek Harness',
          variant='', title='cable-forest', prompt='cable-cars-of-the-cloud-forest', session='70c9dbab-0359-4320-a7f2-21b11a5ee71b',
          followups=3, date='27 Nov 2026', build_min=198, kb=855,
@@ -471,6 +467,10 @@ BUILDS = [
          variant='', title='cloud-forest-cableway', prompt='cable-cars-of-the-cloud-forest', session='de101b67-9ac4-4268-ac04-c7e6994b7896',
          followups=5, date='27 Nov 2026', build_min=106, kb=697,
          blurb='56 minutes first pass, then 5 follow-ups — 1 h 46 m of working time.'),
+    dict(rel='DeepSeek-V4.1-Flash-1017/cable-cars-of-the-cloud-forest.html', slug='deepseek-v4-1-flash-cable-cars-of-the-cloud-forest', model='DeepSeek V4.1 Flash', group='DeepSeek V4.1 Flash', harness='DeepSeek Harness',
+         variant='', title='cable-cars-of-the-cloud-forest', prompt='cable-cars-of-the-cloud-forest', session='e0eeb4f9-de48-43b0-b70f-2783c67e2df5',
+         followups=28, date='28 Nov 2026', build_min=269, kb=952,
+         blurb='48 minutes first pass, then 28 follow-ups — 4 h 29 m of working time.'),
     ]
 
 # owner-set reading order (26 Nov): most-used models first. Groups not named here fall to the end,

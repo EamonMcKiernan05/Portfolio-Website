@@ -871,5 +871,14 @@
   "title": "cloud-forest-cableway",
   "date": "27 Nov 2026",
   "date_iso": "2026-11-27"
+ },
+ {
+  "model": "DeepSeek-V4.1-Flash-1017",
+  "file": "cable-cars-of-the-cloud-forest.html",
+  "rel": "DeepSeek-V4.1-Flash-1017/cable-cars-of-the-cloud-forest.html",
+  "kb": 952,
+  "title": "cable-cars-of-the-cloud-forest",
+  "date": "28 Nov 2026",
+  "date_iso": "2026-11-28"
  }
 ]
